@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>100</y>
+      <w>300</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>subscribers
+--
+email: varchar(255) [primary key]
+name: varchar(255)
+zip: mediumint(5)
+type: enum('Student', 'Alumni', 'Friend', 'Other')
+verificationDate: datetime</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>220</y>
+      <w>220</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>admins
+--
+email: varchar(255) [primary key]
+password: varchar(255)
+super: boolean
+salt: varchar(255)
+name: varchar(255)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>10</y>
+      <w>300</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>emails
+--
+id: integer auto_increment [primary key]
+content: text
+sendDate: datetime</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
