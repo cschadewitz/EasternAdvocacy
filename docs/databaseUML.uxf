@@ -50,4 +50,49 @@ content: text
 sendDate: datetime</panel_attributes>
     <additional_attributes/>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>350</y>
+      <w>260</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>representatives
+--
+id: integer auto_increment [primary key]
+firstName: varchar(55)
+lastName: varchar(55)
+politicalParty: varchar(55)
+image: varchar(255)
+phoneNumber: varchar(20)
+physicalAddress: varchar(255)
+emailAddress: varchar(255)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>330</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>zip_representatives
+--
+zip: meduimint(5) [primary key]
+representative_id integer [primary key]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>370</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
 </diagram>

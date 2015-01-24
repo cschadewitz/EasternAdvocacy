@@ -18,7 +18,28 @@ CREATE TABLE admins (
 
 CREATE TABLE emails (
 	id integer NOT NULL AUTO_INCREMENT,
+	subject varchar(255) NOT NULL,
+	abstract text NOT NULL,
 	content text NOT NULL,
 	sendDate datetime NOT NULL,
 	PRIMARY KEY (id)
+);
+
+CREATE TABLE representatives (
+	id integer NOT NULL AUTO_INCREMENT,
+	firstName varchar(55) NOT NULL,
+	lastName varchar(55) NOT NULL,
+	politicalParty varchar(55) NOT NULL,
+	image varchar(255) NULL,
+	phoneNumber varchar(20) NULL,
+	physicalAddress varchar(255) NULL,
+	emailAddress varchar(255) NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE zip_representatives (
+	zip mediumint(5) NOT NULL,
+	representative_id integer NOT NULL,
+	PRIMARY KEY (zip, representative_id),
+	FOREIGN KEY (representative_id) REFERENCES representatives (id)
 );
