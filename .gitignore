@@ -9,7 +9,7 @@
 /.idea
 install.php
 artisan
-.htascess
+.htaccess
 /themes/flat-theme-master
 /themes/demo
 
