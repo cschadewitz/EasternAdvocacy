@@ -22,7 +22,9 @@ CREATE TABLE emails (
 	abstract text NOT NULL,
 	content text NOT NULL,
 	sendDate datetime NOT NULL,
-	PRIMARY KEY (id)
+	randomEmailId integer Not NULL,
+	PRIMARY KEY (id),
+	UNIQUE (randomEmailId)
 );
 
 CREATE TABLE representatives (
