@@ -1,0 +1,22 @@
+{
+    "name": "zlesperance/advocacy-demo",
+    "type": "october-theme",
+    "description": "Demo EWU Advocacy theme",
+    "keywords": ["october", "cms", "demo", "theme", 'ewu', 'advocacy'],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zach Lesperance",
+            "email": "zplesperance@gmail.com",
+            "role": "Programmer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
