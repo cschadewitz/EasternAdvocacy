@@ -22,6 +22,7 @@ CREATE TABLE emails (
 	abstract text NOT NULL,
 	content text NOT NULL,
 	sendDate datetime NOT NULL,
+	randomEmailId integer Not NULL,
 	PRIMARY KEY (id)
 );
 
