@@ -1,0 +1,14 @@
+.DS_Store
+*.log
+/vendor
+/uploads
+/modules
+/install_files
+/bootstrap
+/app
+/.idea
+install.php
+artisan
+.htaccess
+/themes/flat-theme-master
+/themes/demo
