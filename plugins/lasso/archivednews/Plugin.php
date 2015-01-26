@@ -23,7 +23,9 @@ Class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Lasso\ArchivedNews\Components\Todo' => 'demoTodo'
+            '\Lasso\ArchivedNews\Components\SideBar' => 'sideBar',
+            '\Lasso\ArchivedNews\Components\SingleResult' => 'singleResult',
+            '\Lasso\ArchivedNews\Components\MultiResult' => 'multiResult'
         ];
     }
 }
