@@ -1,0 +1,54 @@
+body {
+    background-color: #222;
+    margin-top: 70px;
+    font-size: 2em;
+}
+
+#layout-header {
+    font-size: 2em;
+    font-weight: lighter;
+}
+
+.navbar-inverse .navbar-brand {
+    font-size: 1.2em;
+    font-weight: normal;
+    padding-bottom: 50px;
+    padding-top: 30px;
+}
+
+#layout-nav {
+    background-color: #333;
+}
+.navbar-inverse .navbar-nav a {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+.navbar-inverse .navbar-nav > .active > a {
+    background-color: #262626;
+}
+
+article {
+    background-color: #FFF;
+    margin: 20px 0;
+}
+
+article > header {
+    background-color: #a10022;
+    padding: 25px 15px;
+    margin: 0 -15px 10px -15px;
+}
+
+article > header > h2 {
+    font-size: 3em;
+    color: #FFF;
+    margin: 0;
+}
+
+footer {
+    padding-top: 10px;
+    margin-top: 40px;
+    color: #999;
+    background-color: #333;
+    text-align: center;
+    font-size:.8em;
+}
