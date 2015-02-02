@@ -1,0 +1,7 @@
+columns:
+  email: Email
+  name: Name
+  zip: Zip Code
+  type: Type
+  verificationDate: Verification Date
+  uuid: uuid
