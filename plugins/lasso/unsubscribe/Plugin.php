@@ -1,24 +1,33 @@
-<?php
-namespace Lasso\Unsubscribe;
+<?php namespace Lasso\Unsubscribe;
 
-class Plugin extends \System\Classes\PluginBase
+use System\Classes\PluginBase;
+
+/**
+ * Unsubscribe Plugin Information File
+ */
+class Plugin extends PluginBase
 {
-    public $require = ['Lasso.Subscriber'];
 
+    /**
+     * Returns information about this plugin.
+     *
+     * @return array
+     */
     public function pluginDetails()
     {
         return [
-            'name' => 'Unsubscribe Plugin',
-            'description' => 'Allows users to unsubscribe from emails.',
-            'author' => 'Zach Lesperance',
-            'icon' => 'icon-times'
+            'name'        => 'Unsubscribe',
+            'description' => 'No description provided yet...',
+            'author'      => 'Lasso',
+            'icon'        => 'icon-leaf'
         ];
     }
 
-    public function registerComponents()
+    public function registerComponents ()
     {
         return [
-
+            'Lasso\Unsubscribe\Components\UnsubscribeHandler' => 'UnsubscribeHandler'
         ];
     }
+
 }
