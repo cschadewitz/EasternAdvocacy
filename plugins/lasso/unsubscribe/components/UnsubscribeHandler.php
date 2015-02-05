@@ -4,9 +4,7 @@ use Cms\Classes\ComponentBase;
 
 class UnsubscribeHandler extends ComponentBase
 {
-    public $email;
-
-    public $uuid;
+    public $success;
 
     public $message;
 
@@ -21,25 +19,33 @@ class UnsubscribeHandler extends ComponentBase
     public function defineProperties()
     {
         return [
-            'email' => [
-                'title'             => 'Email',
-                'description'       => 'Subscriber\'s Email Address',
-                'validationPattern' => '([a-zA-Z0-9!#\\$\\&\'\\+\\-=\\?\\^_{\\|}~\\.]+)@[a-zA-Z0-9\\-]+(?:\\.[a-zA-Z0-9\\-]+)*\\.[a-zA-Z]{2,}',
-                'validationMessage' => 'Invalid Email Address',
-                'required'          => true
-
-            ],
-            'uuid' => [
-                'title'             => 'UUID',
-                'description'       => 'Unique User Identifier',
-                'required'          => true
-            ]
         ];
     }
 
     public function onRun()
     {
+        $email = $this->param('email');
+        $uuid = $this->param('uuid');
+        if ($email == null || $uuid == null) {
+            $this->success = false;
+            $this->message = "Invalid Argument(s): " . $email . " & " . $uuid;
+            return;
+        }
 
+        //$user = Subscriber::whereRaw('email = ? and uuid = ?', array($email, $uuid))->take(1)->get();
+        $user = true;
+
+        if (!$user) {
+            // Throw some error page
+            $this->success = false;
+            $this->message = "Email Not Found";
+            return;
+        }
+
+        //$user->delete();
+
+        $this->success = true;
+        $this->message = "You have been successfully unsubscribed from the mailing list.";
     }
 
 }

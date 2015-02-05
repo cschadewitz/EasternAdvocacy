@@ -26,7 +26,7 @@ class Plugin extends PluginBase
     public function registerComponents ()
     {
         return [
-            'Lasso\Unsubscribe\Components\UnsubscribeHandler' => 'UnsubscribeHandler'
+            'Lasso\Unsubscribe\Components\UnsubscribeHandler' => 'unsubscribeHandler'
         ];
     }
 
