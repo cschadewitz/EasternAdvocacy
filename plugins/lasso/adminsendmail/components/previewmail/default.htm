@@ -1,0 +1,23 @@
+{% put scripts %}
+	<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+	<script src="assets/javascript/editmail.js"></script>
+	<script>tinymce.init({selector:'#message', menubar : false});</script>
+{% endput %}
+
+{% put styles %}
+<link rel="stylesheet" type="text/css" href="{{ 'assets/css/home.css'|theme }}">
+{% endput %}
+
+<div class="row">
+	<article class="col-md-6 col-md-offset-3">
+		<header>
+            <h2>Preview Mail</h2>
+        </header>
+		<div class="panel panel-default">
+		  <div class="panel-heading"><b>Subject:</b> {{subject}}</div>
+		  <div class="panel-body">
+		  	{{ message | raw }}
+		  </div>
+		</div>
+	</article>
+</div> 
