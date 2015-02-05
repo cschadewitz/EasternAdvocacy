@@ -15,6 +15,6 @@ class PreviewMail extends ComponentBase
     public function onRun()
 	{
         $this->page['subject'] = post('subject');
-        $this->page['message'] = htmlspecialchars_decode(post('message'));
+        $this->page['message'] = post('message');
 	}
 }
