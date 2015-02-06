@@ -15,7 +15,14 @@ class MultiResult extends ComponentBase
 
     public function defineProperties()
     {
-        return [];
+        return [
+            'pageNumber' => [
+                'title'         => 'Page Number',
+                'description'   => 'The page number',
+                'type'          => 'string',
+                'default'       => '{{ :page }}',
+            ]
+        ];
     }
 
 }
