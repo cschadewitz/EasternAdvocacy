@@ -1,0 +1,16 @@
+title = "Admin Account"
+url = "/admin/account/:code?"
+layout = "default"
+hidden = "0"
+
+[account]
+paramCode = "code"
+==
+<div class="row">
+    <article id="who-we-are" class="col-md-6 col-md-offset-3">
+        <header>
+            <h2>Admin Login</h2>
+        </header>
+        <p>{% component 'account' %}</p>
+    </article>
+</div>
