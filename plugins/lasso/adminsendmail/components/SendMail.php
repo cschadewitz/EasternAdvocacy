@@ -1,14 +1,15 @@
 <?php namespace Lasso\AdminSendMail\Components;
 
 use Cms\Classes\ComponentBase;
+use Lasso\AdminSendMail\Models;
 
-class PreviewMail extends ComponentBase
+class SendMail extends ComponentBase
 {
     public function componentDetails()
     {
         return [
-            'name' => 'Preview Mail',
-            'description' => 'Preview an email before sending it.'
+            'name' => 'Send Mail',
+            'description' => 'Send the email to specified recipients.'
         ];
     }
 

@@ -27,7 +27,7 @@ class Plugin extends PluginBase
     {
         return [
             'Lasso\AdminSendMail\components\EditMail' => 'EditMail',
-            'Lasso\AdminSendMail\components\PreviewMail' => 'PreviewMail'
+            'Lasso\AdminSendMail\components\SendMail' => 'SendMail'
         ];
     }
 
