@@ -3,5 +3,5 @@ columns:
   subject: Subject
   abstract: Abstract
   content: Content
-  createdOn: CreatedOn
-  modifiedOn: ModifiedOn
+  created_at: Created On
+  updated_at: Modified On

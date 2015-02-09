@@ -1,0 +1,13 @@
+title = "Archive"
+url = "/archive/:pageNumber"
+layout = "default"
+hidden = "0"
+
+[posts]
+pageNumber = "{{ :pageNumber }}"
+postsPerPage = "10"
+noPostsMessage = "No news found"
+postPage = "article"
+==
+{% component 'posts' %}
+{{ dump() }}
