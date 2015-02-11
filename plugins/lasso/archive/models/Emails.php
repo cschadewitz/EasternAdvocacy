@@ -12,9 +12,9 @@ use Model;
 
 class Emails extends Model {
 
-    protected $guarded = ['id', 'randomEmailId'];
+    protected $guarded = ['id'];
 
-    protected $fillable = ['subject', 'abstract', 'content', 'sendDate'];
+    protected $fillable = ['subject', 'abstract', 'content', 'createdOn', 'modifiedOn'];
 
     public $hasOne = [];
     public $hasMany = [];

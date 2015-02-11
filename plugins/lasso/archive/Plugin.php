@@ -1,4 +1,4 @@
-<?php namespace Lasso\ArchivedNews;
+<?php namespace Lasso\Archive;
 /**
  * Created by PhpStorm.
  * User: schad_000
@@ -14,7 +14,7 @@ Class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'ArchivedNews',
+            'name'        => 'Archive',
             'description' => 'Provides viewing archived newsletters that have been emailed out.',
             'author'      => 'Team Lasso - Casey Schadewitz',
             'icon'        => 'icon-rss'
@@ -23,9 +23,9 @@ Class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Lasso\ArchivedNews\Components\SideBar' => 'sideBar',
-            '\Lasso\ArchivedNews\Components\SingleResult' => 'singleResult',
-            '\Lasso\ArchivedNews\Components\MultiResult' => 'multiResult'
+            '\Lasso\Archive\Components\SideBar' => 'sideBar',
+            '\Lasso\Archive\Components\SingleResult' => 'singleResult',
+            '\Lasso\Archive\Components\MultiResult' => 'multiResult'
         ];
     }
 }

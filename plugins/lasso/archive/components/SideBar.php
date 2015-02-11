@@ -1,14 +1,14 @@
-<?php namespace Lasso\ArchivedNews\Components;
+<?php namespace Lasso\Archive\Components;
 
 use Cms\Classes\ComponentBase;
 
-class MultiResult extends ComponentBase
+class SideBar extends ComponentBase
 {
 
     public function componentDetails()
     {
         return [
-            'name'        => 'MultiResult Component',
+            'name'        => 'SideBar Component',
             'description' => 'No description provided yet...'
         ];
     }
