@@ -2,6 +2,8 @@ title = "Subscribe"
 url = "/subscribe"
 layout = "default"
 hidden = "0"
+
+[SubForm]
 ==
 {% put styles %}
 <link rel="stylesheet" type="text/css" href="{{ 'assets/css/act.css'|theme }}">
@@ -14,6 +16,9 @@ hidden = "0"
         </header>
         <p>Want to help Eastern? Cool beans! Here's how you can help:</p>
         <ul class="actions">
+            <li>
+                {% component 'SubForm'  %}
+            </li>
             <li>
                 <h3><a href="#">Contact Some Dude!</a></h3>
                 <p>The more people who do, the more likely something will happen!</p>
