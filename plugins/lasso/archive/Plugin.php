@@ -15,7 +15,7 @@ Class Plugin extends PluginBase
     {
         return [
             'name'        => 'Archive',
-            'description' => 'Provides viewing archived newsletters that have been emailed out.',
+            'description' => 'Provides ability to view archived newsletters that have been emailed out.',
             'author'      => 'Team Lasso - Casey Schadewitz',
             'icon'        => 'icon-rss'
         ];
@@ -23,9 +23,9 @@ Class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Lasso\Archive\Components\SideBar' => 'sideBar',
-            '\Lasso\Archive\Components\SingleResult' => 'singleResult',
-            '\Lasso\Archive\Components\MultiResult' => 'multiResult'
+            '\Lasso\Archive\Components\Posts'       => 'posts',
+            '\Lasso\Archive\Components\Post'        => 'post',
+            '\Lasso\Archive\Components\HomeView'    => 'homeView'
         ];
     }
 }

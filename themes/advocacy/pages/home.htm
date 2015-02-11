@@ -2,6 +2,10 @@ title = "Home"
 url = "/"
 layout = "default"
 hidden = "0"
+
+[homeView]
+numberOfPosts = "4"
+postPage = "article"
 ==
 {% put styles %}
 <link rel="stylesheet" type="text/css" href="{{ 'assets/css/home.css'|theme }}">
@@ -18,17 +22,4 @@ hidden = "0"
         <p>Thank you everyone!</p>
     </article>
 </div>
-
-<div class="row">
-    <article id="news" class="col-md-6 col-md-offset-3">
-        <header>
-            <h2>News</h2>
-        </header>
-        <ul>
-            <li><a href="#">Article 1</a></li>
-            <li><a href="#">Article 2</a></li>
-            <li><a href="#">Article 3</a></li>
-            <li><a href="#">Article 4</a></li>
-        </ul>
-    </article>
-</div>
+{% component 'homeView' %}

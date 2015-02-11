@@ -6,15 +6,18 @@
  * Time: 10:51 PM
  */
 
-namespace Lasso\ArchivedNews\Models;
-
+namespace Lasso\Archive\Models;
+use App;
+use Str;
 use Model;
 
 class Emails extends Model {
 
-    protected $guarded = ['id'];
+    protected $table = 'emails';
 
-    protected $fillable = ['subject', 'abstract', 'content', 'createdOn', 'modifiedOn'];
+    protected $fillable = ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at'];
+
+    protected $visible =  ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at'];
 
     public $hasOne = [];
     public $hasMany = [];
@@ -25,4 +28,25 @@ class Emails extends Model {
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+    public function scopeListPosts($query, $options)
+    {
+        extract(array_merge([
+            'page'       => 1,
+            'postsPerPage'    => 10,
+        ], $options));
+
+        App::make('paginator')->setCurrentPage($page);
+
+        return $query->paginate($postsPerPage);
+    }
+
+    public function setUrl($pageName, $controller)
+    {
+        $params = [
+            'id'    => $this->id,
+            'slug'  => $this->id,
+            ];
+        return $this->url = $controller->pageUrl($pageName, $params);
+    }
 }
