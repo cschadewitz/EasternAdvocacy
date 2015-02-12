@@ -5,6 +5,6 @@
             <header><h2>Oh NO!!</h2></header>
         {% else %}
             <header><h2>{{ post.subject }}</h2></header>
-            <p class="post-content">{{ post.content }}</p>
+            <p class="post-content">{{ post.content | raw }}</p>
         {% endif %}
     </article>
