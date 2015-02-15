@@ -1,0 +1,156 @@
+*:focus {outline: none;}
+.form-container {
+    font: 14px/21px "lato", sans-serif;
+    width: auto;
+}
+
+.form-container h1{
+    cursor: pointer;
+    color: #428bca;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.subscriber_form h2, .subscriber_form label {
+    font-weight: 500;
+    line-height: 1.1;
+}
+.form_hint, .required_notification {font-size: 11px;}
+.subscriber_form ul {
+    width:inherit;
+    list-style-type:none;
+    list-style-position:outside;
+    margin:0;
+    padding:0;
+}
+.subscriber_form li{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+.subscriber_form li:first-child, .subscriber_form li:last-child {
+    border-bottom:1px solid #777;
+}
+.subscriber_form h2 {
+    margin:0;
+    display: inline;
+}
+.required_notification {
+    color:#d45252;
+    margin:5px 0 0 0;
+    display:inline;
+    float:right;
+}
+.subscriber_form label {
+    width:150px;
+    margin-top: 3px;
+    display:inline-block;
+    float:left;
+    padding:3px;
+}
+.subscriber_form input {
+    height: auto;
+    width:220px;
+    padding:5px 8px;
+}
+.subscriber_form button {margin-left:156px;}
+.subscriber_form input, select{
+    border:1px solid #aaa;
+    box-shadow: 0 0 3px #ccc, 0 10px 15px #eee inset;
+    border-radius:2px;
+    -moz-transition: padding .25s;
+    -webkit-transition: padding .25s;
+    -o-transition: padding .25s;
+    transition: padding .25s;
+}
+
+/* Button Style */
+button.submit {
+    background-color: #68b12f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#68b12f), to(#50911e));
+    background: -webkit-linear-gradient(top, #68b12f, #50911e);
+    background: -moz-linear-gradient(top, #68b12f, #50911e);
+    background: -ms-linear-gradient(top, #68b12f, #50911e);
+    background: -o-linear-gradient(top, #68b12f, #50911e);
+    background: linear-gradient(top, #68b12f, #50911e);
+    border: 1px solid #509111;
+    border-bottom: 1px solid #5b992b;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 #9fd574;
+    -webkit-box-shadow: 0 1px 0 0 #9fd574 inset ;
+    -moz-box-shadow: 0 1px 0 0 #9fd574 inset;
+    -ms-box-shadow: 0 1px 0 0 #9fd574 inset;
+    -o-box-shadow: 0 1px 0 0 #9fd574 inset;
+    color: white;
+    font-weight: bold;
+    padding: 6px 20px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #396715;
+}
+button.submit:hover {
+    opacity:.85;
+    cursor: pointer;
+}
+button.submit:active {
+    border: 1px solid #20911e;
+    box-shadow: 0 0 10px 5px #356b0b inset;
+    -webkit-box-shadow:0 0 10px 5px #356b0b inset ;
+    -moz-box-shadow: 0 0 10px 5px #356b0b inset;
+    -ms-box-shadow: 0 0 10px 5px #356b0b inset;
+    -o-box-shadow: 0 0 10px 5px #356b0b inset;
+
+}
+.subscriber_form{
+    display: none;
+}
+.email-error-dup{
+    background: red;
+    border-radius: 3px;
+    color: #ffffff;
+    margin-left: 8px;
+    padding: 1px 6px;
+    z-index: 1000;
+    position: absolute;
+    display: none;
+}
+.email-error-hint, .name-error-hint, .zip-error-hint, .type-error-hint{
+    background: red;
+    border-radius: 3px;
+    color: #ffffff;
+    margin-left: 8px;
+    padding: 1px 6px;
+    z-index: 1000;
+    position: absolute;
+    display: none;
+}
+.email-hint:before, .name-hint:before, .zip-hint:before, .type-hint:before{
+    content: "\25C0";
+    color: red;
+    position: absolute;
+    top: 1px;
+    left: -6px;
+}
+.form_hint {
+    background: #d45252;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    margin-left:8px;
+    padding: 1px 6px;
+    z-index: 999; /* hints stay above all other elements */
+    position: absolute; /* allows proper formatting if hint is two lines */
+    display: none;
+}
+.form_hint::before {
+    content: "\25C0"; /* left point triangle in escaped unicode */
+    color:#d45252;
+    position: absolute;
+    top:1px;
+    left:-6px;
+}
+.subscriber_form input:focus + .form_hint {display: inline;}
+.subscriber_form select:focus + .form_hint {display: inline;}
