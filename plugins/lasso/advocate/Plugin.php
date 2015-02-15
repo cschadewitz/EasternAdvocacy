@@ -1,12 +1,13 @@
-<?php namespace Lasso\User;
+<?php namespace Lasso\Advocate;
 
 use System\Classes\PluginBase;
 
 /**
- * User Plugin Information File
+ * Advocate Plugin Information File
  */
 class Plugin extends PluginBase
 {
+    public $require = ['RainLab.User'];
 
     /**
      * Returns information about this plugin.
@@ -16,10 +17,17 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'User',
+            'name'        => 'Advocate',
             'description' => 'No description provided yet...',
             'author'      => 'Lasso',
             'icon'        => 'icon-leaf'
+        ];
+    }
+
+    public function registerComponents ()
+    {
+        return [
+            'Lasso\Advocate\Components\AdvocateAccount' => 'advocateAccount'
         ];
     }
 
