@@ -1,0 +1,6 @@
+{%set reps = __SELF__.representatives%}
+{% for rep in reps %}
+    <li>
+        {{rep}}<button class="close pull-right">&times;</button>
+    </li>
+{% endfor %}
