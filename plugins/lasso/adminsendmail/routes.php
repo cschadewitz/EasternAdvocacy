@@ -1,8 +1,4 @@
 <?php
+use lasso\adminsendmail\controllers\SendMailController;
 
-Route::get('sendmail/new', function()
-{
-	return 'Sending a new email';
-});
-
-Route::post('sendmail/new', array('uses' => 'SendMailController@preview'));
+Route::get('sendmail/send', array('uses' => 'SendMailController@send'));

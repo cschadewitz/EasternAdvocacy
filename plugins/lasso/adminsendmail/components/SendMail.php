@@ -19,12 +19,23 @@ class SendMail extends ComponentBase
         $this->page['subject'] = post('subject');
         $this->page['message'] = post('message');
 
-        $subs = Subscriber::all();
+        $subs = Subscriber::whereNotNull('verificationDate')->get();
         $this->page['subs'] = $subs;
 
         $email = new Email;
         $email->subject = post('subject');
         $email->content = post('message');
+        $email->abstract = substr(strip_tags(post('message')), 0, 140);
         $email->save();
+
+        $params = ['msg' => $email->content, 
+                    'subject' => $email->subject];
+
+
+        foreach($subs as $subscriber)
+        {
+            \Mail::sendTo($subscriber, 'lasso.adminsendmail::mail.blank', $params);
+        }
+        
 	}
 }
