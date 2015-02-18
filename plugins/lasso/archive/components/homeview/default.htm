@@ -1,0 +1,25 @@
+{% set posts = __SELF__.posts %}
+<div class="row">
+    <article id="lasso-archive" class="col-md-6 col-md-offset-3">
+        <header><h2>News</h2></header>
+
+        <ul class="media-list">
+            {% for post in posts %}
+                <li class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading post-subject">{{ post.subject }}</h4>
+                        <p class="post-abstract">{{ post.abstract }} <a href="{{ ['article'|page, '/', post.id]|join  }}">Read More...</a></p>
+                    </div>
+                </li>
+                <li class="divider"></li>
+            {% else %}
+                <li class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading post-subject">{{ noPostsMessage }}</h4>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </article>
+</div>
