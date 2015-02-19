@@ -34,8 +34,13 @@ class SendMail extends ComponentBase
 
         foreach($subs as $subscriber)
         {
-            \Mail::sendTo($subscriber, 'lasso.adminsendmail::mail.blank', $params);
+            //\Mail::queue($subscriber, 'lasso.adminsendmail::mail.blank', $params);
+            \Mail::queue('lasso.adminsendmail::mail.blank', $params, function($message) use ($subscriber) {
+                $message->to($subscriber->email, $subscriber->name);
+            });
         }
+
+
         
 	}
 }
