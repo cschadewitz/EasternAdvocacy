@@ -1,6 +1,7 @@
 <?php namespace Lasso\Unsubscribe\Components;
 
 use Cms\Classes\ComponentBase;
+use Lasso\Subscribe\Models\Subscribe;
 
 class UnsubscribeHandler extends ComponentBase
 {
@@ -32,17 +33,17 @@ class UnsubscribeHandler extends ComponentBase
             return;
         }
 
-        //$user = Subscriber::whereRaw('email = ? and uuid = ?', array($email, $uuid))->take(1)->get();
-        $user = true;
+        $user = Subscribe::whereRaw('email = ? and uuid = ?', array($email, $uuid));
+        //$user = true;
 
-        if (!$user) {
+        if ($user->count() == 0) {
             // Throw some error page
             $this->success = false;
             $this->message = "Email Not Found";
             return;
         }
 
-        //$user->delete();
+        $user->delete();
 
         $this->success = true;
         $this->message = "You have been successfully unsubscribed from the mailing list.";
