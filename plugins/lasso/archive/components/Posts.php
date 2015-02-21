@@ -18,7 +18,7 @@ class Posts extends ComponentBase
      * Parameter to use for the page number
      * @var string
      */
-    public $pageParam;
+    public $pageNumber;
     public $postsPerPage;
     public $postPage;
 
@@ -39,7 +39,7 @@ class Posts extends ComponentBase
                 'title'       => 'Page Number',
                 'description' => 'Determines the page that the user is on',
                 'type'        => 'string',
-                'default'     => '{{ :page }}',
+                'default'     => '{{ :pageNumber }}',
             ],
             'postsPerPage' => [
                 'title'             => 'Posts Per Page',
@@ -80,12 +80,12 @@ class Posts extends ComponentBase
 
 
         //Will not exeute for AJAX events
-        $postId = $this->property('pageNumber');
-        if($this->property('pageNumber') == null)
-            $this->pageParam = '1';
+        #$postId = $this->property('pageNumber');
+        if(twig_test_empty($this->pageNumber))
+            $this->pageNumber = '1';
 
-        $this->posts = Emails::listPosts([
-            'page'          => $this->pageParam,
+        $this->posts = Emails::orderBy('created_at', 'desc')->listPosts([
+            'page'          => $this->pageNumber,
             'postsPerPage'  => $this->property('postsPerPage')
         ]);
 
@@ -112,7 +112,7 @@ class Posts extends ComponentBase
     {
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
         $this->postPage = $this->page['postPage'] = $this->property('postPage');
-        $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
+        $this->pageNumber = $this->page['pageNumber']  = $this->paramName('pageNumber'); #$this->property('pageNumber');
         $this->postsPerPage = $this->page['postsPerPage'] = $this->property('postsPerPage');
     }
 
