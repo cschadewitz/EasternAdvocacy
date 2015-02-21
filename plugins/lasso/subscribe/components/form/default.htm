@@ -1,0 +1,47 @@
+
+
+<div class="form-container">
+    <h1 class="mailing-list">Mailing List</h1>
+    <form class="subscriber_form" onsubmit="processForm();return false;" method="post" name="subscriber_form">
+        <ul>
+            <li>
+                <h2>Subscribe: </h2>
+                <span class="required_notification">* Denotes Required Field</span>
+            </li>
+            <li>
+                <label for="name">Name:</label>
+                <input id="name" type="text" value="" name="name" placeholder="John Doe"/>
+                <span class="form_hint">No numeric or special characters allowed.</span>
+                <span class="name-error-hint">Invalid name format</span>
+            </li>
+            <li>
+                <label for="email">Email:</label>
+                <input id="email" type="text" value="" name="email" placeholder="name@example.com"/>
+                <span class="form_hint">Proper format "name@example.com"</span>
+                <span class="email-error-hint">Invalid email</span>
+                <span class="email-error-dup">Email already in use</span>
+            </li>
+            <li>
+                <label for="zip">Zip Code:</label>
+                <input id="zip" type="text" value="" name="zip" placeholder="Enter zip code"/>
+                <span class="form_hint">Proper Format "12345 or 12345-6789"</span>
+                <span class="zip-error-hint">Invalid Zip Code</span>
+            </li>
+            <li>
+                <label for="type">Affiliation:</label>
+                <select id="type" name="type" size="1">
+                    <option value="none">-</option>
+                    <option value="student">Student</option>
+                    <option value="alumni">Alumni</option>
+                    <option value="friend">Friend</option>
+                    <option value="other">Other</option>
+                </select>
+                <span class="form_hint">Select what best describes your relationship with this university.</span>
+                <span class="type-error-hint">You must select an option</span>
+            </li>
+            <li>
+                <button type="submit" class="submit">Subscribe</button>
+            </li>
+        </ul>
+    </form>
+</div>

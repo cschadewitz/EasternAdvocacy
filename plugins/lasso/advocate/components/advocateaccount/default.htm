@@ -1,0 +1,18 @@
+{% if not user %}
+
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+            <h3>Sign in</h3>
+            {% partial 'account::signin' %}
+        </div>
+
+    </div>
+
+{% else %}
+
+    {% partial 'account::activation_check' %}
+
+    {% partial 'account::update' %}
+
+{% endif %}
