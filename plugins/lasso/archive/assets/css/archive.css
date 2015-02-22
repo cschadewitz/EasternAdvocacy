@@ -19,8 +19,15 @@
     margin-bottom: 50px;
 }
 
-.post-date {
+.post-footer {
+    min-height: 30px;
+}
+.post-like {
+    float: left;
+}
 
+.post-date {
+    font-size: 12px;
 }
 
 .pagination {
