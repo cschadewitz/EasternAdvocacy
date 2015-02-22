@@ -27,8 +27,8 @@ class ZipRecord extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    //public $hasMany = [];
-    public $hasMany = ['representative_id' => ['Lasso\ZipLookup\Models\Rep']];
+    public $hasMany = [];
+    //public $hasMany = ['representative_id' => ['Lasso\ZipLookup\Models\Rep']];
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -37,15 +37,15 @@ class ZipRecord extends Model
     public $attachOne = [];
     public $attachMany = [];
 
-    public $Zip;
-    public $RepresentativeID;
+    //public $Zip;
+    //public $RepresentativeID;
 
-    public function existingRecord()
-    {
+    //public function existingRecord()
+    //{
        // if();
-    }
-    public function getRepID()
+    //}
+    /*public function getRepID()
     {
         return $this->RepresentativeID;
-    }
+    }*/
 }

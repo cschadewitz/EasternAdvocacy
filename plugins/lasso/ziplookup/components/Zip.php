@@ -45,13 +45,6 @@ class Zip extends ComponentBase
     }
     public function onRun()
     {
-        //$this->zipCode = $this->zipCode;
-
-        /*$this->representatives = [
-            'patty murray',
-            'maria cantwell',
-            'john boner'
-        ];*/
         //doesn't run under ajax events
     }
     public function init()
@@ -62,22 +55,19 @@ class Zip extends ComponentBase
     {
         $zipCode=post('zipCode');
 
-        echo json_encode(Zip::info(), JSON_PRETTY_PRINT);
-
-        //echo $zipCode;
-        $CurrentZipRecord = ZipRecord::where('zip', '=', intval($zipCode))->first();
-        //echo $CurrentZipRecord;
-        $id = $CurrentZipRecord;
-
-        $representatives[] = Rep::where('id', '=', $id);
-        //sforeach($representatives as $rep)
-            //echo $rep->get();
-            //echo $rep->__toString();
+        //$CurrentZipRecord = ZipRecord::where('zip', '=', intval($zipCode))->first();
+        //$representatives[] = Rep::where('id', '=', $CurrentZipRecord);
 
         //if($this->properties['visibleOutput']=='visible')
-        //    $this->page['#results']=$zipCode;
+        //  $this->page['#results']=$zipCode;
         //else
-        //    return $representatives;
+        //  return $representatives;
+
+        $representatives = Zip::info($zipCode);
+        $this->page{'#results'}=$representatives;
+        //$this['representatives']=$representatives;
+        return $representatives;
+        //return Zip::info($zipCode);
     }
 
     public function onAddZip()
@@ -88,13 +78,14 @@ class Zip extends ComponentBase
         $zipRecord ->save();
     }
 
-    public function info()
+    public function info($zippy)
     {
+        echo $zippy;
         $json = file_get_contents(sprintf(
             "https://congress.api.sunlightfoundation.com/legislators/locate?zip=%s&apikey=%s",
-            post('zipCode'),
+            $zippy,
             $this->property('userID')
         ));
-        return json_decode($json);
+        return json_decode($json)->{'results'};
     }
 }

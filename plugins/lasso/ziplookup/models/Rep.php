@@ -38,19 +38,19 @@ class Rep extends Model
     public $attachOne = [];
     public $attachMany = [];
 
-    public $firstName,
+    /*public $firstName,
             $lastName,
             $politicalParty,
             $image,
             $phoneNumber,
-            $physicalAddress;
+            $physicalAddress;*/
 
     public function getReps()
     {
         return $_POST['this'];
     }
-    public function __toString()
+    /*public function __toString()
     {
         return $this->firstName . ' ' . $this->lastName;
-    }
+    }*/
 }
