@@ -6,18 +6,18 @@
     class Subscribe extends Model
     {
         protected $table = 'subscribers';
-        public $timestamps = false;
+        protected $primaryKey = 'uuid';
 
         protected $fillable = [
             'name',
             'email',
             'zip',
-            'type'
+            'type',
+            'verificationDate'
         ];
 
         protected $guarded = [
-            'uuid',
-            'verificationDate'
+            'uuid'
         ];
 
         public function scopeEmail($query, $email){
@@ -34,6 +34,14 @@
 
         public function scopeType($query, $type){
             return $query->where('type', '=', $type);
+        }
+
+        public function  scopeUUID($query, $uuid){
+            return $query->where('uuid', '=', $uuid);
+        }
+
+        public function scopeNotVerified($query){
+            return $query->where('verificationDate', 'IS', 'NULL');
         }
 
         public function generateUUID(){
