@@ -14,9 +14,13 @@
             <h2>Send Mail</h2>
         </header>
 		<div class="panel panel-default">
-		  <div class="panel-heading"><b>Subject:</b> {{subject}}</div>
+		  <div class="panel-heading"><b>Subject:</b> {{email.subject}}</div>
 		  <div class="panel-body">
-		  	{{ message | raw }}
+			  <div class="jumbotron">
+				    {{ email.abstract }}
+				</div>
+			  <quote>
+		  	{{ email.content | raw }}
 		  </div>
 		</div>
 	</article>
