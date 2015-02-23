@@ -81,8 +81,8 @@ class Posts extends ComponentBase
 
         //Will not exeute for AJAX events
         #$postId = $this->property('pageNumber');
-        if(twig_test_empty($this->pageNumber))
-            $this->pageNumber = '1';
+        #if(twig_test_empty($this->pageNumber))
+        #    $this->pageNumber = '1';
 
         $this->posts = Emails::orderBy('created_at', 'desc')->listPosts([
             'page'          => $this->pageNumber,
@@ -110,9 +110,10 @@ class Posts extends ComponentBase
 
     public function assignVars()
     {
+        $pn = $this->property('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
         $this->postPage = $this->page['postPage'] = $this->property('postPage');
-        $this->pageNumber = $this->page['pageNumber']  = $this->paramName('pageNumber'); #$this->property('pageNumber');
+        $this->pageNumber = $this->page['pageNumber']  = $this->paramName('pageNumber', $pn);
         $this->postsPerPage = $this->page['postsPerPage'] = $this->property('postsPerPage');
     }
 

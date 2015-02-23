@@ -65,7 +65,7 @@ description = "Default layout"
                             <li class="{% if this.page.id == 'archive' or this.page.id == 'article' or this.page.id == 'edit-mail' %}active{% endif %} dropdown">
                                 <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Archive <span class="caret"></span></a>
                                 <ul class="dropdown-menu navbar-inverse" role="menu">
-                                    <li class="{% if this.page.id == 'archive' %}active{% endif %} nav-inverse-item"><a href="{{ 'archive'|page }}">Archived News</a></li>
+                                    <li class="{% if this.page.id == 'archive' %}active{% endif %} nav-inverse-item"><a href="{{ 'archive'|page({ pageNumber: 1 }) }}">Archived News</a></li>
                                     <li class="{% if this.page.id == 'edit-mail' %}active{% endif %} nav-inverse-item"><a href="{{ 'edit-mail'|page }}">Admin Send Mail</a></li>
                                 </ul>
                             </li>

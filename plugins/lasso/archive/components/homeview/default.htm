@@ -7,8 +7,9 @@
             {% for post in posts %}
                 <li class="media">
                     <div class="media-body">
-                        <h4 class="media-heading post-subject">{{ post.subject }}</h4>
-                        <p class="post-abstract">{{ post.abstract }} <a href="{{ ['article'|page, '/', post.id]|join  }}">Read More...</a></p>
+                        <h4 class="media-heading post-subject" ><a class="post-subject" href="{{ ['article'|page, '/', post.id]|join  }}">{{ post.subject }}</a></h4>
+                        <p class="post-abstract">{{ post.abstract }} <a href="{{ [__SELF__.postPage|page, '/', post.id]|join  }}">Read More...</a></p>
+                        <p class="post-date text-right">{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</p>
                     </div>
                 </li>
                 <li class="divider"></li>
