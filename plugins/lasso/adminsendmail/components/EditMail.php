@@ -13,10 +13,10 @@ class EditMail extends ComponentBase
     }
 
     public function onRun()
-	{
+    {
         $this->addJs('/themes/advocacy/assets/javascript/adminsendmail.js');
         $this->page['testVar'] = "Let's see...";
-	}
+    }
 
     public function onUpdate()
     {

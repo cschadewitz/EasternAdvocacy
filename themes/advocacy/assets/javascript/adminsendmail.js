@@ -1,5 +1,6 @@
 $("#previewDiv").hide();
 $("#checkDiv").hide();
+$("#abstractDiv").hide();
 
 
 function updatePreview()
@@ -20,4 +21,10 @@ function togglePreview()
 		$("#previewDiv").show();
 	else
 		$("#previewDiv").hide();
+}
+
+function addAbstract()
+{
+	$("#abstractDiv").show();
+	$("#addAbstractLink").hide();
 }
