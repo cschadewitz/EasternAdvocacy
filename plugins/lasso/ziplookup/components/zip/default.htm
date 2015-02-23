@@ -13,9 +13,10 @@
                     <button type="submit" class="btn btn-primary">Search</button>
                 </span>
             </div>
+            <ul class="list-group" id="go">
+                {% partial '@results' %}
+            </ul>
         </div>
-        <ul class="list-group" id="go">
-            {% partial '@results' %}
-        </ul>
+
     </div>
 </form>
