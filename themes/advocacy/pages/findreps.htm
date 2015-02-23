@@ -2,6 +2,10 @@ title = "Find Representatives"
 url = "/findreps"
 layout = "default"
 hidden = "0"
+
+[zip]
+userID = "edf3725acca94c9a897416cd3517f08e"
+visibleOutput = "visible"
 ==
 {% put styles %}
 <link rel="stylesheet" type="text/css" href="{{ 'assets/css/act.css'|theme }}">
@@ -13,7 +17,7 @@ hidden = "0"
             <h2>Find Local Legislative Representatives</h2>
         </header>
         <p>Here you can enter your zip code and find your local legislative representatives. These are the men and women that have the power to make positive changes in the state of higher education. So let your voice be heard and contact your reps today!</p>
-        
+        {% component 'zip' %}
             
     </article>
 </div>

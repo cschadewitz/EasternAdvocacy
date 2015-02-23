@@ -1,0 +1,8 @@
+1.0.1: First version of ZipLookup
+1.0.2:
+   -   Added tables, views, controlers, models, migrations
+   -   create_reps_table.php
+   -   create_zip_records_table.php
+   -   create_zips_table.php
+1.0.3:
+   -  Hopefully have correct columns.yaml and fields.yaml for ziprecord table
