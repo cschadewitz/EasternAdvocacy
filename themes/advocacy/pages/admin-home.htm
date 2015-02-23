@@ -1,7 +1,11 @@
 title = "Admin Home"
 url = "/admin"
-layout = "admin"
+layout = "default"
 hidden = "0"
+
+[session]
+security = "user"
+redirect = "home"
 ==
 <div class="row">
     <article id="who-we-are" class="col-md-6 col-md-offset-3">
@@ -9,5 +13,7 @@ hidden = "0"
             <h2>Admin Home Page</h2>
         </header>
         <p>Welcome Home, {{ user.name }}!</p>
+        <a data-request="onLogout" data-request-data="redirect: '/'">Sign out!</a>
+        
     </article>
 </div>
