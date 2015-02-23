@@ -1,4 +1,4 @@
-{%set reps = __SELF__.representatives%}
+
 
 <form
         data-request="{{__SELF__}}::onSearchZip"
@@ -15,16 +15,7 @@
             </div>
         </div>
         <ul class="list-group" id="go">
-            <?php json_decode(reps);?>
-            {% for rep in reps %}
-                <li>
-                    {rep}->{'first_name'} <button class="close pull-right">&times;</button>
-                </li>
-            {% else %}
-                <li>
-                    No results found <button class="close pull-right">&times;</button>
-                </li>
-            {% endfor %}
+            {% partial '@results' %}
         </ul>
     </div>
 </form>

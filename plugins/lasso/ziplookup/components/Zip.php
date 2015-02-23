@@ -63,10 +63,10 @@ class Zip extends ComponentBase
         //else
         //  return $representatives;
 
-        $representatives = Zip::info($zipCode);
-        $this->page{'#results'}=$representatives;
+        $this->representatives = Zip::info($zipCode);
+        //$this->page{'#results'}=$representatives;
         //$this['representatives']=$representatives;
-        return $representatives;
+        return $this->representatives;
         //return Zip::info($zipCode);
     }
 
@@ -80,7 +80,6 @@ class Zip extends ComponentBase
 
     public function info($zippy)
     {
-        echo $zippy;
         $json = file_get_contents(sprintf(
             "https://congress.api.sunlightfoundation.com/legislators/locate?zip=%s&apikey=%s",
             $zippy,

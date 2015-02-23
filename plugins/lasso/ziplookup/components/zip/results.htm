@@ -1,0 +1,7 @@
+{%set reps = __SELF__.representatives%}
+
+{% for rep in reps %}
+    <li>{{rep.first_name}} {{rep.last_name}}</li>
+{% else %}
+    <li>No results found</li>
+{% endfor %}
