@@ -2,6 +2,7 @@
 namespace Lasso\Subscribe\Components;
 
 use Cms\Classes\ComponentBase;
+use Mail;
 
 class Form extends ComponentBase{
     public function componentDetails(){
@@ -35,12 +36,16 @@ class Form extends ComponentBase{
         }
         else{
             $subscription = new \lasso\subscribe\models\Subscribe;
-            $subscription->uuid = $subscription->generateUUID();
+            $subscription->uuid = $uuid = $subscription->generateUUID();
             $subscription->name = $name;
             $subscription->email = $email;
             $subscription->zip = $zip;
             $subscription->type = $subscription->type2int($type);
             $subscription->save();
+            $params = ['name' => $name, 'email' => $email, 'uuid' => $uuid];
+
+
+            Mail::sendTo([$email => $name], 'lasso.subscribe::mail.verify', $params);
         }
 
 
