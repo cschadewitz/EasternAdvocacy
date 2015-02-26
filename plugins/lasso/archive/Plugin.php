@@ -47,6 +47,20 @@ Class Plugin extends PluginBase
                 'url' => Backend::url('lasso/archive/posts'),
                 'icon' => 'icon-pencil',
                 'order' => 500,
+
+                'sideMenu' => [
+                    'posts' => [
+                        'label' => 'Archive',
+                        'icon' => 'icon-archive',
+                        'url' => Backend::url('lasso/archive/posts'),
+                    ],
+
+                    'newpost' => [
+                        'label' => 'New Post',
+                        'icon' => 'icon-newspaper-o',
+                        'url' => Backend::url('lasso/archive/posts/create'),
+                    ],
+                ],
             ]
         ];
     }
