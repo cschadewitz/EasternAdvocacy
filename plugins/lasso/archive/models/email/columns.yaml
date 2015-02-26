@@ -5,3 +5,4 @@ columns:
   content: Content
   created_at: Created On
   updated_at: Modified On
+  views: Views

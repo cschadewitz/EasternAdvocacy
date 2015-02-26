@@ -15,9 +15,9 @@ class Emails extends Model {
 
     protected $table = 'emails';
 
-    protected $fillable = ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at', 'views'];
 
-    protected $visible =  ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at'];
+    protected $visible =  ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at', 'views'];
 
     public $hasOne = [];
     public $hasMany = [];

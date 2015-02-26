@@ -1,0 +1,20 @@
+<div class="report-widget">
+    <h3>Top Viewed Articles</h3>
+    <?php if (!isset($error)): ?>
+        <div
+                class="control-chart wrap-legend"
+                data-control="chart-bar"
+                data-height="100"
+                data-full-width="1">
+            <ul>
+                <?php if (count($rows)): ?>
+                    <?php foreach ($rows as $row): ?>
+                        <li><?= e($row['subject']) ?><span><?= $row['views'] ?></span></li>
+                    <?php endforeach ?>
+                <?php endif; ?>
+            </ul>
+        </div>
+    <?php else: ?>
+        <p class="flash-message static warning"><?= e($error) ?></p>
+    <?php endif ?>
+</div>

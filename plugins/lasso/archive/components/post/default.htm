@@ -9,7 +9,8 @@
             <p class="post-content">{{ post.content | raw }}</p>
             <div class="post-footer">
                 <div class="post-like fb-like" data-colorscheme="dark" data-href="{{ this.page.baseFileName|page }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-                <div class="post-date text-right">{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</div>
+                <div class="post-views text-right">Views: {{ post.views }}</div>
+                <div class="post-date text-right">Sent:{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</div>
             </div>
         {% endif %}
     </article>

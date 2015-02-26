@@ -49,11 +49,14 @@ class Post extends ComponentBase
         $this->assignVars();
         $this->getAssets();
 
+
         $postId = $this->property('postId');
         if($this->property('postId') == "")
             return Redirect::route($this->archivePage);
 
         $this->post = Emails::where('id', '=', intval($postId))->first();
+        $this->post->views = $this->post->views + 1;
+        $this->post->save();
 
     }
 

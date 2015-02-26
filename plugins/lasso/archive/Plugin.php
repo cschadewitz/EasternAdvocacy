@@ -28,4 +28,14 @@ Class Plugin extends PluginBase
             '\Lasso\Archive\Components\HomeView'    => 'homeView'
         ];
     }
+
+    public function registerReportWidgets()
+    {
+        return [
+            '\Lasso\Archive\ReportWidgets\TopViewed'    =>  [
+                'label'     =>      'TopViewed',
+                'context'   =>      'dashboard',
+            ]
+        ];
+    }
 }

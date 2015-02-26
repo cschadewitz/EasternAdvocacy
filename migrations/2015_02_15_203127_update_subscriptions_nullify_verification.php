@@ -2,7 +2,7 @@
 
 use October\Rain\Database\Updates\Migration;
 
-class UpdateSubscriptionsNullifyVerification extends Migration {
+class UpdateSubscriptionsNullifyVerifications extends Migration {
 
 	/**
 	 * Run the migrations.
