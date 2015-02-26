@@ -5,7 +5,7 @@
  * Date: 1/25/2015
  * Time: 10:59 PM
  */
-
+use Backend;
 use System\Classes\PluginBase;
 
 Class Plugin extends PluginBase
@@ -35,6 +35,18 @@ Class Plugin extends PluginBase
             '\Lasso\Archive\ReportWidgets\TopViewed'    =>  [
                 'label'     =>      'TopViewed',
                 'context'   =>      'dashboard',
+            ]
+        ];
+    }
+
+    public function registerNavigation()
+    {
+        return [
+            'posts' => [
+                'label' => 'Posts',
+                'url' => Backend::url('lasso/archive/posts'),
+                'icon' => 'icon-pencil',
+                'order' => 500,
             ]
         ];
     }
