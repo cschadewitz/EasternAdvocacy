@@ -6,10 +6,10 @@
 name: Post
 
 # Model Form Field configuration
-form: $/lasso/archive/models/post/fields.yaml
+form: $/lasso/archive/models/email/fields.yaml
 
 # Model Class name
-modelClass: Lasso\Archive\Models\Post
+modelClass: Lasso\Archive\Models\Emails
 
 # Default redirect location
 defaultRedirect: lasso/archive/posts

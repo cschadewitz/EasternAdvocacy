@@ -3,6 +3,7 @@
 use BackendMenu;
 use Backend\Classes\Controller;
 use Lasso\Archive\ReportWidgets\TopViewed;
+use Lasso\Archive\Models\Emails;
 
 /**
  * Posts Back-end Controller

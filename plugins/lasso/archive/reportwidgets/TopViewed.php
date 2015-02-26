@@ -8,7 +8,9 @@
 
 namespace Lasso\Archive\ReportWidgets;
 
+use App;
 use Backend\Classes\ReportWidgetBase;
+use Cms\Classes\Page;
 use Lasso\Archive\Models\Emails;
 
 class TopViewed extends ReportWidgetBase {
@@ -47,6 +49,10 @@ class TopViewed extends ReportWidgetBase {
             ],
         ];
     }
+    public function getPostPageOptions()
+    {
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }
 
 
     public function render()
@@ -60,11 +66,13 @@ class TopViewed extends ReportWidgetBase {
         });
         */
         $this->vars['rows'] = $this->posts;
+        $this->vars['postPage'] = $this->postPage;
         return $this->makePartial('reportWidget');
     }
 
     public function assignVars()
     {
+        $this->postPage = $this->page['postPage'] = $this->property('postPage');
         $this->numberOfPosts = $this->page['numberOfPosts'] = $this->property('numberOfPosts');
     }
 }

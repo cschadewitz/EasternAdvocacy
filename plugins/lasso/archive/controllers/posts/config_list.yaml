@@ -3,10 +3,10 @@
 # ===================================
 
 # Model List Column configuration
-list: $/lasso/archive/models/post/columns.yaml
+list: $/lasso/archive/models/email/columns.yaml
 
 # Model Class name
-modelClass: Lasso\Archive\Models\Post
+modelClass: Lasso\Archive\Models\Emails
 
 # List Title
 title: Manage Posts
