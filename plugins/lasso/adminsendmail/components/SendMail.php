@@ -26,15 +26,16 @@ class SendMail extends ComponentBase
 
         $file = new File;
         $file->data = Input::file('fileUpload');
-        $file->save();
 
-        $email->attachedFiles()->add($file);
+        $email->attachments()->add($file);
 
         if(strlen(post('abstract'))==0)
             $email->abstract = substr(strip_tags(post('message')), 0, 300);
         else
             $email->abstract = strip_tags(post('abstract'));
         $email->save();
+        $file->attachment_id = $email->id;
+        $file->save();
 
         //set twig vars
         $this->page['email'] = $email;
