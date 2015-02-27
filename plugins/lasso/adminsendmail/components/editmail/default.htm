@@ -30,7 +30,7 @@
 		 
 		  </div>
 		</div>
-		<form method="POST" action="send-mail">
+		<form method="POST" action="send-mail" enctype="multipart/form-data">
 			<div class="form-group">
 			    <label for="subject">Subject: </label>
 			    <input type="text" class="form-control" id="subject" name="subject" onkeyup="updatePreview()">
@@ -44,6 +44,10 @@
 			    <label for="message">Message: </label>
 				<textarea id="message" name="message"></textarea>
 			</div>
+			<div class="form-group">
+				<label for="fileUpload">Attachment(s): </label>
+                <input type="file" name="fileUpload" id="fileUpload" class="form-control">
+            </div>
 			<div class="form-group" id="checkDiv">
 			  	<label>
 			   		<input type="checkbox" id="previewCheck" onclick="togglePreview()" checked="true"> Show preview
