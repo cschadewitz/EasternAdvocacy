@@ -1,2 +1,15 @@
-
+<div class="scoreboard">
+    <div data-control="toolbar">
+        <div class="scoreboard-item title-value">
+            <h4># of Posts</h4>
+            <p><?= $postsTotal ?></p>
+        </div>
+        <div class="scoreboard-item title-value">
+            <h4>Top Post</h4>
+            <?php foreach ($popularPost as $row): ?>
+                <p><a href="<?= Backend::url('lasso/archive/posts') ?>"><?= $row['subject'] ?></a></p>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
 <?= $this->listRender() ?>

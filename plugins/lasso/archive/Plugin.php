@@ -43,7 +43,7 @@ Class Plugin extends PluginBase
     {
         return [
             'posts' => [
-                'label' => 'Posts',
+                'label' => 'Archive',
                 'url' => Backend::url('lasso/archive/posts'),
                 'icon' => 'icon-pencil',
                 'order' => 500,
@@ -54,14 +54,13 @@ Class Plugin extends PluginBase
                         'icon' => 'icon-archive',
                         'url' => Backend::url('lasso/archive/posts'),
                     ],
-
                     'newpost' => [
                         'label' => 'New Post',
                         'icon' => 'icon-newspaper-o',
                         'url' => Backend::url('lasso/archive/posts/create'),
                     ],
                 ],
-            ]
+            ],
         ];
     }
 }

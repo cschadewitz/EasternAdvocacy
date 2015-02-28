@@ -15,6 +15,8 @@ class Posts extends Controller
         'Backend.Behaviors.ListController'
     ];
 
+    public $popularPost;
+
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
@@ -23,10 +25,18 @@ class Posts extends Controller
     public function __construct()
     {
         parent::__construct();
-
-        BackendMenu::setContext('Lasso.Archive', 'archive', 'posts');
+        $this->assignVars();
+        $this->vars['postsTotal'] = Emails::count();
+        $this->vars['popularPost'] = $this->popularPost;
+        BackendMenu::setContext('Lasso.Archive', 'archive');
         $topViewedWidget = new TopViewed($this);
         $topViewedWidget->alias = 'topViewed';
         $topViewedWidget->bindToController();
+    }
+
+    public function assignVars()
+    {
+        $this->popularPost = Emails::orderBy('views', 'desc')->take(1)->get();
+
     }
 }

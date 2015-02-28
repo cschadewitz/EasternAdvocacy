@@ -31,9 +31,6 @@ defaultSort:
     column: created_at
     direction: desc
 
-viewsSort:
-    column: views
-    direction: desc
 
 # Display checkboxes next to each record
 # showCheckboxes: true
