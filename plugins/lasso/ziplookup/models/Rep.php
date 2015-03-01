@@ -23,34 +23,18 @@ class Rep extends Model
      */
     protected $fillable = ['firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
 
-    protected $visible = ['firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
+    protected $visible = ['id','firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
     /**
      * @var array Relations
      */
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [];
-    //public $belongsTo = ['rep' => ['Acme\Blog\Models\ZipRecord']];
+    //public $belongsToMany = ['id' => ['Lasso\ZipLookup\Models\ZipRecord']];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    /*public $firstName,
-            $lastName,
-            $politicalParty,
-            $image,
-            $phoneNumber,
-            $physicalAddress;*/
-
-    public function getReps()
-    {
-        return $_POST['this'];
-    }
-    /*public function __toString()
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }*/
 }

@@ -7,7 +7,6 @@ use Model;
  */
 class ZipRecord extends Model
 {
-
     /**
      * @var string The database table used by the model.
      */
@@ -36,16 +35,4 @@ class ZipRecord extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    //public $Zip;
-    //public $RepresentativeID;
-
-    //public function existingRecord()
-    //{
-       // if();
-    //}
-    /*public function getRepID()
-    {
-        return $this->RepresentativeID;
-    }*/
 }
