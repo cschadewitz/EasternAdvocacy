@@ -1,0 +1,18 @@
+header#layout-header .navbar-brand {
+    font-size: 0.9em;
+    padding: 13px 0 0 6px;
+    margin: 0;
+}
+
+body {
+    margin-top: 0;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+article > header > h2 {
+    font-size: 2em;
+}
