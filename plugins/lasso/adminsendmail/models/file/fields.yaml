@@ -1,0 +1,4 @@
+fields:
+    attachment:
+        label: Attachment
+        type: fileupload

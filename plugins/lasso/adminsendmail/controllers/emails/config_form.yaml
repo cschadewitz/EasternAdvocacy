@@ -1,0 +1,36 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Email
+
+# Model Form Field configuration
+form: $/lasso/adminsendmail/models/email/fields.yaml
+
+# Model Class name
+modelClass: Lasso\Adminsendmail\Models\Email
+
+# Default redirect location
+defaultRedirect: lasso/adminsendmail/emails
+
+# Create page
+create:
+    title: Create Email
+    redirect: lasso/adminsendmail/emails/update/:id
+    redirectClose: lasso/adminsendmail/emails
+
+# Update page
+update:
+    title: Edit Email
+    redirect: lasso/adminsendmail/emails
+    redirectClose: lasso/adminsendmail/emails
+
+# Preview page
+preview:
+    title: Preview Email
+
+# Send page
+send:
+    title: Send Email
+    redirectClose: lasso/adminsendmail/emails

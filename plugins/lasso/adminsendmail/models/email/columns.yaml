@@ -1,0 +1,13 @@
+columns:
+  id: Id
+  subject: Subject
+  abstract: Abstract
+  content: 
+    label: Content
+    type: html
+  created_at: Created On
+  updated_at: Modified On
+  attachments:
+    label: attachments
+    type: partial
+    sortable: no
