@@ -16,6 +16,7 @@ security = "all"
         <link href="{{ [
             'assets/css/styles.css'
         ]|theme }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ 'assets/css/footer.css'|theme }}">
         {% styles %}
         <style>
             .dropdown-menu > li > a {
@@ -87,8 +88,9 @@ security = "all"
         </section>
 
         <!-- Footer -->
+
         <footer id="layout-footer">
-            {% partial "footer" %}
+            {% partial "footer" user=user page=this.page %}
         </footer>
 
         <!-- Scripts -->
