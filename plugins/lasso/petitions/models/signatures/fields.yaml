@@ -1,0 +1,20 @@
+fields:
+    name:
+        label: Name
+        description: Your name
+    email:
+        label: Email
+        description: Your email address
+        type: text
+    address:
+        label: Address
+        description: Your registered mailing address
+        type: textarea
+    city:
+        label: City
+        description: City you currently live in
+        type: text
+    zip:
+        label: Zip
+        description: Zip Code
+        type: text

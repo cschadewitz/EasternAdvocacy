@@ -1,0 +1,16 @@
+#=====================================
+# Signatures Form Behavior Config
+#=====================================
+
+name: Petition
+form: ~/plugins/lasso/petitions/models/signatures/fields.yaml
+modelClass: Lasso\Petitions\Models\Signatures
+
+update:
+    title: Edit Signature
+    redirect: lasso/petitions/signatures
+    flashSave: Signature updated successfully.
+    flashDelete: Signature has been deleted.
+
+preview:
+    title: View Signature

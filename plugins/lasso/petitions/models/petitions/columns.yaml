@@ -1,0 +1,37 @@
+#===========================================
+# Petitions List Column Definitions
+#===========================================
+
+
+
+columns:
+    pid:
+        label: Petiton-ID
+        type: number
+    title:
+        label: Title
+        type: text
+    slug:
+        label: SLUG
+        type: text
+    summary:
+        label: Summary
+        type: text
+    body:
+        label: Body
+        type: text
+    published:
+        label: Published
+        type: switch
+    publicationDate:
+        label: Publication Date
+        type: datetime
+    signatures:
+        label: Signatures
+        type: number
+    created_at:
+        label: Created At
+        type: datetime
+    updated_at:
+        label: Updated At
+        type: datetime

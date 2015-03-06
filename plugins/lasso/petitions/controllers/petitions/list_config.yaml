@@ -1,0 +1,8 @@
+#======================================
+# Petitions List Behavior Config
+#======================================
+
+title: Petitions
+list: ~/plugins/lasso/petitions/models/petitions/columns.yaml
+modelClass: Lasso\Petitions\Models\Petitions
+recordUrl: lasso/petitions/petitions/update/:pid

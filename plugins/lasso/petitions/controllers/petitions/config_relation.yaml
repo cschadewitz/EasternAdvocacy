@@ -1,0 +1,12 @@
+#==============================================
+# Petition - Signature Relation Behavior Config
+#==============================================
+
+signatures:
+  label: Signature
+  list: ~/plugins/lasso/petitions/models/signatures/columns.yaml
+  form: ~/plugins/lasso/petitions/models/signatures/fields.yaml
+  manage:
+    recordsPerPage: 10
+  view:
+    toolBarButtons: create|delete
