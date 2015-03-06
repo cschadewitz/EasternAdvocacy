@@ -21,16 +21,15 @@ class Rep extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
+    protected $fillable = ['firstName','lastName','title','politicalParty','emailAddress','phoneNumber','physicalAddress','expireDate'];
 
-    protected $visible = ['id','firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
+    protected $visible = ['id','firstName','lastName','title','politicalParty','emailAddress','phoneNumber','physicalAddress','expireDate'];
     /**
      * @var array Relations
      */
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [];
-    //public $belongsToMany = ['id' => ['Lasso\ZipLookup\Models\ZipRecord']];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

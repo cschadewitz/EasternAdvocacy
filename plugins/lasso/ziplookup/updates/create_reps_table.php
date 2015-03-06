@@ -14,10 +14,12 @@ class CreateRepsTable extends Migration
             $table->increments('id');
             $table->string('firstName');
             $table->string('lastName');
+            $table->string('title');
             $table->string('politicalParty');
-            $table->string('image');
+            $table->string('emailAddress');
             $table->string('phoneNumber');
             $table->string('physicalAddress');
+            $table->date('expireDate');
             $table->timestamps();
         });
     }
