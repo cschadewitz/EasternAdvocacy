@@ -22,3 +22,7 @@
     - Added signature relations to petitions controller
     - Added plugin permissions to Plugin.php
     - Added permission control to petitions & signatures controllers
+1.4.0:
+    - Added component petitionPost
+    - Basic front end complete
+    - No front end error checking yet
