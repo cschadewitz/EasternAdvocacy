@@ -11,10 +11,14 @@ class CreateZipRecordsTable extends Migration
         Schema::create('lasso_ziplookup_zip_records', function($table)
         {
             $table->engine = 'InnoDB';
+            $table->unsignedInteger('representative_id');
             $table->mediumInteger('zip');
-            $table->integer('representative_id');
             $table->timestamps();
             $table->primary(array('zip', 'representative_id'));
+            $table->foreign('representative_id')
+                ->references('id')
+                ->on('lasso_ziplookup_reps')
+                ->onDelete('cascade');
         });
     }
 

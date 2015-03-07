@@ -42,21 +42,25 @@ class Zip extends ComponentBase {
     public function onSearchZip() {
         $zipCode = post('zipCode');
         $zipRecord = ZipRecord::where('zip', '=', intval($zipCode))->first();
+
         if (!$zipRecord) {
             $representatives = Zip::info($zipCode);
             foreach($representatives as $rep) {
-                $zipRecord = new ZipRecord();
-                $zipRecord->zip = $zipCode;
-                $repRecord = REP::whereraw('firstName = ? AND lastName = ? ', array($rep->first_name, $rep->last_name))->first();
+                $repRecord = (Rep::whereraw('firstName = ? AND lastName = ? ',
+                    array($rep->first_name, $rep->last_name))->first());
                 if (!$repRecord) {
-                    $repRecord = new Rep();
-                    $repRecord->firstName = $rep->first_name;
-                    $repRecord->lastName = $rep->last_name;
-                    $repRecord->politicalParty = $rep->party;
-                    $repRecord->phoneNumber = $rep->phone;
-                    $repRecord->physicalAddress = $rep->office . ", " . $rep->state;
+                    $repRecord = Rep::create(['firstName' => $rep->first_name,
+                        'lastName' => $rep->last_name,
+                        'title' => $rep->title,
+                        'politicalParty' => $rep->party,
+                        'emailAddress' => $rep->oc_email,
+                        'phoneNumber' => $rep->phone,
+                        'physicalAddress' => $rep->office . ", " . $rep->state,
+                        'expireDate' => $rep->term_end]);
                     $repRecord->save();
                 }
+                $zipRecord = new ZipRecord();
+                $zipRecord->zip = $zipCode;
                 $zipRecord->representative_id = $repRecord->id;
                 $zipRecord->save();
             }

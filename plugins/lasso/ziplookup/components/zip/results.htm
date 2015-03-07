@@ -2,7 +2,8 @@
 
 {% for rep in reps %}
     <li>
-        <p>{{rep.firstName}} {{rep.lastName}} ({{rep.politicalParty}})
+        <p>{{rep.title}} {{rep.firstName}} {{rep.lastName}} ({{rep.politicalParty}})
+            <br />{{rep.emailAddress}}
             <br />{{rep.physicalAddress}}
             <br />{{rep.phoneNumber}}</p>
     </li>
