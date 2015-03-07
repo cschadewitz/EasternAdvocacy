@@ -1,0 +1,19 @@
+.form-items{
+    width:inherit;
+    list-style-type:none;
+    list-style-position:outside;
+    margin:0;
+    padding:0;
+}
+.form-items li{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+.form-items li:first-child, .subscriber_form li:last-child {
+    border-bottom:1px solid #777;
+}
+.form-items h2 {
+    margin:0;
+    display: inline;
+}

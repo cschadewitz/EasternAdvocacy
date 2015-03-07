@@ -1,0 +1,28 @@
+1.0.1:
+    - Added migrations
+    - create_petitions_table.php
+    - create_signatures_table.php
+1.0.5:
+    - Added petitions and signatures models
+1.1.0:
+    - Added seed
+    - seed_petitions.php
+    - seed_signatures.php
+1.2.0:
+    - Added petitions controller
+    - Added backend views
+    - list, create, update, delete, preview behaviors
+1.2.1:
+    - Bug fixes
+1.3.0:
+    - Added signatures controller
+    - Added backend views
+    - list, update, delete, preview behaviors
+1.3.5:
+    - Added signature relations to petitions controller
+    - Added plugin permissions to Plugin.php
+    - Added permission control to petitions & signatures controllers
+1.4.0:
+    - Added component petitionPost
+    - Basic front end complete
+    - No front end error checking yet
