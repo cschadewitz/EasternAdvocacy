@@ -34,7 +34,7 @@
         public function registerNavigation()
         {
             return [
-                'petitions' => [
+                'petition' => [
                     'label' => 'Petitions',
                     'url' => Backend::url('lasso/petitions/petitions'),
                     'icon' => 'icon-check-square',
@@ -54,6 +54,12 @@
                             'icon' => 'icon-check-square',
                             'permissions' => ['lasso.petitions.access_signatures'],
                         ],
+                        'createpetition' => [
+                            'label' => 'Create Petition',
+                            'url' => Backend::url('lasso/petitions/petitions/create'),
+                            'icon' => 'icon-check-square',
+                            'permissions' => ['lasso.petitions.access_petitions'],
+                        ]
                     ]
                 ]
             ];
