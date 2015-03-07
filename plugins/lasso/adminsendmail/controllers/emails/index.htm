@@ -1,2 +1,16 @@
 <link href="/plugins/lasso/adminsendmail/assets/css/fileupload.css" rel="stylesheet">
+<div class="scoreboard">
+    <div data-control="toolbar">
+        <div class="scoreboard-item title-value">
+            <h4># of Posts</h4>
+            <p><?= $postsTotal ?></p>
+        </div>
+        <div class="scoreboard-item title-value">
+            <h4>Top Post</h4>
+            <?php foreach ($popularPost as $row): ?>
+                <p><a href="<?= Backend::url('lasso/adminsendmail/emails/preview/'.$row['id']) ?>"><?= $row['subject'] ?></a></p>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
 <?= $this->listRender() ?>

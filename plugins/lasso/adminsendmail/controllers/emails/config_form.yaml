@@ -17,7 +17,7 @@ defaultRedirect: lasso/adminsendmail/emails
 # Create page
 create:
     title: Create Email
-    redirect: lasso/adminsendmail/emails/update/:id
+    redirect: lasso/adminsendmail/emails/send/:id
     redirectClose: lasso/adminsendmail/emails
 
 # Update page

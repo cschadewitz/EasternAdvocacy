@@ -12,7 +12,7 @@ modelClass: Lasso\Adminsendmail\Models\Email
 title: Manage Emails
 
 # Link URL for each record
-recordUrl: lasso/adminsendmail/emails/update/:id
+recordUrl: lasso/adminsendmail/emails/preview/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
