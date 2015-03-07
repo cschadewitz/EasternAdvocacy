@@ -11,7 +11,7 @@
                 return "Account Verified";
             }
             else{
-                return "Invalid Authentication Token";
+                return "Invalid Token";
             }
 
         }

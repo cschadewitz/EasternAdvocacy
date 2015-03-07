@@ -4,8 +4,7 @@ use Cms\Classes\ComponentBase;
 use Lasso\ZipLookup\Models\ZipRecord;
 use Lasso\ZipLookup\Models\Rep;
 
-class Zip extends ComponentBase
-{
+class Zip extends ComponentBase {
     /**
      * zipcode, read as string
      * @var string
@@ -17,16 +16,13 @@ class Zip extends ComponentBase
      */
     public $representatives;
 
-
-    public function componentDetails()
-    {
+    public function componentDetails() {
         return [
             'name'        => 'Zip',
             'description' => 'Zip Lookup Plugin'
         ];
     }
-    public function defineProperties()
-    {
+    public function defineProperties() {
 	    return [
             'userID' => [
             'title'         => 'User ID',
@@ -43,46 +39,52 @@ class Zip extends ComponentBase
             ]
 	    ];
     }
-    public function onRun()
-    {
-        //doesn't run under ajax events
+    public function onSearchZip() {
+        $zipCode = post('zipCode');
+        $zipRecord = ZipRecord::where('zip', '=', intval($zipCode))->first();
+
+        if (!$zipRecord) {
+            $representatives = Zip::info($zipCode);
+            foreach($representatives as $rep) {
+                $repRecord = (Rep::whereraw('firstName = ? AND lastName = ? ',
+                    array($rep->first_name, $rep->last_name))->first());
+                if (!$repRecord) {
+                    $repRecord = Rep::create(['firstName' => $rep->first_name,
+                        'lastName' => $rep->last_name,
+                        'title' => $rep->title,
+                        'politicalParty' => $rep->party,
+                        'emailAddress' => $rep->oc_email,
+                        'phoneNumber' => $rep->phone,
+                        'physicalAddress' => $rep->office . ", " . $rep->state,
+                        'expireDate' => $rep->term_end]);
+                    $repRecord->save();
+                }
+                $zipRecord = new ZipRecord();
+                $zipRecord->zip = $zipCode;
+                $zipRecord->representative_id = $repRecord->id;
+                $zipRecord->save();
+            }
+        }
+        unset($representatives);
+        $representatives = array();
+        if($zipRecord) {
+            $repsIds = ZipRecord::where('zip', '=', $zipRecord->zip);
+            foreach ($repsIds->get() as $zipIndex) {
+                $repIndex = $zipIndex->representative_id;
+                $rep = Rep::where('id', '=', $repIndex)->first();
+                array_push($representatives, $rep);
+            }
+        }
+        if($this->properties['visibleOutput']=='visible') {
+            $this->representatives = $representatives;
+        } else {
+            return $representatives;
+        }
     }
-    public function init()
-    {
-        //does run under ajax events
-    }
-    public function onSearchZip()
-    {
-        $zipCode=post('zipCode');
-
-        //$CurrentZipRecord = ZipRecord::where('zip', '=', intval($zipCode))->first();
-        //$representatives[] = Rep::where('id', '=', $CurrentZipRecord);
-
-        //if($this->properties['visibleOutput']=='visible')
-        //  $this->page['#results']=$zipCode;
-        //else
-        //  return $representatives;
-
-        $this->representatives = Zip::info($zipCode);
-        //$this->page{'#results'}=$representatives;
-        //$this['representatives']=$representatives;
-        return $this->representatives;
-        //return Zip::info($zipCode);
-    }
-
-    public function onAddZip()
-    {
-        $zipRecord = new ZipRecord();
-        $zipRecord ->zip = post('zip');
-        $zipRecord ->representative_id = post('repID');
-        $zipRecord ->save();
-    }
-
-    public function info($zippy)
-    {
+    public function info($zipCode) {
         $json = file_get_contents(sprintf(
             "https://congress.api.sunlightfoundation.com/legislators/locate?zip=%s&apikey=%s",
-            $zippy,
+            $zipCode,
             $this->property('userID')
         ));
         return json_decode($json)->{'results'};

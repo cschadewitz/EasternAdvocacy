@@ -1,0 +1,44 @@
+<div class="petition">
+    <div class="info">
+        <h1>Petition</h1>
+        {{ petitionInfo.title }}
+        <h2>Cause</h2>
+        {{ petitionInfo.body | raw }}
+        <h3>Signatures</h3>
+        {{petitionInfo.signatures}}
+    </div>
+    <div class="form">
+        {{ form_open({ request: 'signPetition' }) }}
+        <ul class="form-items">
+            <li>
+                <h2>Count Me In: </h2>
+                <span class="required_notification">* Denotes Required Field</span>
+            </li>
+            <li>
+                <label for="name">Name:</label>
+                <input id="name" type="text" value="" name="name" placeholder="John Doe"/>
+            </li>
+            <li>
+                <label for="email">Email:</label>
+                <input id="email" type="text" value="" name="email" placeholder="name@example.com"/>
+            </li>
+            <li>
+                <label for="mailingaddress">Registered Mailing Address:</label>
+                <input name="mailingaddress" id="mailingaddress" placeholder="Address"/>
+            </li>
+            <li>
+                <label for="city">City:</label>
+                <input type="text" name="city" id="city" placeholder="Cheney"/>
+            </li>
+            <li>
+                <label for="zip">Zip Code:</label>
+                <input id="zip" type="text" value="" name="zip" placeholder="Enter zip code"/>
+            </li>
+            <li>
+                <button type="submit" class="submit">Sign</button>
+            </li>
+            <input type="hidden" name="pid" value="{{ petitionInfo.pid }}"/>
+        </ul>
+        {{ form_close() }}
+    </div>
+</div>

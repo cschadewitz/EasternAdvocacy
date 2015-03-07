@@ -1,0 +1,8 @@
+#======================================
+# Signatures List Behavior Config
+#======================================
+
+title: Petitions
+list: ~/plugins/lasso/petitions/models/signatures/columns.yaml
+modelClass: Lasso\Petitions\Models\Signatures
+recordUrl: lasso/petitions/signatures/update/:sid

@@ -1,0 +1,28 @@
+columns:
+    sid:
+        label: Signature-ID
+        type: number
+    name:
+        label: Name
+        type: text
+    email:
+        label: Email Address
+        type: text
+    address:
+        label: Address
+        type: text
+    city:
+        label: City
+        type: text
+    zip:
+        label: Zip
+        type: text
+    pid:
+        label: Petition-ID
+        type: number
+    created_at:
+        label: Created At
+        type: datetime
+    updated_at:
+        label: Updated At
+        type: datetime

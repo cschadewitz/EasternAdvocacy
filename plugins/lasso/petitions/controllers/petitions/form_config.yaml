@@ -1,0 +1,22 @@
+#=====================================
+# Petitions Form Behavior Config
+#=====================================
+
+name: Petition
+form: ~/plugins/lasso/petitions/models/petitions/fields.yaml
+modelClass: Lasso\Petitions\Models\Petitions
+
+create:
+    title: New Petition
+    redirect: lasso/petitions/petitions/update/:pid
+    redirectClose: lasso/petitions/petitions
+    flashSave: Petition has been created.
+
+update:
+    title: Edit Petition
+    redirect: lasso/petitions/petitions
+    flashSave: Petition updated successfully.
+    flashDelete: Petition has been deleted.
+
+preview:
+    title: View Petition

@@ -1,0 +1,26 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    subject:
+        label: Subject
+        description: The subject for this email
+        type: text
+    abstract:
+        label: Abstract
+        description: The abstract for this email
+        type: textarea
+        size: small
+    content:
+        label: Content
+        description: The content of this email
+        type: richeditor
+        size: huge
+    attachments:
+        label: Attachment
+        type: fileupload
+        mode: file

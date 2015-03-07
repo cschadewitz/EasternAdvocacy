@@ -21,36 +21,19 @@ class Rep extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
+    protected $fillable = ['firstName','lastName','title','politicalParty','emailAddress','phoneNumber','physicalAddress','expireDate'];
 
-    protected $visible = ['firstName','lastName','politicalParty','image','phoneNumber','physicalAddress'];
+    protected $visible = ['id','firstName','lastName','title','politicalParty','emailAddress','phoneNumber','physicalAddress','expireDate'];
     /**
      * @var array Relations
      */
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [];
-    //public $belongsTo = ['rep' => ['Acme\Blog\Models\ZipRecord']];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    /*public $firstName,
-            $lastName,
-            $politicalParty,
-            $image,
-            $phoneNumber,
-            $physicalAddress;*/
-
-    public function getReps()
-    {
-        return $_POST['this'];
-    }
-    /*public function __toString()
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }*/
 }

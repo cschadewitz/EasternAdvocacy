@@ -7,7 +7,6 @@ use Model;
  */
 class ZipRecord extends Model
 {
-
     /**
      * @var string The database table used by the model.
      */
@@ -21,14 +20,13 @@ class ZipRecord extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['zip', 'representative_id'];
-    protected $visible = ['zip', 'representative_id'];
+    protected $fillable = ['representative_id', 'zip'];
+    protected $visible = ['representative_id', 'zip'];
     /**
      * @var array Relations
      */
     public $hasOne = [];
     public $hasMany = [];
-    //public $hasMany = ['representative_id' => ['Lasso\ZipLookup\Models\Rep']];
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -36,16 +34,4 @@ class ZipRecord extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    //public $Zip;
-    //public $RepresentativeID;
-
-    //public function existingRecord()
-    //{
-       // if();
-    //}
-    /*public function getRepID()
-    {
-        return $this->RepresentativeID;
-    }*/
 }

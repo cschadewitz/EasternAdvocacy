@@ -3,6 +3,14 @@
    -   Added tables, views, controlers, models, migrations
    -   create_reps_table.php
    -   create_zip_records_table.php
-   -   create_zips_table.php
 1.0.3:
    -  Hopefully have correct columns.yaml and fields.yaml for ziprecord table
+1.0.4:
+  -   Added additional fields to enable effective cache checking
+1.0.5:
+  -   Added foriegn key to enable easy cascading deletes
+1.0.6:
+  -   Adjusted foriegn key entries
+1.0.7:
+  -   Better consistancy through better naming of fields
+  -   removed create_zips_table.php

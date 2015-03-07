@@ -10,16 +10,5 @@ postPage = "article"
 {% put styles %}
 <link rel="stylesheet" type="text/css" href="{{ 'assets/css/home.css'|theme }}">
 {% endput %}
-
-<div class="row">
-    <article id="who-we-are" class="col-md-6 col-md-offset-3">
-        <header>
-            <h2>Who Are We?</h2>
-        </header>
-        <p>Eastern Advocates is a coalition of EWU alumni, students, faculty and concerned citizens working to ensure that higher education is a priority in Washington. Please, join us in our efforts to support Eastern Washington University.</p>
-        <p>Supporters of Eastern Advocates were very active the 2013-2014 legislative session.</p>
-        <p>To find your legislator, you can visit the Washington State Legislature page here. You can also find members on the Higher Education Joint Comittee here.</p>
-        <p>Thank you everyone! We look forward to having you on the team.</p>
-    </article>
-</div>
+{% content 'whoweare.htm' %}
 {% component 'homeView' %}

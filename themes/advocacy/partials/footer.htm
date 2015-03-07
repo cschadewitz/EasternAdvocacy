@@ -1,7 +1,32 @@
 ==
-<div id="footer">
-    <div class="container">
-        <p class="muted credit">Eastern Advocates is not funded at public expense. The views expressed here are solely those of Eastern Advocates and do not represent the positions of the Eastern Washington University.</p>
-        <p>&copy; 2015 Eastern Advocates</p>
+<!--Called using  partial "footer" user=user -->
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col- col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-1">
+                    <p class="muted credit text-left">Eastern Advocates is not funded at public expense. The views expressed here are solely those of Eastern Advocates and do not represent the positions of the Eastern Washington University.</p>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-2 col-sm-offset-2 col-md-offset-1">
+
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-2 col-sm-offset-2 col-md-offset-1">
+                    <div class="footer-links">
+                        <a class="footer-brand" href="{{ 'home'|page }}">Eastern Advocates</a>
+
+                        {% if user %}
+                        <a id="#account-link" class="disabled"  href="{{ 'user-account'|page }}"><i class="icon-user"></i> {{ user.name }}</a>
+                        <a href="{{ 'user'|page }}"><i class="icon-lock"></i> Logout</a>
+                        {% else %}
+                        <a id="#account-link-no-user" class="disabled"  href="#account-link-no-user"><i class="icon-user"></i> No User</a>
+                        <a href="{{ 'user-account'|page }}"><i class="icon-lock"></i> Login</a>
+                        {% endif %}
+                        <a href="#"><i class="icon-envelope"> Contact Us</i></a>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="text-center">© 2015 Eastern Advocates</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

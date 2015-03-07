@@ -14,3 +14,14 @@ artisan
 /themes/demo
 index.php
 /plugins/rainlab
+CHANGELOG.md
+CONTRIBUTING.md
+composer.json
+composer.lock
+config/
+phpdoc.dist.xml
+phpunit.xml
+server.php
+storage/
+tests/
+README.md
