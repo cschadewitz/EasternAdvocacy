@@ -19,6 +19,6 @@
         {
             parent::__construct();
 
-            BackendMenu::setContext('Lasso.Petitions', 'Petitions', 'Signatures');
+            BackendMenu::setContext('Lasso.Petitions', 'petition', 'signatures');
         }
     }
