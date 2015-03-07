@@ -2,6 +2,7 @@
     namespace Lasso\Petitions\Models;
 
     use Model;
+    use Str;
     use October\Rain\Database\Traits\Sluggable;
 
     class Petitions extends Model
