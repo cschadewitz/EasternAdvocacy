@@ -16,10 +16,11 @@ class CreateRepresentativesTable extends Migration {
 			$table->increments('id');
 	        $table->string('firstName');
 	        $table->string('lastName');
-	        $table->string('politicalParty');
-	        $table->string('image');
-	        $table->string('phoneNumber');
-	        $table->string('physicalAddress');
+	        $table->string('politicalParty');			
+			$table->string('emailAddress');
+            $table->string('phoneNumber');
+            $table->string('physicalAddress');
+            $table->date('expireDate');
 	        $table->timestamps();
         });
 	}
