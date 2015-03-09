@@ -59,11 +59,11 @@ security = "all"
                                     <li class="{% if this.page.id == 'contribute' %}active{% endif %} nav-inverse-item"><a href="{{ 'contribute'|page }}">Contribute</a></li>
                                 </ul>
                             </li>
-                            <li class="{% if this.page.id == 'subscribe' or this.page.id == 'unsubscribe' %}active{% endif %} dropdown">
+                            <li class="{% if this.page.id == 'subscribe' or this.page.id == 'unsubscribe' or this.page.id == 'unsubscribe-form' %}active{% endif %} dropdown">
                                 <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mailing List <span class="caret"></span></a>
                                 <ul class="dropdown-menu navbar-inverse" role="menu">
                                     <li class="{% if this.page.id == 'subscribe' %}active{% endif %} nav-inverse-item"><a href="{{ 'subscribe'|page }}">Subscribe</a></li>
-                                    <li class="{% if this.page.id == 'unsubscribe' %}active{% endif %} nav-inverse-item"><a href="{{ 'unsubscribe-form'|page }}">Unsubscribe</a></li>
+                                    <li class="{% if this.page.id == 'unsubscribe-form' %}active{% endif %} nav-inverse-item"><a href="{{ 'unsubscribe-form'|page }}">Unsubscribe</a></li>
                                 </ul>
                             </li>
                             <li class="{% if this.page.id == 'archive' or this.page.id == 'article' or this.page.id == 'edit-mail' %}active{% endif %} dropdown">
