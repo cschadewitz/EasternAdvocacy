@@ -42,4 +42,9 @@
         {
             return $query->where('pid', '=', $pid);
         }
+
+        public function scopeUrl($query, $slug)
+        {
+            return $query->where('slug', '=', $slug);
+        }
     }

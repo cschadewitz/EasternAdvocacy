@@ -28,6 +28,7 @@
         {
             return [
                 'Lasso\Petitions\Components\Post' => 'petitionPost',
+			'Lasso\Petitions\Components\Viewpost' => 'viewPost'
             ];
         }
 
