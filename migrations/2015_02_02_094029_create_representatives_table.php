@@ -16,6 +16,7 @@ class CreateRepresentativesTable extends Migration {
 			$table->increments('id');
 	        $table->string('firstName');
 	        $table->string('lastName');
+            $table->string('title');
 	        $table->string('politicalParty');			
 			$table->string('emailAddress');
             $table->string('phoneNumber');
