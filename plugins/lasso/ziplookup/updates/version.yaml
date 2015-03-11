@@ -14,3 +14,5 @@
 1.0.7:
   -   Better consistancy through better naming of fields
   -   removed create_zips_table.php
+1.0.8:
+  -   Bugfix - missing title field in migration
