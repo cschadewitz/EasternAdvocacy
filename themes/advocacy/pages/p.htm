@@ -1,0 +1,18 @@
+title = "Petition"
+url = "/petition/:slug"
+layout = "default"
+description = "The default layout of a petition obtainable using the petition's unique slug. For example www.example.com/petition/sample-petition"
+hidden = "0"
+
+[viewPost]
+slug = "{{ :slug }}"
+==
+<div class="row">
+    
+    <article class="col-md-6 col-md-offset-3">
+        <header>
+            <h2>Sign a Petition</h2>
+        </header>
+        {% component 'viewPost'  %}
+    </article>
+</div>
