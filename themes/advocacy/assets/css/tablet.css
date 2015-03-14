@@ -1,0 +1,29 @@
+header#layout-header .navbar-brand {
+    text-align: center;
+    padding-left: 0;
+    float: none;
+    display: block;
+    padding-right: 0;
+    margin-left: 0;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    float: none !important;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    float: none;
+    display: inline-block;
+}
+
+@media (max-width: 662px) {
+    .navbar-nav > li {
+        width: 100%;
+    }
+}
