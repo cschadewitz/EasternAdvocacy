@@ -98,7 +98,7 @@ class Posts extends ComponentBase
 
             $currentPage = $this->property('pageNumber');
 
-            if ($currentPage > ($lastPage = $this->posts->getLastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $this->posts->lastItem()) && $currentPage > 1)
                 return Redirect::to($this->currentPageUrl(['pageNumber' => $lastPage]));
         }
     }
