@@ -4,5 +4,8 @@
         <li>Send Email</li>
     </ul>
 <?php Block::endPut() ?>
-
-<?= $email ?>
+<?php if( $sent == true ): ?>
+	<div class="alert-box success"><span>Success: </span>Email successfully sent.</div>
+<?php else: ?>
+	<div class="alert-box error"><span>Error: </span>Email was not sent.</div>
+<?php endif; ?>
