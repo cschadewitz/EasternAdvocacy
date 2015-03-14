@@ -13,7 +13,7 @@ artisan
 /themes/flat-theme-master
 /themes/demo
 index.php
-/plugins/rainlab
+plugins/rainlab
 CHANGELOG.md
 CONTRIBUTING.md
 composer.json
@@ -25,3 +25,4 @@ server.php
 storage/
 tests/
 README.md
+
