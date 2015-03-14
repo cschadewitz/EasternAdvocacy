@@ -33,7 +33,10 @@ class Emails extends Controller
         $topViewedWidget->alias = 'topViewed';
         $topViewedWidget->bindToController();
         $this->addCss('/plugins/lasso/adminsendmail/assets/css/box.css');
+<<<<<<< HEAD
         $this->addCss('/plugins/lasso/adminsendmail/assets/css/fileupload.css');
+=======
+>>>>>>> Send mail partial created
     }
 
     public function assignVars()
@@ -65,7 +68,11 @@ class Emails extends Controller
 
         return $this->makePartial('send', [
                 'email' => $email,
+<<<<<<< HEAD
                 'sent' => true,
+=======
+                'sent' => false,
+>>>>>>> Send mail partial created
             ]);
     }
 

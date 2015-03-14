@@ -28,5 +28,9 @@ update:
 
 # Preview page
 preview:
+<<<<<<< HEAD
     title: Preview Email
     form: $/lasso/adminsendmail/models/email/preview.yaml
+=======
+    title: Preview Email
+>>>>>>> Send mail partial created
