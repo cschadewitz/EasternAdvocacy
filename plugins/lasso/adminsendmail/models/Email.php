@@ -31,9 +31,7 @@ class Email extends Model
             'postsPerPage'    => 10,
         ], $options));
 
-        App::make('paginator')->setCurrentPage($page);
-
-        return $query->paginate($postsPerPage);
+        return $query->paginate($postsPerPage, $page);
     }
 
     public function setUrl($pageName, $controller)
