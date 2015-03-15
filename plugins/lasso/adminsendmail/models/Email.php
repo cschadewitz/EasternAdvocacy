@@ -6,7 +6,7 @@ use App;
 
 class Email extends Model 
 {
-    protected $table = 'emails';
+    protected $table = 'lasso_adminsendmail_emails';
 
     protected $fillable = ['id', 'subject', 'abstract', 'content'];
 
