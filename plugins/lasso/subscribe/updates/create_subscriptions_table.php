@@ -8,7 +8,7 @@ class CreatePetitionsTable extends Migration
 {
     public function up()
     {
-        Schema::create('subscribers', function($table)
+        Schema::create('lasso_subscribe_subscribers', function($table)
         {
             $table->engine = 'InnoDB';
             $table->char('uuid', 13);
@@ -23,6 +23,6 @@ class CreatePetitionsTable extends Migration
 
     public function down()
     {
-        Schema::drop('subscribers');
+        Schema::drop('lasso_subscribe_subscribers');
     }
 }

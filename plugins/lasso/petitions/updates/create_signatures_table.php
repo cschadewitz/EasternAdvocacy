@@ -8,7 +8,7 @@
     {
         public function up()
         {
-            Schema::create('signatures', function($table)
+            Schema::create('lasso_petitions_signatures', function($table)
             {
                 $table->engine = 'InnoDB';
                 $table->increments('sid');
@@ -18,13 +18,13 @@
                 $table->string('city');
                 $table->string('zip');
                 $table->integer('pid')->unsigned();
-                $table->foreign('pid')->references('pid')->on('petitions')->onDelete('cascade');
+                $table->foreign('pid')->references('pid')->on('lasso_petitions_petitions')->onDelete('cascade');
                 $table->timestamps();
             });
         }
 
         public function down()
         {
-            Schema::drop('signatures');
+            Schema::drop('lasso_petitions_petitions');
         }
     }

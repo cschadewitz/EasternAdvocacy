@@ -1,1 +1,6 @@
-1.0.1: First version of AdminSendMail
+1.0.1:
+    - Add email table
+    - create_emails_table.php
+1.0.2:
+    - Add views field to emails
+    - update_emails_add_views.php
