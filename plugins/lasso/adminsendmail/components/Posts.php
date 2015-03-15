@@ -84,13 +84,11 @@ class Posts extends ComponentBase
         #if(twig_test_empty($this->pageNumber))
         #    $this->pageNumber = '1';
 
-        $this->posts = Email::orderBy('created_at', 'desc')->paginate(10);
-/*
-        listPosts([
+        $this->posts = Email::orderBy('created_at', 'desc')->listPosts([
             'page'          => $this->pageNumber,
             'postsPerPage'  => $this->property('postsPerPage')
         ]);
-*/
+
         $this->posts->each(function($post) {
             $post->setUrl($this->postPage, $this->controller);
         });
