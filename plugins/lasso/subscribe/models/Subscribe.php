@@ -5,7 +5,7 @@
 
     class Subscribe extends Model
     {
-        protected $table = 'subscribers';
+        protected $table = 'lasso_subscribe_subscribers';
         protected $primaryKey = 'uuid';
 
         protected $fillable = [

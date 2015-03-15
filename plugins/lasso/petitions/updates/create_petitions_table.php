@@ -8,7 +8,7 @@
     {
         public function up()
         {
-            Schema::create('petitions', function($table)
+            Schema::create('lasso_petitions_petitions', function($table)
             {
                 $table->engine = 'InnoDB';
                 $table->increments('pid');
@@ -25,6 +25,6 @@
 
         public function down()
         {
-            Schema::drop('petitions');
+            Schema::drop('lasso_petitions_petitions');
         }
     }
