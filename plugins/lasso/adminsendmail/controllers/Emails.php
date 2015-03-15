@@ -32,6 +32,7 @@ class Emails extends Controller
         $topViewedWidget = new TopViewed($this);
         $topViewedWidget->alias = 'topViewed';
         $topViewedWidget->bindToController();
+        $this->addCss('/plugins/lasso/adminsendmail/assets/css/box.css');
     }
 
     public function assignVars()
@@ -52,10 +53,13 @@ class Emails extends Controller
         if(is_null($email))
             return Redirect::to(Backend::url('lasso/adminsendmail/emails'));
 
-        // TODO: load subscribers and send email
+        // TODO: load subscribers and send thisemail
+
+        $this->pageTitle = 'Send Email';
 
         return $this->makePartial('send', [
-                'email' => $email
+                'email' => $email,
+                'sent' => false,
             ]);
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace Lasso\adminSendMail\Models;
+namespace Lasso\AdminSendMail\Models;
 
 use Model;
 use App;

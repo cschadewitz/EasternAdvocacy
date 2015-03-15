@@ -1,0 +1,42 @@
+.lasso-archive {
+
+}
+
+.post-subject {
+    color:#A10022;
+    font-size: 30px;
+}
+
+.post-abstract {
+    text-indent: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.post-content {
+    text-indent: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.post-footer {
+    min-height: 30px;
+}
+
+.post-like {
+    float: left;
+}
+
+.post-date {
+    font-size: 12px;
+}
+
+.pagination {
+
+}
+.divider{
+    height:2px;
+    margin:10px 0;
+    overflow:hidden;
+    background-color:darkgray;
+}
