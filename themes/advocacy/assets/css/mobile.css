@@ -16,3 +16,13 @@ body {
 article > header > h2 {
     font-size: 2em;
 }
+
+@media (max-width: 400px) {
+    header#layout-header .navbar-brand {
+        max-width: 80%;
+        text-overflow: clip;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 9.5vw;
+    }
+}
