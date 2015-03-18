@@ -28,7 +28,7 @@
         <div class="text-center">
              <ul class="pagination post-pagination">
              {% if posts.currentPage > 1 %}
-                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.currentPage-1) }) }}">&larr;</a></li>
+                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.currentPage-1) }) }}"><i class="icon-chevron-left"></i></a></li>
              {% endif %}
              {% for page in 1..posts.lastPage %}
                 <li class="{{ posts.currentPage == page ? 'active' : null }}">
@@ -36,7 +36,7 @@
                 </li>
             {% endfor %}
             {% if posts.lastPage > posts.currentPage %}
-                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.currentPage+1) }) }}">&rarr;</a></li>
+                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.currentPage+1) }) }}"><i class="icon-chevron-right"></i></a></li>
             {% endif %}
             </ul>
         </div>

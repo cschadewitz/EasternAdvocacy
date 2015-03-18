@@ -1,12 +1,21 @@
 {% set post = __SELF__.post %}
+{% set attached = __SELF__.attached %}
 <div class="row">
     <article id="lasso-archive" class="col-md-6 col-md-offset-3">
         {% if post is empty %}
             <header><h2>Oh NO!!</h2></header>
+
+            <p class="post-content">There are no emails currently in the archive.</p>
         {% else %}
             <header><h2>{{ post.subject }}</h2></header>
 
             <p class="post-content">{{ post.content | raw }}</p>
+
+            <ul class="post-attached-list">
+                {% for att in attached %}
+                    <li class="post-attached-item"><a href="{{att.getPath}}" download="{{att.file_name}}">{{att.file_name}}</a></li>
+                {% endfor %}
+            </ul>
             <div class="post-footer">
                 <div class="post-like fb-like" data-colorscheme="dark" data-href="{{ this.page.baseFileName|page }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div class="post-views text-right">Views: {{ post.views }}</div>
@@ -14,3 +23,4 @@
             </div>
         {% endif %}
     </article>
+</div>

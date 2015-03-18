@@ -11,6 +11,8 @@ class Post extends ComponentBase
 {
     public $post;
 
+    public $attached;
+
     public $archivePage;
 
     public function componentDetails()
@@ -55,6 +57,7 @@ class Post extends ComponentBase
             return Redirect::route($this->archivePage);
 
         $this->post = Email::where('id', '=', intval($postId))->first();
+        $this->attached = $this->post->attachments;
         $this->post->views = $this->post->views + 1;
         $this->post->save();
 
