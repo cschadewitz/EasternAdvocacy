@@ -25,3 +25,15 @@
 	background:#e3f7fc;
 	border:1px solid #8ed9f6;
 }
+
+.content-preview {
+    padding: 10px;
+    border: 1px solid;
+    border-color: #ccc;
+    border-radius: 5px;
+    background-color: #efefef;
+}
+
+.preview-menu {
+	text-align: right;
+}

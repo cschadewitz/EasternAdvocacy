@@ -1,11 +1,13 @@
 <?php namespace Lasso\Adminsendmail\Controllers;
 
+use Mail;
 use Redirect;
 use Backend;
 use BackendMenu;
 use Request;
 use Backend\Classes\Controller;
 use Lasso\Adminsendmail\Models\Email;
+use Lasso\Adminsendmail\Models\Subscriber;
 use System\Models\File;
 use Lasso\Adminsendmail\ReportWidgets\TopViewed;
 
@@ -39,7 +41,6 @@ class Emails extends Controller
     public function assignVars()
     {
         $this->popularPost = Email::orderBy('views', 'desc')->take(1)->get();
-
     }
 
     public function onUpdate()
@@ -47,25 +48,35 @@ class Emails extends Controller
         return Redirect::to(Backend::url('lasso/adminsendmail/emails/preview/'.$id));
     }
 
-    public function onSend()
-    {
-        return Email::find(1);
-    }
-
     public function send($id = null)
     {
+        $issent = true;
         $email = Email::with('attachments')->find($id);
 
         if(is_null($email))
-            return Redirect::to(Backend::url('lasso/adminsendmail/emails'));
+            $issent = false;
 
-        // TODO: load subscribers and send thisemail
+        //send email
+        $subs = Subscriber::all();
+        $params = ['msg' => $email->content, 'subject' => $email->subject];
+        foreach($subs as $subscriber)
+        {
+            $params['unsubscribeUrl'] = 'http://october.ouahhabi.com/unsubscribe/'.$subscriber->email.'/'.$subscriber->uuid;
+            Mail::send('lasso.adminsendmail::mail.default', $params, function($message) use ($subscriber, $email) {
+                $message->to($subscriber->email, $subscriber->name);
+                foreach($email->attachments as $attachment)
+                {
+                    $message->attach('http://october.ouahhabi.com/'.$attachment->getPath());
+                }
+            });
+        } 
 
         $this->pageTitle = 'Send Email';
 
         return $this->makePartial('send', [
                 'email' => $email,
-                'sent' => true,
+                'sent' => $issent,
+                'subs' => $subs
             ]);
     }
 
