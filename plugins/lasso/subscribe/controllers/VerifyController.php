@@ -8,10 +8,10 @@
                 $verifier = \lasso\subscribe\models\Subscribe::find($uuid);
                 $verifier->verificationDate = date('Y-m-d H:i:s');
                 $verifier->save();
-                return "Account Verified";
+                return redirect('/archive/1');
             }
             else{
-                return "Invalid Token";
+                return redirect('/');
             }
 
         }
