@@ -4,5 +4,12 @@
         <li>Send Email</li>
     </ul>
 <?php Block::endPut() ?>
-
-<?= $email ?>
+<?php if( $sent == true ): ?>
+		<div class="alert-box success"><span>Success: </span>Email successfully sent.</div>
+		Sent to: <?php foreach($subs as $sub)
+		{
+			echo $sub->name.' <'.$sub->email.'><br/>';
+		}
+	 else: ?>
+	<div class="alert-box error"><span>Error: </span>Email was not sent.</div>
+<?php endif; ?>

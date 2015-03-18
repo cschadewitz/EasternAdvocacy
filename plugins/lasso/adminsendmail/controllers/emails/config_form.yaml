@@ -29,8 +29,4 @@ update:
 # Preview page
 preview:
     title: Preview Email
-
-# Send page
-send:
-    title: Send Email
-    redirectClose: lasso/adminsendmail/emails
+    form: $/lasso/adminsendmail/models/email/preview.yaml

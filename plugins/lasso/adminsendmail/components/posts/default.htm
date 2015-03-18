@@ -23,19 +23,20 @@
             </li>
             {% endfor %}
         </ul>
-        {% if posts.getLastPage > 1 %}
+        {% if posts.lastPage > 1 %}
+
         <div class="text-center">
              <ul class="pagination post-pagination">
-             {% if posts.getCurrentPage > 1 %}
-                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.getCurrentPage-1) }) }}">&larr;</a></li>
+             {% if posts.currentPage > 1 %}
+                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.currentPage-1) }) }}">&larr;</a></li>
              {% endif %}
-             {% for page in 1..posts.getLastPage %}
-                <li class="{{ posts.getCurrentPage == page ? 'active' : null }}">
+             {% for page in 1..posts.lastPage %}
+                <li class="{{ posts.currentPage == page ? 'active' : null }}">
                     <a href="{{ this.page.baseFileName|page({ pageNumber: page }) }}">{{ page }}</a>
                 </li>
             {% endfor %}
-            {% if posts.getLastPage > posts.getCurrentPage %}
-                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.getCurrentPage+1) }) }}">&rarr;</a></li>
+            {% if posts.lastPage > posts.currentPage %}
+                <li><a href="{{ this.page.baseFileName|page({ pageNumber: (posts.currentPage+1) }) }}">&rarr;</a></li>
             {% endif %}
             </ul>
         </div>

@@ -12,6 +12,9 @@ class CreateEmailsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('subject');
+            $table->text('abstract');
+            $table->text('content');
             $table->timestamps();
         });
     }

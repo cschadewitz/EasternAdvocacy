@@ -66,7 +66,7 @@ class HomeView extends ComponentBase
 
     public function getAssets()
     {
-        $this->addCss('/plugins/lasso/archive/assets/css/archive.css');
+        $this->addCss('/plugins/lasso/adminsendmail/assets/css/archive.css');
     }
 
 }

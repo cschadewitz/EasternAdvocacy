@@ -12,7 +12,7 @@ use Model;
 
 class Signatures extends Model
 {
-    protected $table = 'signatures';
+    protected $table = 'lasso_petitions_signatures';
 
     protected $primaryKey = 'sid';
 

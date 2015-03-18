@@ -1,7 +1,0 @@
-columns:
-  id: Id
-  subject: Subject
-  abstract: Abstract
-  content: Content
-  created_at: Created On
-  updated_at: Modified On

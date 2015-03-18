@@ -7,7 +7,7 @@
 
     class Petitions extends Model
     {
-        protected $table = 'petitions';
+        protected $table = 'lasso_petitions_petitions';
 
         protected $primaryKey = 'pid';
 
