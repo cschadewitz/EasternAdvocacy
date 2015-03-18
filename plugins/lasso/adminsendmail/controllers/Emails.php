@@ -1,5 +1,6 @@
 <?php namespace Lasso\Adminsendmail\Controllers;
 
+use App;
 use Mail;
 use Redirect;
 use Backend;
@@ -68,12 +69,12 @@ class Emails extends Controller
         $params = ['msg' => $email->content, 'subject' => $email->subject];
         foreach($subs as $subscriber)
         {
-            $params['unsubscribeUrl'] = 'http://october.ouahhabi.com/unsubscribe/'.$subscriber->email.'/'.$subscriber->uuid;
+            $params['unsubscribeUrl'] = '/unsubscribe/'.$subscriber->email.'/'.$subscriber->uuid;
             Mail::send('lasso.adminsendmail::mail.default', $params, function($message) use ($subscriber, $email) {
                 $message->to($subscriber->email, $subscriber->name);
                 foreach($email->attachments as $attachment)
                 {
-                    $message->attach('http://october.ouahhabi.com/'.$attachment->getPath());
+                    $message->attach(App::basePath().$attachment->getPath());
                 }
             });
         } 
