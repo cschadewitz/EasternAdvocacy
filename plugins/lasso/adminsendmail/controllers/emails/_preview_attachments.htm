@@ -1,5 +1,9 @@
 <?php
 $files = \System\Models\File::where('attachment_id', '=', $model->id)->get();
+if(count($files)==0)
+{
+	echo '<br>No attachments.';
+}
 ?>
 <div id="FileUpload-formAttachments-attachments" class="field-fileupload is-multi has-attachments is-sortable" >
 		    <div class="file-multi">

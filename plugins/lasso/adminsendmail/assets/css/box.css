@@ -58,6 +58,21 @@
 	border:1px solid #8ed9f6;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Send mail partial created
 =======
 >>>>>>> Send mail partial created
+=======
+
+.content-preview {
+    padding: 10px;
+    border: 1px solid;
+    border-color: #ccc;
+    border-radius: 5px;
+    background-color: #efefef;
+}
+
+.preview-menu {
+	text-align: right;
+}
+>>>>>>> Add email footer with unsubscribe url
