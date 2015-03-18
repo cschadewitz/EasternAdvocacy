@@ -33,12 +33,18 @@ class Emails extends Controller
         $topViewedWidget->alias = 'topViewed';
         $topViewedWidget->bindToController();
         $this->addCss('/plugins/lasso/adminsendmail/assets/css/box.css');
+        $this->addCss('/plugins/lasso/adminsendmail/assets/css/fileupload.css');
     }
 
     public function assignVars()
     {
         $this->popularPost = Email::orderBy('views', 'desc')->take(1)->get();
 
+    }
+
+    public function onUpdate()
+    {
+        return Redirect::to(Backend::url('lasso/adminsendmail/emails/preview/'.$id));
     }
 
     public function onSend()
@@ -59,7 +65,7 @@ class Emails extends Controller
 
         return $this->makePartial('send', [
                 'email' => $email,
-                'sent' => false,
+                'sent' => true,
             ]);
     }
 
