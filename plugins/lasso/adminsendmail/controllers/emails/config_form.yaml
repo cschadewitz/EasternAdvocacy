@@ -28,14 +28,5 @@ update:
 
 # Preview page
 preview:
-<<<<<<< HEAD
-<<<<<<< HEAD
     title: Preview Email
     form: $/lasso/adminsendmail/models/email/preview.yaml
-=======
-    title: Preview Email
->>>>>>> Send mail partial created
-=======
-    title: Preview Email
-    form: $/lasso/adminsendmail/models/email/preview.yaml
->>>>>>> Add partials and custom yaml files for backend emails preview
