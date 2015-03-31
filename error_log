@@ -1,4 +1,0 @@
-[30-Dec-2014 14:56:30] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/54/usr/lib64/php/modules/imagick.so' - /usr/php/54/usr/lib64/php/modules/imagick.so: undefined symbol: zend_new_interned_string in Unknown on line 0
-[30-Dec-2014 14:56:30] PHP Notice:  Use of undefined constant __DIR__ - assumed '__DIR__' in /home6/zachlesp/public_html/index.php on line 18
-[30-Dec-2014 14:56:30] PHP Warning:  require(__DIR__/bootstrap/autoload.php) [<a href='function.require'>function.require</a>]: failed to open stream: No such file or directory in /home6/zachlesp/public_html/index.php on line 18
-[30-Dec-2014 14:56:30] PHP Fatal error:  require() [<a href='function.require'>function.require</a>]: Failed opening required '__DIR__/bootstrap/autoload.php' (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home6/zachlesp/public_html/index.php on line 18
