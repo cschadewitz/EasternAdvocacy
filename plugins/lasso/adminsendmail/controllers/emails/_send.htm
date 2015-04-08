@@ -6,8 +6,6 @@
 <?php Block::endPut()?>
 <?php if ($sent == true): ?>
 		<div class="alert-box success"><span>Success: </span>Email successfully sent.</div>
-		Sent to: <?php foreach ($subs as $sub) {
-	echo $sub->name . ' <' . $sub->email . '><br/>';
-} else : ?>
+		else : ?>
 	<div class="alert-box error"><span>Error: </span><?=$error?></div>
 <?php endif;?>
