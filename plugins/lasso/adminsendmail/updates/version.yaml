@@ -4,3 +4,6 @@
 1.0.2:
     - Add views field to emails
     - update_emails_add_views.php
+1.0.3:
+    - Add sent field to emails
+    - update_emails_add_sent.php
