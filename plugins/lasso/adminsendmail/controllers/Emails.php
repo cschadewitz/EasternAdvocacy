@@ -52,11 +52,23 @@ class Emails extends Controller {
 		if (is_null($email)) {
 			$issent = false;
 			$error = 'Invalid post id';
+
+			return $this->makePartial('send', [
+				'email' => $email,
+				'sent' => $issent,
+				'error' => $error,
+			]);
 		}
 
 		if ($email->sent == true) {
 			$issent = false;
 			$error = 'This email has already been sent';
+
+			return $this->makePartial('send', [
+				'email' => $email,
+				'sent' => $issent,
+				'error' => $error,
+			]);
 		}
 
 		//send email
@@ -80,7 +92,6 @@ class Emails extends Controller {
 		return $this->makePartial('send', [
 			'email' => $email,
 			'sent' => $issent,
-			'subs' => $subs,
 			'error' => $error,
 		]);
 	}
