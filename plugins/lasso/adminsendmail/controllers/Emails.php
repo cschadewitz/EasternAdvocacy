@@ -45,6 +45,7 @@ class Emails extends Controller {
 	}
 
 	public function send($id = null) {
+		$this->pageTitle = 'Send Email';
 		$issent = true;
 		$error = '';
 		$email = Email::with('attachments')->find($id);
@@ -86,8 +87,6 @@ class Emails extends Controller {
 
 		$email->sent = true;
 		$email->save();
-
-		$this->pageTitle = 'Send Email';
 
 		return $this->makePartial('send', [
 			'email' => $email,
