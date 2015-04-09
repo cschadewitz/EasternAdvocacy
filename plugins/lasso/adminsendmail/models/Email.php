@@ -22,6 +22,14 @@ class Email extends Model {
 		'attachments' => ['System\Models\File'],
 	];
 
+	use \October\Rain\Database\Traits\Validation;
+
+	public $rules = [
+		'subject' => 'required|between:4,77',
+		'abstract' => 'required',
+		'content' => 'required',
+	];
+
 	public function scopeListPosts($query, $options) {
 		extract(array_merge([
 			'page' => 1,
