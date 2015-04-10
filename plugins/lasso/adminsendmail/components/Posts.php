@@ -110,7 +110,6 @@ class Posts extends ComponentBase
 
     public function assignVars()
     {
-        $pn = $this->property('pageNumber');
         $this->noPostsMessage = $this->page['noPostsMessage'] = $this->property('noPostsMessage');
         $this->postPage = $this->page['postPage'] = $this->property('postPage');
         $this->pageNumber = $this->propertyName('pageNumber');

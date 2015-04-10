@@ -1,3 +1,5 @@
-<div data-control="toolbar">
-    <a href="<?= Backend::url('lasso/adminsendmail/emails/create') ?>" class="btn btn-primary oc-icon-plus">New Email</a>
-</div>
+<?php if ($this->user->hasPermission('lasso.adminsendmail.create_posts')): ?>
+    <div data-control="toolbar">
+        <a href="<?= Backend::url('lasso/adminsendmail/emails/create') ?>" class="btn btn-primary oc-icon-plus">New Email</a>
+    </div>
+<?php endif ?>

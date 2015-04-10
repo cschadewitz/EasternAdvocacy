@@ -23,6 +23,16 @@ class Plugin extends PluginBase
             'icon'        => 'icon-rss'
         ];
     }
+
+    public function registerPermissions()
+    {
+        return [
+            'lasso.adminsendmail.access_posts' => ['tab' => 'Archive', 'label' => 'View Posts'],
+            'lasso.adminsendmail.edit_posts' => ['tab' => 'Archive', 'label' => 'Edit Posts'],
+            'lasso.adminsendmail.create_posts' => ['tab' => 'Archive', 'label' => 'Create Posts'],
+        ];
+    }
+
     public function registerComponents()
     {
         return [
@@ -57,7 +67,7 @@ class Plugin extends PluginBase
                         'label'       => 'Emails',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('lasso/adminsendmail/emails'),
-                        'permissions' => ['lasso.adminsendmail.access_emails'],
+                        'permissions' => ['lasso.adminsendmail.access_posts'],
                     ]
                 ]
 

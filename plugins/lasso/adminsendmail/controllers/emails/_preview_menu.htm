@@ -1,5 +1,7 @@
-<div class="preview-menu">
-	<a href="<?= Backend::url('lasso/adminsendmail/emails/update/'.$model->id) ?>">
-		<span class="oc-icon-edit"></span>Edit
-	</a>
-</div>
+<?php if ($this->user->hasPermission('lasso.adminsendmail.edit_posts')): ?>
+	<div class="preview-menu">
+		<a href="<?= Backend::url('lasso/adminsendmail/emails/update/'.$model->id) ?>">
+			<span class="oc-icon-edit"></span>Edit
+		</a>
+	</div>
+<?php endif ?>

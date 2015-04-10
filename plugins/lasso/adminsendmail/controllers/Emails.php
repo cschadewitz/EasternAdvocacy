@@ -22,6 +22,8 @@ class Emails extends Controller
         'Backend.Behaviors.ListController'
     ];
 
+    public $requiredPermissions = ['lasso.petitions.access_posts'];
+
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
