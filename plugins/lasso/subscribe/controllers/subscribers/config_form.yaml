@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Subscriber
+
+# Model Form Field configuration
+form: $/lasso/subscribe/models/subscribe/fields.yaml
+
+# Model Class name
+modelClass: Lasso\Subscribe\Models\Subscribe
+
+# Default redirect location
+defaultRedirect: lasso/subscribe/subscribers
+
+# Create page
+create:
+    title: Create Subscriber
+    redirect: lasso/subscribe/subscribers/update/:id
+    redirectClose: lasso/subscribe/subscribers
+
+# Update page
+update:
+    title: Edit Subscriber
+    redirect: lasso/subscribe/subscribers
+    redirectClose: lasso/subscribe/subscribers
+
+# Preview page
+preview:
+    title: Preview Subscriber

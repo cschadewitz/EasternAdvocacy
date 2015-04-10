@@ -1,0 +1,8 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    verificationDate:
+        label: vDate
+        searchable: true

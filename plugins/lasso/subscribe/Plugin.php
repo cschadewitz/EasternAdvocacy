@@ -1,6 +1,12 @@
 <?php
     namespace Lasso\Subscribe;
 
+    use Event;
+    use Backend;
+    use BackendMenu;
+    use RainLab\User\Controllers\Users as UserController;
+    use RainLab\User\Models\User as UserModel;
+    use Lasso\Subscribe\Models\UserSubscribe;
     use System\Classes\PluginBase;
     use Illuminate\Support\Facades\DB;
     class Plugin extends PluginBase
@@ -26,6 +32,50 @@
             return [
                 'lasso.subscribe::mail.verify' => 'Verification email sent to new subscribers.',
             ];
+        }
+
+
+
+        public function boot(){
+            UserModel::extend(function($model) {
+                $model->hasOne['usersubscribe'] = ['Lasso\Subscribe\Models\UserSubscribe', 'table' => 'lasso_subscribe_user_subscribes', 'key' => 'user_id'];
+            });
+            UserController::extendFormFields(function($form, $model, $context) {
+
+                if(!$model instanceof UserModel)
+                        return;
+
+                if(!$model->exists)
+                        return;
+                //dump($model);
+
+                UserSubscribe::getModel($model);
+
+                $form->addTabFields([
+                    'usersubscribe[verificationDate]'  => [
+                        'label' => 'Subscribed?',
+                        'tab'   => 'Subscription',
+                        'type'  => 'text',
+                        'disabled' => 'true'
+                        //'path'  => '~/plugins/lasso/subscribe/controllers/subscribers/_verificationDate.htm'
+                    ]
+                ]);
+            });
+            Event::listen('backend.menu.extendItems', function($manager){
+
+                $manager->addSideMenuItems('RainLab.User', 'user', [
+                    'subscribers'   => [
+                        'label'         => 'Subscribers',
+                        'url'           => Backend::url('lasso/subscribe/subscribers'),
+                        'icon'          => 'icon-user',
+                        'owner'         => 'RainLab.User',
+                        'permissions'   => ['lasso.subscribers.*'],
+                    ],
+                    'users'         => [
+                        'label'         => 'Users',
+                    ]
+                ]);
+            });
         }
 
         public function registerSchedule($schedule)
