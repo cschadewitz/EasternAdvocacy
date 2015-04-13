@@ -3,7 +3,7 @@
 //use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class UpdateEmailsAddViews extends Migration {
+class UpdateEmailsAddSent extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class UpdateEmailsAddViews extends Migration {
 	 */
 	public function up() {
 		Schema::table('lasso_adminsendmail_emails', function ($table) {
-			$table->unsignedInteger("views");
+			$table->boolean('sent');
 		});
 	}
 
@@ -22,8 +22,8 @@ class UpdateEmailsAddViews extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::table('emails', function ($table) {
-			$table->dropColumn("views");
+		Schema::table('lasso_adminsendmail_emails', function ($table) {
+			$table->dropColumn("sent");
 		});
 	}
 
