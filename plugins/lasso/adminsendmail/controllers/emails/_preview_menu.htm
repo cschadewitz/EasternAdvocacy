@@ -2,4 +2,13 @@
 	<a href="<?=Backend::url('lasso/adminsendmail/emails/update/' . $model->id)?>">
 		<span class="oc-icon-edit"></span>Edit
 	</a>
+	<?php
+	if(!($model->sent)):
+	?>
+	<a href="<?=Backend::url('lasso/adminsendmail/emails/sent/' . $model->id)?>">
+		<span class="oc-icon-envelope-o"></span>
+	</a>
+	<?php
+	endif;
+	?>
 </div>
