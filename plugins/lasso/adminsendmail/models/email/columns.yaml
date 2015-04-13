@@ -12,3 +12,6 @@ columns:
     label: attachments
     type: partial
     sortable: no
+  sent:
+    label: sent
+    type: switch
