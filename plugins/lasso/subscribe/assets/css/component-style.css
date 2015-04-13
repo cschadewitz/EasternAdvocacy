@@ -12,27 +12,29 @@
     line-height: 1.1;
 }
 
-.subscriber_form h2, .subscriber_form label {
+.subscriber_form h2, .subscriber_form label,
+.unsubscribe_form h2, .unsubscribe_form label{
     font-weight: 500;
     line-height: 1.1;
 }
 .form_hint, .required_notification {font-size: 11px;}
-.subscriber_form ul {
+.subscriber_form ul, .unsubscribe_form ul {
     width:inherit;
     list-style-type:none;
     list-style-position:outside;
     margin:0;
     padding:0;
 }
-.subscriber_form li{
+.subscriber_form li, .unsubscribe_form li {
     padding:12px;
     border-bottom:1px solid #eee;
     position:relative;
 }
-.subscriber_form li:first-child, .subscriber_form li:last-child {
+.subscriber_form li:first-child, .subscriber_form li:last-child,
+.unsubscribe_form li:first-child, .unsubscribe_form li:last-child {
     border-bottom:1px solid #777;
 }
-.subscriber_form h2 {
+.subscriber_form h2, .unsubscribe_form h2 {
     margin:0;
     display: inline;
 }
@@ -42,20 +44,20 @@
     display:inline;
     float:right;
 }
-.subscriber_form label {
+.subscriber_form label, .unsubscribe_form label {
     width:150px;
     margin-top: 3px;
     display:inline-block;
     float:left;
     padding:3px;
 }
-.subscriber_form input {
+.subscriber_form input, .unsubscribe_form input {
     height: auto;
     width:220px;
     padding:5px 8px;
 }
-.subscriber_form button {margin-left:156px;}
-.subscriber_form input, select{
+.subscriber_form button, .unsubscribe_form button {margin-left:156px;}
+.subscriber_form input, .unsubscribe_form input, select{
     border:1px solid #aaa;
     box-shadow: 0 0 3px #ccc, 0 10px 15px #eee inset;
     border-radius:2px;
@@ -152,5 +154,5 @@ button.submit:active {
     top:1px;
     left:-6px;
 }
-.subscriber_form input:focus + .form_hint {display: inline;}
-.subscriber_form select:focus + .form_hint {display: inline;}
+.subscriber_form input:focus + .form_hint, .unsubscribe_form input:focus + .form_hint {display: inline;}
+.subscriber_form select:focus + .form_hint, .unsubscribe_form select:focus + .form_hint {display: inline;}
