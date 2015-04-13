@@ -5,8 +5,8 @@
 	<?php
 	if(!($model->sent)):
 	?>
-	<a href="<?=Backend::url('lasso/adminsendmail/emails/sent/' . $model->id)?>">
-		<span class="oc-icon-envelope-o"></span>
+	<a href="<?=Backend::url('lasso/adminsendmail/emails/send/' . $model->id)?>">
+		<span class="oc-icon-envelope-o"></span>Send
 	</a>
 	<?php
 	endif;
