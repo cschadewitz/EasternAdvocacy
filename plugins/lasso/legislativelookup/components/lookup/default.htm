@@ -1,0 +1,24 @@
+<form
+        data-request="{{__SELF__}}::parseAddress"
+        data-request-success="$('#zipCode').val('')"
+        data-request-update="'{{__SELF__}}::results': '#go'"
+        >
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="input-group">
+                <input name="address" type="text" id="address" class="form-control" value="" placeholder="Street address"/>
+                <div>
+                    <input name="city" type="text" id="city" class="form-control" style="width: 200px" value="" placeholder="City"/>
+                    <input name="state" type="text" id="state" class="form-control" style="width: 60px"  value="" placeholder="State"/>
+                    <input name="zip" type="text" id="zip" class="form-control" style="width: 90px"  value="" placeholder="Zip Code"/>
+                </div>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+            <ul class="list-group" id="go">
+                {% partial '@results' %}
+            </ul>
+        </div>
+    </div>
+</form>

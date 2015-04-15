@@ -1,0 +1,13 @@
+{%set the_legislators = __SELF__.legislators%}
+
+{% for legislator in the_legislators %}
+    <li>
+        <p><img src="{{legislator.photo_url}}" /> {{legislator.first_name}} {{legislator.last_name}} ({{legislator.party}})
+            <br /><a href="mailto:{{legislator.email}}">{{legislator.email}}</a>
+            <br />{{legislator.url}}
+            <br />{{legislator.office_phone}}
+        </p>
+    </li>
+{% else %}
+    <li>No results found</li>
+{% endfor %}
