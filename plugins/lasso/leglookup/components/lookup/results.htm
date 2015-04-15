@@ -1,0 +1,13 @@
+{%set legs = __SELF__.legislators%}
+
+{% for leg in legs %}
+    <li>
+        <p>{{leg.title}} {{leg.firstName}} {{leg.lastName}} ({{leg.politicalParty}})
+            <br /><a href="mailto:{{leg.emailAddress}}">{{leg.emailAddress}}</a>
+            <br />{{leg.physicalAddress}}
+            <br />{{leg.phoneNumber}}
+        </p>
+    </li>
+{% else %}
+    <li>No results found</li>
+{% endfor %}
