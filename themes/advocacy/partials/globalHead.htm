@@ -1,0 +1,26 @@
+description = "Global Stylesheet Includes"
+==
+<meta charset="utf-8">
+<title>Eastern Advocates - {{ this.page.title }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}" /> -->
+<link href="{{ [
+    'assets/css/theme.css'
+]|theme }}" rel="stylesheet">
+<link href="{{ [
+    'assets/css/styles.css'
+]|theme }}" rel="stylesheet">
+<link href="{{ [
+    'assets/css/mobile.css'
+]|theme }}" rel="stylesheet" media="only screen and (min-device-width : 320px) and (max-device-width : 481px)">
+<link href="{{ [
+    'assets/css/tablet.css'
+]|theme }}" rel="stylesheet" media="only screen and (min-device-width : 482px) and (max-device-width : 1200px)">
+<link rel="stylesheet" href="{{ 'assets/css/footer.css'|theme }}">
+{% styles %}
+<style>
+    .dropdown-menu > li > a {
+        color: white;
+    }
+</style>
+<script type="text/javascript" src="{{ 'assets/js/respond.min.js'|theme }}"></script>
