@@ -17,18 +17,6 @@ class Lookup extends ComponentBase
 
     public function defineProperties() {
         return [
-            'userSunlightID' => [
-                'title'         => 'Sunlight API Key',
-                'description'   => 'API key to access Sunlight OpenState API',
-                'default'       => 'edf3725acca94c9a897416cd3517f08e',
-                'type'          => 'string'
-            ],
-            'userGoogleID' => [
-                'title'         => 'Google Geocode API Key',
-                'description'   => 'API key to access Google Geocode API',
-                'default'       => 'AIzaSyAYMLT-JMVwC69aPCFDPUNmc9G8PbtF_Wo',
-                'type'          => 'string'
-            ],
             'visibleOutput' => [
                 'title'         => 'Visible Output',
                 'description'   => 'Output results visibly, as opposed to returning JSON data',
@@ -82,10 +70,10 @@ class Lookup extends ComponentBase
         if(mb_ereg('^[0-9]{5}?[-][0-9]{4}', $zip))
 
         $location = array($address, $city, $state, $zip);
-        $coordinates = Lookup::getCoordinatesFromAddress($location);
+        $coordinates = Address::getCoordinatesFromAddress($location);
 
         if (!$coordinates) {
-            $coordinates = Lookup::getCoordinatesFromAddress($address);
+            //?????? todo $coordinates = Address::getCoordinatesFromAddress($address);
             $legislators = Lookup::getLegislatorsFromAPICoordinatess($coordinates->{'lat'}, $coordinates->{'lng'});
 
             foreach ($legislators as $legislator) {
@@ -143,7 +131,8 @@ class Lookup extends ComponentBase
             $json = file_get_contents(sprintf(
                 "https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false&key=%s",
                 $address[3],
-                $this->property('userGoogleID')
+                Settings::get('google_id')
+                //$this->property('userGoogleID')
             ));
             $json = json_decode($json)->{'results'};
             $json = json_decode($json)->{'geometry'};
@@ -162,7 +151,8 @@ class Lookup extends ComponentBase
             "https://openstates.org/api/v1//legislators/geo/?lat=%s&long=%s&apikey=%s",
             round($lat, 1),
             round($long, 1),
-            $this->property('userSunlightID')
+            Settings::get('sunlight_id')
+            //$this->property('userSunlightID')
         )));
         return json_decode($json);
     }
