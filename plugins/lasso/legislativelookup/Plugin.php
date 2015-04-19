@@ -31,4 +31,22 @@ class Plugin extends PluginBase
             '\Lasso\LegislativeLookup\Components\Lookup' => 'lookup'
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'LegislativeLookup',
+                'description' => 'Manage Lookup API Keys.',
+                'category'    => 'LegislativeLookup',
+                'icon'        => 'oc-icon-smile-o',
+                'class'       => 'Lasso\LegislativeLookup\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'security location'
+            ]
+        ];
+    }
 }
