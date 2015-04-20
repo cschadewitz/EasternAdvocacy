@@ -1,5 +1,9 @@
 description = "Default layout"
 
+[facebook_share]
+postId = "{{ :postId }}"
+archivePage = "archive"
+postPage = "article"
 [session]
 security = "all"
 ==
@@ -7,7 +11,7 @@ security = "all"
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Eastern Advocates - {{ this.page.title }}</title>
+        {%component 'facebook_share'%}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}" /> -->
         <link href="{{ [
@@ -23,6 +27,7 @@ security = "all"
             'assets/css/tablet.css'
         ]|theme }}" rel="stylesheet" media="only screen and (min-device-width : 482px) and (max-device-width : 1200px)">
         <link rel="stylesheet" href="{{ 'assets/css/footer.css'|theme }}">
+
         {% styles %}
         <style>
             .dropdown-menu > li > a {
@@ -31,14 +36,7 @@ security = "all"
         </style>
     </head>
     <body>
-    <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    {%component 'facebook'%}
 
         <!-- Header -->
         <header id="layout-header">

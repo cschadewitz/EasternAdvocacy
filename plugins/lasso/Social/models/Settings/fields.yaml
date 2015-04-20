@@ -1,0 +1,23 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    email:
+        label: Email address for site
+        type: text
+    email_include:
+        label: Include on SocialButtons component?
+        type: switch
+    fb_app_id:
+        label: Facebook App ID
+        type: text
+    fb_url:
+        label:  Facebook Page URL
+        type: text
+    fb_include:
+        label: Include on SocialButtons component?
+        type: switch
+    buttons_square:
+        label: Use square buttons?
+        type: switch

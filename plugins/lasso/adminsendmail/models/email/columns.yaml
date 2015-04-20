@@ -1,9 +1,14 @@
 columns:
   id: Id
-  subject: Subject
-  abstract: Abstract
+  subject:
+    label: Subject
+    searchable: yes
+  abstract:
+    label: Abstract
+    searchable: yes
   content: 
     label: Content
+    searchable: yes
     type: html
   created_at: Created On
   updated_at: Modified On

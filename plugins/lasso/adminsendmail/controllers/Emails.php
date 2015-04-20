@@ -9,6 +9,7 @@ use Request;
 use Backend\Classes\Controller;
 use Lasso\Adminsendmail\Models\Email;
 use Lasso\Adminsendmail\Models\Subscriber;
+use Lasso\Subscribe\Models\UserSubscribe;
 use System\Models\File;
 use Lasso\Adminsendmail\ReportWidgets\TopViewed;
 
@@ -22,7 +23,7 @@ class Emails extends Controller
         'Backend.Behaviors.ListController'
     ];
 
-    public $requiredPermissions = ['lasso.petitions.access_posts'];
+    public $requiredPermissions = ['lasso.petitions.*'];
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
@@ -72,8 +73,14 @@ class Emails extends Controller
                     $message->attach(App::basePath().$attachment->getPath());
                 }
             });
-        } 
-
+        }
+        /*
+        $userSubs = UserSubscribe::where('verificationDate', "!=", null);
+        foreach($userSubs as $subscriber)
+        {
+            $params['loginUrl'] = '/'
+        }
+        */
         $this->pageTitle = 'Send Email';
 
         return $this->makePartial('send', [

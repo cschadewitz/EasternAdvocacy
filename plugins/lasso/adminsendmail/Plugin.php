@@ -36,9 +36,10 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Lasso\AdminSendMail\Components\Posts'       => 'posts',
-            '\Lasso\AdminSendMail\Components\Post'        => 'post',
-            '\Lasso\AdminSendMail\Components\HomeView'    => 'homeView'
+            '\Lasso\AdminSendMail\Components\Posts'             => 'posts',
+            '\Lasso\AdminSendMail\Components\Post'              => 'post',
+            '\Lasso\AdminSendMail\Components\HomeView'          => 'homeView',
+            '\Lasso\AdminSendMail\Components\DialogGenerator'   => 'dialogGenerator'
         ];
     }
 
@@ -71,6 +72,21 @@ class Plugin extends PluginBase
                     ]
                 ]
 
+            ]
+        ];
+    }
+
+    public function registerSettings()
+    {
+        return [
+            'integration' => [
+                'label'       => 'Facebook Integration',
+                'description' => 'Manage Facebook app id and url',
+                'category'    => 'Archive',
+                'icon'        => 'icon-globe',
+                'class'       => 'Lasso\AdminSendMail\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'archive facebook emails'
             ]
         ];
     }

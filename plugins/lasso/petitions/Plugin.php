@@ -19,8 +19,8 @@
         public function registerPermissions()
         {
             return [
-                'lasso.petitions.access_petitions' => ['label' => 'Manage petitions'],
-                'lasso.petitions.access_signatures' => ['label' => 'Manage signatures'],
+                'lasso.petitions.access_petitions' => ['label' => 'Manage petitions', 'tab' => 'Petitions'],
+                'lasso.petitions.access_signatures' => ['label' => 'Manage signatures', 'tab' => 'Petitions'],
             ];
         }
 
