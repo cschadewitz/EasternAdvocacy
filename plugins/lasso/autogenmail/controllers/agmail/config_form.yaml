@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: A G Mail
+
+# Model Form Field configuration
+form: $/lasso/autogenmail/models/agmail/fields.yaml
+
+# Model Class name
+modelClass: Lasso\AutoGenMail\Models\AGMail
+
+# Default redirect location
+defaultRedirect: lasso/autogenmail/agmail
+
+# Create page
+create:
+    title: Create A G Mail
+    redirect: lasso/autogenmail/agmail/update/:id
+    redirectClose: lasso/autogenmail/agmail
+
+# Update page
+update:
+    title: Edit A G Mail
+    redirect: lasso/autogenmail/agmail
+    redirectClose: lasso/autogenmail/agmail
+
+# Preview page
+preview:
+    title: Preview A G Mail
