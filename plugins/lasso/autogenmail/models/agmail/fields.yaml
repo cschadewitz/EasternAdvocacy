@@ -6,10 +6,22 @@ fields:
     id:
         label: ID
         disabled: true
-    subject:
-        label: Subject
+    title:
+        label: Title
         type: text
+    subtitle:
+        label: Subtitle
+        type: text
+    description:
+        label: Desciption
+        type: textarea
     template:
         label: Mail Template
         type: relation
         nameFrom: description
+    require_user:
+        label: Require user login?
+        type: switch
+    is_active:
+        label: Active
+        type: switch

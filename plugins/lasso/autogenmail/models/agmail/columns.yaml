@@ -6,11 +6,16 @@ columns:
     id:
         label: ID
         searchable: true
-    subject:
-        label: Subject
+    title:
+        label: Title
         type: text
-        searchable: true
-    mailtemplate:
+    subtitle:
+        label: Subtitle
+        type: text
+    description:
+        label: Desciption
+        type: text
+    template:
         label: Mail Template
         relation: template
         select: subject
