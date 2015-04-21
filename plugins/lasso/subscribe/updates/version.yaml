@@ -4,3 +4,6 @@
 1.0.2:
       - Extended Users Plugin to allow users to subscribe
       - create_user_subscribes_table.php
+1.0.3:
+      - Added type field to user subscribe to add affiliation to registered users
+      - update_user_subscribes_table.php

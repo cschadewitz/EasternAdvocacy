@@ -6,3 +6,6 @@ fields:
     verificationDate:
         label: vDate
         disabled: false
+    type:
+        label: type
+        description: Affiliation with university

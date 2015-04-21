@@ -1,9 +1,9 @@
 <?php namespace Lasso\Social\Components;
 
 use Cms\Classes\ComponentBase;
-use Lasso\Social\Models\FacebookSettings as Settings;
+use Lasso\Social\Models\Settings as Settings;
 
-class FacebookInegration extends ComponentBase
+class FacebookIntegration extends ComponentBase
 {
 
     public function componentDetails()

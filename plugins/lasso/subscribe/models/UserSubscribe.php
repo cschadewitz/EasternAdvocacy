@@ -21,7 +21,7 @@ class UserSubscribe extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['verificationDate'];
+    protected $fillable = ['verificationDate', 'type'];
 
     /**
      * @var array Relations
