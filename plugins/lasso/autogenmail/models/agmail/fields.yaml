@@ -6,3 +6,10 @@ fields:
     id:
         label: ID
         disabled: true
+    subject:
+        label: Subject
+        type: text
+    template:
+        label: Mail Template
+        type: relation
+        nameFrom: description
