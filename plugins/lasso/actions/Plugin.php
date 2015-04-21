@@ -20,7 +20,14 @@ class Plugin extends PluginBase
             'name'        => 'Actions',
             'description' => 'Allows admins to create Mail Templates that users would use to send pre-generated emails to their representatives.',
             'author'      => 'Lasso - Samir Ouahhabi',
-            'icon'        => 'icon-envelope'
+            'icon'        => 'icon-send'
+        ];
+    }
+
+    public function registerComponents()
+    {
+        return [
+            'Lasso\Actions\Components\TakeAction' => 'takeAction'
         ];
     }
 
@@ -30,7 +37,7 @@ class Plugin extends PluginBase
             'actions' => [
                 'label'       => 'Actions',
                 'url'         => Backend::url('lasso/actions/action'),
-                'icon'        => 'icon-envelope',
+                'icon'        => 'icon-send',
                 'permissions' => ['lasso.actions.*'],
                 'order'       => 500,
 
