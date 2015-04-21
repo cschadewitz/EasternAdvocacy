@@ -12,7 +12,9 @@ class CreateAGMailsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('subject');
+            $table->string('title');
+            $table->string('subtitle');
+            $table->text('description');
             $table->integer('template_id');
             $table->boolean('require_user');
             $table->boolean('is_active');
