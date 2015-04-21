@@ -38,8 +38,7 @@ class Plugin extends PluginBase
         return [
             '\Lasso\AdminSendMail\Components\Posts'             => 'posts',
             '\Lasso\AdminSendMail\Components\Post'              => 'post',
-            '\Lasso\AdminSendMail\Components\HomeView'          => 'homeView',
-            '\Lasso\AdminSendMail\Components\DialogGenerator'   => 'dialogGenerator'
+            '\Lasso\AdminSendMail\Components\HomeView'          => 'homeView'
         ];
     }
 
