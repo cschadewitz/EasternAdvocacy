@@ -1,14 +1,14 @@
-<?php namespace Lasso\AutoGenMail\Updates;
+<?php namespace Lasso\Actions\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class CreateAGMailsTable extends Migration
+class CreateActionsTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('lasso_autogenmail_a_g_mails', function($table)
+        Schema::create('lasso_actions_actions', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -24,7 +24,7 @@ class CreateAGMailsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('lasso_autogenmail_a_g_mails');
+        Schema::dropIfExists('lasso_actions_actions');
     }
 
 }

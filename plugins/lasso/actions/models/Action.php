@@ -1,18 +1,17 @@
-<?php namespace Lasso\AutoGenMail\Models;
+<?php namespace Lasso\Actions\Models;
 
 use Model;
-use System;
 
 /**
- * AGMail Model
+ * Action Model
  */
-class AGMail extends Model
+class Action extends Model
 {
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'lasso_autogenmail_a_g_mails';
+    public $table = 'lasso_actions_actions';
 
     /**
      * @var array Guarded fields
@@ -38,15 +37,5 @@ class AGMail extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    public function getMailtemplateOptions($keyValue = null)
-    {
-        $templates = System\Models\MailTemplate::all();
-        $ret = [];
-        foreach ($templates as $temp) {
-            $ret[$temp->id] = $temp->subject;
-        }
-        return $ret;
-    }
 
 }

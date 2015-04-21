@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Action
+
+# Model Form Field configuration
+form: $/lasso/actions/models/action/fields.yaml
+
+# Model Class name
+modelClass: Lasso\Actions\Models\Action
+
+# Default redirect location
+defaultRedirect: lasso/actions/action
+
+# Create page
+create:
+    title: Create Action
+    redirect: lasso/actions/action/update/:id
+    redirectClose: lasso/actions/action
+
+# Update page
+update:
+    title: Edit Action
+    redirect: lasso/actions/action
+    redirectClose: lasso/actions/action
+
+# Preview page
+preview:
+    title: Preview Action

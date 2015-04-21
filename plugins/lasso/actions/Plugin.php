@@ -1,10 +1,10 @@
-<?php namespace Lasso\AutoGenMail;
+<?php namespace Lasso\Actions;
 
 use System\Classes\PluginBase;
 use Backend;
 
 /**
- * AutoGenMail Plugin Information File
+ * Actions Plugin Information File
  */
 class Plugin extends PluginBase
 {
@@ -17,7 +17,7 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'AutoGenMail',
+            'name'        => 'Actions',
             'description' => 'Allows admins to create Mail Templates that users would use to send pre-generated emails to their representatives.',
             'author'      => 'Lasso - Samir Ouahhabi',
             'icon'        => 'icon-envelope'
@@ -27,19 +27,19 @@ class Plugin extends PluginBase
     public function registerNavigation()
     {
         return [
-            'autogenmail' => [
-                'label'       => 'Auto-Gen.Mail',
-                'url'         => Backend::url('lasso/autogenmail/agmail'),
+            'actions' => [
+                'label'       => 'Actions',
+                'url'         => Backend::url('lasso/actions/action'),
                 'icon'        => 'icon-envelope',
-                'permissions' => ['lasso.autogenmail.*'],
+                'permissions' => ['lasso.actions.*'],
                 'order'       => 500,
 
                 'sideMenu' => [
-                    'agmail' => [
-                        'label'       => 'Auto-Gen.Mail',
-                        'icon'        => 'icon-copy',
-                        'url'         => Backend::url('lasso/autogenmail/agmail'),
-                        'permissions' => ['lasso.autogenmail.*'],
+                    'actionmanager' => [
+                        'label'       => 'New Action',
+                        'icon'        => 'icon-plus',
+                        'url'         => Backend::url('lasso/actions/action/create'),
+                        'permissions' => ['lasso.actions.*'],
                     ]
                 ]
 

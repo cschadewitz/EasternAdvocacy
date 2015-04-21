@@ -1,12 +1,12 @@
-<?php namespace Lasso\AutoGenMail\Controllers;
+<?php namespace Lasso\Actions\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * A G Mail Back-end Controller
+ * Action Back-end Controller
  */
-class AGMail extends Controller
+class Action extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
@@ -20,6 +20,6 @@ class AGMail extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Lasso.AutoGenMail', 'autogenmail', 'agmail');
+        BackendMenu::setContext('Lasso.Actions', 'actions', 'action');
     }
 }
