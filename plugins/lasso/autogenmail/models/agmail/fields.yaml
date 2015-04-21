@@ -2,26 +2,30 @@
 #  Form Field Definitions
 # ===================================
 
-fields:
-    id:
-        label: ID
-        disabled: true
-    title:
-        label: Title
-        type: text
-    subtitle:
-        label: Subtitle
-        type: text
-    description:
-        label: Desciption
-        type: textarea
-    template:
-        label: Mail Template
-        type: relation
-        nameFrom: description
-    require_user:
-        label: Require user login?
-        type: switch
-    is_active:
-        label: Active
-        type: switch
+tabs:
+    fields:
+        title:
+            label: Title
+            type: text
+            tab: Mail content
+        subtitle:
+            label: Subtitle
+            type: text
+            tab: Mail content
+        description:
+            label: Desciption
+            type: textarea
+            tab: Mail content
+        template:
+            label: Mail Template
+            type: relation
+            nameFrom: description
+            tab: Mail content
+        require_user:
+            label: Require user login?
+            type: switch
+            tab: Options
+        is_active:
+            label: Active
+            type: switch
+            tab: Options
