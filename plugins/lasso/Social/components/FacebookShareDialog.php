@@ -48,11 +48,11 @@ class FacebookShareDialog extends ComponentBase
 
     public function getArchivePageOptions()
     {
-        return $this.getPageOptions();
+        return $this->getPageOptions();
     }
     public function getPostPageOptions()
     {
-        return $this.getPageOptions();
+        return $this->getPageOptions();
     }
     public function getPageOptions()
     {
