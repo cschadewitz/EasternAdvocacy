@@ -6,3 +6,17 @@ columns:
     id:
         label: ID
         searchable: true
+    subject:
+        label: Subject
+        type: text
+        searchable: true
+    mailtemplate:
+        label: Mail Template
+        relation: template
+        select: subject
+    require_user:
+        label: Require user
+        type: switch
+    is_active:
+        label: Is active?
+        type: switch
