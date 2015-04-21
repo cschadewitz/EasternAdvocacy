@@ -1,5 +1,9 @@
 <?php namespace Lasso\Social\Components;
 
+use App;
+use Request;
+use Redirect;
+use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Lasso\Social\Models\Settings as Settings;
 use Lasso\AdminSendMail\Models\Email;
