@@ -3,11 +3,12 @@
 {% set postPage = __SELF__.postPage %}
 {% if this.page.id == postPage %}
     <title>Eastern Advocates - {{ post.subject }}</title>
-    <meta property="og:title"              content="{{post.subject}}" />
-    <meta property="og:url"                content="{{this.page.baseFileName|page({ postId: post.id })}}" />
-    <meta property="fb:app_id"             content="{{appID}}" />
-    <meta property="og:type"               content="article" />
-    <meta property="og:description"        content="{{post.content | raw}}" />
+    <meta property="og:title"              content="{{post.subject}}" ></meta>
+    <meta property="og:url"                content="{{this.page.baseFileName|page({ postId: post.id })}}" ></meta>
+    <meta property="fb:app_id"             content="{{appID}}" ></meta>
+    <meta property="og:type"               content="article" ></meta>
+    <meta property="og:description"        content="{{post.content | raw}}" ></meta>
+    <meta property="og:site_name"          content="Eastern Advocates" ></meta>
 {% else %}
     <title>Eastern Advocates - {{ this.page.title }}</title>
 {% endif %}

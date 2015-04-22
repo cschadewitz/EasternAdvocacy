@@ -77,16 +77,6 @@ class Plugin extends PluginBase
 
     public function registerSettings()
     {
-        return [
-            'integration' => [
-                'label'       => 'Facebook Integration',
-                'description' => 'Manage Facebook app id and url',
-                'category'    => 'Archive',
-                'icon'        => 'icon-globe',
-                'class'       => 'Lasso\AdminSendMail\Models\Settings',
-                'order'       => 500,
-                'keywords'    => 'archive facebook emails'
-            ]
-        ];
+
     }
 }
