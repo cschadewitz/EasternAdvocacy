@@ -1,6 +1,7 @@
 <?php namespace Lasso\Actions\Components;
 
 use Cms\Classes\ComponentBase;
+use Lasso\Actions\Models\Action;
 
 class TakeAction extends ComponentBase
 {
@@ -26,7 +27,9 @@ class TakeAction extends ComponentBase
 
     public function onRun()
     {
-        $this->page['actionId'] = $this->property('actionId');
+        $this->addCss('/plugins/lasso/actions/assets/css/frontend.css');
+        $action = Action::with('template')->find($this->property('actionId'));
+        $this->page['action'] = $action;
     }
 
 }

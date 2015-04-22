@@ -1,5 +1,50 @@
-{{ id }}
+<div class="row">
+    <article id="takeaction" class="col-md-8 col-md-offset-2">
+        {% if action is null %}
+            <header><h2>Oh NO!!</h2></header>
 
-<p>This is the default markup for component TakeAction</p>
+            <p>Invalid URL.</p>
+        {% else %}
+            <header><h2>{{ action.title }}</h2></header>
+            <div class="takeaction-header">
+				<h1>{{ action.subtitle }}</h1>
+				<p>{{ action.description }}</p>
+			</div>
 
-<small>You can delete this file if you want</small>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="row panel panel-default">
+						<div class="panel-body">
+							<div class="well col-xs-6">
+								<form method="POST" action="send-action">
+									<div class="form-group">
+									    <label for="name">Name: </label>
+									    <input type="text" class="form-control" id="name" name="name">
+									</div>
+									<div class="form-group">
+									    <label for="email">Email: </label>
+									    <input type="email" class="form-control" id="email" name="email">
+									</div>
+									<div class="form-group">
+									    <label for="zipcode">Zip code: </label>
+									    <input type="text" class="form-control" id="zipcode" name="zipcode">
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">WRITE CONGRESS</button>
+									</div>
+								</form>
+							</div>
+							<div class="col-xs-6">
+								<h2>{{ action.template.subject }}</h2>
+								{{ action.template.content_html | raw }}
+							</div>
+						</div>
+						<div class="panel-footer">
+							<h4><a href="#">How does it work?</a></h5>
+						</div>
+					</div>
+				</div>
+			</div>
+        {% endif %}
+    </article>
+</div>
