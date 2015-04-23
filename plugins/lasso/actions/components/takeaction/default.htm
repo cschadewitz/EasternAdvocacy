@@ -11,9 +11,26 @@
 				<p>{{ action.description }}</p>
 			</div>
 
+			<br>
+
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="row panel panel-default">
+						<div class="panel-heading">
+							<h2>Your representatives</h2>
+							<div class="row">
+							  {% for rep in reps %}    
+							  <div class="col-sm-6 col-md-4">
+							    <div class="thumbnail">
+							      <img src="https://www.govtrack.us/data/photos/{{ rep.govtrack_id }}-200px.jpeg" alt="">
+							      <div class="caption">
+							        <h5>{{ rep.first_name }} {{ rep.last_name }}</h5>
+							      </div>
+							    </div>
+							  </div>
+							  {% endfor %}
+							</div>
+						</div>
 						<div class="panel-body">
 							<div class="well col-xs-6">
 								<form method="POST" action="send-action">
@@ -36,11 +53,9 @@
 							</div>
 							<div class="col-xs-6">
 								<h2>{{ action.template.subject }}</h2>
-								{{ action.template.content_html | raw }}
+								{{ action.template.content_html | striptags | raw [:200]}}...
+								 <a href="#">Read the letter</a>
 							</div>
-						</div>
-						<div class="panel-footer">
-							<h4><a href="#">How does it work?</a></h5>
 						</div>
 					</div>
 				</div>

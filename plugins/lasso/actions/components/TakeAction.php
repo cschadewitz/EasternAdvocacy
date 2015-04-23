@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
+use Lasso\ZipLookup\Components\Zip;
 
 class TakeAction extends ComponentBase
 {
@@ -27,9 +28,11 @@ class TakeAction extends ComponentBase
 
     public function onRun()
     {
+        $zip = new Zip;
         $this->addCss('/plugins/lasso/actions/assets/css/frontend.css');
         $action = Action::with('template')->find($this->property('actionId'));
         $this->page['action'] = $action;
+        $this->page['reps'] = $zip->info('99004');
     }
 
 }
