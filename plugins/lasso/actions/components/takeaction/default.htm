@@ -20,7 +20,7 @@
 							<h2>Your representatives</h2>
 							<div class="row">
 							  {% for rep in reps %}    
-							  <div class="col-sm-6 col-md-4">
+							  <div class="col-xs-4">
 							    <div class="thumbnail">
 							      {% if rep.photo_url is not empty %}
 							        <img src="{{ rep.photo_url }}" alt="">
@@ -37,7 +37,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="well col-xs-6">
-								<form method="POST" action="send-action">
+								<form onsubmit="$(this).request('onTest'); return false;">
 									<div class="form-group">
 									    <label for="name">Name: </label>
 									    <input type="text" class="form-control" id="name" name="name">
@@ -65,5 +65,11 @@
 				</div>
 			</div>
         {% endif %}
+    </article>
+</div>
+
+<div class="row">
+    <article id="testarea" class="col-md-8 col-md-offset-2">
+        
     </article>
 </div>
