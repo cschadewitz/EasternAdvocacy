@@ -1,15 +1,11 @@
-<?php Block::put('breadcrumb') ?>
+<?php Block::put('breadcrumb')?>
     <ul>
-        <li><a href="<?= Backend::url('lasso/adminsendmail/emails') ?>">Emails</a></li>
+        <li><a href="<?=Backend::url('lasso/adminsendmail/emails')?>">Emails</a></li>
         <li>Send Email</li>
     </ul>
-<?php Block::endPut() ?>
-<?php if( $sent == true ): ?>
+<?php Block::endPut()?>
+<?php if ($sent == true): ?>
 		<div class="alert-box success"><span>Success: </span>Email successfully sent.</div>
-		Sent to: <?php foreach($subs as $sub)
-		{
-			echo $sub->name.' <'.$sub->email.'><br/>';
-		}
-	 else: ?>
-	<div class="alert-box error"><span>Error: </span>Email was not sent.</div>
-<?php endif; ?>
+<?php else: ?>
+	<div class="alert-box error"><span>Error: </span><?=$error?></div>
+<?php endif;?>

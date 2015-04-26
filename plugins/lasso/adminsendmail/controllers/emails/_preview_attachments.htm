@@ -1,29 +1,27 @@
 <?php
 $files = \System\Models\File::where('attachment_id', '=', $model->id)->get();
-if(count($files)==0)
-{
+if (count($files) == 0) {
 	echo '<br>No attachments.';
 }
 ?>
 <div id="FileUpload-formAttachments-attachments" class="field-fileupload is-multi has-attachments is-sortable" >
 		    <div class="file-multi">
 		        <ul><?php
-				foreach($files as $file)
-				{ ?>
-					<a href="<?= $file->getPath() ?>" target="_BLANK">
+foreach ($files as $file) {?>
+					<a href="<?=$file->getPath()?>" target="_BLANK">
 				        <li>
 			    	        <div class="attachment-item active-file">
 			        	        <span class="file-icon">
 			            	    	<i class="icon-file"></i>
-			                	    <b class="file-extension"><?= $file->extension ?></b>
+			                	    <b class="file-extension"><?=$file->extension?></b>
 			                	</span>
-			                	<span class="caption"><?= $file->file_name ?></span>
+			                	<span class="caption"><?=$file->file_name?></span>
 			            	</div>
 			        	</li>
 		        	</a>
 					<?php
-				}
-			?>
+}
+?>
      	</ul>
     </div>
 </div>
