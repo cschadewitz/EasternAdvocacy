@@ -1,3 +1,5 @@
+@import (reference) "../vendor/bootstrap/less/bootstrap";
+
 @backdrop-color: #222;
 @nav-background-color: #333;
 
@@ -57,4 +59,9 @@ footer {
   background-color: @nav-background-color;
   text-align: center;
   font-size:.8em;
+}
+
+.advocacy-article {
+  .make-md-column(8);
+  .make-md-column-offset(2);
 }
