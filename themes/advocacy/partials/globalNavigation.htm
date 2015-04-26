@@ -1,0 +1,43 @@
+description = "Global Nav Bar"
+==
+<nav id="layout-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ 'home'|page }}">Eastern Advocates</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-main-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="{% if this.page.id == 'petition' or this.page.id == 'contribute' or this.page.id == 'findreps' %}active{% endif %} dropdown">
+                    <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Act Now <span class="caret"></span></a>
+                    <ul class="dropdown-menu navbar-inverse" role="menu">
+                        <li class="{% if this.page.id == 'findreps' %}active{% endif %} nav-inverse-item"><a href="{{ 'findreps'|page }}">Find Reps</a></li>
+                        <li class="{% if this.page.id == 'petition' %}active{% endif %} nav-inverse-item"><a href="{{ 'petition'|page }}">Sign Petition</a></li>
+                        <li class="{% if this.page.id == 'contribute' %}active{% endif %} nav-inverse-item"><a href="{{ 'contribute'|page }}">Contribute</a></li>
+                    </ul>
+                </li>
+                <li class="{% if this.page.id == 'subscribe' or this.page.id == 'unsubscribe' or this.page.id == 'unsubscribe-form' %}active{% endif %} dropdown">
+                    <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mailing List <span class="caret"></span></a>
+                    <ul class="dropdown-menu navbar-inverse" role="menu">
+                        <li class="{% if this.page.id == 'subscribe' %}active{% endif %} nav-inverse-item"><a href="{{ 'subscribe'|page }}">Subscribe</a></li>
+                        <li class="{% if this.page.id == 'unsubscribe-form' %}active{% endif %} nav-inverse-item"><a href="{{ 'unsubscribe-form'|page }}">Unsubscribe</a></li>
+                    </ul>
+                </li>
+                <li class="{% if this.page.id == 'archive' or this.page.id == 'article' or this.page.id == 'edit-mail' %}active{% endif %} dropdown">
+                    <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Archive <span class="caret"></span></a>
+                    <ul class="dropdown-menu navbar-inverse" role="menu">
+                        <li class="{% if this.page.id == 'archive' %}active{% endif %} nav-inverse-item"><a href="{{ 'archive'|page({ pageNumber: 1 }) }}">Archived News</a></li>
+                        {% if user %}
+                        <li class="{% if this.page.id == 'edit-mail' %}active{% endif %} nav-inverse-item"><a href="{{ 'edit-mail'|page }}">Admin Send Mail</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
