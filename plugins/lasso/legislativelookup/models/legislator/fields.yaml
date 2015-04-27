@@ -6,3 +6,33 @@ fields:
     id:
         label: ID
         disabled: true
+    uuid:
+        label: uuid
+        type: text
+    state:
+        label: state
+        type: text
+    district:
+        label: district
+        type: text
+    first_name:
+        label: first_name
+        type: text
+    last_name:
+        label: last_name
+        type: text
+    party:
+        label: party
+        type: text
+    email:
+        label: email
+        type: text
+    photo_url:
+        label: photo_url
+        type: text
+    office_phone:
+        label: office_phone
+        type: text
+    url:
+        label: url
+        type: text
