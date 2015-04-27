@@ -12,16 +12,16 @@ class CreateLegislatorsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('uuid');
+            $table->string('uuid')->index();
             $table->string('state');
             $table->string('district');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('party');
-            $table->string('email');
-            $table->string('photo_url');
-            $table->string('office_phone');
-            $table->string('url');
+            $table->string('email')->nullable();
+            $table->string('photo_url')->nullable();
+            $table->string('office_phone')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
