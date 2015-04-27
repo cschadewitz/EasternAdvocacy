@@ -1,0 +1,8 @@
+#======================================
+# Subscribers List Behavior Config
+#======================================
+
+title: Subscribers
+list: ~/plugins/lasso/subscribe/models/subscribe/columns.yaml
+modelClass: Lasso\Subscribe\Models\Subscribe
+recordUrl: lasso/subscribe/subscribe/update/:uuid

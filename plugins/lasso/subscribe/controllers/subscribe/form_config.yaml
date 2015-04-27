@@ -1,0 +1,16 @@
+#=====================================
+# Subscription Form Behavior Config
+#=====================================
+
+name: Signature
+form: ~/plugins/lasso/subscribe/models/subscribe/fields.yaml
+modelClass: Lasso\Subscribe\Models\Subscribe
+
+update:
+    title: Edit Subcription
+    redirect: lasso/suscribe/subscribe
+    flashSave: Subscription updated successfully.
+    flashDelete: Subscription has been deleted.
+
+preview:
+    title: View Subscription

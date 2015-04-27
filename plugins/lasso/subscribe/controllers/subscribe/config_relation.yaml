@@ -1,0 +1,12 @@
+#==============================================
+# Subscribe - Relation Behavior Config
+#==============================================
+
+signatures:
+  label: Subscriber
+  list: ~/plugins/lasso/subscribe/models/subscribe/columns.yaml
+  form: ~/plugins/lasso/subscribe/models/subscribe/fields.yaml
+  manage:
+    recordsPerPage: 10
+  view:
+    toolBarButtons: create|delete

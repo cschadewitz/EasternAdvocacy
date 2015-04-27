@@ -4,15 +4,18 @@ namespace Lasso\Subscribe\Components;
 use Cms\Classes\ComponentBase;
 use Mail;
 
-class Form extends ComponentBase{
-    public function componentDetails(){
+class Form extends ComponentBase
+{
+    public function componentDetails()
+    {
         return [
             'name' => 'Subscription Form',
             'description' => 'Display the subscription form'
         ];
     }
 
-    public function onSubscribe(){
+    public function onSubscribe()
+    {
         $name = post('name');
         $email = post('email');
         $zip = post('zip');
