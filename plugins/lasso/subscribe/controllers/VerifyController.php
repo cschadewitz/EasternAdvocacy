@@ -1,8 +1,10 @@
 <?php
     namespace Lasso\Subscribe\Controllers;
 
-    class VerifyController extends \System\Classes\Controller{
-        public function commit($uuid){
+    class VerifyController extends \System\Classes\Controller
+    {
+        public function commit($uuid)
+        {
             $subscription = new \lasso\subscribe\models\Subscribe;
             if($subscription->UUID($uuid)->count() == 1){
                 $verifier = \lasso\subscribe\models\Subscribe::find($uuid);

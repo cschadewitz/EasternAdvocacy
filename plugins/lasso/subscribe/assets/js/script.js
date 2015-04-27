@@ -1,8 +1,10 @@
 /**
  * Created by Wolf on 2/2/2015.
  */
-(function(){
-    $.fn.fadeSlideToggle = function(){
+(function()
+{
+    $.fn.fadeSlideToggle = function()
+    {
         var box = $(this);
         $(box).animate({
             'opacity': 'toggle',
@@ -17,15 +19,14 @@
     });
 })();
 
-function processForm(){
-    console.log('form submitted');
-
+function processForm()
+{
     var em = checkEmailError();
     var zip = checkZipError();
     var type = checkTypeError();
     var name = checkNameError();
-    if(em && zip && type && name){
-        console.log('test passed');
+    if(em && zip && type && name)
+    {
         $(this).request('onSubscribe',{
             data: {
                 "name" : $('#name').val(),
@@ -47,11 +48,13 @@ function processForm(){
     }
 }
 
-function checkEmailError(){
+function checkEmailError()
+{
     var matchEmail = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
     var email = $('#email');
     var emailError = $('.email-error-hint');
-    if(!email.val() || !matchEmail.test(email.val())){
+    if(!email.val() || !matchEmail.test(email.val()))
+    {
         email.addClass('input-error');
         emailError.show();
         return false;
@@ -61,7 +64,8 @@ function checkEmailError(){
     }
 }
 
-function checkZipError(){
+function checkZipError()
+{
     var matchZip = /^\d{5}(\-?\d{4})?$/;
     var zip = $('#zip');
     var zipError = $('.zip-error-hint');
@@ -74,10 +78,12 @@ function checkZipError(){
         return true;
 }
 
-function checkTypeError() {
+function checkTypeError()
+{
     var type = $('#type');
     var typeHint = $('.type-error-hint');
-    if(type.val() === 'none'){
+    if(type.val() === 'none')
+    {
         typeHint.show();
         return false;
     }
@@ -85,22 +91,27 @@ function checkTypeError() {
         return true;
 }
 
-function checkNameError(){
+function checkNameError()
+{
     var name = $('#name');
     var nameError = $('.name-error-hint');
-    if(!name.val()){
+    if(!name.val())
+    {
         nameError.show();
         return false;
     }
-    else{
+    else
+    {
         return true;
     }
 }
 
-function emailError(data){
+function emailError(data)
+{
     var em = $('#email');
     var emh = $('.email-error-dup');
-    if(data.error === 'nonUniqueEmail'){
+    if(data.error === 'nonUniqueEmail')
+    {
         em.addClass('email-error').on('input propertychange paste', function () {
             em.removeClass('email-error');
             emh.hide();
@@ -110,46 +121,54 @@ function emailError(data){
     }
 }
 
-function zipValid(){
+function zipValid()
+{
     var matchZip = /^\d{5}(\-?\d{4})?$/;
     var zip = $('#zip');
     var zipError = $('.zip-error-hint');
     zip.on('input propertychange paste', function () {
-        if(matchZip.test(zip.val())){
+        if(matchZip.test(zip.val()))
+        {
             zip.removeClass('input-error');
             zipError.hide();
         }
     });
 }
 
-function emailValid(){
+function emailValid()
+{
     var matchEmail = /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/;
     var email = $('#email');
     var emailError = $('.email-error-hint');
     email.on('input propertychange paste', function () {
-        if(matchEmail.test(email.val())){
+        if(matchEmail.test(email.val()))
+        {
             email.removeClass('input-error');
             emailError.hide();
         }
     });
 }
 
-function nameValid(){
+function nameValid()
+{
     var name = $('#name');
     var nameError = $('.name-error-hint');
     name.on('input propertychange paste', function() {
-        if(name.val()){
+        if(name.val())
+        {
             name.removeClass('.input-error');
             nameError.hide();
         }
     });
 }
 
-function typeValid(){
+function typeValid()
+{
     var type = $('#type');
     var typeHint = $('.type-error-hint');
     type.on('change', function () {
-        if (type.val() !== 'none') {
+        if (type.val() !== 'none')
+        {
             typeHint.hide();
         }
     });

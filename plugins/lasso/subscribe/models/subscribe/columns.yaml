@@ -1,0 +1,19 @@
+# ===================================
+#  Subscribe List Column Definitions
+# ===================================
+
+columns:
+    uuid:
+          label: Unique User ID
+          type: text
+    email:
+          label: Email
+          type: text
+    name:
+          label: Name
+          type: text
+    zip:
+          label: Zipcode
+          type: number
+    type: type
+    verificationDate: vDate

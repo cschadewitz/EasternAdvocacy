@@ -22,7 +22,8 @@
             ];
         }
 
-        public function registerMailTemplates(){
+        public function registerMailTemplates()
+        {
             return [
                 'lasso.subscribe::mail.verify' => 'Verification email sent to new subscribers.',
             ];
