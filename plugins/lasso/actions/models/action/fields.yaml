@@ -1,0 +1,36 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+tabs:
+    fields:
+        title:
+            label: Title
+            type: text
+            tab: Mail content
+            required: true
+        subtitle:
+            label: Subtitle
+            type: text
+            tab: Mail content
+        description:
+            label: Desciption
+            type: textarea
+            tab: Mail content
+        template:
+            label: Mail Template
+            type: relation
+            nameFrom: description
+            tab: Mail content
+            commentAbove: To create more Mail templates, please go to Settings > Mail templates
+        require_user:
+            label: Require user login?
+            type: switch
+            tab: Options
+            commentAbove: Would you like to restrict this Action to users only?
+            default: 1
+        is_active:
+            label: Active
+            type: switch
+            tab: Options
+            commentAbove: Would you like to enable this action as soon as it is saved?

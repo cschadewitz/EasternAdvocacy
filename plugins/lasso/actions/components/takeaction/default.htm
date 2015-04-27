@@ -1,0 +1,75 @@
+<div class="row">
+    <article id="takeaction" class="col-md-8 col-md-offset-2">
+        {% if action is null %}
+            <header><h2>Oh NO!!</h2></header>
+
+            <p>Invalid URL.</p>
+        {% else %}
+            <header><h2>{{ action.title }}</h2></header>
+            <div class="takeaction-header">
+				<h1>{{ action.subtitle }}</h1>
+				<p>{{ action.description }}</p>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="row panel panel-default">
+						<div class="panel-heading">
+							<h2>Your representatives</h2>
+							<div class="row">
+							  {% for rep in reps %}    
+							  <div class="col-xs-4">
+							    <div class="thumbnail">
+							      {% if rep.photo_url is not empty %}
+							        <img src="{{ rep.photo_url }}" alt="">
+							      {% else %}
+							        <img src="http://lorempixel.com/600/800/cats/" alt="">
+							      {% endif %}
+							      <div class="caption">
+							        <h5>{{ rep.full_name }}</h5>
+							      </div>
+							    </div>
+							  </div>
+							  {% endfor %}
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="well col-xs-6">
+								<form onsubmit="$(this).request('onTest'); return false;">
+									<div class="form-group">
+									    <label for="name">Name: </label>
+									    <input type="text" class="form-control" id="name" name="name">
+									</div>
+									<div class="form-group">
+									    <label for="email">Email: </label>
+									    <input type="email" class="form-control" id="email" name="email">
+									</div>
+									<div class="form-group">
+									    <label for="zipcode">Zip code: </label>
+									    <input type="text" class="form-control" id="zipcode" name="zipcode">
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">WRITE CONGRESS</button>
+									</div>
+								</form>
+							</div>
+							<div class="col-xs-6">
+								<h2>{{ action.template.subject }}</h2>
+								{{ action.template.content_html | striptags | raw [:200]}}...
+								 <a href="#">Read the letter</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        {% endif %}
+    </article>
+</div>
+
+<div class="row">
+    <article id="testarea" class="col-md-8 col-md-offset-2">
+        
+    </article>
+</div>
