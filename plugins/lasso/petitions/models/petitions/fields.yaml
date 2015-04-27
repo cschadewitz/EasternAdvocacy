@@ -2,14 +2,17 @@ fields:
     title:
         label: Petition Title
         description: Title for this petition
+        required: true
     summary:
         label: Petition Summary
         description: Summarize your petition
         type: textarea
+        required: true
     body:
         label: Body
         description: Describe your petition
         type: richeditor
+        required: true
     published:
         label: Published?
         description: Publish petition right away?

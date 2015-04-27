@@ -34,7 +34,8 @@
             return $query->where('title', '=', $title);
         }
 
-        public function scopePid($query, $pid){
+        public function scopePid($query, $pid)
+        {
             return $query->where('pid', '=', $pid);
         }
 
@@ -46,5 +47,10 @@
         public function scopeUrl($query, $slug)
         {
             return $query->where('slug', '=', $slug);
+        }
+
+        public function scopeActive($query)
+        {
+            return $query->where('published', '=', 1);
         }
     }

@@ -2,6 +2,7 @@
     namespace Lasso\Petitions\Components;
 
     use Illuminate\Support\Facades\DB;
+    use Lasso\Petitions\Controllers\Signatures;
 
     class Post extends \Cms\Classes\ComponentBase
     {
@@ -38,8 +39,7 @@
 
         public function getPetition()
         {
-            //$petition = \Lasso\Petitions\Models\Petitions::getPetition($this->property('petition'));
-            $petition = DB::table('petitions')->where('pid', $this->property('petition'))->first();
+            $petition = \Lasso\Petitions\Models\Petitions::GetPetition($this->property('petition'))->first();
             $result = [];
             foreach($petition as $code=>$data)
             {
@@ -48,7 +48,8 @@
             return $result;
         }
 
-        public function signPetition(){
+        public function signPetition()
+        {
             $name = post('name');
             $email = post('email');
             $mailingAddress = post('mailingaddress');
@@ -64,6 +65,10 @@
                 throw new \Exception(sprintf('Enter your registered mailing address'));
             if ( empty($zip) )
                 throw new \Exception(sprintf('Please enter your zip code.'));
+            if((new \lasso\petitions\models\Signatures)->SignatureValid($email, $pid) == 0)
+            {
+                \Flash::error('You have already signed this petition!');
+            }
             else{
                 $signature = new \lasso\petitions\models\Signatures;
                 $signature->name = $name;
