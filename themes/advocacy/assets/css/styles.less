@@ -1,0 +1,67 @@
+@import (reference) "../vendor/bootstrap/less/bootstrap";
+
+@backdrop-color: #222;
+@nav-background-color: #333;
+
+body {
+  background-color: @backdrop-color;
+  margin-top: 70px;
+  font-size: 2em;
+}
+
+#layout-header {
+  font-size: 2em;
+  font-weight: lighter;
+}
+
+#layout-nav {
+  background-color: @nav-background-color;
+}
+
+.navbar-inverse {
+  .navbar-brand {
+    font-size: 1.2em;
+    font-weight: normal;
+    padding-bottom: 50px;
+    padding-top: 30px;
+  }
+  .navbar-nav {
+      a {
+          padding-bottom: 30px;
+          padding-top: 30px;
+      }
+    & > .active > a {
+      background-color: #262626;
+    }
+  }
+}
+
+
+article {
+  background-color: #FFF;
+  margin: 20px 0;
+  & > header {
+    background-color: #a10022;
+    padding: 25px 15px;
+    margin: 0 -15px 10px -15px;
+    & > h2 {
+      font-size: 3em;
+      color: #FFF;
+      margin: 0;
+    }
+  }
+}
+
+footer {
+  padding-top: 10px;
+  margin-top: 40px;
+  color: #999;
+  background-color: @nav-background-color;
+  text-align: center;
+  font-size:.8em;
+}
+
+.advocacy-article {
+  .make-md-column(8);
+  .make-md-column-offset(2);
+}

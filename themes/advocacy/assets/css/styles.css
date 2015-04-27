@@ -1,54 +1,108 @@
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after,
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after,
+.btn-toolbar:before,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:before,
+.btn-group-vertical > .btn-group:after,
+.nav:before,
+.nav:after,
+.navbar:before,
+.navbar:after,
+.navbar-header:before,
+.navbar-header:after,
+.navbar-collapse:before,
+.navbar-collapse:after,
+.pager:before,
+.pager:after,
+.panel-body:before,
+.panel-body:after,
+.modal-footer:before,
+.modal-footer:after {
+  content: " ";
+  display: table;
+}
+.container:after,
+.container-fluid:after,
+.row:after,
+.form-horizontal .form-group:after,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:after,
+.nav:after,
+.navbar:after,
+.navbar-header:after,
+.navbar-collapse:after,
+.pager:after,
+.panel-body:after,
+.modal-footer:after {
+  clear: both;
+}
 body {
-    background-color: #222;
-    margin-top: 70px;
-    font-size: 2em;
+  background-color: #222222;
+  margin-top: 70px;
+  font-size: 2em;
 }
-
 #layout-header {
-    font-size: 2em;
-    font-weight: lighter;
+  font-size: 2em;
+  font-weight: lighter;
 }
-
-.navbar-inverse .navbar-brand {
-    font-size: 1.2em;
-    font-weight: normal;
-    padding-bottom: 50px;
-    padding-top: 30px;
-}
-
 #layout-nav {
-    background-color: #333;
+  background-color: #333333;
+}
+.navbar-inverse .navbar-brand {
+  font-size: 1.2em;
+  font-weight: normal;
+  padding-bottom: 50px;
+  padding-top: 30px;
 }
 .navbar-inverse .navbar-nav a {
-    padding-bottom: 30px;
-    padding-top: 30px;
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 .navbar-inverse .navbar-nav > .active > a {
-    background-color: #262626;
+  background-color: #262626;
 }
-
 article {
-    background-color: #FFF;
-    margin: 20px 0;
+  background-color: #FFF;
+  margin: 20px 0;
 }
-
 article > header {
-    background-color: #a10022;
-    padding: 25px 15px;
-    margin: 0 -15px 10px -15px;
+  background-color: #a10022;
+  padding: 25px 15px;
+  margin: 0 -15px 10px -15px;
 }
-
 article > header > h2 {
-    font-size: 3em;
-    color: #FFF;
-    margin: 0;
+  font-size: 3em;
+  color: #FFF;
+  margin: 0;
 }
-
 footer {
-    padding-top: 10px;
-    margin-top: 40px;
-    color: #999;
-    background-color: #333;
-    text-align: center;
-    font-size:.8em;
+  padding-top: 10px;
+  margin-top: 40px;
+  color: #999;
+  background-color: #333333;
+  text-align: center;
+  font-size: .8em;
+}
+.advocacy-article {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .advocacy-article {
+    float: left;
+    width: 66.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .advocacy-article {
+    margin-left: 16.66666667%;
+  }
 }
