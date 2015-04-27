@@ -24,4 +24,23 @@ class Signatures extends Model
     public $belongsTo = [
         'petitions' => ['Lasso\Petitions\Models\Petitions'],
     ];
+
+    function scopeEmail($query, $email)
+    {
+        return $query->where('email', '=', $email);
+    }
+
+    function scopeEmailPid($query, $email, $pid){
+        return $query->where('email', '=', $email)->where('pid', '=', $pid);
+    }
+
+    public function SignatureValid($email, $pid)
+    {
+        $test = Signatures::EmailPid($email, $pid);
+        if($test->count() > 0)
+        {
+            return 0;
+        }
+        return 1;
+    }
 }

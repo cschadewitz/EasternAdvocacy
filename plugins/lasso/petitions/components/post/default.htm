@@ -7,6 +7,9 @@
         <h3>Signatures</h3>
         {{petitionInfo.signatures}}
     </div>
+    {% flash %}
+        <div class="alert alert-error">{{ message }}</div>
+    {% endflash %}
     <div class="form">
         {{ form_open({ request: 'signPetition' }) }}
         <ul class="form-items">
@@ -20,7 +23,7 @@
             </li>
             <li>
                 <label for="email">Email:</label>
-                <input id="email" type="email" value="" name="email" placeholder="name@example.com" required pattern="^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$"/>
+                <input id="email" type="text" value="" name="email" placeholder="name@example.com" required pattern="^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$"/>
             </li>
             <li>
                 <label for="mailingaddress">Registered Mailing Address:</label>
