@@ -38,6 +38,8 @@ class Lookup extends ComponentBase
      * @return array|mixed
      */
     public function parseAddress() {
+        echo "Do something!";
+
         /*Validator::create([
         //todo - do this later
         ]);*/
@@ -72,6 +74,7 @@ class Lookup extends ComponentBase
                 array_push($legislators, $legislator);
             }
         }
+        displayResults($legislators);
     }
 
     /**
@@ -84,5 +87,29 @@ class Lookup extends ComponentBase
         } else {
             return $legislators;
         }
+    }
+
+    /**
+     * @param $address object with coordinates found
+     * @return JSON from API to get
+     */
+    public function infoFromObject($address) {
+        $street_address = array($address->address, $address->city, $address->state, $address->zip);
+        return infoFromArray($street_address);
+    }
+    /**
+     * @param $address array with street address
+     * @return JSON from API to get
+     */
+    public function infoFromArray($address) {
+        $street_address = $address[0] . $address[1] . $address[2] . $address[3];
+        return infoFromString($street_address);
+    }
+    /**
+     * @param $address string
+     * @return JSON from API to get
+     */
+    public function infoFromString($address) {
+        return Legislator::getJSONLegislatorsFromAddress($address);
     }
 }

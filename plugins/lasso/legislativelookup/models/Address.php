@@ -49,20 +49,11 @@ class Address extends Model
         $street = "address=";
         $street = $street . ($address==null?$address:"");
         $street = $street . ($city==null?$city:"");
-        $street = $street . ($state==null?$state:"");
+        $street = $street . ($state==null?$state:"WA");//default to washington since that's where we are
         $street = $street . ($zip==null?$zip:"");
 
-        echo $street;
-        printf("%s", $street);
+        $json = Address->getCoordsFromAPI($street);
 
-        $json = file_get_contents(sprintf(
-            "https://maps.googleapis.com/maps/api/geocode/json?%s&sensor=false&key=%s",
-            $street,
-            Settings::get('google_id')
-        ));
-        $json = json_decode($json)->{'results'};
-        $json = json_decode($json)->{'geometry'};
-        $json = json_decode($json)->{'location'};
         $lat=round(json_decode($json)->{'lat'}, 1);//normalized here
         $long=round(json_decode($json)->{'lng'}, 1);
         $newAddress = Address::create([
@@ -75,9 +66,19 @@ class Address extends Model
         ]);
         $newAddress->save();
 
-        echo $newAddress;
-
         return $newAddress;
+    }
+
+    public static function getCoordsFromAPI($street) {
+        $json = file_get_contents(sprintf(
+            "https://maps.googleapis.com/maps/api/geocode/json?%s&sensor=false&key=%s",
+            $street,
+            Settings::get('google_id')
+        ));
+        $json = json_decode($json)->{'results'};
+        $json = json_decode($json)->{'geometry'};
+        $json = json_decode($json)->{'location'};
+        return (json_decode($json));
     }
 
     public function getLat(){

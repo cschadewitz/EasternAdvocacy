@@ -2,9 +2,13 @@ title = "Find Representatives"
 url = "/findreps"
 layout = "default"
 hidden = "0"
+
+[lookup]
+visibleOutput = "visible"
 ==
 <div class="row">
-    <article class="col-md-6 col-md-offset-3">
+    <article class="advocacy-article">
         {% partial 'findreps.htm' %}
+        {% component 'lookup' %}
     </article>
 </div>

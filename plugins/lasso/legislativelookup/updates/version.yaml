@@ -1,8 +1,4 @@
 1.0.1:
-      - First version of LegislativeLookup
-1.0.2:
-      - Finalized schema of addresses and legislators
-1.0.3:
       - Create Addresses table
       - create_addresses_table.php
       - Create Legislators table
