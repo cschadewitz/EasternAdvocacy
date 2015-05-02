@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Lasso\Captcha\Components\Recaptcha;
 
 class UnsubscribeForm extends ComponentBase
 {
@@ -38,6 +39,8 @@ class UnsubscribeForm extends ComponentBase
             throw new \Exception(sprintf('Please enter your zip code.'));
         if ( empty($captcha))
             throw new \Exception(sprintf('Please enter the Captcha'));
+
+
 
         $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
         $captchaRequest->addPostFields(array('secret'=>$this->captchaSecret, 'response'=>$captcha));
