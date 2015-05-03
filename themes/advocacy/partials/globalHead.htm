@@ -1,7 +1,12 @@
 description = "Global Stylesheet Includes"
+
+[share_dialog]
+postId = "{{ :postId }}"
+archivePage = "archive"
+postPage = "article"
 ==
 <meta charset="utf-8">
-<title>Eastern Advocates - {{ this.page.title }}</title>
+{% component 'share_dialog'%}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}" /> -->
 <link href="{{ [

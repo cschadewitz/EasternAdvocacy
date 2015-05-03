@@ -1,0 +1,27 @@
+{% set settings = __SELF__.settings %}
+<div class="social_buttons_container">
+
+    {% if settings.email_include %}
+        {% if settings.buttons_square %}
+            <a class="" href="mailto:{{ settings.email }}">
+                <i class="icon-rss-square"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-default" href="mailto:{{ settings.email }}" role="button">
+                <i class="icon-envelope"></i>
+        </a>
+        {% endif %}
+    {% endif %}
+    {% if settings.fb_include %}
+        {% if settings.buttons_square %}
+            <a class="" href="https://{{ settings.fb_url }}">
+                <i class="icon-facebook-square"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-default" href="https://{{ settings.fb_url }}" role="button">
+                <i class="icon-facebook"></i>
+            </a>
+        {% endif %}
+    {% endif %}
+
+</div>
