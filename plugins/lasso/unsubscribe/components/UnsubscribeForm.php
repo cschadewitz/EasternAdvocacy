@@ -21,6 +21,10 @@ class UnsubscribeForm extends ComponentBase
         return [];
     }
 
+    public function onInit()
+    {
+    }
+
     public function onRun()
     {
         $this->addCss('/plugins/lasso/subscribe/assets/css/component-style.css');
@@ -40,17 +44,18 @@ class UnsubscribeForm extends ComponentBase
         if ( empty($captcha))
             throw new \Exception(sprintf('Please enter the Captcha'));
 
+        $postData = [
+            "email" => $email,
+            "zip"   => $zip
+        ];
+
         // Change the next bit to use the verify function in the Recaptcha plugin
+        $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', [$captcha]);
 
         $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
         $captchaRequest->addPostFields(array('secret'=>$this->captchaSecret, 'response'=>$captcha));
 
-        try {
-            $captchaResponse = json_decode($captchaRequest->send()->getBody());
-            if ($captchaResponse->success == false)
-                throw new \Exception(sprintf('Incorrect Captcha Response'));
-
-        } catch (HttpException $ex) {
+        if ($captchaResponse == false) {
             throw new \Exception(sprintf('Could not verify Captcha'));
         }
 

@@ -38,6 +38,13 @@ class Recaptcha extends ComponentBase
         ];
     }
 
+    public function onInit()
+    {
+        Event::listen("lasso.captcha.recaptcha.verify", function($recaptchaResponse) {
+            return verify($recaptchaResponse);
+        });
+    }
+
     public function onRun()
     {
     }
