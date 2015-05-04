@@ -74,14 +74,15 @@ class Legislator extends Model
     }
 
     /**
-     * @param $theAddress - Address object to check API for
+     * @param $lat - Latitiude to check
+     * @param $long - Longitude to check
      * @return mixed - JSON of legislator data for address provided
      */
-    public static function getJSONLegislatorsFromAddress($theAddress) {
+    public static function getJSONLegislatorsFromAddress($lat, $long) {
         $json = file_get_contents(htmlspecialchars_decode(sprintf(
-            "https://openstates.org/api/v1//legislators/geo/?lat=%s&long=%s&apikey=%s",
-            $theAddress->getLat(),
-            $theAddress->getLong(),
+            "http://openstates.org/api/v1/legislators/geo/?lat=%s&long=%s&apikey=%s",
+            $lat,
+            $long,
             Settings::get('sunlight_id')
         )));
         return json_decode($json);
