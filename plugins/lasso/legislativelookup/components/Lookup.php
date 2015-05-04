@@ -37,24 +37,34 @@ class Lookup extends ComponentBase
      * parseAddress - main method of plugin for parsing the address
      * @return array|mixed
      */
-    public function parseAddress() {
-        echo "Do something!";
-
+    public function onParseAddress() {
         /*Validator::create([
         //todo - do this later
         ]);*/
 
+        //STEP 1 - read address
+        //STEP 2 - check cache for address
+            //if not present, add address and query coords
+            //else if present, retrieve coords
+        //STEP 3 - check legislative cache for coords (district?)
+            //if not present querey for legislators
+            //else retrieve legislators
+        //STEP 4 - pass legislators to display()
+
+        //STEP 1
         $address = post('address');
         $city = post('city');
         $state = post('state');
         $zip = post('zip');
+        $location = array($address, $city, $state, $zip);
+        $coordinates = Address::parseNewAddress($location);//should handle both cached and non-cashed now
         $legislatorRecord = null;//instanciate here for scope purposes - we'll be using it soon
 
-        $location = array($address, $city, $state, $zip);
-        $coordinates = Address::parseNewAddress($location);
-
-        if (!$coordinates->district) {
-            $legislators = Legislator::getJSONLegislatorsFromAddress($coordinates);
+        //so we have our address added in successfully now, time to dig deeper,
+        // if the district has been set, that tells us we've been here before and can
+        // just query for our legislators, else we'll need to go to the api for them
+        if (!isset($coordinates->district)) {
+            $legislators = Legislator::getJSONLegislatorsFromAddress($coordinates->lat, $coordinates->long);
 
             foreach ($legislators as $legislator) {
                 $legislatorRecord = Legislator::UUID($legislator->id)->get();
@@ -75,6 +85,26 @@ class Lookup extends ComponentBase
             }
         }
         displayResults($legislators);
+        //DEBUGIN
+        $leg = Legislator::create([
+            'uuid'=> "WA001",
+            'state'=> "WA",
+            'district'=> "9",
+            'first_name'=> "Bob",
+            'last_name'=> "Bobson",
+            'party'=> "R",
+            'email'=> "bob@senate.com",
+            'photo_url'=> "http://imgur.com/photo.png",
+            'office_phone'=> "509-888-5700",
+            'url'=> "http://wastate.gov"
+        ]);
+        $leg->save();
+        array_push($legislators, $leg);
+        echo $legislators;
+        echo $leg;
+        $this->legislators=$legislators;//FOR TRUCKS SAKE THIS TOOK FOREVER, HAVE TO EXPLICITLY ASSIGN THE VALUE BACK TO THE GLOBAL VARIABLE
+        //end debuggin
+        return $legislators;
     }
 
     /**
@@ -85,7 +115,19 @@ class Lookup extends ComponentBase
         if($this->properties['visibleOutput']=='visible') {
             $this->legislators = $legislators;
         } else {
-            return $legislators;
+            return Legislator::create([
+                'uuid'=> "WA001",
+                'state'=> "WA",
+                'district'=> "9",
+                'first_name'=> "Bob",
+                'last_name'=> "Bobson",
+                'party'=> "R",
+                'email'=> "bob@senate.com",
+                'photo_url'=> "http://imgur.com/photo.png",
+                'office_phone'=> "509-888-5700",
+                'url'=> "http://wastate.gov"
+            ]);
+            //return $legislators;
         }
     }
 
@@ -106,10 +148,19 @@ class Lookup extends ComponentBase
         return infoFromString($street_address);
     }
     /**
-     * @param $address string
+     * @param $address string303
      * @return JSON from API to get
      */
     public function infoFromString($address) {
         return Legislator::getJSONLegislatorsFromAddress($address);
+    }
+
+    /**
+     * Wrapper method
+     * @param $address
+     * @return mixed
+     */
+    public function info($address) {
+        return infoFromString($address);
     }
 }
