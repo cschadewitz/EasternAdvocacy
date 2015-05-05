@@ -18,6 +18,18 @@ fields:
     fb_include:
         label: Include on SocialButtons component?
         type: switch
-    buttons_square:
-        label: Use square buttons?
+    twitter_url:
+        label: Twitter Page URL
+        type: text
+    twitter_id:
+        label: Twitter page name
+        type: text
+    twitter_include:
+        label: Include on SocialButtons component?
+        type: switch
+    gp_url:
+        label: Google+ Page URL
+        type:   text
+    gp_include:
+        label: Include on SocialButtons component?
         type: switch
