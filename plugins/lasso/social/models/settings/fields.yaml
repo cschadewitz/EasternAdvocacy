@@ -18,6 +18,7 @@ fields:
     fb_include:
         label: Include on SocialButtons component?
         type: switch
+        default: 1
     twitter_url:
         label: Twitter Page URL
         type: text
@@ -27,9 +28,11 @@ fields:
     twitter_include:
         label: Include on SocialButtons component?
         type: switch
+        default: 1
     gp_url:
         label: Google+ Page URL
         type:   text
     gp_include:
         label: Include on SocialButtons component?
         type: switch
+        default: 1

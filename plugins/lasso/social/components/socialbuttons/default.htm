@@ -3,7 +3,7 @@
 
     {% if settings.email_include %}
         {% if settings.buttons_square %}
-            <a class="" href="mailto:{{ settings.email }}">
+            <a class="btn btn-default" href="mailto:{{ settings.email }}">
                 <i class="icon-rss-square"></i>
             </a>
         {% else %}
@@ -14,7 +14,7 @@
     {% endif %}
     {% if settings.fb_include %}
         {% if settings.buttons_square %}
-            <a class="" href="https://{{ settings.fb_url }}">
+            <a class="btn btn-default" href="https://{{ settings.fb_url }}">
                 <i class="icon-facebook-square"></i>
             </a>
         {% else %}
@@ -25,22 +25,22 @@
     {% endif %}
     {% if settings.twitter_include %}
         {% if settings.buttons_square %}
-            <a class="" href="https://{{ settings.fb_url }}">
+            <a class="btn btn-default" href="https://{{ settings.twitter_url }}">
                 <i class="icon-twitter-square"></i>
             </a>
         {% else %}
-            <a class="btn btn-default" href="https://{{ settings.fb_url }}" role="button">
+            <a class="btn btn-default" href="https://{{ settings.twitter_url }}" role="button">
                 <i class="icon-twitter"></i>
             </a>
         {% endif %}
     {% endif %}
     {% if settings.gp_include %}
         {% if settings.buttons_square %}
-            <a class="" href="https://{{ settings.fb_url }}">
+            <a class="btn btn-default" href="https://{{ settings.gp_url }}">
                 <i class="icon-google-plus-square"></i>
             </a>
         {% else %}
-            <a class="btn btn-default" href="https://{{ settings.fb_url }}" role="button">
+            <a class="btn btn-default" href="https://{{ settings.gp_url }}" role="button">
                 <i class="icon-google-plus"></i>
             </a>
         {% endif %}
