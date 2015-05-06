@@ -18,7 +18,7 @@ class CreateAddressesTable extends Migration
             $table->string('zip');
             $table->float('lat');
             $table->float('long');
-            $table->string('district');
+            $table->string('district')->nullable();
             $table->timestamps();
         });
     }

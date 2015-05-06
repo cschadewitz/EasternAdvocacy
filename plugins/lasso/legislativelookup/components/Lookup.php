@@ -58,52 +58,43 @@ class Lookup extends ComponentBase
         $zip = post('zip');
         $location = array($address, $city, $state, $zip);
         $coordinates = Address::parseNewAddress($location);//should handle both cached and non-cashed now
-        $legislatorRecord = null;//instanciate here for scope purposes - we'll be using it soon
-
-        //so we have our address added in successfully now, time to dig deeper,
-        // if the district has been set, that tells us we've been here before and can
-        // just query for our legislators, else we'll need to go to the api for them
-        if (!isset($coordinates->district)) {
-            $legislators = Legislator::getJSONLegislatorsFromAddress($coordinates->lat, $coordinates->long);
-
+        $legislatorRecord = null;//instanciate here for scope purposes
+        if ($coordinates->districtExists()) {//if we don't have a district associated with our address, then we have no legislators yet
+            $lat = $coordinates->getLat();
+            $long = $coordinates->getLong();
+            $legislators = Legislator::getJSONLegislatorsFromCoords($lat, $long);//pull from API
+            //returning empty at this time!!!!!!
+            print_r($legislators);
+            var_dump($legislators);
             foreach ($legislators as $legislator) {
                 $legislatorRecord = Legislator::UUID($legislator->id)->get();
-
-                if (!$legislatorRecord) {
+                if (!(isset($legislatorRecord))) {
                     $legislatorRecord = Legislator::getLegislatorFromJSON($legislator);
                 }
-            }
+            }//endfor
+            print_r($legislators);
+            var_dump($legislators);
+            $coordinates->district = json_decode(reset($legislators))->{'district'};//and assign the district value to cross refrence next time
+        }//endif
+        else {//else we already have the records and just have to grab them from the cache
+            $legislatorRecord = Legislator::getLegislatorByDistrict($coordinates->district);
         }
         unset($legislators);
         $legislators = array();
-        if ($legislatorRecord) {
-            $districtIds = Address::district($legislatorRecord->district);
+        var_dump($legislatorRecord);//null still, so print_r doesn't catch it
+        print_r($legislatorRecord);
+        //so if were here and legislatorRecord is undefined, all this fails anyways
+        //so lets define a new block to populate it
+
+        if (!(is_null($legislatorRecord->district))) {
+            $districtIds = Address::district($legislatorRecord->district);//well, whats here
             foreach ($districtIds->get() as $districtIndex) {
                 $district = $districtIndex->representative_id;
                 $legislator = Legislator::district($district)->first();
                 array_push($legislators, $legislator);
             }
         }
-        displayResults($legislators);
-        //DEBUGIN
-        $leg = Legislator::create([
-            'uuid'=> "WA001",
-            'state'=> "WA",
-            'district'=> "9",
-            'first_name'=> "Bob",
-            'last_name'=> "Bobson",
-            'party'=> "R",
-            'email'=> "bob@senate.com",
-            'photo_url'=> "http://imgur.com/photo.png",
-            'office_phone'=> "509-888-5700",
-            'url'=> "http://wastate.gov"
-        ]);
-        $leg->save();
-        array_push($legislators, $leg);
-        echo $legislators;
-        echo $leg;
         $this->legislators=$legislators;//FOR TRUCKS SAKE THIS TOOK FOREVER, HAVE TO EXPLICITLY ASSIGN THE VALUE BACK TO THE GLOBAL VARIABLE
-        //end debuggin
         return $legislators;
     }
 
@@ -115,19 +106,7 @@ class Lookup extends ComponentBase
         if($this->properties['visibleOutput']=='visible') {
             $this->legislators = $legislators;
         } else {
-            return Legislator::create([
-                'uuid'=> "WA001",
-                'state'=> "WA",
-                'district'=> "9",
-                'first_name'=> "Bob",
-                'last_name'=> "Bobson",
-                'party'=> "R",
-                'email'=> "bob@senate.com",
-                'photo_url'=> "http://imgur.com/photo.png",
-                'office_phone'=> "509-888-5700",
-                'url'=> "http://wastate.gov"
-            ]);
-            //return $legislators;
+            return $legislators;
         }
     }
 
@@ -148,17 +127,18 @@ class Lookup extends ComponentBase
         return infoFromString($street_address);
     }
     /**
-     * @param $address string303
+     * @param $address string
      * @return JSON from API to get
      */
     public function infoFromString($address) {
-        return Legislator::getJSONLegislatorsFromAddress($address);
+        $coords = Address::getCoordsFromAPI($address);
+        return Legislator::getJSONLegislatorsFromCoords($oords[0], $coords[1]);
     }
 
     /**
      * Wrapper method
      * @param $address
-     * @return mixed
+     * @return JSON with legislator information
      */
     public function info($address) {
         return infoFromString($address);
