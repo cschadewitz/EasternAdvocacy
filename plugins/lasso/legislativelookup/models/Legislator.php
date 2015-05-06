@@ -66,7 +66,8 @@ class Legislator extends Model
      */
     public static function getLegislatorsFromDistrict($district) {
         $json = file_get_contents(htmlspecialchars_decode(sprintf(
-            "https://openstates.org/api/v1/legislators/?district=%s&apikey=%s",
+        //"https://openstates.org/api/v1/legislators/?district=%s&apikey=%s", saving original here just in case
+            Settings::get('sunlight_district_api'),
             $district,
             Settings::get('sunlight_id')
         )));
@@ -78,13 +79,16 @@ class Legislator extends Model
      * @param $long - Longitude to check
      * @return mixed - JSON of legislator data for address provided
      */
-    public static function getJSONLegislatorsFromAddress($lat, $long) {
+    public static function getJSONLegislatorsFromCoords($lat, $long) {
         $json = file_get_contents(htmlspecialchars_decode(sprintf(
-            "http://openstates.org/api/v1/legislators/geo/?lat=%s&long=%s&apikey=%s",
+        //"http://openstates.org/api/v1/legislators/geo/?lat=%s&long=%s&apikey=%s", //saving original here just in case
+            Settings::get('sunlight_geo_api'),
             $lat,
             $long,
             Settings::get('sunlight_id')
         )));
+        print_r($json);
+        var_dump($json);//we're getting nothing back...
         return json_decode($json);
     }
 

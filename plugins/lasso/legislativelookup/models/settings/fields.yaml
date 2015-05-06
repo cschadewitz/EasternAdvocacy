@@ -12,7 +12,19 @@ fields:
         label: Sunlight API Key
         comment: Sunlight OpenStates API Key
         type: text
+    sunlight_geo_api:
+        label: Sunlight API Geo-Lookup URL Address
+        comment: Sunlight OpenStates API Geo lookup URL
+        type: text
+    sunlight_district_api:
+        label: Sunlight API Distruct Lookup URL Address
+        comment: Sunlight OpenStates API district lookup URL
+        type: text
     google_id:
         label: Google API Key
         comment: Google Geocache API Key
+        type: text
+    google_api:
+        label: Google API URL Address
+        comment: Google Geocache API base URL
         type: text

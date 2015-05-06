@@ -44,15 +44,15 @@ class Address extends Model
         if(Address::checkRecord($street_address)) {
             return Address::parseAddress($street_address);
         }
-        $street = "address=";
-        $street = $street . ($street_address[0]==null?$street_address[0]:"");
-        $street = $street . ($street_address[1]==null?$street_address[1]:"");
-        $street = $street . ($street_address[2]==null?$street_address[2]:"WA");//default to washington since that's where we are
-        $street = $street . ($street_address[3]==null?$street_address[3]:"");
+        $street = "";
+        $street = $street . (isset($street_address[0])?$street_address[0]:"");
+        $street = $street . (isset($street_address[1])?$street_address[1]:"");
+        $street = $street . (isset($street_address[2])?$street_address[2]:"");
+        $street = $street . (isset($street_address[3])?$street_address[3]:"");
 
         $results = Address::getCoordsFromAPI($street);
-        $lat=round($results[0], 1);//normalized here
-        $long=round($results[1], 1);
+        $lat=round($results[0], 2);//normalized here, too many digits and the sunlight api fails
+        $long=round($results[1], 2);
 
         $newAddress = Address::create([
             'address' => $street_address[0],
@@ -60,38 +60,76 @@ class Address extends Model
             'state' => $street_address[2],
             'zip' => $street_address[3],
             'lat' => $lat,
-            'long' => $long
+            'long' => $long,
+            'district' => null
         ]);
         $newAddress->save();
         return $newAddress;
     }
     public static function parseAddress($street_address) {
-        return Address::address($street_address[0])->city($street_address[1])->state($street_address[2])->zip($street_address[3])->get();
+        return Address::address($street_address[0])
+            ->city($street_address[1])
+            ->state($street_address[2])
+            ->zip($street_address[3])
+            ->first();
     }
     public static function getCoordsFromAPI($street) {
         $json = file_get_contents(sprintf(
-            "https://maps.googleapis.com/maps/api/geocode/json?%s&sensor=false&key=%s",
-            $street,
+        //"https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false&key=%s",
+        //original API string, now stored in settings for ease of update, keeping here for now so it has a backup location
+            Settings::get('google_api'),
+            urlencode($street),
             Settings::get('google_id')
         ));
         $json = json_decode($json);
-        $xlat = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-        $xlong = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+        if(!($json->{'status'} == 'OK')){
+            throw new Exception($json->{'status'});//TODO - make sure this works - it doesn't but it catches properly :)
+        }
+        $json = $json->{'results'};
+        $json = (is_array($json)?reset($json):$json);//if is an array, return the first element, else just hand back
 
-        $results = array($xlat, $xlong);
+        $lat = $json->{'geometry'}->{'location'}->{'lat'};
+        $long = $json->{'geometry'}->{'location'}->{'lng'};
+
+        $results = array($lat, $long);
         return $results;
     }
-    public static function checkRecord($street_address) {
-        if(Address::address($street_address[0])->city($street_address[1])->state($street_address[2])->zip($street_address[3])->get()!=null)
+    public static function checkRecord($street_address) {//top down for more specificity
+        $exists=Address::address($street_address[0])->first();
+        if($exists!=null) {
+            $exists=Address::address($street_address[0])->city($street_address[1])->first();
+            if($exists!=null) {
+                $exists=Address::address($street_address[0])->city($street_address[1])->state($street_address[2])->first();
+                if($exists!=null) {
+                    $exists=Address::address($street_address[0])->city($street_address[1])->state($street_address[2])->zip($street_address[3])->first();
+                    if($exists!=null) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
             return false;
-        else
-            return true;
+        }
+    }//i should be killed for this, but the cost of 4 nested if's is less than potentially going out to the API so we deal
+
+    public function districtExists() {
+        return is_null($this->district);
     }
     public function getLat(){
-        return round($this->lat, 1);//normalize here
+        return $this->lat;
     }
     public function getLong(){
-        return round($this->long, 1);
+        return $this->long;
     }
     public function scopeAddress($query, $address) {
         return $query->where('address', '=', $address);
@@ -108,5 +146,4 @@ class Address extends Model
     public function scopeDistrict($query, $district){
         return $query->where('district', '=', $district);
     }
-
 }
