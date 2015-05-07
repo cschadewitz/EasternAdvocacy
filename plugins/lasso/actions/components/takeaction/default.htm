@@ -1,17 +1,37 @@
-<div class="row">
-    <article id="takeaction" class="col-md-8 col-md-offset-2">
-        {% if action is null %}
-            <header><h2>Oh NO!!</h2></header>
+{% if access_status == 'invalid' %}
+	<article class="col-md-8 col-md-offset-2">
+		<header><h2>Invalid URL.</h2></header>
 
-            <p>Invalid URL.</p>
-        {% else %}
+	    <p>Redirecting...</p>
+    </article>
+{% elseif access_status == 'no' %}
+	<article class="col-md-8 col-md-offset-2">
+		<header><h2>You need to login</h2></header>
+
+	    {% component 'account' %}
+	    <p></p>
+    </article>
+{% else %} 
+<div class="row">
+	{% if not action.is_active %}
+		<div class="col-md-8 col-md-offset-2 alert alert-warning">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			This Action is not active.
+		</div>
+	{% endif %}
+    <article id="takeaction" class="col-md-8 col-md-offset-2">        
+        {% if access_status == 'ok' %}{% set fill = true %}{% else %}{% set fill = false %}{% endif %}
             <header><h2>{{ action.title }}</h2></header>
+
+					<img src="{{ action.photo.getPath() }}" class="img-responsive img-thumbnail" >
             <div class="takeaction-header">
 				<h1>{{ action.subtitle }}</h1>
 				<p>{{ action.description }}</p>
 			</div>
 
 			<br>
+
+			{% if action.is_active %}
 
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
@@ -37,18 +57,21 @@
 						</div>
 						<div class="panel-body">
 							<div class="well col-xs-6">
-								<form onsubmit="$(this).request('onTest'); return false;">
+								<form>
 									<div class="form-group">
 									    <label for="name">Name: </label>
-									    <input type="text" class="form-control" id="name" name="name">
+									    <input type="text" class="form-control" id="name" name="name" 
+									    	{% if fill %}value="{{ user.name }}" disabled{% endif %}>
 									</div>
 									<div class="form-group">
 									    <label for="email">Email: </label>
-									    <input type="email" class="form-control" id="email" name="email">
+									    <input type="email" class="form-control" id="email" name="email" 
+									    	{% if fill %}value="{{ user.email }}" disabled{% endif %}>
 									</div>
 									<div class="form-group">
 									    <label for="zipcode">Zip code: </label>
-									    <input type="text" class="form-control" id="zipcode" name="zipcode">
+									    <input type="text" class="form-control" id="zipcode" name="zipcode"
+									    	{% if fill %}value="{{ user.zipcode }}" disabled{% endif %}>
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-success">WRITE CONGRESS</button>
@@ -64,12 +87,7 @@
 					</div>
 				</div>
 			</div>
+			{% endif %}
         {% endif %}
-    </article>
-</div>
-
-<div class="row">
-    <article id="testarea" class="col-md-8 col-md-offset-2">
-        
     </article>
 </div>

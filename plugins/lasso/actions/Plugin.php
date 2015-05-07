@@ -27,7 +27,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Lasso\Actions\Components\TakeAction' => 'takeAction'
+            'Lasso\Actions\Components\TakeAction' => 'takeAction',
+            'Lasso\Actions\Components\Actions' => 'Actions'
         ];
     }
 
