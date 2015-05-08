@@ -38,6 +38,10 @@ class Signatures extends Model
         return $query->where('email', '=', $email)->where('pid', '=', $pid);
     }
 
+    public function scopeDeleteUsers($query, $pid){
+        $query->where('pid', '=', $pid)->delete();
+    }
+
     public function SignatureValid($email, $pid)
     {
         $test = Signatures::EmailPid($email, $pid);

@@ -35,6 +35,7 @@
             //Email effected petitioners
             $util->emailSignatures($this->pid);
             //Delete effected signatures
+            \Lasso\Petitions\Models\Signatures::DeleteUsers($this->pid);
         }
 
         public function scopeTitle($query, $title)
