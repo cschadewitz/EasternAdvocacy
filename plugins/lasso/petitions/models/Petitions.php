@@ -3,6 +3,7 @@
 
     use Model;
     use Str;
+    use Mail;
     use October\Rain\Database\Traits\Sluggable;
 
     class Petitions extends Model
@@ -29,6 +30,13 @@
             $this->slug = Str::slug($this->title);
         }
 
+        public function afterUpdate(){
+            $util = new Utility();
+            //Email effected petitioners
+            $util->emailSignatures($this->pid);
+            //Delete effected signatures
+        }
+
         public function scopeTitle($query, $title)
         {
             return $query->where('title', '=', $title);
@@ -53,4 +61,20 @@
         {
             return $query->where('published', '=', 1);
         }
+    }
+
+    class Utility
+    {
+
+        public function emailSignatures($pid)
+        {
+            $results = \Lasso\Petitions\Models\Signatures::Pid($pid)->get();
+            $petition = \Lasso\Petitions\Models\Petitions::Pid($pid)->first();
+
+            foreach ($results as $r) {
+                $params = ['name' => $r->name, 'email' => $r->email, 'petitionName' => $petition->title, 'slug' => $petition->slug];
+                Mail::sendTo([$r->email => $r->name], 'lasso.petitions::mail.petition_changed', $params);
+            }
+        }
+
     }

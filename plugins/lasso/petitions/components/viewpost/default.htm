@@ -1,4 +1,7 @@
 <div class="petition">
+    {% if petitionInfo is empty %}
+        <h1>Invalid Petition</h1>
+    {% else %}
     <div class="info">
         <h1>Petition</h1>
         {{ petitionInfo.attributes.title }}
@@ -44,4 +47,5 @@
         </ul>
         {{ form_close() }}
     </div>
+    {% endif %}
 </div>

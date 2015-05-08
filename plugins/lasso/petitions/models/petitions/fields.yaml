@@ -18,3 +18,13 @@ fields:
         description: Publish petition right away?
         type: checkbox
         default: true
+    active:
+        label: Petition is currently active?
+        description: Petition is active if goal has not been met
+        type: checkbox
+        default: true
+    goal:
+        label: Petition Goal
+        description: Number of signatures needed
+        type: Number
+        span: left

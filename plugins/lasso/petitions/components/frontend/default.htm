@@ -8,7 +8,8 @@
             <li class="media">
                 <div class="media-body">
                     <h4 class="media-heading post-subject" ><a class="petition-title" href="{{ ['petition'|page, '/', petition.attributes.slug]|join  }}">{{ petition.attributes.title }}</a></h4>
-                    <p class="petition-summary">{{petition.attributes.summary}}<a href="{{ ['petition'|page, '/', petition.attributes.slug]|join }}">Advocate</a></p>
+                    <p class="petition-summary">{{petition.attributes.summary}}</p>
+                    <a href="{{ ['petition'|page, '/', petition.attributes.slug]|join }}">Advocate</a>
                     <p class="petition-date text-right">{{ petition.attributes.created_at|date("m/d/Y") }} - {{ petition.attributes.created_at|date("h:i") }}</p>
                 </div>
             </li>
