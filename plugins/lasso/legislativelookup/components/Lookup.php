@@ -25,13 +25,18 @@ class Lookup extends ComponentBase
                 'options'       => ['visible'=>'Visible', 'json'=>'JSON']
             ]
         ];
-    }
+    }//so depricated
 
     /**
      * array of state Legislators
      * @var array
      */
     public $legislators;
+
+    public function onRun()
+    {
+        $this->addCss('/plugins/lasso/legislativelookup/assets/css/lookup.css');
+    }
 
     /**
      * parseAddress - main method of plugin for parsing the address
@@ -42,59 +47,33 @@ class Lookup extends ComponentBase
         //todo - do this later
         ]);*/
 
-        //STEP 1 - read address
-        //STEP 2 - check cache for address
-            //if not present, add address and query coords
-            //else if present, retrieve coords
-        //STEP 3 - check legislative cache for coords (district?)
-            //if not present querey for legislators
-            //else retrieve legislators
-        //STEP 4 - pass legislators to display()
-
         //STEP 1
         $address = post('address');
         $city = post('city');
         $state = post('state');
         $zip = post('zip');
         $location = array($address, $city, $state, $zip);
-        $coordinates = Address::parseNewAddress($location);//should handle both cached and non-cashed now
+        $coordinates = Address::parseNewAddress($location);
         $legislatorRecord = null;//instanciate here for scope purposes
-        if ($coordinates->districtExists()) {//if we don't have a district associated with our address, then we have no legislators yet
-            $lat = $coordinates->getLat();
-            $long = $coordinates->getLong();
-            $legislators = Legislator::getJSONLegislatorsFromCoords($lat, $long);//pull from API
-            //returning empty at this time!!!!!!
-            print_r($legislators);
-            var_dump($legislators);
-            foreach ($legislators as $legislator) {
-                $legislatorRecord = Legislator::UUID($legislator->id)->get();
-                if (!(isset($legislatorRecord))) {
-                    $legislatorRecord = Legislator::getLegislatorFromJSON($legislator);
+        $legislators = null;//and this
+        if ($coordinates->districtNotExists()) {//if we don't have a district associated with our address, then we have no legislators yet
+            $legislators = Legislator::getJSONLegislatorsFromCoords(
+                $coordinates->getLat(),
+                $coordinates->getLong()
+            );//pull from API
+            foreach (json_decode($legislators) as $legislator) {
+                $legislatorRecord = Legislator::UUID($legislator->{'id'})->first();//check the id of our json against the cache
+                if (is_null($legislatorRecord)) {
+                    $legislatorRecord = Legislator::getLegislatorFromJSON($legislator);//add it
                 }
-            }//endfor
-            print_r($legislators);
-            var_dump($legislators);
-            $coordinates->district = json_decode(reset($legislators))->{'district'};//and assign the district value to cross refrence next time
-        }//endif
-        else {//else we already have the records and just have to grab them from the cache
-            $legislatorRecord = Legislator::getLegislatorByDistrict($coordinates->district);
+            }//endforeach
+            $coordinates->district = $legislatorRecord->district;
+            $coordinates->save();
+        } else {//else we already have the records and just have to grab them from the cache
+            $legislatorRecord = Legislator::getLegislatorByDistrict($coordinates->getDistrict());
         }
-        unset($legislators);
-        $legislators = array();
-        var_dump($legislatorRecord);//null still, so print_r doesn't catch it
-        print_r($legislatorRecord);
-        //so if were here and legislatorRecord is undefined, all this fails anyways
-        //so lets define a new block to populate it
-
-        if (!(is_null($legislatorRecord->district))) {
-            $districtIds = Address::district($legislatorRecord->district);//well, whats here
-            foreach ($districtIds->get() as $districtIndex) {
-                $district = $districtIndex->representative_id;
-                $legislator = Legislator::district($district)->first();
-                array_push($legislators, $legislator);
-            }
-        }
-        $this->legislators=$legislators;//FOR TRUCKS SAKE THIS TOOK FOREVER, HAVE TO EXPLICITLY ASSIGN THE VALUE BACK TO THE GLOBAL VARIABLE
+        $legislators = Legislator::district($coordinates->getDistrict())->get();
+        $this->legislators=$legislators->toArray();
         return $legislators;
     }
 
@@ -115,6 +94,8 @@ class Lookup extends ComponentBase
      * @return JSON from API to get
      */
     public function infoFromObject($address) {
+        if($address->districtExists())
+            return(Legislator::getLegislatorByDistrict($address->district));
         $street_address = array($address->address, $address->city, $address->state, $address->zip);
         return infoFromArray($street_address);
     }
@@ -131,8 +112,8 @@ class Lookup extends ComponentBase
      * @return JSON from API to get
      */
     public function infoFromString($address) {
-        $coords = Address::getCoordsFromAPI($address);
-        return Legislator::getJSONLegislatorsFromCoords($oords[0], $coords[1]);
+        $coords = Address::scopeAddress($address)->get();
+        return Legislator::getJSONLegislatorsFromCoords($coords[0], $coords[1])->get()->toJson();
     }
 
     /**

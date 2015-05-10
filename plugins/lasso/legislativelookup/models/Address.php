@@ -73,26 +73,32 @@ class Address extends Model
             ->zip($street_address[3])
             ->first();
     }
-    public static function getCoordsFromAPI($street) {
-        $json = file_get_contents(sprintf(
-        //"https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false&key=%s",
-        //original API string, now stored in settings for ease of update, keeping here for now so it has a backup location
-            Settings::get('google_api'),
-            urlencode($street),
-            Settings::get('google_id')
-        ));
-        $json = json_decode($json);
-        if(!($json->{'status'} == 'OK')){
-            throw new Exception($json->{'status'});//TODO - make sure this works - it doesn't but it catches properly :)
+    public static function getCoordsFromAPI($street)
+    {
+        try {
+            $json = file_get_contents(sprintf(
+            //"https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false&key=%s",
+            //original API string, now stored in settings for ease of update, keeping here for now so it has a backup location
+                Settings::get('google_api'),
+                urlencode($street),
+                Settings::get('google_id')
+            ));
+            $json = json_decode($json);
+            if (!($json->{'status'} == 'OK')) {
+                throw new Exception($json->{'status'});
+            }
+            $json = $json->{'results'};
+            $json = (is_array($json) ? reset($json) : $json);//if is an array, return the first element, else just hand back
+
+            $lat = $json->{'geometry'}->{'location'}->{'lat'};
+            $long = $json->{'geometry'}->{'location'}->{'lng'};
+
+            $results = array($lat, $long);
+            return $results;
+        } catch (Exception $e) {
+            echo 'Exception: ', e . getMessage(), "\n";
+            return e . getMessage();
         }
-        $json = $json->{'results'};
-        $json = (is_array($json)?reset($json):$json);//if is an array, return the first element, else just hand back
-
-        $lat = $json->{'geometry'}->{'location'}->{'lat'};
-        $long = $json->{'geometry'}->{'location'}->{'lng'};
-
-        $results = array($lat, $long);
-        return $results;
     }
     public static function checkRecord($street_address) {//top down for more specificity
         $exists=Address::address($street_address[0])->first();
@@ -122,7 +128,7 @@ class Address extends Model
         }
     }//i should be killed for this, but the cost of 4 nested if's is less than potentially going out to the API so we deal
 
-    public function districtExists() {
+    public function districtNotExists() {
         return is_null($this->district);
     }
     public function getLat(){
@@ -130,6 +136,9 @@ class Address extends Model
     }
     public function getLong(){
         return $this->long;
+    }
+    public function getDistrict() {
+        return $this->district;
     }
     public function scopeAddress($query, $address) {
         return $query->where('address', '=', $address);

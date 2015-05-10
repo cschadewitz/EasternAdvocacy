@@ -48,11 +48,11 @@ class Legislator extends Model
             'district'=> $json->district,
             'first_name'=> $json->first_name,
             'last_name'=> $json->last_name,
-            'party'=> $json->party,
-            'email'=> $json->email,
-            'photo_url'=> $json->photo_url,
-            'office_phone'=> $json->office_phone,
-            'url'=> $json->url
+            'party'=> isset($json->party)?$json->party:null,
+            'email'=> isset($json->email)?$json->email:null,
+            'photo_url'=> isset($json->photo_url)?$json->photo_url:null,
+            'office_phone'=> isset($json->office_phone)?$json->office_phone:null,
+            'url'=> isset($json->url)?$json->url:null
         ]);
         $legislatorRecord->save();
         return $legislatorRecord;
@@ -64,14 +64,20 @@ class Legislator extends Model
      * @param $district - district we are checkign
      * @return mixed - json data that includes the legislators we are looking for
      */
-    public static function getLegislatorsFromDistrict($district) {
-        $json = file_get_contents(htmlspecialchars_decode(sprintf(
-        //"https://openstates.org/api/v1/legislators/?district=%s&apikey=%s", saving original here just in case
-            Settings::get('sunlight_district_api'),
-            $district,
-            Settings::get('sunlight_id')
-        )));
-        return json_decode($json);
+    public static function getLegislatorsFromDistrict($district)
+    {
+        try {
+            $json = file_get_contents(htmlspecialchars_decode(sprintf(
+            //"https://openstates.org/api/v1/legislators/?district=%s&apikey=%s", saving original here just in case
+                Settings::get('sunlight_district_api'),
+                $district,
+                Settings::get('sunlight_id')
+            )));
+            return json_decode($json);
+        } catch (Exception $e) {
+            echo 'Exception: ', e . getMessage(), "\n";
+            return e . getMessage();
+        }
     }
 
     /**
@@ -80,23 +86,26 @@ class Legislator extends Model
      * @return mixed - JSON of legislator data for address provided
      */
     public static function getJSONLegislatorsFromCoords($lat, $long) {
-        $json = file_get_contents(htmlspecialchars_decode(sprintf(
-        //"http://openstates.org/api/v1/legislators/geo/?lat=%s&long=%s&apikey=%s", //saving original here just in case
-            Settings::get('sunlight_geo_api'),
-            $lat,
-            $long,
-            Settings::get('sunlight_id')
-        )));
-        print_r($json);
-        var_dump($json);//we're getting nothing back...
-        return json_decode($json);
+        try {
+            $json = file_get_contents(htmlspecialchars_decode(sprintf(
+            //"http://openstates.org/api/v1/legislators/geo/?lat=%s&long=%s&apikey=%s", //saving original here just in case
+                Settings::get('sunlight_geo_api'),
+                $lat,
+                $long,
+                Settings::get('sunlight_id')
+            )));
+            return $json;
+        }
+        catch (Exception $e) {
+            echo 'Exception: ', e.getMessage(), "\n";
+            return e.getMessage();
+        }
     }
-
     public static function getLegislatorByUUID($UUID){
-        return Legislator::whereraw('$uuid = ? ', $UUID);
+        return Legislator::where('uuid', '=', $uuid)->first();
     }
     public static function getLegislatorByDistrict($district){
-        return Legislator::whereraw('$district = ? ', $district);
+        return Legislator::where('district', '=', $district)->first();
     }
     public function getUUID(){
         return $this->uuid;
@@ -106,5 +115,8 @@ class Legislator extends Model
     }
     public function scopeUUID($query, $uuid){
         return $query->where('uuid', '=', $uuid);
+    }
+    public function scopeJSON($query) {
+        return json_encode($query->get());
     }
 }
