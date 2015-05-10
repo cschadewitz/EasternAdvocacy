@@ -2,3 +2,15 @@
     width: 60px;
     height: 70px;
 }
+.lasso-lookup-city-field {
+    width: 57%;
+}
+.lasso-lookup-state-field {
+    width: 17%;
+}
+.lasso-lookup-zip-field {
+    width: 26%;
+}
+.lasso-lookup-area-fields {
+    display: inline-block;
+}
