@@ -2,24 +2,32 @@
 
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
+use Twig;
 
 class Actions extends ComponentBase
 {
-
     public function componentDetails()
     {
         return [
             'name'        => 'Actions Component',
-            'description' => 'No description provided yet...'
+            'description' => 'Displays active and non-active actions.'
         ];
     }
 
     public function defineProperties()
     {
-        return [];
+        return [
+            'noActionsMessage' => [
+                'title'        => 'No Actions Message',
+                'description'  => 'Message to be displayed if no actions are found',
+                'type'         => 'string',
+                'default'      => 'No actions found'
+            ],
+        ];
     }
 
     public function onRun() {
+
         $this->injectAssets();
 
         $this->assignVars();
@@ -33,8 +41,9 @@ class Actions extends ComponentBase
     }
 
     public function assignVars()
-    {       
-        $actions = Action::with('template', 'photo')->get();
+    {
+        $this->page['noActionsMessage'] = $this->property('noActionsMessage');
+        $actions = Action::with('template', 'photo')->orderBy('is_active', 'desc')->get();
         $this->page['actions'] = $actions;
     }
 

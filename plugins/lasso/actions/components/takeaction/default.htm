@@ -3,6 +3,8 @@
 		<header><h2>Invalid URL.</h2></header>
 
 	    <p>Redirecting...</p>
+
+	    <meta http-equiv="refresh" content="0; url={{ basePath | app }}/contribute" />
     </article>
 {% elseif access_status == 'no' %}
 	<article class="col-md-8 col-md-offset-2">
@@ -56,32 +58,36 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<div class="well col-xs-6">
+							<div class="well">
 								<form>
-									<div class="form-group">
-									    <label for="name">Name: </label>
-									    <input type="text" class="form-control" id="name" name="name" 
-									    	{% if fill %}value="{{ user.name }}" disabled{% endif %}>
-									</div>
-									<div class="form-group">
-									    <label for="email">Email: </label>
-									    <input type="email" class="form-control" id="email" name="email" 
-									    	{% if fill %}value="{{ user.email }}" disabled{% endif %}>
-									</div>
-									<div class="form-group">
-									    <label for="zipcode">Zip code: </label>
-									    <input type="text" class="form-control" id="zipcode" name="zipcode"
-									    	{% if fill %}value="{{ user.zipcode }}" disabled{% endif %}>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+											    <label for="name">Name: </label>
+											    <input type="text" class="form-control" id="name" name="name" 
+											    	{% if fill %}value="{{ user.name }}" {% if user.name is not empty %}disabled{% endif %}{% endif %} required>
+											</div>
+											<div class="form-group">
+											    <label for="email">Email: </label>
+											    <input type="email" class="form-control" id="email" name="email" 
+											    	{% if fill %}value="{{ user.email }}"  {% if user.email is not empty %}disabled{% endif %}{% endif %} required>
+											</div>
+											<div class="form-group">
+											    <label for="zipcode">Zip code: </label>
+											    <input type="text" class="form-control" id="zipcode" name="zipcode"
+											    	{% if fill %}value="{{ user.zipcode }}" {% if user.zipcode is not empty %}disabled{% endif %}{% endif %} required>
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+											    <div id="message">{{ action.template.content_html | raw }}</div>
+											</div>
+										</div>
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-success">WRITE CONGRESS</button>
 									</div>
 								</form>
-							</div>
-							<div class="col-xs-6">
-								<h2>{{ action.template.subject }}</h2>
-								{{ action.template.content_html | striptags | raw [:200]}}...
-								 <a href="#">Read the letter</a>
 							</div>
 						</div>
 					</div>
