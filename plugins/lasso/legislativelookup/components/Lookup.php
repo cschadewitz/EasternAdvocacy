@@ -3,6 +3,8 @@
 use Cms\Classes\ComponentBase;
 use Lasso\LegislativeLookup\Models\Address;
 use Lasso\LegislativeLookup\Models\Legislator;
+use Validator;
+use ValidationException;
 
 class Lookup extends ComponentBase
 {
@@ -33,26 +35,38 @@ class Lookup extends ComponentBase
      */
     public $legislators;
 
+    /**
+     * onRun - runs at load time, after page and layout have loaded, add our CSS for formatting
+     */
     public function onRun()
     {
         $this->addCss('/plugins/lasso/legislativelookup/assets/css/lookup.css');
     }
 
     /**
-     * parseAddress - main method of plugin for parsing the address
+     * parseAddress - main method of plugin for parsing the address, takes a
+     * bit more since our models are generated here, and we need to tie the
+     * districts to the addresses for caching the next time we search
      * @return array|mixed
      */
     public function onParseAddress() {
-        /*Validator::create([
-        //todo - do this later
-        ]);*/
-
-        //STEP 1
         $address = post('address');
         $city = post('city');
         $state = post('state');
         $zip = post('zip');
         $location = array($address, $city, $state, $zip);
+
+        $rules = [];
+        $rules['address'] = 'alpha_dash';
+        $rules['city'] = 'alpha_dash';
+        $rules['state'] = 'size:2';
+        $rules['zip'] = 'numerical:5';
+
+        $validation = Validator::make($location, $rules);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
+
         $coordinates = Address::parseNewAddress($location);
         $legislatorRecord = null;//instanciate here for scope purposes
         $legislators = null;//and this
@@ -70,28 +84,22 @@ class Lookup extends ComponentBase
             $coordinates->district = $legislatorRecord->district;
             $coordinates->save();
         } else {//else we already have the records and just have to grab them from the cache
-            $legislatorRecord = Legislator::getLegislatorByDistrict($coordinates->getDistrict());
+            $legislatorRecord = Legislator::getLegislatorByDistrict(
+                $coordinates->getDistrict(),
+                $coordinates->getState()
+            );
         }
-        $legislators = Legislator::district($coordinates->getDistrict())->get();
+        $legislators = Legislator::district(
+            $coordinates->getDistrict())
+            ->state($coordinates->getState())
+            ->get();
         $this->legislators=$legislators->toArray();
         return $legislators;
     }
 
     /**
-     * @param $legislators
-     * @return mixed
-     */
-    public function displayResults($legislators) {
-        if($this->properties['visibleOutput']=='visible') {
-            $this->legislators = $legislators;
-        } else {
-            return $legislators;
-        }
-    }
-
-    /**
      * @param $address object with coordinates found
-     * @return JSON from API to get
+     * @return JSON legislator records
      */
     public function infoFromObject($address) {
         if($address->districtExists())
@@ -101,15 +109,15 @@ class Lookup extends ComponentBase
     }
     /**
      * @param $address array with street address
-     * @return JSON from API to get
+     * @return JSON legislator records
      */
     public function infoFromArray($address) {
         $street_address = $address[0] . $address[1] . $address[2] . $address[3];
         return infoFromString($street_address);
     }
     /**
-     * @param $address string
-     * @return JSON from API to get
+     * @param $address string containing address
+     * @return JSON with legislator information, checking cache first
      */
     public function infoFromString($address) {
         $coords = Address::scopeAddress($address)->get();
@@ -117,8 +125,8 @@ class Lookup extends ComponentBase
     }
 
     /**
-     * Wrapper method
-     * @param $address
+     * Wrapper method, see infoFromString()
+     * @param $address - string containing address
      * @return JSON with legislator information
      */
     public function info($address) {
