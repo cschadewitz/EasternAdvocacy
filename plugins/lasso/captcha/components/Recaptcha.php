@@ -1,7 +1,7 @@
 <?php namespace Lasso\Captcha\Components;
 
 use Cms\Classes\ComponentBase;
-use Lasso\Advocate\Models\Settings;
+use Lasso\Captcha\Models\Settings;
 
 class Recaptcha extends ComponentBase
 {
