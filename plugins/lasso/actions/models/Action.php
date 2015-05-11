@@ -39,4 +39,17 @@ class Action extends Model
         'photo' => ['System\Models\File']];
     public $attachMany = [];
 
+    /**
+     * Validation rules
+     */
+
+    use \October\Rain\Database\Traits\Validation;
+
+    public $rules = [
+        'title' => 'required|between:4,77',
+        'subtitle' => 'required|between:4,77',
+        'description' => 'required',
+        'template' => 'required'
+    ];
+
 }

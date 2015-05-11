@@ -1,3 +1,6 @@
 1.0.1: 
     - First version of Actions
     - create_actions_table.php
+1.0.2:
+    - Actions seeder
+    - seed_actions_table.php
