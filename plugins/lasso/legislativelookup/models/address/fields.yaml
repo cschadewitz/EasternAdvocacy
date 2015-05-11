@@ -1,0 +1,29 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    address:
+        label: address
+        type: text
+    city:
+        label: city
+        type: text
+    state:
+        label: state
+        type: text
+    zip:
+        label: zip
+        type: text
+    lat:
+        label: lat
+        type: float
+    long:
+        label: long
+        type: float
+    district:
+        label: district
+        type: text

@@ -3,13 +3,12 @@ url = "/findreps"
 layout = "default"
 hidden = "0"
 
-[zip]
-userID = "edf3725acca94c9a897416cd3517f08e"
+[lookup]
 visibleOutput = "visible"
 ==
 <div class="row">
     <article class="advocacy-article">
         {% partial 'findreps.htm' %}
-        {%component 'zip' %}
+        {% component 'lookup' %}
     </article>
 </div>
