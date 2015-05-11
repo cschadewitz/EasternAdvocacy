@@ -50,7 +50,7 @@ class Legislator extends Model
             'last_name'=> $json->last_name,
             'party'=> isset($json->party)?$json->party:null,
             'email'=> isset($json->email)?$json->email:null,
-            'photo_url'=> isset($json->photo_url)?$json->photo_url:null,
+            'photo_url'=> empty($json->photo_url)?"/plugins/rainlab/user/assets/images/no-user-avatar.png":$json->photo_url,
             'office_phone'=> isset($json->office_phone)?$json->office_phone:null,
             'url'=> isset($json->url)?$json->url:null
         ]);
@@ -64,19 +64,20 @@ class Legislator extends Model
      * @param $district - district we are checkign
      * @return mixed - json data that includes the legislators we are looking for
      */
-    public static function getLegislatorsFromDistrict($district)
+    public static function getLegislatorsFromDistrict($district, $state)
     {
         try {
             $json = file_get_contents(htmlspecialchars_decode(sprintf(
-            //"https://openstates.org/api/v1/legislators/?district=%s&apikey=%s", saving original here just in case
+            //"https://openstates.org/api/v1/legislators/?district=%s&state=%s&apikey=%s", //saving original here just in case
                 Settings::get('sunlight_district_api'),
                 $district,
+                $state,
                 Settings::get('sunlight_id')
             )));
             return json_decode($json);
         } catch (Exception $e) {
-            echo 'Exception: ', e . getMessage(), "\n";
-            return e . getMessage();
+            echo 'Exception: ', $e->getMessage(), "\n";
+            return $e->getMessage();
         }
     }
 
@@ -97,10 +98,14 @@ class Legislator extends Model
             return $json;
         }
         catch (Exception $e) {
-            echo 'Exception: ', e.getMessage(), "\n";
-            return e.getMessage();
+            echo 'Exception: ', $e->getMessage(), "\n";
+            return $e->getMessage();
         }
     }
+
+    /*
+     * get and scope methods for use, instance and statics
+     */
     public static function getLegislatorByUUID($UUID){
         return Legislator::where('uuid', '=', $uuid)->first();
     }
@@ -112,6 +117,9 @@ class Legislator extends Model
     }
     public function scopeDistrict($query, $district){
         return $query->where('district', '=', $district);
+    }
+    public function scopeState($query, $state) {
+        return $query->where('state', '=', $state);
     }
     public function scopeUUID($query, $uuid){
         return $query->where('uuid', '=', $uuid);

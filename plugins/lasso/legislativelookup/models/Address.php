@@ -1,6 +1,7 @@
 <?php namespace Lasso\LegislativeLookup\Models;
 
 use Model;
+use Exception;
 
 /**
  * Address Model
@@ -66,6 +67,11 @@ class Address extends Model
         $newAddress->save();
         return $newAddress;
     }
+
+    /**
+     * @param $street_address - array with the components of the inputed street address
+     * @return mixed - instance of Address object at the specified address
+     */
     public static function parseAddress($street_address) {
         return Address::address($street_address[0])
             ->city($street_address[1])
@@ -73,6 +79,11 @@ class Address extends Model
             ->zip($street_address[3])
             ->first();
     }
+
+    /**
+     * @param $street - String of street address
+     * @return array|string - Geolocated coordinates from API
+     */
     public static function getCoordsFromAPI($street)
     {
         try {
@@ -96,10 +107,15 @@ class Address extends Model
             $results = array($lat, $long);
             return $results;
         } catch (Exception $e) {
-            echo 'Exception: ', e . getMessage(), "\n";
-            return e . getMessage();
+            echo 'Exception: ', $e->getMessage(), "\n";
+            return $e->getMessage();
         }
     }
+
+    /**
+     * @param $street_address - array of street address compnents
+     * @return bool - whether or not the address is in our records
+     */
     public static function checkRecord($street_address) {//top down for more specificity
         $exists=Address::address($street_address[0])->first();
         if($exists!=null) {
@@ -126,11 +142,18 @@ class Address extends Model
         else {
             return false;
         }
-    }//i should be killed for this, but the cost of 4 nested if's is less than potentially going out to the API so we deal
+    }//The cost of 4 nested if's is less than potentially going out to the API so we'll do it
 
+    /**
+     * @return bool - if the district has not been set yet
+     */
     public function districtNotExists() {
         return is_null($this->district);
     }
+
+    /*
+     * getters and scope functions for use
+     */
     public function getLat(){
         return $this->lat;
     }
@@ -139,6 +162,9 @@ class Address extends Model
     }
     public function getDistrict() {
         return $this->district;
+    }
+    public function getState() {
+        return $this->state;
     }
     public function scopeAddress($query, $address) {
         return $query->where('address', '=', $address);
