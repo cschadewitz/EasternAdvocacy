@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    recaptcha_site_key:
+        label: Site Key
+        description: The public site key from ReCaptcha
+
+    recaptcha_secret_key:
+        label: Secret Key
+        description: The secret key from ReCaptcha

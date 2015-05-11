@@ -6,7 +6,6 @@ use Lasso\Captcha\Components\Recaptcha;
 
 class UnsubscribeForm extends ComponentBase
 {
-    private $captchaSecret = '6LeBkgUTAAAAAPumAWlBZUCdoOGNdY8IugX6B3Ia';
 
     public function componentDetails()
     {
@@ -51,9 +50,6 @@ class UnsubscribeForm extends ComponentBase
 
         // Change the next bit to use the verify function in the Recaptcha plugin
         $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', [$captcha]);
-
-        $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
-        $captchaRequest->addPostFields(array('secret'=>$this->captchaSecret, 'response'=>$captcha));
 
         if ($captchaResponse == false) {
             throw new \Exception(sprintf('Could not verify Captcha'));

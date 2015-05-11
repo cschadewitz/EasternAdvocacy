@@ -1,6 +1,7 @@
 <?php namespace Lasso\Captcha\Components;
 
 use Cms\Classes\ComponentBase;
+use Lasso\Advocate\Models\Settings;
 
 class Recaptcha extends ComponentBase
 {
@@ -15,27 +16,7 @@ class Recaptcha extends ComponentBase
 
     public function defineProperties()
     {
-        return [
-            'sitekey' => [
-                'title'             => 'Site Key',
-                'description'       => 'Public key from recaptcha',
-                'type'              => 'string',
-                'required'          => true,
-            ],
-            'secretkey' => [
-                'title'             => 'Secret Key',
-                'description'       => 'Secret key from recaptcha',
-                'type'              => 'string',
-                'required'          => true,
-            ]
-        ];
-    }
-
-    public function registerComponents()
-    {
-        return [
-            'Lasso\Captcha\Components\Recaptcha' => 'recaptcha'
-        ];
+        return [];
     }
 
     public function onInit()
@@ -49,20 +30,21 @@ class Recaptcha extends ComponentBase
     {
     }
 
+
     public function siteKey()
     {
-        return $this->property('sitekey');
+        return Settings::get('recaptcha_site_key');
     }
 
-    public function secretKey()
+    private function secretKey()
     {
-        return $this->property('secretkey');
+        return Settings::get('recaptcha_secret_key');
     }
 
     public function verify($recaptchaResponse)
     {
         $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
-        $captchaRequest->addPostFields(array('secret'=>$this->property('secretkey'), 'response'=>$recaptchaResponse));
+        $captchaRequest->addPostFields(array('secret'=>secretKey(), 'response'=>$recaptchaResponse));
 
         try {
             $captchaResponse = json_decode($captchaRequest->send()->getBody());
