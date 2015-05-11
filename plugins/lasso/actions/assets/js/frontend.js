@@ -1,5 +1,6 @@
-$('form').request('onTest', {
-    success: function(){
-        console.log('Finished!')
-    }
-})
+// Carousel Auto-Cycle
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 6000
+    })
+  });

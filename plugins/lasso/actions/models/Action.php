@@ -35,7 +35,21 @@ class Action extends Model
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
-    public $attachOne = [];
+    public $attachOne = [
+        'photo' => ['System\Models\File']];
     public $attachMany = [];
+
+    /**
+     * Validation rules
+     */
+
+    use \October\Rain\Database\Traits\Validation;
+
+    public $rules = [
+        'title' => 'required|between:4,77',
+        'subtitle' => 'required|between:4,77',
+        'description' => 'required',
+        'template' => 'required'
+    ];
 
 }

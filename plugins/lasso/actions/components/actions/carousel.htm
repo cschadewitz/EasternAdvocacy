@@ -1,0 +1,44 @@
+<div class="carousel slide" id="myCarousel">
+        <div class="carousel-inner">
+        {% set i = 0 %}
+		{% for action in actions %}
+            {% if i % 4 == 0 %} 
+            	<div class="item {% if i == 0 %}active{% endif %}">
+                    <ul class="thumbnails">
+            {% endif %}
+                        <li class="col-sm-3">
+    						<div class="fff">
+								<div class="thumbnail">
+									<a href="{{ basePath | app }}/take-action/{{ action.id }}">
+										<img src="{{ action.photo.getPath() != null? action.photo.getPath() : 'http://placehold.it/360x240' }}" alt="{{ action.title }}">
+										</a>
+								</div>
+								<div class="caption">
+									<h4><a href="{{ basePath | app }}/take-action/{{ action.id }}">{{ action.title }}</a></h4>
+									<h5>{{ action.subtitle }}</h5>
+									<a class="btn btn-mini" href="{{ basePath | app }}/take-action/{{ action.id }}">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+            {% if i % 4 == 3 %}
+                    </ul>
+              </div>
+            {% endif %}
+           	{% set i = i + 1 %}
+        {% endfor %}
+        {% if i % 4 != 3 %}
+                </ul>
+            </div>
+        {% endif %}
+
+        </div>
+        <nav>
+			<ul class="control-box pager">
+				<li><a data-slide="prev" href="#myCarousel" class=""><i class="icon-chevron-left"></i></a></li>
+				<li><a data-slide="next" href="#myCarousel" class=""><i class="icon-chevron-right"></i></li>
+			</ul>
+		</nav>
+	   <!-- /.control-box -->   
+                              
+    </div><!-- /#myCarousel -->
+    </article>
