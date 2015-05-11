@@ -1,7 +1,7 @@
 <?php
 namespace Lasso\Actions\Updates;
 
-require_once '/srv/october/vendor/fzaninotto/faker/src/autoload.php';
+require_once getcwd().'/vendor/fzaninotto/faker/src/autoload.php';
 use Faker;
 use Seeder;
 use Lasso\Actions\Models\Action;

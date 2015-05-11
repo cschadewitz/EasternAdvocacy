@@ -43,7 +43,7 @@ class Actions extends ComponentBase
     public function assignVars()
     {
         $this->page['noActionsMessage'] = $this->property('noActionsMessage');
-        $actions = Action::with('template', 'photo')->orderBy('is_active', 'desc')->get();
+        $actions = Action::with('template', 'photo')->orderBy('is_active', 'desc')->orderBy('created_at', 'desc')->get();
         $this->page['actions'] = $actions;
     }
 
