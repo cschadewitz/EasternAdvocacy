@@ -6,5 +6,13 @@ hidden = "0"
 
 [takeAction]
 actionId = "{{ :actionId }}"
+
+[session]
+security = "all"
+redirect = "take-action"
+
+[account]
+redirect = "take-action"
+paramCode = "code"
 ==
 {% component 'takeAction' %}

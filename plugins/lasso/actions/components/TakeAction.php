@@ -2,7 +2,8 @@
 
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
-use Lasso\ZipLookup\Components\Zip;
+//use Lasso\LegislativeLookup\Components\Lookup;
+use Auth;
 
 class TakeAction extends ComponentBase {
 
@@ -24,13 +25,49 @@ class TakeAction extends ComponentBase {
 	}
 
 	public function onRun() {
-		$zip = new Zip;
+		$this->injectAssets();
+
+		$this->assignVars();
+
+		//$lookup = new Lookup;
+		//$this->page['reps'] = $lookup->info('99004');
+	}
+
+
+	public function injectAssets()
+	{
 		$this->addCss('/plugins/lasso/actions/assets/css/frontend.css');
 		$this->addJs('/plugins/lasso/actions/assets/js/frontend.js');
+	}
+
+	public function assignVars()
+	{		
 		$action = Action::with('template')->find($this->property('actionId'));
+		$this->page['access_status'] = $this->checkAccessStatus($action);
 		$this->page['action'] = $action;
-		$this->page['reps'] = $this->lookupReps('eastern washington university'); //$zip->info('99004');
-		//$this->page['debug'] = $this->lookupReps('99004');
+	}
+
+	private function checkAccessStatus($action)
+	{
+		if(!is_null($action))
+		{
+			if($action->require_user)
+			{
+				if(Auth::check())
+					return 'ok';
+				else
+					return 'no';
+			}
+			else
+			{
+				if(Auth::check())
+					return 'ok';
+				else
+					return 'sub';
+			}
+		}
+		else
+			return 'invalid';
 	}
 
 	public function lookupReps($address) {

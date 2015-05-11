@@ -1,0 +1,60 @@
+<div class="row">
+    <article class="col-md-8 col-md-offset-2">
+    <header><h2>Actions</h2></header>
+
+    <div class="well">
+    <h3>Take Action!</h3>
+    Contribute and help us achieve our goals by taking action!<br>
+    You can take action and contact your representatives by clicking on the Actions below.
+    </div>
+        
+    <div class="carousel slide" id="myCarousel">
+        <div class="carousel-inner">
+        {% set i = 0 %}
+		{% for action in actions %}
+            {% if i % 4 == 0 %} 
+            	<div class="item {% if i == 0 %}active{% endif %}">
+                    <ul class="thumbnails">
+            {% endif %}
+                        <li class="col-sm-3">
+    						<div class="fff">
+								<div class="thumbnail">
+									<a href="{{ basePath | app }}/take-action/{{ action.id }}">
+										<img src="{{ action.photo.getPath() != null? action.photo.getPath() : 'https://placeimg.com/640/480/nature' }}" alt="{{ action.title }}">
+										</a>
+								</div>
+								<div class="caption">
+									<h4><a href="{{ basePath | app }}/take-action/{{ action.id }}">{{ action.title }}</a></h4>
+									<h5>{{ action.subtitle }}</h5>
+									<a class="btn btn-mini" href="{{ basePath | app }}/take-action/{{ action.id }}">» Read More</a>
+                                    {% if action.is_active %}
+                                        <a class="btn btn-small btn-success" disabled><i class="icon-check"></i> Active</a>
+                                    {% else %}
+                                        <a class="btn btn-small btn-danger" disabled><i class="icon-ban"></i> Non-active</a>
+                                    {% endif %}
+								</div>
+                            </div>
+                        </li>
+            {% if i % 4 == 3 %}
+                    </ul>
+              </div>
+            {% endif %}
+           	{% set i = i + 1 %}
+        {% endfor %}
+        {% if i % 4 != 3 %}
+                </ul>
+            </div>
+        {% endif %}
+
+        </div>
+        <nav>
+			<ul class="control-box pager">
+				<li><a data-slide="prev" href="#myCarousel" class=""><i class="icon-chevron-left"></i></a></li>
+				<li><a data-slide="next" href="#myCarousel" class=""><i class="icon-chevron-right"></i></li>
+			</ul>
+		</nav>
+	   <!-- /.control-box -->   
+                              
+    </div><!-- /#myCarousel -->
+    </article>
+</div>

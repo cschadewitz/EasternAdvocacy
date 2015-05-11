@@ -23,6 +23,12 @@ tabs:
             nameFrom: description
             tab: Mail content
             commentAbove: To create more Mail templates, please go to Settings > Mail templates
+        photo:
+            label: Cover photo
+            type: fileupload
+            mode: image
+            tab: Mail content
+            fileTypes: jpeg,jpg,png,gif,bmp
         require_user:
             label: Require user login?
             type: switch
@@ -34,3 +40,4 @@ tabs:
             type: switch
             tab: Options
             commentAbove: Would you like to enable this action as soon as it is saved?
+            default: 0
