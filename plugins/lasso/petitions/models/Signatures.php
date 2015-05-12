@@ -25,6 +25,10 @@ class Signatures extends Model
         'petitions' => ['Lasso\Petitions\Models\Petitions'],
     ];
 
+    function scopePid($query, $pid){
+        return $query->where('pid', '=', $pid);
+    }
+
     function scopeEmail($query, $email)
     {
         return $query->where('email', '=', $email);
@@ -32,6 +36,10 @@ class Signatures extends Model
 
     function scopeEmailPid($query, $email, $pid){
         return $query->where('email', '=', $email)->where('pid', '=', $pid);
+    }
+
+    public function scopeDeleteUsers($query, $pid){
+        $query->where('pid', '=', $pid)->delete();
     }
 
     public function SignatureValid($email, $pid)

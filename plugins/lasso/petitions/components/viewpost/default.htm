@@ -1,40 +1,26 @@
 <div class="petition">
-    <div class="info">
-        <h1>Petition</h1>
-        {{ petitionInfo.attributes.title }}
-        <h2>Cause</h2>
-        {{ petitionInfo.attributes.body|raw}}
-        <h3>Signatures</h3>
-        {{petitionInfo.attributes.signatures}}
-    </div>
-    {% flash %}
-        <div class="alert alert-error">{{ message }}</div>
-    {% endflash %}
+    {% if petitionInfo is empty %}
+        <h1>Invalid Petition</h1>
+    {% else %}
     <div class="form">
         {{ form_open({ request: 'signPetition' }) }}
         <ul class="form-items">
             <li>
                 <h2>Count Me In: </h2>
-                <span class="required_notification">* Denotes Required Field</span>
             </li>
             <li>
-                <label for="name">Name:</label>
-                <input id="name" type="text" value="" name="name" placeholder="John Doe" required/>
+                <input id="name" type="text" value="" name="name" placeholder="Name" required/>
             </li>
             <li>
-                <label for="email">Email:</label>
                 <input id="email" type="email" value="" name="email" placeholder="name@example.com" required pattern="^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$"/>
             </li>
             <li>
-                <label for="mailingaddress">Registered Mailing Address:</label>
                 <input name="mailingaddress" type="text" id="mailingaddress" placeholder="Address" required/>
             </li>
             <li>
-                <label for="city">City:</label>
-                <input type="text" name="city" id="city" placeholder="Cheney" required/>
+                <input type="text" name="city" id="city" placeholder="City" required/>
             </li>
             <li>
-                <label for="zip">Zip Code:</label>
                 <input id="zip" type="text" value="" name="zip" placeholder="Enter zip code" required pattern="^\d{5}(\-?\d{4})?$"/>
             </li>
             <li>
@@ -44,4 +30,14 @@
         </ul>
         {{ form_close() }}
     </div>
+    <div class="info">
+        {{ petitionInfo.attributes.title }}
+        <h2>Goal {{ petitionInfo.attributes.signatures}}/{{ petitionInfo.attributes.goal }}</h2>
+        <h2>Cause</h2>
+        {{ petitionInfo.attributes.body|raw}}
+    </div>
+    {% flash %}
+    <div class="alert alert-error">{{ message }}</div>
+    {% endflash %}
+    {% endif %}
 </div>
