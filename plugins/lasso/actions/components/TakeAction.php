@@ -2,7 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
-//use Lasso\LegislativeLookup\Components\Lookup;
+use Lasso\LegislativeLookup\Components\Lookup;
 use Auth;
 
 class TakeAction extends ComponentBase {
@@ -28,9 +28,6 @@ class TakeAction extends ComponentBase {
 		$this->injectAssets();
 
 		$this->assignVars();
-
-		//$lookup = new Lookup;
-		//$this->page['reps'] = $lookup->info('99004');
 	}
 
 
@@ -45,6 +42,10 @@ class TakeAction extends ComponentBase {
 		$action = Action::with('template')->find($this->property('actionId'));
 		$this->page['access_status'] = $this->checkAccessStatus($action);
 		$this->page['action'] = $action;
+		if(Auth::check() && !empty(Auth::check()->zipcode))
+			$this->page['reps'] = $this->lookupReps(Auth::check()->zipcode);
+		else
+			$this->page['reps'] = null;
 	}
 
 	private function checkAccessStatus($action)
@@ -70,6 +71,28 @@ class TakeAction extends ComponentBase {
 			return 'invalid';
 	}
 
+	public function getRepsHtml($address)
+	{
+		$html = "";
+
+		$reps = $this->lookupReps($address);
+
+        if(count($reps)==0)
+            $html .= 'No representatives found at this zip code.';
+        else
+            foreach($reps as $rep)
+            {
+                $html .= '<div class="col-xs-4">';
+                $html .= '<div class="thumbnail">';
+                $html .= '<img src="http://static.openstates.org/photos/small/'.$rep->id.'.jpg" alt="">';
+                $html .= '<div class="caption">';
+                $html .= '<h5>'.$rep->full_name.'</h5>';
+                $html .= '</div></div></div>';
+            }
+
+		return $html;
+	}
+
 	public function lookupReps($address) {
 		$geo = $this->getGeoCode($address);
 
@@ -79,7 +102,7 @@ class TakeAction extends ComponentBase {
 	}
 
 	public function getGeoCode($address) {
-		$geokey = 'AIzaSyA9spIfrAzZZy84WCQQ_WxQozHHNiupVbE';
+		$geokey = 'AIzaSyB-uT5MX5748RHDpXJ5YgTWD3gWoSC_KbA';
 
 		$json = file_get_contents(sprintf(
 			"https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s",

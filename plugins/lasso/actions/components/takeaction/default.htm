@@ -40,7 +40,7 @@
 					<div class="row panel panel-default">
 						<div class="panel-heading">
 							<h2>Your representatives</h2>
-							<div class="row">
+							<div class="row" id="reps-div">
 							  {% for rep in reps %}    
 							  <div class="col-xs-4">
 							    <div class="thumbnail">
@@ -54,6 +54,8 @@
 							      </div>
 							    </div>
 							  </div>
+							  {% else %}
+							  	<em>Enter your zip code below to view your representatives.</em>
 							  {% endfor %}
 							</div>
 						</div>
@@ -74,7 +76,7 @@
 											</div>
 											<div class="form-group">
 											    <label for="zipcode">Zip code: </label>
-											    <input type="text" class="form-control" id="zipcode" name="zipcode"
+											    <input type="text" class="form-control" id="zipcode" name="zipcode" pattern="\d{5,5}(-\d{4,4})?"
 											    	{% if fill %}value="{{ user.zipcode }}" {% if user.zipcode is not empty %}disabled{% endif %}{% endif %} required>
 											</div>
 										</div>
@@ -97,3 +99,4 @@
         {% endif %}
     </article>
 </div>
+
