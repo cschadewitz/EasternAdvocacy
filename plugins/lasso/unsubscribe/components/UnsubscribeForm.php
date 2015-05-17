@@ -6,6 +6,9 @@ use Lasso\Captcha\Components\Recaptcha;
 
 class UnsubscribeForm extends ComponentBase
 {
+    public $success = null;
+
+    public $message = null;
 
     public function componentDetails()
     {
@@ -32,40 +35,52 @@ class UnsubscribeForm extends ComponentBase
 
     public function onUnsubscribe()
     {
+        // Todo: Research AJAX Stuff for this: https://octobercms.com/docs/cms/ajax#components-ajax-handlers
         $email = post('email');
-        $zip = post('zip');
         $captcha = post('g-recaptcha-response');
 
-        if ( empty($email) || empty($zip))
-            throw new \Exception(sprintf('Please enter your email address.'));
-        if ( empty($zip) )
-            throw new \Exception(sprintf('Please enter your zip code.'));
+        if ( empty($email) )
+            return throwError('Please enter your email address.');
         if ( empty($captcha))
-            throw new \Exception(sprintf('Please enter the Captcha'));
+            return throwError('Please enter the Captcha');
 
-        $postData = [
-            "email" => $email,
-            "zip"   => $zip
-        ];
-
-        // Change the next bit to use the verify function in the Recaptcha plugin
         $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', [$captcha]);
 
-        if ($captchaResponse == false) {
-            throw new \Exception(sprintf('Could not verify Captcha'));
-        }
+        if ($captchaResponse == false)
+            return throwError('Could not verify Captcha');
 
-        $user = Subscribe::whereRaw('email = ? and zip = ?', array($email, $zip));
+        $unsubResponse = Event::fire('lasso.unsubscribe.unsubscribe', $email);
 
-        if ($user->count() == 0) {
-            // Throw some error page
-            throw new \Exception(sprintf("The entered email or zip did not match our records."));
-        }
-
-        $user->delete();
+        if (!$unsubResponse)
+            return throwError("The entered email or zip did not match our records.");
 
         $this->success = true;
         $this->message = "You have been successfully unsubscribed from the mailing list.";
+    }
+
+    private function throwError($message = 'An error occurred')
+    {
+        $this->success = false;
+        $this->message = $message;
+    }
+
+    public function flash($key)
+    {
+        if ($key == "success") {
+            $result = $this->success;
+            $this->success = null;
+            return $result;
+        }
+        if ($key == "message") {
+            $result = $this->message;
+            $this->message = null;
+            return $result;
+        }
+    }
+
+    public function isPostBack()
+    {
+        return !is_null($this->success);
     }
 
 }

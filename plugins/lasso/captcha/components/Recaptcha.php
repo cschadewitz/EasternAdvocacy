@@ -54,6 +54,8 @@ class Recaptcha extends ComponentBase
         } catch (HttpException $ex) {
             return false;
         }
+
+        return true;
     }
 
 }

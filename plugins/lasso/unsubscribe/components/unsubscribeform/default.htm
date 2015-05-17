@@ -1,11 +1,17 @@
 
-
 <div class="form-container">
-    <form class="unsubscribe_form" onsubmit="processForm();return false;" method="post">
+    <form class="unsubscribe_form" data-request="{{__SELF__}}::onUnsubscribe" method="post">
         <ul>
             <li>
-                <h2>Unsubscribe: </h2>
+                <h2>Please enter subscribed email: </h2>
                 <span class="required_notification">* Denotes Required Field</span>
+            </li>
+            <li>
+                {% if __SELF__.flash('success') %}
+                    <span class="form-success">{{ __SELF__.flash('message') }}</span>
+                {% else %}
+                    <span class="form.failure">{{ __SELF__.flash('message') }}</span>
+                {% endif %}
             </li>
             <li>
                 <label for="email">Email*:</label>
@@ -13,12 +19,6 @@
                 <span class="form_hint">Proper format "name@example.com"</span>
                 <span class="email-error-hint">Invalid email</span>
                 <span class="email-error-dup">Email already in use</span>
-            </li>
-            <li>
-                <label for="zip">Zip Code*:</label>
-                <input id="zip" type="text" value="" name="zip" placeholder="Enter zip code" required="required"/>
-                <span class="form_hint">Proper Format "12345 or 12345-6789"</span>
-                <span class="zip-error-hint">Invalid Zip Code</span>
             </li>
             <li>
                 {% component 'recaptcha' %}

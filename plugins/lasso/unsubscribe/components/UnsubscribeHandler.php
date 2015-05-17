@@ -23,6 +23,13 @@ class UnsubscribeHandler extends ComponentBase
         ];
     }
 
+    public function onInit()
+    {
+        Event::listen("lasso.unsubscribe.unsubscribe", function($email) {
+            return unsubscribe($email);
+        });
+    }
+
     public function onRun()
     {
         $email = $this->param('email');
@@ -34,10 +41,8 @@ class UnsubscribeHandler extends ComponentBase
         }
 
         $user = Subscribe::whereRaw('email = ? and uuid = ?', array($email, $uuid));
-        //$user = true;
 
         if ($user->count() == 0) {
-            // Throw some error page
             $this->success = false;
             $this->message = "Email Not Found";
             return;
@@ -47,6 +52,18 @@ class UnsubscribeHandler extends ComponentBase
 
         $this->success = true;
         $this->message = "You have been successfully unsubscribed from the mailing list.";
+    }
+
+    private function unsubscribe($email)
+    {
+        $user = Subscribe::whereRaw('email = ?', array($email));
+
+        if ($user->count() == 0)
+            return false;
+
+        $user->delete();
+
+        return true;
     }
 
 }
