@@ -5,6 +5,7 @@ use Lasso\LegislativeLookup\Models\Address;
 use Lasso\LegislativeLookup\Models\Legislator;
 use Validator;
 use ValidationException;
+use Flash;
 
 class Lookup extends ComponentBase
 {
@@ -50,21 +51,26 @@ class Lookup extends ComponentBase
      * @return array|mixed
      */
     public function onParseAddress() {
-        $address = post('address');
-        $city = post('city');
-        $state = post('state');
-        $zip = post('zip');
-        $location = array($address, $city, $state, $zip);
 
-        $rules = [];
-        $rules['address'] = 'alpha_dash';
-        $rules['city'] = 'alpha_dash';
-        $rules['state'] = 'size:2';
-        $rules['zip'] = 'numerical:5';
+        $location = [
+            'address' => post('address'),
+            'city' => post('city'),
+            'state' => post('state'),
+            'zip' => post('zip')
+        ];
+        $rules = [//turns out alpha_dash doesn't allow for spaces, kinda need those for addresses (and some cities)
+            'address' => 'regex:/^\w+(\s*\w*)*$/',
+            'city' => 'regex:/^\w+(\s*\w*)*$/',
+            'state' => 'alpha|size:2',
+            'zip' => 'regex:/^\d{5}(-\d{4}){0,1}$/'
+        ];
 
         $validation = Validator::make($location, $rules);
         if ($validation->fails()) {
-            throw new ValidationException($validation);
+            var_dump($validation->messages());
+            window.alert($validation->messages());
+            return;
+            //throw new ValidationException($validation);
         }
 
         $coordinates = Address::parseNewAddress($location);
@@ -104,7 +110,10 @@ class Lookup extends ComponentBase
     public function infoFromObject($address) {
         if($address->districtExists())
             return(Legislator::getLegislatorByDistrict($address->district));
-        $street_address = array($address->address, $address->city, $address->state, $address->zip);
+        $street_address = array('address' => $address->address,
+            'city' => $address->city,
+            'state' => $address->state,
+            'zip' => $address->zip);
         return infoFromArray($street_address);
     }
     /**
@@ -112,7 +121,7 @@ class Lookup extends ComponentBase
      * @return JSON legislator records
      */
     public function infoFromArray($address) {
-        $street_address = $address[0] . $address[1] . $address[2] . $address[3];
+        $street_address = $address['address'] . $address['city'] . $address['state'] . $address['zip'];
         return infoFromString($street_address);
     }
     /**
