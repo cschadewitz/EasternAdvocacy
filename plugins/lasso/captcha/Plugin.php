@@ -1,7 +1,7 @@
 <?php namespace Lasso\Captcha;
 
 use System\Classes\PluginBase;
-use Illuminate\Events\Dispatcher;
+use Event;
 
 /**
  * Captcha Plugin Information File
