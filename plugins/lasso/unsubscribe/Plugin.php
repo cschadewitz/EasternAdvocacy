@@ -1,7 +1,7 @@
 <?php namespace Lasso\Unsubscribe;
 
 use System\Classes\PluginBase;
-use Illuminate\Events;
+use Event;
 
 /**
  * Unsubscribe Plugin Information File
