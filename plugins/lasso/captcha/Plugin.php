@@ -1,6 +1,7 @@
 <?php namespace Lasso\Captcha;
 
 use System\Classes\PluginBase;
+use Illuminate\Events\Dispatcher;
 
 /**
  * Captcha Plugin Information File
@@ -43,6 +44,30 @@ class Plugin extends PluginBase
         return [
             'Lasso\Captcha\Components\Recaptcha' => 'recaptcha',
         ];
+    }
+
+    public function boot()
+    {
+        Event::listen("lasso.captcha.recaptcha.verify", function($recaptchaResponse) {
+            return verify($recaptchaResponse);
+        });
+    }
+
+    private function verify($recaptchaResponse)
+    {
+        $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
+        $captchaRequest->addPostFields(array('secret'=>secretKey(), 'response'=>$recaptchaResponse));
+
+        try {
+            $captchaResponse = json_decode($captchaRequest->send()->getBody());
+            if ($captchaResponse->success == false)
+                return false;
+
+        } catch (HttpException $ex) {
+            return false;
+        }
+
+        return true;
     }
 
 }
