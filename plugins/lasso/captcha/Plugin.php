@@ -2,6 +2,7 @@
 
 use System\Classes\PluginBase;
 use Event;
+use Lasso\Captcha\Models\Settings;
 
 /**
  * Captcha Plugin Information File
@@ -49,25 +50,25 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::listen("lasso.captcha.recaptcha.verify", function($recaptchaResponse) {
-            return verify($recaptchaResponse);
-        });
-    }
+            $curl = curl_init('https://www.google.com/recaptcha/api/siteverify');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, array(
+                'secret' => Settings::get('recaptcha_secret_key'),
+                'response' => $recaptchaResponse
+            ));
 
-    private function verify($recaptchaResponse)
-    {
-        $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
-        $captchaRequest->addPostFields(array('secret'=>secretKey(), 'response'=>$recaptchaResponse));
+            $captchaResponse = curl_exec($curl);
 
-        try {
-            $captchaResponse = json_decode($captchaRequest->send()->getBody());
-            if ($captchaResponse->success == false)
+            curl_close($curl);
+
+            if (is_null($captchaResponse) || !is_object($captchaResponse))
                 return false;
+            if ($captchaResponse->success == true)
+                return true;
 
-        } catch (HttpException $ex) {
             return false;
-        }
-
-        return true;
+        });
     }
 
 }

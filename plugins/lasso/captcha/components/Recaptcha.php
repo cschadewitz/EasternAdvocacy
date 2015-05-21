@@ -27,17 +27,8 @@ class Recaptcha extends ComponentBase
     {
     }
 
-
     public function siteKey()
     {
         return Settings::get('recaptcha_site_key');
     }
-
-    private function secretKey()
-    {
-        return Settings::get('recaptcha_secret_key');
-    }
-
-
-
 }

@@ -1,6 +1,7 @@
 <?php namespace Lasso\Unsubscribe;
 
 use System\Classes\PluginBase;
+use Lasso\Subscribe\Models\Subscribe;
 use Event;
 
 /**
@@ -36,20 +37,15 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::listen("lasso.unsubscribe.unsubscribe", function($email) {
-            return unsubscribe($email);
+            $user = Subscribe::whereRaw('email = ?', array($email));
+
+            if ($user->count() == 0)
+                return false;
+
+            $user->delete();
+
+            return true;
         });
-    }
-
-    private function unsubscribe($email)
-    {
-        $user = Subscribe::whereRaw('email = ?', array($email));
-
-        if ($user->count() == 0)
-            return false;
-
-        $user->delete();
-
-        return true;
     }
 
 }

@@ -1,6 +1,6 @@
 
 <div class="form-container">
-    <form class="unsubscribe_form" data-request="{{__SELF__}}::onUnsubscribe" method="post">
+    {{ form_open({ request: 'onUnsubscribe', method: 'post', class: 'unsubscribe_form' }) }}
         <ul>
             <li>
                 <h2>Please enter subscribed email: </h2>
@@ -10,7 +10,7 @@
                 {% if __SELF__.flash('success') %}
                     <span class="form-success">{{ __SELF__.flash('message') }}</span>
                 {% else %}
-                    <span class="form.failure">{{ __SELF__.flash('message') }}</span>
+                    <span class="form-failure">{{ __SELF__.flash('message') }}</span>
                 {% endif %}
             </li>
             <li>
@@ -27,5 +27,5 @@
                 <button type="submit" class="submit">Unsubscribe</button>
             </li>
         </ul>
-    </form>
+    {{ form_close() }}
 </div>

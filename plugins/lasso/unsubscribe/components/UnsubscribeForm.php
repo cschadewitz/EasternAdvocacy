@@ -1,8 +1,8 @@
 <?php namespace Lasso\Unsubscribe\Components;
 
 use Cms\Classes\ComponentBase;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Lasso\Captcha\Components\Recaptcha;
+use Event;
 
 class UnsubscribeForm extends ComponentBase
 {
@@ -39,20 +39,28 @@ class UnsubscribeForm extends ComponentBase
         $email = post('email');
         $captcha = post('g-recaptcha-response');
 
-        if ( empty($email) )
-            return throwError('Please enter your email address.');
-        if ( empty($captcha))
-            return throwError('Please enter the Captcha');
+        if (empty($email)) {
+            $this->throwError('Error: Please enter your email address.');
+            return;
+        }
+        if (empty($captcha)) {
+            $this->throwError('Error: Please enter the Captcha');
+            return;
+        }
 
         $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', [$captcha]);
 
-        if ($captchaResponse == false)
-            return throwError('Could not verify Captcha');
+        if ($captchaResponse == false) {
+            $this->throwError('Error: Could not verify Captcha');
+            return;
+        }
 
         $unsubResponse = Event::fire('lasso.unsubscribe.unsubscribe', $email);
 
-        if (!$unsubResponse)
-            return throwError("The entered email or zip did not match our records.");
+        if (!$unsubResponse) {
+            $this->throwError("Error: The entered email or zip did not match our records.");
+            return;
+        }
 
         $this->success = true;
         $this->message = "You have been successfully unsubscribed from the mailing list.";
@@ -77,10 +85,4 @@ class UnsubscribeForm extends ComponentBase
             return $result;
         }
     }
-
-    public function isPostBack()
-    {
-        return !is_null($this->success);
-    }
-
 }
