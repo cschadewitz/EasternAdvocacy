@@ -1,0 +1,16 @@
+.lasso-lookup-img-thumb {
+    width: 70px;
+    height: 70px;
+}
+.lasso-lookup-city-field {
+    width: 57% !important;
+}
+.lasso-lookup-state-field {
+    width: 17% !important;
+}
+.lasso-lookup-zip-field {
+    width: 26% !important;
+}
+.lasso-lookup-area-fields {
+    white-space: nowrap !important;
+}

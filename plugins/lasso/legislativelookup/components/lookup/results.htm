@@ -1,0 +1,12 @@
+{%set the_legislators = __SELF__.legislators%}
+
+{% for legislator in the_legislators %}
+
+    <li>
+        <p><img class="lasso-lookup-img-thumb" src="{{legislator.photo_url}}" /> {{legislator.first_name}} {{legislator.last_name}} ({{legislator.party}})
+            <br /><a href="mailto:{{legislator.email}}">{{legislator.email}}</a>
+            <br /><a href="{{legislator.url}}">{{legislator.url}}</a>
+            <br />{{legislator.office_phone}}
+        </p>
+    </li>
+{% endfor %}

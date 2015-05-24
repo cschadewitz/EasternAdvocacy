@@ -45,6 +45,7 @@
 body {
   background-color: #222222;
   margin-top: 70px;
+  padding-bottom: 180px;
   font-size: 2em;
 }
 #layout-header {
@@ -81,14 +82,6 @@ article > header > h2 {
   color: #FFF;
   margin: 0;
 }
-footer {
-  padding-top: 10px;
-  margin-top: 40px;
-  color: #999;
-  background-color: #333333;
-  text-align: center;
-  font-size: .8em;
-}
 .advocacy-article {
   position: relative;
   min-height: 1px;
@@ -113,4 +106,41 @@ footer {
 .form-failure {
   color: #F00;
   font-weight: bold;
+}
+.footer-left {
+  float: left;
+  padding: 0px;
+  width: 35%;
+  text-align: left;
+  font-size: 14px;
+}
+.footer-right {
+  margin-left: 50%;
+  min-width: 200px;
+  padding: 0px;
+  text-align: left;
+  font-size: 14px;
+}
+div.footer-links > a {
+  color: #ffffff;
+  display: block;
+  text-align: right;
+  padding-left: 10px;
+}
+div.footer-links > a:focus {
+  color: #999999;
+}
+div.footer-links > a.footer-brand {
+  font-size: 16px;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-top: 10px;
+  margin-top: 40px;
+  color: #999;
+  background-color: #333333;
+  text-align: center;
+  font-size: .8em;
 }

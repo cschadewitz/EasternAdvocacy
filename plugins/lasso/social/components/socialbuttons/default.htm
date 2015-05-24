@@ -1,0 +1,50 @@
+{% set settings = __SELF__.settings %}
+<div class="social_buttons_container">
+
+    {% if settings.email_include %}
+        {% if settings.buttons_square %}
+            <a class="btn btn-default" href="mailto:{{ settings.email }}">
+                <i class="icon-rss-square"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-default" href="mailto:{{ settings.email }}" role="button">
+                <i class="icon-envelope"></i>
+            </a>
+        {% endif %}
+    {% endif %}
+    {% if settings.fb_include %}
+        {% if settings.buttons_square %}
+            <a class="btn btn-default" href="https://{{ settings.fb_url }}">
+                <i class="icon-facebook-square"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-default" href="https://{{ settings.fb_url }}" role="button">
+                <i class="icon-facebook"></i>
+            </a>
+        {% endif %}
+    {% endif %}
+    {% if settings.twitter_include %}
+        {% if settings.buttons_square %}
+            <a class="btn btn-default" href="https://{{ settings.twitter_url }}">
+                <i class="icon-twitter-square"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-default" href="https://{{ settings.twitter_url }}" role="button">
+                <i class="icon-twitter"></i>
+            </a>
+        {% endif %}
+    {% endif %}
+    {% if settings.gp_include %}
+        {% if settings.buttons_square %}
+            <a class="btn btn-default" href="https://{{ settings.gp_url }}">
+                <i class="icon-google-plus-square"></i>
+            </a>
+        {% else %}
+            <a class="btn btn-default" href="https://{{ settings.gp_url }}" role="button">
+                <i class="icon-google-plus"></i>
+            </a>
+        {% endif %}
+    {% endif %}
+
+
+</div>

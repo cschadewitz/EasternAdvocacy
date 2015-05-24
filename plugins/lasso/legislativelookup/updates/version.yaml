@@ -1,0 +1,5 @@
+1.0.1:
+      - Create Addresses table
+      - create_addresses_table.php
+      - Create Legislators table
+      - create_legislators_table.php

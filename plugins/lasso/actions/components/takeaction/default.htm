@@ -1,17 +1,39 @@
-<div class="row">
-    <article id="takeaction" class="col-md-8 col-md-offset-2">
-        {% if action is null %}
-            <header><h2>Oh NO!!</h2></header>
+{% if access_status == 'invalid' %}
+	<article class="col-md-8 col-md-offset-2">
+		<header><h2>Invalid URL.</h2></header>
 
-            <p>Invalid URL.</p>
-        {% else %}
+	    <p>Redirecting...</p>
+
+	    <meta http-equiv="refresh" content="0; url={{ basePath | app }}/contribute" />
+    </article>
+{% elseif access_status == 'no' %}
+	<article class="col-md-8 col-md-offset-2">
+		<header><h2>You need to login</h2></header>
+
+	    {% component 'account' %}
+	    <p></p>
+    </article>
+{% else %} 
+<div class="row">
+	{% if not action.is_active %}
+		<div class="col-md-8 col-md-offset-2 alert alert-warning">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			This Action is not active.
+		</div>
+	{% endif %}
+    <article id="takeaction" class="col-md-8 col-md-offset-2">        
+        {% if access_status == 'ok' %}{% set fill = true %}{% else %}{% set fill = false %}{% endif %}
             <header><h2>{{ action.title }}</h2></header>
+
+					<img src="{{ action.photo.getPath() }}" class="img-responsive img-thumbnail" >
             <div class="takeaction-header">
 				<h1>{{ action.subtitle }}</h1>
 				<p>{{ action.description }}</p>
 			</div>
 
 			<br>
+
+			{% if action.is_active %}
 
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
@@ -36,40 +58,42 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<div class="well col-xs-6">
-								<form onsubmit="$(this).request('onTest'); return false;">
-									<div class="form-group">
-									    <label for="name">Name: </label>
-									    <input type="text" class="form-control" id="name" name="name">
-									</div>
-									<div class="form-group">
-									    <label for="email">Email: </label>
-									    <input type="email" class="form-control" id="email" name="email">
-									</div>
-									<div class="form-group">
-									    <label for="zipcode">Zip code: </label>
-									    <input type="text" class="form-control" id="zipcode" name="zipcode">
+							<div class="well">
+								<form>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group">
+											    <label for="name">Name: </label>
+											    <input type="text" class="form-control" id="name" name="name" 
+											    	{% if fill %}value="{{ user.name }}" {% if user.name is not empty %}disabled{% endif %}{% endif %} required>
+											</div>
+											<div class="form-group">
+											    <label for="email">Email: </label>
+											    <input type="email" class="form-control" id="email" name="email" 
+											    	{% if fill %}value="{{ user.email }}"  {% if user.email is not empty %}disabled{% endif %}{% endif %} required>
+											</div>
+											<div class="form-group">
+											    <label for="zipcode">Zip code: </label>
+											    <input type="text" class="form-control" id="zipcode" name="zipcode"
+											    	{% if fill %}value="{{ user.zipcode }}" {% if user.zipcode is not empty %}disabled{% endif %}{% endif %} required>
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group">
+											    <div id="message">{{ action.template.content_html | raw }}</div>
+											</div>
+										</div>
 									</div>
 									<div class="form-group">
 										<button type="submit" class="btn btn-success">WRITE CONGRESS</button>
 									</div>
 								</form>
 							</div>
-							<div class="col-xs-6">
-								<h2>{{ action.template.subject }}</h2>
-								{{ action.template.content_html | striptags | raw [:200]}}...
-								 <a href="#">Read the letter</a>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			{% endif %}
         {% endif %}
-    </article>
-</div>
-
-<div class="row">
-    <article id="testarea" class="col-md-8 col-md-offset-2">
-        
     </article>
 </div>

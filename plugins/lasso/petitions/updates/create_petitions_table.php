@@ -16,7 +16,9 @@
                 $table->string('slug')->index();
                 $table->text('summary')->nullable();
                 $table->text('body');
-                $table->boolean('published')->default(false);
+                $table->boolean('published')->default(true);
+                $table->boolean('active')->default(true);
+                $table->integer('goal')->default(1000);
                 $table->timestamp('publicationDate')->nullable();
                 $table->integer('signatures')->default(0);
                 $table->timestamps();
