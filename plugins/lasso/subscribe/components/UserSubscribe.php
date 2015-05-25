@@ -13,7 +13,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Lasso\Subscribe\Models\Subscribe as Subscriber;
 use RainLab\User\Models\Settings as UserSettings;
-use RainLab\User\Models\User as UserModel;
+use RainLab\User\Components\Account as UserAccount;
 use Exception;
 
 class UserSubscribe extends ComponentBase
@@ -65,8 +65,8 @@ class UserSubscribe extends ComponentBase
         }
 
         $this->page['user'] = BackendAuth::getUser();
-        $this->page['loginAttribute'] = UserModel.loginAttribute();
-        $this->page['loginAttributeLabel'] = UserModel.loginAttributeLabel();
+        $this->page['loginAttribute'] = UserAccount::loginAttribute();
+        $this->page['loginAttributeLabel'] = UserAccount::loginAttributeLabel();
     }
 
     /**
