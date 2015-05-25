@@ -4,3 +4,7 @@
 1.0.2:
       - Added user extended table
       - create_user_extensions_table.php
+1.0.3:
+      - Added report widget
+      - Small changes
+      
