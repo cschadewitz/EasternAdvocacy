@@ -1,4 +1,4 @@
-<?php
+<?php namespace Lasso\Adminsendmail\Updates;
 
 //use Schema;
 use October\Rain\Database\Updates\Migration;
