@@ -197,8 +197,8 @@ class UserSubscribe extends ComponentBase
          */
         $redirectUrl = $this->pageUrl($this->property('redirect'));
 
-        if ($redirectUrl = post('redirect', $redirectUrl))
-            return Redirect::to($redirectUrl);
+        //if ($redirectUrl = post('redirect', $redirectUrl))
+            //return Redirect::to($redirectUrl);
     }
     public function onActivate($isAjax = true, $code = null)
     {
