@@ -53,6 +53,30 @@ class UserSubscribe extends ComponentBase
         return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function user()
+    {
+        if (!Auth::check())
+            return null;
+
+        return Auth::getUser();
+    }
+
+    /**
+     * Returns the login model attribute.
+     */
+    public function loginAttribute()
+    {
+        return UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
+    }
+
+    /**
+     * Returns the login label as a word.
+     */
+    public function loginAttributeLabel()
+    {
+        return $this->loginAttribute() == UserSettings::LOGIN_EMAIL ? 'Email' : 'Username';
+    }
+
     public function onRun()
     {
         $routeParameter = $this->property('paramCode');
@@ -64,9 +88,9 @@ class UserSubscribe extends ComponentBase
             $this->onActivate(false, $activationCode);
         }
 
-        $this->page['user'] = BackendAuth::getUser();
-        $this->page['loginAttribute'] = UserAccount::loginAttribute();
-        $this->page['loginAttributeLabel'] = UserAccount::loginAttributeLabel();
+        $this->page['user'] = $this->user();
+        $this->page['loginAttribute'] = $this->loginAttribute();
+        $this->page['loginAttributeLabel'] = $this->loginAttributeLabel();
     }
 
     /**
