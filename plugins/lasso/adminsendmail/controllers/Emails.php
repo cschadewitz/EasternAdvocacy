@@ -74,8 +74,8 @@ class Emails extends Controller {
 		}
 
 		//send email
-		$subs = Subscribe::verified();
-		$users = UserExtension::subscribers();
+		$subs = Subscribe::verified()->get();
+		$users = UserExtension::subscribers()->get();
 		$params = ['msg' => $email->content, 'subject' => $email->subject];
 		foreach ($subs as $subscriber) {
 			$params['unsubscribeUrl'] = '/unsubscribe/' . $subscriber->email . '/' . $subscriber->uuid;
