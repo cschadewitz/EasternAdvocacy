@@ -99,14 +99,6 @@ article > header > h2 {
     margin-left: 16.66666667%;
   }
 }
-.form-success {
-  color: #090;
-  font-weight: bold;
-}
-.form-failure {
-  color: #F00;
-  font-weight: bold;
-}
 .footer-left {
   float: left;
   padding: 0px;
@@ -143,4 +135,29 @@ footer {
   background-color: #333333;
   text-align: center;
   font-size: .8em;
+}
+.advocacy-article {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .advocacy-article {
+    float: left;
+    width: 66.66666667%;
+  }
+}
+@media (min-width: 992px) {
+  .advocacy-article {
+    margin-left: 16.66666667%;
+  }
+}
+.form-success {
+  color: #090;
+  font-weight: bold;
+}
+.form-failure {
+  color: #F00;
+  font-weight: bold;
 }

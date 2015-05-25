@@ -50,24 +50,73 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::listen("lasso.captcha.recaptcha.verify", function($recaptchaResponse) {
+            $result = array(
+                'success' => false,
+                'data' => ''
+            );
+
+            $secret = Settings::get('recaptcha_secret_key');
+
+            if (is_null($secret) || $secret == "") {
+                $result['error'] = 'Administrative error: Recaptcha secret key not set';
+                return $result;
+            }
+            if (is_null($recaptchaResponse) || $recaptchaResponse == "") {
+                $result['error'] = 'No Recaptcha Response Provided';
+                return $result;
+            }
+
             $curl = curl_init('https://www.google.com/recaptcha/api/siteverify');
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, array(
-                'secret' => Settings::get('recaptcha_secret_key'),
+
+            $postFields = array(
+                'secret' => $secret,
                 'response' => $recaptchaResponse
-            ));
+            );
+
+            $options = array(
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => http_build_query($postFields, '', '&'),
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/x-www-form-urlencoded'
+                ),
+                CURLINFO_HEADER_OUT => false,
+                CURLOPT_HEADER => false,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_SSL_VERIFYPEER => false
+            );
+            curl_setopt_array($curl, $options);
 
             $captchaResponse = curl_exec($curl);
 
+            if ($captchaResponse == false) {
+                $result['error'] = 'Error Reaching Recaptcha Site: ' . curl_error($curl);
+                return $result;
+            }
+
             curl_close($curl);
 
-            if (is_null($captchaResponse) || !is_object($captchaResponse))
-                return false;
-            if ($captchaResponse->success == true)
-                return true;
+            $captchaResponse = json_decode($captchaResponse);
 
-            return false;
+            if (json_last_error() != JSON_ERROR_NONE) {
+                $result['error'] = json_last_error_msg();
+                return $result;
+            }
+
+            if (is_null($captchaResponse) || !(is_object($captchaResponse) || is_array($captchaResponse))) {
+                $result['error'] = 'Response is not valid';
+                return $result;
+            }
+            if ($captchaResponse->success == true) {
+                $result['success'] = true;
+                return $result;
+            }
+
+            $errorCodes = 'error-codes';
+
+            $result['error'] = 'Captcha verification failed';
+            $result['data'] = implode(', ', $captchaResponse->$errorCodes);
+
+            return $result;
         });
     }
 

@@ -48,17 +48,17 @@ class UnsubscribeForm extends ComponentBase
             return;
         }
 
-        $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', [$captcha]);
+        $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', $captcha)[0];
 
-        if ($captchaResponse == false) {
-            $this->throwError('Error: Could not verify Captcha');
+        if ($captchaResponse['success'] == false) {
+            $this->throwError('Error: ' . $captchaResponse['error'] . ' Data: ' . $captchaResponse['data']);
             return;
         }
 
         $unsubResponse = Event::fire('lasso.unsubscribe.unsubscribe', $email);
 
         if (!$unsubResponse) {
-            $this->throwError("Error: The entered email or zip did not match our records.");
+            $this->throwError("Error: The entered email is not subscribed to the mailing list.");
             return;
         }
 
