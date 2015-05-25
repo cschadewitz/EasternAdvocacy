@@ -105,14 +105,14 @@
                 $form->addTabFields([
                     'extension[verificationDate]'  => [
                         'label' => 'Subscribed Since',
-                        'tab'   => 'Details',
+                        'tab'   => 'Advocacy',
                         'type'  => 'text',
                         'disabled' => 'true'
                         //'path'  => '~/plugins/lasso/subscribe/controllers/subscribers/_verificationDate.htm'
                     ],
                     'extension[type]'  => [
                         'label' => 'University Affiliation',
-                        'tab'   => 'Details',
+                        'tab'   => 'Advocacy',
                         'type'  => 'text',
                         'disabled' => 'true'
 

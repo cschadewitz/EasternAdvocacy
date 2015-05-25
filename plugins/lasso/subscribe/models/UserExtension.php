@@ -42,6 +42,7 @@ class UserExtension extends Model
     }
     public function scopeSubscribers($query, $inverse = false)
     {
+        var_dump($query->all());
         $temp = $query->wherehas('user', function($q)
         {
             $q->where('is_activated', '=', 1);
