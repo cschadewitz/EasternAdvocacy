@@ -25,7 +25,7 @@
         {
             return [
                 '\Lasso\Subscribe\Components\Form' => 'SubForm',
-                '\Lasso\Subscribe\Components\UserSubscribe' => 'UserExtended'
+                '\Lasso\Subscribe\Components\UserSubscribe' => 'user_extended'
             ];
         }
 

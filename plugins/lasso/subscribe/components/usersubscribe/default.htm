@@ -1,3 +1,23 @@
-<p>This is the default markup for component UserSubscribe</p>
+{% if not user %}
 
-<small>You can delete this file if you want</small>
+    <div class="row">
+
+        <div class="col-md-6">
+            <h3>Sign in</h3>
+            {% partial 'account::signin' %}
+        </div>
+
+        <div class="col-md-6">
+            <h3>Register</h3>
+            {% partial __SELF__ ~ '::register' %}
+        </div>
+
+    </div>
+
+{% else %}
+
+{% partial 'account::activation_check' %}
+
+{% partial __SELF__ ~ '::update' %}
+
+{% endif %}
