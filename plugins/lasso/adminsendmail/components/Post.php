@@ -50,7 +50,8 @@ class Post extends ComponentBase
 
     public function onRun()
     {
-        $this->assignVars();
+
+
         $this->getAssets();
 
 
@@ -62,6 +63,7 @@ class Post extends ComponentBase
         $this->attached = $this->post->attachments;
         $this->post->views = $this->post->views + 1;
         $this->post->save();
+        $this->assignVars();
 
     }
 
