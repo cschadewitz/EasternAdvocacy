@@ -1,8 +1,13 @@
 <?php
     namespace Lasso\Subscribe;
 
+    use Event;
+    use Lasso\Subscribe\Models\UserExtension;
+    //use Lasso\Subscribe\Models\Subscribe;
     use System\Classes\PluginBase;
     use Illuminate\Support\Facades\DB;
+    use RainLab\User\Models\User as UserModel;
+    use RainLab\User\Controllers\Users as UserController;
     class Plugin extends PluginBase
     {
         public function pluginDetails()
@@ -18,9 +23,29 @@
         public function registerComponents()
         {
             return [
-                '\lasso\Subscribe\Components\Form' => 'SubForm'
+                '\Lasso\Subscribe\Components\Form' => 'SubForm',
+                '\Lasso\Subscribe\Components\UserSubscribe' => 'UserExtended'
             ];
         }
+
+        public function registerPermissions()
+        {
+            return [
+                'lasso.subscribe.access_subscribers'  => ['tab' => 'Users', 'label' => 'View Subscribers'],
+                'lasso.subscribe.edit_subscribers' => ['tab' => 'Users', 'label' => 'Edit Subscribers']
+            ];
+        }
+
+        public function registerReportWidget()
+        {
+            return [
+                '\Lasso\Subscribe\ReportWidgets\Subscriptions' => [
+                    'label' => 'Subscriptions',
+                    'context' => 'dashboard',
+                ],
+            ];
+        }
+
 
         public function registerMailTemplates()
         {
@@ -29,17 +54,81 @@
             ];
         }
 
+        public function boot(){
+            $this->extendUserModel();
+            $this->extendUserController();
+            $this->extendUserMenu();
+        }
+
+        protected function extendUserModel()
+        {
+            UserModel::extend(function ($model) {
+                $model->hasOne['extension'] = ['Lasso\Subscribe\Models\UserExtension', 'table' => 'lasso_subscribe_user_extensions', 'key' => 'user_id'];
+            });
+        }
+        protected function extendUserController()
+        {
+            UserController::extendFormFields(function($form, $model, $context) {
+
+                if(!$model instanceof UserModel)
+                    return;
+
+                if(!$model->exists)
+                    return;
+                //dump($model);
+
+                UserExtension::getModel($model);
+
+                $form->addTabFields([
+                    'userextension[verificationDate]'  => [
+                        'label' => 'Subscribed Since',
+                        'tab'   => 'Details',
+                        'type'  => 'text',
+                        'disabled' => 'true'
+                        //'path'  => '~/plugins/lasso/subscribe/controllers/subscribers/_verificationDate.htm'
+                    ],
+                    'userextension[type]'  => [
+                        'label' => 'University Affiliation',
+                        'tab'   => 'Details',
+                        'type'  => 'text',
+                        'disabled' => 'true'
+
+                    ]
+                ]);
+            });
+        }
+        protected function extendUserMenu()
+        {
+            Event::listen('backend.menu.extendItems', function($manager){
+                $manager->addSideMenuItems('RainLab.User', 'user', [
+                    'subscribers'   => [
+                        'label'         => 'Subscribers',
+                        'url'           => Backend::url('lasso/subscribe/subscribers'),
+                        'icon'          => 'icon-user',
+                        'owner'         => 'RainLab.User',
+                        'permissions'   => ['lasso.subscribers.*'],
+                    ],
+                    'users'         => [
+                        'label'         => 'Users',
+                    ]
+                ]);
+            });
+        }
+
         public function registerSchedule($schedule)
         {
             // Check if old unverified entries need to be deleted
             $schedule->call(function(){
                 $results = Db::select('select * from subscribers where verificationDate IS NULL');
+                //Subscribe::where('verificationDate', null);
                 $now = date('Y-m-d H:i:s');
+                //DateTime::getTimestamp();
                 $timeLimit = 3 * 60;
                 foreach($results as $val){
                     $checkIn = $val->created_at;
                     if(strtotime($now) - strtotime($checkIn) > $timeLimit){
                         Db::delete('delete from subscribers where uuid = "'.$val->uuid.'"');
+                        //Subscribers::where("uuid", $val->uuid)->delete();
                     }
                 }
             })->everyFiveMinutes();

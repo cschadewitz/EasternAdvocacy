@@ -15,6 +15,8 @@ class Post extends ComponentBase
 
     public $archivePage;
 
+    public $author;
+
     public function componentDetails()
     {
         return [

@@ -1,0 +1,39 @@
+<form data-request="onRegister">
+    <div class="form-group">
+        <label for="registerName">Full Name</label>
+        <input name="name" type="text" class="form-control" id="registerName" placeholder="Enter your full name">
+    </div>
+
+    <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input name="email" type="email" class="form-control" id="registerEmail" placeholder="Enter your email">
+    </div>
+
+    <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input name="password" type="password" class="form-control" id="registerPassword" placeholder="Choose a password">
+    </div>
+
+    <div class="form-group">
+        <label for="registerZip">Zip</label>
+        <input name="zip" type="number" class="form-control" id="registerZip" placeholder="Zip Code">
+    </div>
+
+    <div class="form-group">
+        <label for="registerAffiliation">Affiliation:</label>
+        <select id="registerAffiliation" class="form-control" name="affiliation" size="1">
+            <option value="none">-</option>
+            <option value="student">Student</option>
+            <option value="alumni">Alumni</option>
+            <option value="friend">Friend</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="registerSubscribe">Subscribe?</label>
+        <input name="subscribe" type="checkbox" class="form-control" id="registerSubscribe" value="{{ form_value('subscribe') }}">
+    </div>
+
+    <button type="submit" class="btn btn-default">Register</button>
+</form>

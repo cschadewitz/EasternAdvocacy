@@ -1,3 +1,12 @@
+<?php if(!$this->user->hasPermission('lasso.subscribe.edit_Subscribers')): ?>
+    <div class="layout-row">
+        You do not have permission to edit subscribers.
+        <a href="<?=Backend::url('lasso/subscribe/subscribe/preview/' . $model->id)?>">
+            <span class="icon-reply"></span>Return
+        </a>
+    </div>
+<?php else:?>
+
 <?= Form::open(['class'=>'layout']) ?>
 
 <div class="layout-row">
@@ -29,3 +38,5 @@
 </div>
 
 <?= Form::close() ?>
+
+<?php endif; ?>

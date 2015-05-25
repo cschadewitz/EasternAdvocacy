@@ -2,6 +2,8 @@
 namespace Lasso\AdminSendMail\Models;
 
 use Model;
+use Auth;
+use October\Rain\Auth\Models\User as Admin;
 
 class Email extends Model {
 	protected $table = 'lasso_adminsendmail_emails';
@@ -10,9 +12,10 @@ class Email extends Model {
 
 	protected $visible = ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at', 'views'];
 
+	protected $guarded = ['admin_id'];
 	public $hasOne = [];
 	public $hasMany = [];
-	public $belongsTo = [];
+	public $belongsTo = ['user' => 'October\Rain\Auth\Models\User', 'key' => 'admin_id'];
 	public $belongsToMany = [];
 	public $morphTo = [];
 	public $morphOne = [];
@@ -37,6 +40,11 @@ class Email extends Model {
 		], $options));
 
 		return $query->paginate($postsPerPage, $page);
+	}
+
+	public function getAuthor()
+	{
+		return Admin::getLogin(getUserById($this->admin_id));
 	}
 
 	public function setUrl($pageName, $controller) {

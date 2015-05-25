@@ -5,11 +5,12 @@ use Backend\Facades\BackendMenu;
 
 class Subscribe extends \Backend\Classes\Controller
 {
-
     public $implement = ['Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
         'Backend.Behaviors.RelationController',
     ];
+
+    public $requiredPermissions = ['lasso.subscribe.access_subscribers'];
 
     public $formConfig = 'form_config.yaml';
 
@@ -21,6 +22,6 @@ class Subscribe extends \Backend\Classes\Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Lasso.Subscribe', 'subscribe', 'subscribe');
+        BackendMenu::setContext('RainLab.User', 'user', 'subscribers');
     }
 }

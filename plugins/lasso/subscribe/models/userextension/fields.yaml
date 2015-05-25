@@ -1,0 +1,14 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    verificationDate:
+        label: vDate
+        disabled: false
+    type:
+        label: type
+        description: Affiliation with university
