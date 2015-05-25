@@ -3,4 +3,4 @@
       - create_subscriptions_table.php
 1.0.2:
       - Added user extended table
-      - create_user_extension_table.php
+      - create_user_extensions_table.php
