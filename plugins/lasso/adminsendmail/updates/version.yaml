@@ -7,3 +7,6 @@
 1.0.3:
     - Add sent field to emails
     - update_emails_add_sent.php
+1.0.4:
+    - Add author field
+    - update_emails_add_author.php
