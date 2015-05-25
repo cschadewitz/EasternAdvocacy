@@ -12,7 +12,7 @@ class CreateUserExtensionsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('user_id')->unsigned->index;
+            $table->integer('user_id')->unsigned()->index();
             $table->enum('affiliation', array('Student', 'Alumni', 'Friend', 'Other'));
             $table->timestamp('verificationDate')->nullable();
             $table->timestamps();
