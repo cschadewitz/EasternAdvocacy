@@ -55,9 +55,21 @@ class Plugin extends PluginBase
                 'data' => ''
             );
 
+            $disabled = Settings::get('recaptcha_disabled');
+            $siteKey = Settings::get('recaptcha_site_key');
             $secret = Settings::get('recaptcha_secret_key');
 
-            if (is_null($secret) || $secret == "") {
+            if ($disabled) {
+                $result['success'] = true;
+                return $result;
+            }
+
+            if (is_null($siteKey) || $siteKey == '') {
+                $result['error'] = 'Administrative error: Recaptcha site key not set';
+                return $result;
+            }
+
+            if (is_null($secret) || $secret == '') {
                 $result['error'] = 'Administrative error: Recaptcha secret key not set';
                 return $result;
             }

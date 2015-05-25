@@ -31,4 +31,9 @@ class Recaptcha extends ComponentBase
     {
         return Settings::get('recaptcha_site_key');
     }
+
+    public function isDisabled()
+    {
+        return Settings::get('recaptcha_disabled');
+    }
 }

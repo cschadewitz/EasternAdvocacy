@@ -43,10 +43,6 @@ class UnsubscribeForm extends ComponentBase
             $this->throwError('Error: Please enter your email address.');
             return;
         }
-        if (empty($captcha)) {
-            $this->throwError('Error: Please enter the Captcha');
-            return;
-        }
 
         $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', $captcha)[0];
 

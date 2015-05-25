@@ -1,1 +1,3 @@
+{% if not __SELF__.disabled() %}
 <div class="g-recaptcha" data-sitekey="{{ __SELF__.siteKey() }}"></div>
+{% endif %}
