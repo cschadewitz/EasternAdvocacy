@@ -2,6 +2,7 @@
 namespace Lasso\Subscribe\Controllers;
 
 use Backend\Facades\BackendMenu;
+use Backend\Facades\BackendAuth;
 
 class Subscribe extends \Backend\Classes\Controller
 {
@@ -22,5 +23,16 @@ class Subscribe extends \Backend\Classes\Controller
         parent::__construct();
 
         BackendMenu::setContext('Lasso.Subscribe', 'subscribe', 'subscribe');
+    }
+
+    public function onDelete(){
+        $subscribers = post("subscriber");
+        foreach($subscribers as $sub){
+            if($sub != "on"){
+                \Lasso\Subscribe\Models\Subscribe::find($sub)->delete();
+            }
+        }
+        \Flash::success('Subscriber(s) Successfully deleted.');
+        return $this->listRefresh();
     }
 }

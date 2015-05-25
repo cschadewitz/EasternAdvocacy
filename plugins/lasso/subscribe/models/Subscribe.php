@@ -16,6 +16,11 @@
             'verificationDate'
         ];
 
+        public function beforeCreate()
+        {
+            $this->uuid = uniqid();
+        }
+
         protected $guarded = [
             'uuid'
         ];

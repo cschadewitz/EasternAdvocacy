@@ -3,17 +3,6 @@
  */
 (function()
 {
-    $.fn.fadeSlideToggle = function()
-    {
-        var box = $(this);
-        $(box).animate({
-            'opacity': 'toggle',
-            'height' : 'toggle'
-        }, {duration: 500});
-    };
-    $('h1.mailing-list').on('click', function(){
-        $('form.subscriber_form').fadeSlideToggle();
-    });
     $('.submit').submit(function (e) {
         return false;
     });
@@ -35,8 +24,7 @@ function processForm()
                 "email" : $('#email').val()
             },
             success: function(data){
-                if(!emailError(data))
-                    $('form.subscriber_form').fadeSlideToggle();
+                location.reload();
             }
         }); return false;
     }
