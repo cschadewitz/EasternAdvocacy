@@ -2,6 +2,5 @@
       - Added subscribers migrations
       - create_subscriptions_table.php
 1.0.2:
-      - Updated subscribers plugin added uuid & nullify verification
-      - update_subscriptions_add_uuid.php
-      - update_subscriptions_nullify_verification.php
+      - Added user extended table
+      - create_user_extension_table.php
