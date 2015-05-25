@@ -64,12 +64,17 @@ class Lookup extends ComponentBase
             'state' => 'alpha|size:2',
             'zip' => 'regex:/^\d{5}(-\d{4}){0,1}$/'
         ];
+        $messages = [//turns out alpha_dash doesn't allow for spaces, kinda need those for addresses (and some cities)
+            'address' => 'Address must not contain special characters, alpha-numeric and spaces only',
+            'city' => 'City must not contain special characters, alpha-numeric and spaces only',
+            'state' => 'State must be 2 letters',
+            'zip' => 'Zipcode must be standard 5 or 9 digit zip code'
+        ];
 
-        $validation = Validator::make($location, $rules);
+        $validation = Validator::make($location, $rules, $messages);
         if ($validation->fails()) {
-            var_dump($validation->messages());
-            window.alert($validation->messages());
-            return;
+            $this->page['message'] = $validation->errors()->toArray();
+            return false;
             //throw new ValidationException($validation);
         }
 
@@ -88,6 +93,7 @@ class Lookup extends ComponentBase
                 }
             }//endforeach
             $coordinates->district = $legislatorRecord->district;
+            $coordinates->state = $legislatorRecord->state;
             $coordinates->save();
         } else {//else we already have the records and just have to grab them from the cache
             $legislatorRecord = Legislator::getLegislatorByDistrict(
@@ -120,17 +126,28 @@ class Lookup extends ComponentBase
      * @param $address array with street address
      * @return JSON legislator records
      */
-    public function infoFromArray($address) {
+    public static function infoFromArray($address) {
         $street_address = $address['address'] . $address['city'] . $address['state'] . $address['zip'];
-        return infoFromString($street_address);
+        return Lookup::infoFromString($street_address);
     }
     /**
      * @param $address string containing address
      * @return JSON with legislator information, checking cache first
      */
-    public function infoFromString($address) {
-        $coords = Address::scopeAddress($address)->get();
-        return Legislator::getJSONLegislatorsFromCoords($coords[0], $coords[1])->get()->toJson();
+    public static function infoFromString($address) {
+        $coords = Address::address($address)->first();
+        $isnew = false;
+        if(is_null($coords)) {
+            $isnew = true;
+            $coords = Address::parseNewAddress(array('address' => $address, 'city' => '', 'state' => '', 'zip' => ''));
+        }
+        $leg = Legislator::getLegislatorsFromAddress($coords);
+        if($isnew) {
+            $coords['state'] = $leg->first()['state'];
+            $coords['district'] = $leg->first()['district'];
+            $coords->save();
+        }
+        return $leg;
     }
 
     /**
@@ -138,7 +155,7 @@ class Lookup extends ComponentBase
      * @param $address - string containing address
      * @return JSON with legislator information
      */
-    public function info($address) {
-        return infoFromString($address);
+    public static function info($address) {
+        return Lookup::infoFromString($address);
     }
 }
