@@ -71,6 +71,27 @@
         }
         protected function extendUserController()
         {
+            UserController::extendListColumns(function($list,$model){
+                if(!$model instanceof UserModel)
+                    return;
+
+                if(!$model->exists)
+                    return;
+
+                UserExtension::getModel($model);
+                $list->addColumns([
+                    'extension[verificationDate]'  => [
+                        'label' => 'Subscribed?',
+                        'type' => 'partial',
+                        'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
+                    ],
+                    'extension[affiliation]' => [
+                        'label' => 'Affiliation',
+                        'type' => 'text',
+                        'width' => '10'
+                    ]
+                ]);
+            });
             UserController::extendFormFields(function($form, $model, $context) {
 
                 if(!$model instanceof UserModel)
@@ -80,7 +101,6 @@
                     return;
                 //dump($model);
 
-                UserExtension::getModel($model);
 
                 $form->addTabFields([
                     'extension[verificationDate]'  => [

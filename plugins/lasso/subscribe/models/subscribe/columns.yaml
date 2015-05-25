@@ -21,3 +21,4 @@ columns:
     subscribed:
           label: Subscribed
           type: partial
+          path: $/lasso/subscribe/controllers/subscribe/_subscribed.htm

@@ -172,6 +172,7 @@ class UserSubscribe extends ComponentBase
         $userData = array_slice($data, 0, 5);
 
         $user->save($userData);
+        UserExtension::getModel($user);
         if($data['subscribe'] == "Yes")
         {
             $user->extension->verificationDate = DateTime::getTimestamp();
@@ -222,6 +223,7 @@ class UserSubscribe extends ComponentBase
             }
 
             if (($sub = Subscriber::email($user->email).get()) != null) {
+                UserExtension::getModel($user);
                 $user->extension->verificationDate = $sub->verificationDate;
                 $this->removeOldSubscription($user);
                 Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription
