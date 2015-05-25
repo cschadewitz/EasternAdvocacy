@@ -40,9 +40,9 @@ class UserExtension extends Model
     {
         $temp = $query->where('user.isActivated', '=', 1);
         if(!$inverse)
-            return $temp->where('verificationDate', 'IS NOT', 'NULL');
+            return $temp->where('verificationDate', '!=', 'NULL');
         else
-            return $temp->where('verificationDate', 'IS', 'NULL');
+            return $temp->where('verificationDate', '=', 'NULL');
     }
 
     public static function getModel($user)
