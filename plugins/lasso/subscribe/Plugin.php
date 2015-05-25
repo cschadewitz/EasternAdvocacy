@@ -21,6 +21,7 @@
             ];
         }
 
+        public $require = ['RainLab.User'];
         public function registerComponents()
         {
             return [
