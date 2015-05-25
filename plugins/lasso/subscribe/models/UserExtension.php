@@ -54,15 +54,15 @@ class UserExtension extends Model
 
     public static function getModel($user)
     {
-        if($user->userextension)
-            return $user->userextension;
+        if($user->extension)
+            return $user->extension;
         $userextension = new static;
         $userextension->user = $user;
-        $userextension->user_id = $user->id;
+        //$userextension->user_id = $user->id;
         $userextension->verificationDate = null;
         $userextension->affiliation = "other";
         $userextension->save();
-        $user->userextension = $userextension;
+        $user->extension = $userextension;
         return $userextension;
     }
 }
