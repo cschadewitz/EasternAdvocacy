@@ -15,7 +15,7 @@ class Email extends Model {
 	protected $guarded = ['admin_id'];
 	public $hasOne = [];
 	public $hasMany = [];
-	public $belongsTo = ['user' => 'October\Rain\Auth\Models\User', 'key' => 'admin_id'];
+	public $belongsTo = ['author' => 'October\Rain\Auth\Models\User', 'key' => 'admin_id'];
 	public $belongsToMany = [];
 	public $morphTo = [];
 	public $morphOne = [];
