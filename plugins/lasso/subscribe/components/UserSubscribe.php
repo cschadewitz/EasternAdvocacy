@@ -1,6 +1,7 @@
 <?php namespace Lasso\Subscribe\Components;
 
 use Auth;
+use Backend\Facades\BackendAuth;
 use Mail;
 use Flash;
 use Input;
@@ -62,7 +63,7 @@ class UserSubscribe extends ComponentBase
             $this->onActivate(false, $activationCode);
         }
 
-        $this->page['user'] = $this->user();
+        $this->page['user'] = BackendAuth::getUser();
         $this->page['loginAttribute'] = $this->loginAttribute();
         $this->page['loginAttributeLabel'] = $this->loginAttributeLabel();
     }
