@@ -68,6 +68,7 @@ class Post extends ComponentBase
     public function assignVars()
     {
         $this->archivePage = $this->page['archivePage'] = $this->property('archivePage');
+        $this->author = $this->page['author'] = $this->post->author->name;
     }
 
     public function getAssets()
