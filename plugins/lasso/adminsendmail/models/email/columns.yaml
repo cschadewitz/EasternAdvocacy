@@ -1,7 +1,13 @@
 columns:
   id: Id
-  subject: Subject
-  abstract: Abstract
+  subject:
+    label: Subject
+    type: text
+    width: 20
+  abstract:
+    label: Abstract
+    type: text
+    width: 40
   content: 
     label: Content
     type: html
@@ -10,6 +16,7 @@ columns:
   author:
     label: Author
     type: text
+    width: 10
   views: Views
   attachments:
     label: Attachments
