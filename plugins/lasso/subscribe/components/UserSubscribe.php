@@ -173,7 +173,7 @@ class UserSubscribe extends ComponentBase
 
         $user->save($userData);
         var_dump(UserExtension::getModel($user));
-        if($data['subscribe'] == "Yes")
+        if($data['subscribe'] == 'Yes')
         {
             $user->extension->verificationDate = DateTime::getTimestamp();
         }
