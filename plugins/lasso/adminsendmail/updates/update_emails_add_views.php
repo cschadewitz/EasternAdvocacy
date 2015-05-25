@@ -22,7 +22,7 @@ class UpdateEmailsAddViews extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::table('emails', function ($table) {
+		Schema::table('lasso_adminsendmail_emails', function ($table) {
 			$table->dropColumn("views");
 		});
 	}
