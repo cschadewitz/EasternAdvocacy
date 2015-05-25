@@ -1,6 +1,7 @@
 <?php namespace Lasso\Subscribe\Models;
 
 use Model;
+use RainLab\User\Models\User;
 
 /**
  * UserExtension Model
@@ -28,14 +29,17 @@ class UserExtension extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [ 'user' => ['RainLab\User\Models\User']];
+    public $belongsTo = [ 'user' => ['RainLab\User\Models\User', 'key' => 'user_id']];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
+    public function user()
+    {
+        return $this->belongsTo('')
+    }
     public function scopeSubscribers($query, $inverse = false)
     {
         $temp = $query->where('user.isActivated', '=', 1);
