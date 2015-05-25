@@ -63,6 +63,7 @@ class UserExtension extends Model
         $userextension->affiliation = "other";
         $userextension->save();
         $user->extension = $userextension;
+        $user->push();
         return $userextension;
     }
 }

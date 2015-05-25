@@ -83,14 +83,14 @@
                 UserExtension::getModel($model);
 
                 $form->addTabFields([
-                    'userextension[verificationDate]'  => [
+                    'extension[verificationDate]'  => [
                         'label' => 'Subscribed Since',
                         'tab'   => 'Details',
                         'type'  => 'text',
                         'disabled' => 'true'
                         //'path'  => '~/plugins/lasso/subscribe/controllers/subscribers/_verificationDate.htm'
                     ],
-                    'userextension[type]'  => [
+                    'extension[type]'  => [
                         'label' => 'University Affiliation',
                         'tab'   => 'Details',
                         'type'  => 'text',

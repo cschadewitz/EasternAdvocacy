@@ -13,7 +13,6 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Lasso\Subscribe\Models\Subscribe as Subscriber;
 use RainLab\User\Models\Settings as UserSettings;
-use RainLab\User\Components\Account as UserAccount;
 use Exception;
 
 class UserSubscribe extends ComponentBase
