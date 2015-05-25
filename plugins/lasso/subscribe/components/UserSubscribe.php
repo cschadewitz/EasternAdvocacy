@@ -172,7 +172,7 @@ class UserSubscribe extends ComponentBase
         $userData = array_slice($data, 0, 5);
 
         $user->save($userData);
-        UserExtension::getModel($user);
+        var_dump(UserExtension::getModel($user));
         if($data['subscribe'] == "Yes")
         {
             $user->extension->verificationDate = DateTime::getTimestamp();
@@ -182,6 +182,7 @@ class UserSubscribe extends ComponentBase
             $user->extension->verificationDate = null;
         }
         $user->push();
+
         /*
          * Password has changed, reauthenticate the user
          */
