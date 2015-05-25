@@ -1,0 +1,18 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    recaptcha_site_key:
+        label: Site Key
+        description: The public site key from ReCaptcha
+
+    recaptcha_secret_key:
+        label: Secret Key
+        description: The secret key from ReCaptcha
+
+    recaptcha_disabled:
+        label: Disable ReCaptcha
+        description: Disables ReCaptcha. WARNING: This allows non-humans to submit ReCaptcha forms.
+        type: checkbox
+        default: false
