@@ -186,7 +186,7 @@ class UserSubscribe extends ComponentBase
             Auth::login($user->reload(), true);
         }
 
-        Flash::success(post('flash', Lang::get('Your account has been successfully updated.')));
+        Flash::success(post('flash', 'Your account has been successfully updated.'));
 
         /*
          * Redirect to the intended page after successful update
@@ -206,13 +206,13 @@ class UserSubscribe extends ComponentBase
              */
             $parts = explode('!', $code);
             if (count($parts) != 2) {
-                throw new ValidationException(['code' => Lang::get('Invalid activation code supplied')]);
+                throw new ValidationException(['code' => 'Invalid activation code supplied']);
             }
 
             list($userId, $code) = $parts;
 
             if (!strlen(trim($userId)) || !($user = Auth::findUserById($userId))) {
-                throw new ApplicationException(Lang::get('No user found with given credentials.'));
+                throw new ApplicationException('No user found with given credentials.');
             }
 
             if (!$user->attemptActivation($code)) {
@@ -253,14 +253,14 @@ class UserSubscribe extends ComponentBase
     {
         try {
             if (!$user = $this->user()) {
-                throw new ApplicationException(Lang::get('rainlab.user::lang.account.login_first'));
+                throw new ApplicationException('You must log in first');
             }
 
             if ($user->is_activated) {
-                throw new ApplicationException(Lang::get('Your account has already been activated'));
+                throw new ApplicationException('Your account has already been activated');
             }
 
-            Flash::success(Lang::get('An activation email has been sent to you at ' + $user->email));
+            Flash::success('An activation email has been sent to you at ' + $user->email);
 
             $this->sendActivationEmail($user);
 
