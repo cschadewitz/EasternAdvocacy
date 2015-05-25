@@ -12,6 +12,7 @@ use ApplicationException;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Lasso\Subscribe\Models\Subscribe as Subscriber;
+use Lasso\Subscribe\Models\UserExtension;
 use RainLab\User\Models\Settings as UserSettings;
 use Exception;
 
@@ -129,13 +130,14 @@ class UserSubscribe extends ComponentBase
         $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
         $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
         $user = Auth::register($userData, $automaticActivation);
-
+        UserExtension::getModel($user);
         if($data['subscribe'] == 'Yes')
         {
             $user->extension->verificationDate = DateTime::getTimestamp();
         }
 
         $user->extension->affiliation = Subscriber::type2Int($data["affiliation"]);
+        $user->push();
         /*
          * Activation is by the user, send the email
          */
