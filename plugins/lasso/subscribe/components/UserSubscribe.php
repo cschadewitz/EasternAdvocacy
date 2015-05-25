@@ -110,7 +110,7 @@ class UserSubscribe extends ComponentBase
             $user->extension->verificationDate = DateTime::getTimestamp();
         }
 
-        $user->extension->affiliation = $data["affiliation"];
+        $user->extension->affiliation = Subscriber::type2Int($data["affiliation"]);
         /*
          * Activation is by the user, send the email
          */

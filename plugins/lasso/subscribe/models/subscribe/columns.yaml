@@ -15,5 +15,9 @@ columns:
     zip:
           label: Zipcode
           type: number
-    type: type
-    verificationDate: vDate
+    type:
+          label: Affiliation
+          type: text
+    subscribed:
+          label: Subscribed
+          type: partial

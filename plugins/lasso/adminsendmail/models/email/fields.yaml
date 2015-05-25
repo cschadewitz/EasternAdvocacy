@@ -20,6 +20,11 @@ fields:
         description: The content of this email
         type: richeditor
         size: huge
+    author:
+        label: Author
+        description: The author of this email ( You )
+        type: text
+        disabled: true
     attachments:
         label: Attachment
         type: fileupload

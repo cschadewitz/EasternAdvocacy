@@ -50,6 +50,11 @@
             return $query->where('verificationDate', 'IS', 'NULL');
         }
 
+        public function scopeVerified($query)
+        {
+            return $query->where('verificationDate', 'IS NOT', 'NULL');
+        }
+
         public function generateUUID()
         {
             return uniqid();

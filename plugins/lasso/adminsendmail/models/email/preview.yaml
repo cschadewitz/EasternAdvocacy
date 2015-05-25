@@ -19,6 +19,11 @@ fields:
         label: Content
         description: The content of this email
         type: partial
+    author:
+        label: Author
+        description: The author of this email
+        type: text
+        disabled: true
     attachments:
         label: Attachment
         type: partial

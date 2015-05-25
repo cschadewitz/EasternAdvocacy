@@ -36,6 +36,14 @@ class UserExtension extends Model
     public $attachOne = [];
     public $attachMany = [];
 
+    public function scopeSubscribers($query, $inverse = false)
+    {
+        if(!$inverse)
+            return $query->with('user')->has('user.isActivated', '=', 1)->where('verificationDate', 'IS NOT', 'NULL')->all();
+        else
+            return $query->with('user')->has('user.isActivated', '=',  1)->where('verificationDate', 'IS', 'NULL')->all();
+    }
+
     public static function getModel($user)
     {
         if($user->userextension)

@@ -2,6 +2,7 @@
 namespace Lasso\Subscribe\Controllers;
 
 use Backend\Facades\BackendMenu;
+use Lasso\Subscribe\ReportWidgets\Subscriptions;
 
 class Subscribe extends \Backend\Classes\Controller
 {
@@ -24,5 +25,8 @@ class Subscribe extends \Backend\Classes\Controller
         parent::__construct();
 
         BackendMenu::setContext('RainLab.User', 'user', 'subscribers');
+        $subscriptionsWidget = new Subscriptions($this);
+        $subscriptionsWidget->alias = 'Subscriptions';
+        $subscriptionsWidget->bindToController();
     }
 }

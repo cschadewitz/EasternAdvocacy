@@ -7,9 +7,12 @@ columns:
     type: html
   created_at: Created On
   updated_at: Modified On
+  author:
+    label: Author
+    type: text
   views: Views
   attachments:
-    label: attachments
+    label: Attachments
     type: partial
     sortable: no
   sent:

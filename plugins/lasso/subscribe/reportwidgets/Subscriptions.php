@@ -10,16 +10,11 @@ namespace Lasso\Subscribe\ReportWidgets;
 
 use App;
 use Backend\Classes\ReportWidgetBase;
-use Cms\Classes\Page;
 use Lasso\Subscribe\Models\Subscribe;
 use Lasso\Subscribe\Models\UserExtension;
-use RainLab\User\Models\User as UserModel;
 
-class TopViewed extends ReportWidgetBase {
+class Subscriptions extends ReportWidgetBase {
 
-    public $posts;
-    public $postPage;
-    public $numberOfPosts;
 
     public $defaultAlias = 'subscriptions';
 
@@ -35,7 +30,7 @@ class TopViewed extends ReportWidgetBase {
     {
         return [
             'includeUnsub' => [
-                'title'    => 'Include unsubscribed users',
+                'title'    => 'Include un-subscribed users',
                 'type'     => 'checkbox',
                 'default'  => ''
             ]
@@ -50,9 +45,9 @@ class TopViewed extends ReportWidgetBase {
 
     public function assignVars()
     {
-        $this->vars['subs'] = Subscribe::where('verificationDate', '!=', null)->count();
-        $this->vars['users'] = UserModel::where('isActivated', '!=', 0)->extension->where('verificationDate', '==', null)->count();
-        $this->vars['userSubs'] = UserModel::where('isActivated', '!=', 0)->extension->where('verificationDate', '!=', null)->count();
+        $this->vars['subs'] = Subscribe::verified()->count();
+        $this->vars['users'] = UserExtension::subscribers(true)->count();
+        $this->vars['userSubs'] = UserExtension::subscribers()->count();
         $this->vars['includeUnsub'] = $this->page['includeUnsub'] = $this->property('includeUnsub');
     }
 }
