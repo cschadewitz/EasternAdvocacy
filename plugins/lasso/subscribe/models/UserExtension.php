@@ -42,7 +42,10 @@ class UserExtension extends Model
     }
     public function scopeSubscribers($query, $inverse = false)
     {
-        $temp = $query->where('user.isActivated', '=', 1);
+        $temp = $query->wherehas('user', function($q)
+        {
+            $q->where('is_activated', '=', 1);
+        });
         if(!$inverse)
             return $temp->where('verificationDate', '!=', 'NULL');
         else
