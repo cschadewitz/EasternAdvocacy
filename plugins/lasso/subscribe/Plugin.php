@@ -104,7 +104,7 @@
                 $manager->addSideMenuItems('RainLab.User', 'user', [
                     'subscribers'   => [
                         'label'         => 'Subscribers',
-                        'url'           => Backend::url('lasso/subscribe/subscribers'),
+                        'url'           => Backend::url('lasso/subscribe/subscribe'),
                         'icon'          => 'icon-user',
                         'owner'         => 'RainLab.User',
                         'permissions'   => ['lasso.subscribers.*'],
