@@ -21,11 +21,6 @@
     margin:0;
     display: inline;
 }
-.alert.alert-error{
-    background-color: pink;
-    margin: 2em;
-    border: inset 5px #f5f5f5;
-}
 
 .form-items input {
     height: auto;

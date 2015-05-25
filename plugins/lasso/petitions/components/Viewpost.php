@@ -4,7 +4,7 @@
     use Cms\Classes\ComponentBase;
     use Lasso\Petitions\Controllers\Petitions;
 
-    class ViewPost extends Post
+    class ViewPost extends ComponentBase
     {
         public $petition;
 
@@ -26,6 +26,54 @@
                     'type' => 'string',
                 ],
             ];
+        }
+
+        public function getPetition()
+        {
+            $petition = \Lasso\Petitions\Models\Petitions::GetPetition($this->property('petition'))->first();
+            $result = [];
+            foreach($petition as $code=>$data)
+            {
+                $result[$code] = $data;
+            }
+            return $result;
+        }
+
+        public function signPetition()
+        {
+            $name = post('name');
+            $email = post('email');
+            $mailingAddress = post('mailingaddress');
+            $city = post('city');
+            $zip = post('zip');
+            $pid = post('pid');
+
+            if ( empty($name) )
+                throw new \Exception(sprintf('Please enter your name.'));
+            if ( empty($email) )
+                throw new \Exception(sprintf('Please enter your email address.'));
+            if(empty($mailingAddress))
+                throw new \Exception(sprintf('Enter your registered mailing address'));
+            if ( empty($zip) )
+                throw new \Exception(sprintf('Please enter your zip code.'));
+            if((new \lasso\petitions\models\Signatures)->SignatureValid($email, $pid) == 0)
+            {
+                \Flash::error('You have already signed this petition!');
+            }
+            else{
+                $signature = new \lasso\petitions\models\Signatures;
+                $signature->name = $name;
+                $signature->email = $email;
+                $signature->zip = $zip;
+                $signature->address = $mailingAddress;
+                $signature->city = $city;
+                $signature->pid = $pid;
+                $signature->save();
+                $petition = \lasso\petitions\models\Petitions::pid($pid);
+                $petition->increment('signatures');
+                \Flash::success('Petition Signed!');
+                //  $petition->save();
+            }
         }
 
         public function onRun()

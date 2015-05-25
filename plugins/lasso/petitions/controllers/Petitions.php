@@ -25,5 +25,17 @@
             BackendMenu::setContext('Lasso.Petitions', 'petition', 'petitions');
         }
 
-
+        public function onDelete(){
+            $petitions = post("petition");
+            foreach($petitions as $pet){
+                if($pet != "on"){
+                    //delete petition's signatures
+                    \Lasso\Petitions\Models\Signatures::DeleteUsers($pet);
+                    //delete petition
+                    \Lasso\Petitions\Models\Petitions::find($pet)->delete();
+                }
+            }
+            \Flash::success('Petition(s) Successfully deleted.');
+            return $this->listRefresh();
+        }
     }
