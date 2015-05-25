@@ -172,7 +172,7 @@ class UserSubscribe extends ComponentBase
         $userData = array_slice($data, 0, 5);
 
         $user->save($userData);
-        var_dump(UserExtension::getModel($user));
+        //var_dump(UserExtension::getModel($user));
         if($data['subscribe'] == 'Yes')
         {
             $user->extension->verificationDate = DateTime::getTimestamp();
@@ -197,8 +197,8 @@ class UserSubscribe extends ComponentBase
          */
         $redirectUrl = $this->pageUrl($this->property('redirect'));
 
-        //if ($redirectUrl = post('redirect', $redirectUrl))
-            //return Redirect::to($redirectUrl);
+        if ($redirectUrl = post('redirect', $redirectUrl))
+            return Redirect::to($redirectUrl);
     }
     public function onActivate($isAjax = true, $code = null)
     {
