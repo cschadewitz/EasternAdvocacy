@@ -65,8 +65,8 @@ class UserSubscribe extends ComponentBase
         }
 
         $this->page['user'] = BackendAuth::getUser();
-        $this->page['loginAttribute'] = UserModel::loginAttribute();
-        $this->page['loginAttributeLabel'] = UserModel::loginAttributeLabel();
+        $this->page['loginAttribute'] = UserModel.loginAttribute();
+        $this->page['loginAttributeLabel'] = UserModel.loginAttributeLabel();
     }
 
     /**
