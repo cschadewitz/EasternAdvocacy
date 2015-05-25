@@ -13,6 +13,7 @@ use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use Lasso\Subscribe\Models\Subscribe as Subscriber;
 use RainLab\User\Models\Settings as UserSettings;
+use RainLab\User\Models\User as UserModel;
 use Exception;
 
 class UserSubscribe extends ComponentBase
@@ -33,14 +34,14 @@ class UserSubscribe extends ComponentBase
     {
         return [
             'redirect' => [
-                'title'       => 'Redirect to',
+                'title'       => 'Redirect To',
                 'description' => 'Page name to redirect to after update, sign in or registration.',
                 'type'        => 'dropdown',
                 'default'     => ''
             ],
             'paramCode' => [
-                'title'       => 'rainlab.user::lang.account.code_param',
-                'description' => 'rainlab.user::lang.account.code_param_desc',
+                'title'       => 'Parameterized Code',
+                'description' => 'Activation code provided as part of a link in user activation emails.',
                 'type'        => 'string',
                 'default'     => 'code'
             ]
@@ -64,8 +65,8 @@ class UserSubscribe extends ComponentBase
         }
 
         $this->page['user'] = BackendAuth::getUser();
-        $this->page['loginAttribute'] = $this->loginAttribute();
-        $this->page['loginAttributeLabel'] = $this->loginAttributeLabel();
+        $this->page['loginAttribute'] = UserModel::loginAttribute();
+        $this->page['loginAttributeLabel'] = UserModel::loginAttributeLabel();
     }
 
     /**
@@ -192,18 +193,18 @@ class UserSubscribe extends ComponentBase
             }
 
             if (!$user->attemptActivation($code)) {
-                throw new ValidationException(['code' => Lang::get('Invalid activation code supplied')]);
+                throw new ValidationException(['code' => 'Invalid activation code supplied']);
             }
 
             if (($sub = Subscriber::email($user->email).get()) != null) {
                 $user->extension->verificationDate = $sub->verificationDate;
                 $this->removeOldSubscription($user);
-                Flash::success(Lang::get('Your account has been successfully activated. Thanks for upgrading your subscription
-                                            to a registered account!'));
+                Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription
+                                            to a registered account!');
             }
             else
             {
-                Flash::success(Lang::get('Your account has been successfully activated. Thanks for Registering!'));
+                Flash::success('Your account has been successfully activated. Thanks for Registering!');
             }
 
             /*
