@@ -3,6 +3,7 @@
 
     use Event;
     use Lasso\Subscribe\Models\UserExtension;
+    use Backend;
     //use Lasso\Subscribe\Models\Subscribe;
     use System\Classes\PluginBase;
     use Illuminate\Support\Facades\DB;
