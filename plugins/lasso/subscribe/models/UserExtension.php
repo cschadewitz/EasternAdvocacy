@@ -38,7 +38,7 @@ class UserExtension extends Model
     public $attachMany = [];
     public function user()
     {
-        return $this->belongsTo('')
+        return $this->belongsTo('user');
     }
     public function scopeSubscribers($query, $inverse = false)
     {
