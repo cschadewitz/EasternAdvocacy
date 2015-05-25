@@ -23,6 +23,10 @@ class UnsubscribeHandler extends ComponentBase
         ];
     }
 
+    public function onInit()
+    {
+    }
+
     public function onRun()
     {
         $email = $this->param('email');
@@ -34,10 +38,8 @@ class UnsubscribeHandler extends ComponentBase
         }
 
         $user = Subscribe::whereRaw('email = ? and uuid = ?', array($email, $uuid));
-        //$user = true;
 
         if ($user->count() == 0) {
-            // Throw some error page
             $this->success = false;
             $this->message = "Email Not Found";
             return;

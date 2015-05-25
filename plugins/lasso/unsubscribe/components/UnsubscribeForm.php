@@ -1,11 +1,14 @@
 <?php namespace Lasso\Unsubscribe\Components;
 
 use Cms\Classes\ComponentBase;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Lasso\Captcha\Components\Recaptcha;
+use Event;
 
 class UnsubscribeForm extends ComponentBase
 {
-    private $captchaSecret = '6LeBkgUTAAAAAPumAWlBZUCdoOGNdY8IugX6B3Ia';
+    public $success = null;
+
+    public $message = null;
 
     public function componentDetails()
     {
@@ -20,6 +23,10 @@ class UnsubscribeForm extends ComponentBase
         return [];
     }
 
+    public function onInit()
+    {
+    }
+
     public function onRun()
     {
         $this->addCss('/plugins/lasso/subscribe/assets/css/component-style.css');
@@ -28,40 +35,50 @@ class UnsubscribeForm extends ComponentBase
 
     public function onUnsubscribe()
     {
+        // Todo: Research AJAX Stuff for this: https://octobercms.com/docs/cms/ajax#components-ajax-handlers
         $email = post('email');
-        $zip = post('zip');
         $captcha = post('g-recaptcha-response');
 
-        if ( empty($email) || empty($zip))
-            throw new \Exception(sprintf('Please enter your email address.'));
-        if ( empty($zip) )
-            throw new \Exception(sprintf('Please enter your zip code.'));
-        if ( empty($captcha))
-            throw new \Exception(sprintf('Please enter the Captcha'));
-
-        $captchaRequest = new \HttpRequest('https://www.google.com/recaptcha/api/siteverify', HttpRequest::METH_POST);
-        $captchaRequest->addPostFields(array('secret'=>$this->captchaSecret, 'response'=>$captcha));
-
-        try {
-            $captchaResponse = json_decode($captchaRequest->send()->getBody());
-            if ($captchaResponse->success == false)
-                throw new \Exception(sprintf('Incorrect Captcha Response'));
-
-        } catch (HttpException $ex) {
-            throw new \Exception(sprintf('Could not verify Captcha'));
+        if (empty($email)) {
+            $this->throwError('Error: Please enter your email address.');
+            return;
         }
 
-        $user = Subscribe::whereRaw('email = ? and zip = ?', array($email, $zip));
+        $captchaResponse = Event::fire('lasso.captcha.recaptcha.verify', $captcha)[0];
 
-        if ($user->count() == 0) {
-            // Throw some error page
-            throw new \Exception(sprintf("The entered email or zip did not match our records."));
+        if ($captchaResponse['success'] == false) {
+            $this->throwError('Error: ' . $captchaResponse['error'] . ' Data: ' . $captchaResponse['data']);
+            return;
         }
 
-        $user->delete();
+        $unsubResponse = Event::fire('lasso.unsubscribe.unsubscribe', $email);
+
+        if (!$unsubResponse) {
+            $this->throwError("Error: The entered email is not subscribed to the mailing list.");
+            return;
+        }
 
         $this->success = true;
         $this->message = "You have been successfully unsubscribed from the mailing list.";
     }
 
+    private function throwError($message = 'An error occurred')
+    {
+        $this->success = false;
+        $this->message = $message;
+    }
+
+    public function flash($key)
+    {
+        if ($key == "success") {
+            $result = $this->success;
+            $this->success = null;
+            return $result;
+        }
+        if ($key == "message") {
+            $result = $this->message;
+            $this->message = null;
+            return $result;
+        }
+    }
 }
