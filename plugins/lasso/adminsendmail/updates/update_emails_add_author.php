@@ -12,7 +12,7 @@ class UpdateEmailsAddAuthor extends Migration {
      */
     public function up() {
         Schema::table('lasso_adminsendmail_emails', function ($table) {
-            $table->integer('admin_id')->unsigned->index;
+            $table->integer('admin_id')->unsigned()->index();
         });
     }
 
