@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: F A Q
+
+# Model Form Field configuration
+form: $/lasso/faq/models/faq/fields.yaml
+
+# Model Class name
+modelClass: Lasso\FAQ\Models\FAQ
+
+# Default redirect location
+defaultRedirect: lasso/faq/faqs
+
+# Create page
+create:
+    title: Create F A Q
+    redirect: lasso/faq/faqs/update/:id
+    redirectClose: lasso/faq/faqs
+
+# Update page
+update:
+    title: Edit F A Q
+    redirect: lasso/faq/faqs
+    redirectClose: lasso/faq/faqs
+
+# Preview page
+preview:
+    title: Preview F A Q
