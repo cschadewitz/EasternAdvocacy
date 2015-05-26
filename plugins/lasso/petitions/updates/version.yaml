@@ -31,7 +31,7 @@
 1.4.6:
     -added active, goal flags to migrations
 1.5.0:
-    -added petition immutability
-    -updated backend views
-    -added form confirmations
-    -updated frontEnd view html/css
+    - added petition immutability
+    - updated backend views
+    - added form confirmations
+    - updated frontEnd view html/css
