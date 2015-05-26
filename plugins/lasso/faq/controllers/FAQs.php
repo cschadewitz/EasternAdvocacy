@@ -2,6 +2,7 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use Lasso\FAQ\Models\FAQ;
 
 /**
  * F A Qs Back-end Controller
@@ -21,5 +22,16 @@ class FAQs extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Lasso.FAQ', 'faq', 'faqs');
+    }
+
+    public function all()
+    {
+        $this->pageTitle = "Available FAQs";
+        $this->addCss('/plugins/lasso/faq/assets/bootstrap/css/bootstrap.min.css');
+        $this->addCss('/plugins/lasso/faq/assets/font-awesome/css/font-awesome.min.css');
+        $this->addCss('/plugins/lasso/faq/assets/faq/css/faq.css');
+        $this->addJs('/plugins/lasso/faq/assets/bootstrap/js/bootstrap.min.js');
+        $faqs = FAQ::with('questions')->get();
+        return $this->makePartial('all', ['faqs' => $faqs]);
     }
 }

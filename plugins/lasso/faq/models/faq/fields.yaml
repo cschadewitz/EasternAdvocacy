@@ -3,12 +3,6 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
     title:
-        label: Title
+        label: Category title
         type: text
-    description:
-        label: Description
-        tytpe: textarea

@@ -3,29 +3,29 @@
 # ===================================
 
 # Record name
-name: F A Q
+name: Question
 
 # Model Form Field configuration
-form: $/lasso/faq/models/faq/fields.yaml
+form: $/lasso/faq/models/question/fields.yaml
 
 # Model Class name
-modelClass: Lasso\FAQ\Models\FAQ
+modelClass: Lasso\Faq\Models\Question
 
 # Default redirect location
-defaultRedirect: lasso/faq/faqs
+defaultRedirect: lasso/faq/questions
 
 # Create page
 create:
-    title: Create F A Q
+    title: Create Question
     redirect: lasso/faq/faqs/all
     redirectClose: lasso/faq/faqs/all
 
 # Update page
 update:
-    title: Edit F A Q
+    title: Edit Question
     redirect: lasso/faq/faqs/all
     redirectClose: lasso/faq/faqs/all
 
 # Preview page
 preview:
-    title: Preview F A Q
+    title: Preview Question

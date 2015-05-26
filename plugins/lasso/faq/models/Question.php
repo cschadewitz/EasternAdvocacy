@@ -28,7 +28,9 @@ class Question extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'faq' => 'Lasso\FAQ\Models\FAQ'
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

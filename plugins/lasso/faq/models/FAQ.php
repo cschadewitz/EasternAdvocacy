@@ -28,7 +28,7 @@ class FAQ extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'questions' => 'Lasso\FAQ\Models\Question'
+        'questions' => ['Lasso\FAQ\Models\Question', 'key' => 'faq_id']
     ];
     public $belongsTo = [];
     public $belongsToMany = [];
