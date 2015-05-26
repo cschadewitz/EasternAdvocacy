@@ -2,8 +2,11 @@
 
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
-use Lasso\LegislativeLookup\Components\Lookup;
+use Lasso\Actions\Models\ActionTaken;
 use Auth;
+use Request;
+use Validator;
+use ValidationException;
 
 class TakeAction extends ComponentBase {
 
@@ -30,8 +33,80 @@ class TakeAction extends ComponentBase {
 		$this->assignVars();
 	}
 
+    public function onSubmitAction() {
+        $validation = $this->validateInput();
 
-	public function injectAssets()
+        if ($validation->fails()) {
+            $this->feedbackVars((new ValidationException($validation))->getMessage(), true);
+        }
+        else
+        {
+            $count = ActionTaken::where('action_id', '=', $this->property('actionId'))
+                    ->where('email', Request::input('email'))->count();
+            if($count > 0)
+            {
+                $this->feedbackVars("You have already taken this action.", true);
+            }
+            else
+            {
+                $actionTaken = $this->saveActionTaken();
+
+                $this->emailReps($actionTaken);
+
+                $this->feedbackVars("You have succesfully contacted your representatives.");
+            }
+        }
+
+    }
+
+    private function validateInput()
+    {
+        $rules = [];
+        $rules['name'] = 'required';
+        $rules['email'] = 'email';
+        $rules['zipcode'] = 'regex:^\d{5}([\-]?\d{4})?^';
+
+        return Validator::make(Request::all(), $rules);
+    }
+
+    private function saveActionTaken()
+    {
+        $actionTaken = new ActionTaken;
+        $actionTaken->action_id = $this->property('actionId');
+        $actionTaken->name = Request::input('name');
+        $actionTaken->email = Request::input('email');
+        $actionTaken->zipcode = Request::input('zipcode');
+        $actionTaken->ip_address = Request::getClientIp();
+        $actionTaken->save();
+
+        return $actionTaken;
+    }
+
+    private function emailReps($actionTaken)
+    {
+        $reps = $this->lookupReps($actionTaken->zipcode);
+
+        $action = Action::find($actionTaken->action_id);
+
+        /*$params = ['msg' => $email->content, 'subject' => $email->subject];
+        foreach ($subs as $subscriber) {
+            Mail::send('lasso.adminsendmail::mail.default', $params, function ($message) use ($subscriber, $email) {
+                $message->to($subscriber->email, $subscriber->name);
+                foreach ($email->attachments as $attachment) {
+                    $message->attach(App::basePath() . $attachment->getPath());
+                }
+            });
+        }*/
+    }
+
+    private function feedbackVars($message, $error=false)
+    {
+        $this->page['has_error'] = $error;
+        $this->page['feedback_header'] = $error? "Error:" : "Thank you!";
+        $this->page['message'] = $message;
+    }
+
+	private function injectAssets()
 	{
 		$this->addCss('/plugins/lasso/actions/assets/css/frontend.css');
 		$this->addJs('/plugins/lasso/actions/assets/js/frontend.js');
@@ -94,12 +169,26 @@ class TakeAction extends ComponentBase {
 	}
 
 	public function lookupReps($address) {
+        if(!$this->checkZip($address))
+            return null;
+
 		$geo = $this->getGeoCode($address);
 
 		$reps = $this->getGeoReps($geo);
 
 		return $reps;
 	}
+
+    public function checkZip($address)
+    {
+        $json = file_get_contents(
+            "https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=ewuadvocates.org&country=us&pnr=".$address
+        );
+
+        $json = json_decode($json);
+
+        return $json->valid;
+    }
 
 	public function getGeoCode($address) {
 		$geokey = 'AIzaSyB-uT5MX5748RHDpXJ5YgTWD3gWoSC_KbA';

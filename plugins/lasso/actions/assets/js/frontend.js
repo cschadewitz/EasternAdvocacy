@@ -14,3 +14,7 @@ $("#zipcode").keyup(function()
 		});
 	}
 });
+
+$("#action-form").on("success", function() {
+    $('#action-form').fadeOut(1000);
+});

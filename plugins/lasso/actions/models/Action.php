@@ -27,10 +27,12 @@ class Action extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'taken' => ['Lasso\Actions\Models\ActionTaken']
+    ];
     public $belongsTo = [
         'template' => ['System\Models\MailTemplate']
-        ];
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
