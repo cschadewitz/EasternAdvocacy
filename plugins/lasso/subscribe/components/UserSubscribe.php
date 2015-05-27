@@ -170,7 +170,7 @@ class UserSubscribe extends ComponentBase
 
         $user->save($userData);
         //var_dump(UserExtension::getModel($user));
-        $subbed = ($data['subscribe'] ? date('Y-m-d H:i:s') : null);
+        $subbed = (array_key_exists('subscribe', $data) ? date('Y-m-d H:i:s') : null);
         UserExtension::getModel($user, $subbed, $data['affiliation']);
 
         /*
