@@ -14,6 +14,7 @@ use Cms\Classes\ComponentBase;
 use Lasso\Subscribe\Models\Subscribe as Subscriber;
 use Lasso\Subscribe\Models\UserExtension;
 use RainLab\User\Models\Settings as UserSettings;
+use RainLab\User\Models\User as UserModel;
 use Exception;
 
 class UserSubscribe extends ComponentBase
@@ -139,7 +140,7 @@ class UserSubscribe extends ComponentBase
         }
 
         $userextension->affiliation = Subscriber::type2Int($data["affiliation"]);
-        $userextension->user = $user;
+        $userextension->user = UserModel::where('email', '=', $data['email']);
         $userextension->save();
         /*
          * Activation is by the user, send the email
