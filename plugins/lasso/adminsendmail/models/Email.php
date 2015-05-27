@@ -2,6 +2,7 @@
 namespace Lasso\AdminSendMail\Models;
 
 use Model;
+use Backend\Facades\BackendAuth;
 
 class Email extends Model {
 	protected $table = 'lasso_adminsendmail_emails';
