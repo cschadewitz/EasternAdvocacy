@@ -97,7 +97,6 @@ class Emails extends Controller {
 		}*/
 
 		$email->sent = true;
-		$email->author =
 		$email->save();
 
 		return $this->makePartial('send', [
