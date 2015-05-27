@@ -117,7 +117,7 @@ class UserSubscribe extends ComponentBase
         if ($this->loginAttribute() == UserSettings::LOGIN_USERNAME) {
             $rules['username'] = 'required|between:2,64';
         }
-        $userData = array_slice($data, 0, 4);
+        $userData = array_slice($data, 0, 5);
 
         $validation = Validator::make($data, $rules);
         if ($validation->fails()) {
@@ -170,14 +170,8 @@ class UserSubscribe extends ComponentBase
 
         $user->save($userData);
         //var_dump(UserExtension::getModel($user));
-        if($data['subscribe'])
-        {
-            $user->extension->verificationDate = date('Y-m-d H:i:s');
-        }
-        else
-        {
-            $user->extension->verificationDate = null;
-        }
+        $subbed = ($data['subscribe'] ? date('Y-m-d H:i:s') : null);
+        UserExtension::getModel($user, $subbed, $data['affiliation']);
 
         /*
          * Password has changed, reauthenticate the user
