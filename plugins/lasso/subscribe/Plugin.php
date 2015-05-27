@@ -58,7 +58,7 @@
         }
 
         public function boot(){
-            //$this->extendUserModel();
+            $this->extendUserModel();
             //$this->extendUserController();
             //$this->extendUserMenu();
         }
