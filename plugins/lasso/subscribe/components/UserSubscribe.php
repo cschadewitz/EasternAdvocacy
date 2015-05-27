@@ -138,9 +138,9 @@ class UserSubscribe extends ComponentBase
         {
             $userextension->verificationDate = date('Y-m-d H:i:s');
         }
-
+        $email = $data['email'];
         $userextension->affiliation = Subscriber::type2Int($data["affiliation"]);
-        $userextension->user = UserModel::where('email', '=', $data['email']);
+        $userextension->user = UserModel::where('email', '=', $email);
         $userextension->save();
         /*
          * Activation is by the user, send the email
