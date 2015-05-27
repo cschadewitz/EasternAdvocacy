@@ -135,7 +135,7 @@ class UserSubscribe extends ComponentBase
         //$user->extension = $userextension;
         if($data['subscribe'])
         {
-            $user->extension->verificationDate = DateTime::getTimestamp();
+            $user->extension->verificationDate = date('Y-m-d H:i:s');
         }
 
         $user->extension->affiliation = Subscriber::type2Int($data["affiliation"]);
