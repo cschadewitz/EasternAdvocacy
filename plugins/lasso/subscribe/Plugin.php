@@ -26,7 +26,7 @@
         {
             return [
                 '\Lasso\Subscribe\Components\UserSubscribe' => 'user_extended',
-                '\lasso\Subscribe\Components\Form' => 'SubForm'
+                '\Lasso\Subscribe\Components\Form' => 'SubForm'
             ];
         }
 
@@ -139,13 +139,13 @@
         {
             // Check if old unverified entries need to be deleted
             $schedule->call(function(){
-                $results = Db::select('select * from subscribers where verificationDate IS NULL');
+                $results = Db::select('select * from lasso_subscribe_subscribers where verificationDate IS NULL');
                 $now = date('Y-m-d H:i:s');
                 $timeLimit = 60 * 60 * 24;
                 foreach($results as $val){
                     $checkIn = $val->created_at;
                     if(strtotime($now) - strtotime($checkIn) > $timeLimit){
-                        Db::delete('delete from subscribers where uuid = "'.$val->uuid.'"');
+                        Db::delete('delete from lasso_subscribe_subscribers where uuid = "'.$val->uuid.'"');
                     }
                 }
             })->everyFiveMinutes();

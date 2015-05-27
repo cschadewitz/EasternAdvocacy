@@ -6,7 +6,7 @@
     $('.submit').submit(function (e) {
         return false;
     });
-});
+})();
 
 function processForm()
 {
