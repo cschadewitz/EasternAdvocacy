@@ -78,15 +78,14 @@
 
 
                 $list->addColumns([
-                    'verificationDate'  => [
+                    'extension[verificationDate]'  => [
                         'label' => 'Subscribed?',
                         'type' => 'partial',
                         'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
                     ],
                     'extension[affiliation]' => [
-                        'label' => 'Affiliation',
-                        'type' => 'text',
-                        'width' => '10'
+                        'label' => 'University Affiliation',
+                        'type' => 'text'
                     ]
                 ]);
             });
@@ -108,7 +107,7 @@
                         //'disabled' => 'true'
                         'path'  => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm'
                     ],
-                    'extension[type]'  => [
+                    'extension[affiliation]'  => [
                         'label' => 'University Affiliation',
                         'tab'   => 'Advocacy',
                         'type'  => 'text',
