@@ -19,6 +19,12 @@ fields:
         label: Content
         description: The content of this email
         type: partial
+    author:
+        label: Author
+        description: The author of this email
+        type: partial
+        path: $/lasso/adminsendmail/controllers/emails/_preview_author.htm
+        disabled: true
     attachments:
         label: Attachment
         type: partial
