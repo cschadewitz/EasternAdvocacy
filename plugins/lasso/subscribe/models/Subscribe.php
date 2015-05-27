@@ -60,7 +60,7 @@
             return uniqid();
         }
 
-        public function type2int($type)
+        public static function type2int($type)
         {
             if(!empty($type)){
                 if(strcmp($type, "student")==0){
