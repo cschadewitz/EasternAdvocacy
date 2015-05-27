@@ -38,7 +38,7 @@
             ];
         }
 
-        public function registerReportWidget()
+        public function registerReportWidgets()
         {
             return [
                 '\Lasso\Subscribe\ReportWidgets\Subscriptions' => [
