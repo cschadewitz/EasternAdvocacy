@@ -25,6 +25,7 @@ update:
     title: Edit Question
     redirect: lasso/faq/faqs/all
     redirectClose: lasso/faq/faqs/all
+    form: $/lasso/faq/models/question/update.yaml
 
 # Preview page
 preview:

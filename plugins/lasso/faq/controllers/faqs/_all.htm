@@ -24,7 +24,12 @@
                 echo '<h4 class="panel-title">';
                 echo '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$question->id.'">';
                 echo $question->question.'</a></h4></div><div id="collapse'.$question->id.'" class="panel-collapse collapse">';
-                echo '<div class="panel-body">'.$question->answer.'</div></div></div>';
+                echo '<div class="panel-body">';
+                if(empty($question->answer))
+                    echo '<em>This question has not been answered yet.</em>';
+                else
+                    echo $question->answer;
+                echo '</div></div></div>';
             }
         }
         ?>

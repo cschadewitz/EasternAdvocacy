@@ -1,0 +1,18 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    faq:
+        label: FAQ category
+        type: relation
+        nameFrom: title
+    question:
+        label: Question
+        type: text
+    answer:
+        label: Answer
+        type: richeditor
+    answered:
+        label: Answered?
+        type: switch

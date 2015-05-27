@@ -26,7 +26,7 @@ class FAQs extends Controller
 
     public function all()
     {
-        $this->pageTitle = "Available FAQs";
+        $this->pageTitle = "Admin FAQ";
         $this->addCss('/plugins/lasso/faq/assets/bootstrap/css/bootstrap.min.css');
         $this->addCss('/plugins/lasso/faq/assets/font-awesome/css/font-awesome.min.css');
         $this->addCss('/plugins/lasso/faq/assets/faq/css/faq.css');

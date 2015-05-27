@@ -15,6 +15,7 @@ class CreateQuestionsTable extends Migration
             $table->string('question');
             $table->text('answer');
             $table->integer('faq_id');
+            $table->boolean('answered')->default(false);
             $table->timestamps();
         });
     }

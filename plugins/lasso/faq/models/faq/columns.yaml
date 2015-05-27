@@ -6,3 +6,10 @@ columns:
     id:
         label: ID
         searchable: true
+    title:
+        label: Category title
+        type: text
+    questions:
+        label: Questions
+        relation: questions
+        select: question

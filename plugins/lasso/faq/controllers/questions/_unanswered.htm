@@ -1,0 +1,42 @@
+<?php \Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('lasso/faq/faqs/all') ?>">F A Qs</a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
+<?php \Block::endPut() ?>
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered table-hover col-md-6">
+            <?php
+            if(count($questions) == 0)
+            {
+                echo 'There are no unanswered questions at this moment.<br/>';
+            }
+            else
+            {
+            ?>
+                <thead>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Question</th>
+                    <th>Options</th>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach($questions as $question)
+                    {
+                        echo '<th scope="row">'.$question->id.'</th>';
+                        echo '<td>'.$question->faq->title.'</td>';
+                        echo '<td>'.$question->question.'</td>';
+                        echo '<td><a href="'.Backend::url('lasso/faq/questions/update/').'/'.$question->id.'">Answer this</a></td>';
+                    }
+                    ?>
+                </tbody>
+            <?php
+            }
+            ?>
+            <br/><br/>
+            <p><a href="<?= Backend::url('lasso/faq/faqs/all') ?>" class="btn btn-primary" style="float: right;">Return to FAQs</a></p>
+        </table>
+    </div>
+</div>

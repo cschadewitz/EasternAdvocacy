@@ -39,16 +39,23 @@ class Plugin extends PluginBase
                         'label' => 'New FAQ category',
                         'icon' => 'icon-plus',
                         'url' => Backend::url('lasso/faq/faqs/create'),
-                        'permissions' => ['lasso.faq.access_questions'],
+                        'permissions' => ['lasso.faq.add_categories'],
                     ],
                     'questions' => [
                         'label' => 'New Question',
-                        'icon' => 'icon-plus',
+                        'icon' => 'icon-question',
                         'url' => Backend::url('lasso/faq/questions/create'),
-                        'permissions' => ['lasso.faq.access_questions'],
+                        'permissions' => ['lasso.faq.ask_questions'],
+                    ],
+                    'answers' => [
+                        'label' => 'Answer Questions',
+                        'icon' => 'icon-magic',
+                        'url' => Backend::url('lasso/faq/questions/unanswered'),
+                        'permissions' => ['lasso.faq.answer_questions'],
                     ],
                 ],
-            ]
+            ],
+
         ];
     }
 }
