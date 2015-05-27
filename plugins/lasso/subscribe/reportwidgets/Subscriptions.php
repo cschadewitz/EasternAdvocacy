@@ -31,8 +31,8 @@ class Subscriptions extends ReportWidgetBase {
         return [
             'includeUnsub' => [
                 'title'    => 'Include un-subscribed users',
-                'type'     => 'switch',
-                'default'  => '0'
+                'type'     => 'checkbox',
+                'default'  => ''
             ]
         ];
     }
