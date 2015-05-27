@@ -61,6 +61,7 @@ class UserExtension extends Model
         {
             $userextension->affiliation = Subscribe::type2Int($affiliation);
         }
+        $userextension->save();
         return $userextension;
     }
 
