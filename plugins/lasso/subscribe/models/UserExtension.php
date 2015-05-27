@@ -36,10 +36,7 @@ class UserExtension extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-    public function user()
-    {
-        return $this->belongsTo('user');
-    }
+
     public function scopeSubscribers($query, $inverse = false)
     {
         $temp = $query->wherehas('user', function($q)
