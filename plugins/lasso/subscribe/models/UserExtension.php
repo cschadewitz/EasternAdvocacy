@@ -71,7 +71,7 @@ class UserExtension extends Model
             return $user->extension;
         $userextension = new static;
         $userextension->user = $user;
-        //$userextension->user_id = $user->id;
+        $userextension->user_id = $user->id;
         $userextension->verificationDate = $verificationDate;
         $userextension->affiliation = ($affiliation ? $affiliation : "friend");
         $userextension->save();
