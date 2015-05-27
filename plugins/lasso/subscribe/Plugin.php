@@ -25,7 +25,7 @@
         public function registerComponents()
         {
             return [
-                '\Lasso\Subscribe\Components\Form' => 'SubForm',
+                '\lasso\Subscribe\Components\Form' => 'SubForm',
                 '\Lasso\Subscribe\Components\UserSubscribe' => 'user_extended'
             ];
         }
