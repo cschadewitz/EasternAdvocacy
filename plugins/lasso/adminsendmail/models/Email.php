@@ -44,7 +44,7 @@ class Email extends Model {
 
 	public function getAuthor($id)
 	{
-		return BackendAuth::getUserById($id);
+		return BackendAuth::findUserById($id);
 	}
 
 	public function setUrl($pageName, $controller) {
