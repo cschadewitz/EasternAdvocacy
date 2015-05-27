@@ -16,7 +16,7 @@ columns:
   author:
     label: Author
     type: partial
-    path: $/lasso/adminsendmail/controllers/emails/_preview_author.htm
+    path: $/lasso/adminsendmail/controllers/emails/_author.htm
     width: 10
   views: Views
   attachments:
