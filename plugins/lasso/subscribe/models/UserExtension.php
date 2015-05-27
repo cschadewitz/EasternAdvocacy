@@ -31,7 +31,7 @@ class UserExtension extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [ 'user' => ['RainLab\User\Models\User', 'key' => 'user_id'] ];
+    public $belongsTo = [ 'user' => ['RainLab\User\Models\User', 'foreign_key' => 'id'] ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
@@ -73,7 +73,7 @@ class UserExtension extends Model
         $userextension->user = $user;
         //$userextension->user_id = $user->id;
         $userextension->verificationDate = $verificationDate;
-        $userextension->affiliation = ($affiliation ? $affiliation : 3);
+        $userextension->affiliation = ($affiliation ? $affiliation : "friend");
         $userextension->save();
         $user->extension = $userextension;
         //$user->push();
