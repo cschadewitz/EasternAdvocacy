@@ -150,17 +150,4 @@
                 }
             })->everyFiveMinutes();
         }
-
-        public function registerNavigation()
-        {
-            return [
-                'subscribe' => [
-                    'label' => 'Subscribe',
-                    'url' => Backend::url('lasso/subscribe/subscribe'),
-                    'icon' => 'icon-check-square',
-                    'permissions' => ['lasso.subscribe.*'],
-                    'order' => 501,
-                ]
-            ];
-        }
     }
