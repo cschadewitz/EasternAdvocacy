@@ -139,7 +139,8 @@ class UserSubscribe extends ComponentBase
         }
 
         $userextension->affiliation = Subscriber::type2Int($data["affiliation"]);
-        $userextension->user_id = $user->id;
+        $userextension->user = $user;
+        $userextension->push();
         $userextension->save();
         /*
          * Activation is by the user, send the email
