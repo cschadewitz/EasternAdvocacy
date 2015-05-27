@@ -106,7 +106,7 @@
                         'tab'   => 'Advocacy',
                         'type'  => 'Partial',
                         //'disabled' => 'true'
-                        'path'  => '$/lasso/subscribe/controllers/subscribers/_subscribed.htm'
+                        'path'  => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm'
                     ],
                     'extension[type]'  => [
                         'label' => 'University Affiliation',
