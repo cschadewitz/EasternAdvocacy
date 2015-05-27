@@ -32,7 +32,7 @@ class Subscriptions extends ReportWidgetBase {
             'includeUnsub' => [
                 'title'    => 'Include un-subscribed users',
                 'type'     => 'switch',
-                'default'  => ''
+                'default'  => '0'
             ]
         ];
     }
