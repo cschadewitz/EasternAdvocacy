@@ -39,6 +39,11 @@ class Email extends Model {
 		return $query->paginate($postsPerPage, $page);
 	}
 
+	public function getAuthor($id)
+	{
+		return BackendAuth::findUserById($id);
+	}
+
 	public function setUrl($pageName, $controller) {
 		$params = [
 			'id' => $this->id,
