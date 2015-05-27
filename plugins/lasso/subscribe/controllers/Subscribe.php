@@ -25,7 +25,7 @@ class Subscribe extends \Backend\Classes\Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('RainLab.User', 'user', 'subscribers');
+        BackendMenu::setContext('Lasso.Subscribe', 'subscribe', 'subscribe');
         $subscriptionsWidget = new Subscriptions($this);
         $subscriptionsWidget->alias = 'Subscriptions';
         $subscriptionsWidget->bindToController();
