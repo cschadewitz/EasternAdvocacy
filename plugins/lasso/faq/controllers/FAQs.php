@@ -1,6 +1,7 @@
 <?php namespace Lasso\FAQ\Controllers;
 
 use BackendMenu;
+use System\Classes\SettingsManager;
 use Backend\Classes\Controller;
 use Lasso\FAQ\Models\FAQ;
 
@@ -22,6 +23,7 @@ class FAQs extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Lasso.FAQ', 'faq', 'faqs');
+        SettingsManager::setContext('Lasso.Faq', 'notifications');
     }
 
     public function all()

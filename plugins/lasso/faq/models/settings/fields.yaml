@@ -1,0 +1,24 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    contact1:
+        label: Contact 1
+        type: text
+    contact2:
+        label: Contact 2
+        type: text
+    contact3:
+        label: Contact 3
+        type: text
+    contact4:
+        label: Contact 4
+        type: text
+    contact5:
+        label: Contact 5
+        type: text
+    send_emails:
+        label: Send notifications to these contacts?
+        type: switch
+        default: 0
