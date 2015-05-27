@@ -97,6 +97,7 @@ class Emails extends Controller {
 		}*/
 
 		$email->sent = true;
+		$email->author = BackendAuth::getUser()->id;
 		$email->save();
 
 		return $this->makePartial('send', [
