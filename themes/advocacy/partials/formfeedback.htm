@@ -1,0 +1,11 @@
+<div class="alert alert-{% if has_error %}danger{% else %}success{% endif %}" role="alert">
+    <span class="icon-{% if has_error %}frown{% else %}smile{% endif %}" aria-hidden="true"></span>
+    <h2>{{ feedback_header }}</h2>
+    {{ message }}
+</div>
+
+{% if not has_error %}
+    <script>
+        $("#action-form").trigger("success");
+    </script>
+{% endif %}

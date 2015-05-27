@@ -21,10 +21,9 @@
 			This Action is not active.
 		</div>
 	{% endif %}
-    <article id="takeaction" class="col-md-8 col-md-offset-2">        
+    <article id="takeaction" class="col-md-8 col-md-offset-2">
         {% if access_status == 'ok' %}{% set fill = true %}{% else %}{% set fill = false %}{% endif %}
             <header><h2>{{ action.title }}</h2></header>
-
 					<img src="{{ action.photo.getPath() }}" class="img-responsive img-thumbnail" >
             <div class="takeaction-header">
 				<h1>{{ action.subtitle }}</h1>
@@ -40,7 +39,7 @@
 					<div class="row panel panel-default">
 						<div class="panel-heading">
 							<h2>Your representatives</h2>
-							<div class="row">
+							<div class="row" id="reps-div">
 							  {% for rep in reps %}    
 							  <div class="col-xs-4">
 							    <div class="thumbnail">
@@ -54,28 +53,31 @@
 							      </div>
 							    </div>
 							  </div>
+							  {% else %}
+							  	<em>Enter your zip code below to view your representatives.</em>
 							  {% endfor %}
 							</div>
 						</div>
 						<div class="panel-body">
-							<div class="well">
-								<form>
+                            <div id="form-feedback"></div>
+							<div class="well" id="action-form">
+								<form data-request="onSubmitAction" data-request-update="formfeedback: '#form-feedback'">
 									<div class="row">
 										<div class="col-xs-6">
 											<div class="form-group">
 											    <label for="name">Name: </label>
 											    <input type="text" class="form-control" id="name" name="name" 
-											    	{% if fill %}value="{{ user.name }}" {% if user.name is not empty %}disabled{% endif %}{% endif %} required>
+											    	{% if fill %}value="{{ user.name }}" {% if user.name is not empty %}readonly{% endif %}{% endif %} required>
 											</div>
 											<div class="form-group">
 											    <label for="email">Email: </label>
 											    <input type="email" class="form-control" id="email" name="email" 
-											    	{% if fill %}value="{{ user.email }}"  {% if user.email is not empty %}disabled{% endif %}{% endif %} required>
+											    	{% if fill %}value="{{ user.email }}"  {% if user.email is not empty %}readonly{% endif %}{% endif %} required>
 											</div>
 											<div class="form-group">
 											    <label for="zipcode">Zip code: </label>
-											    <input type="text" class="form-control" id="zipcode" name="zipcode"
-											    	{% if fill %}value="{{ user.zipcode }}" {% if user.zipcode is not empty %}disabled{% endif %}{% endif %} required>
+											    <input type="text" class="form-control" id="zipcode" name="zipcode" pattern="\d{5,5}(-\d{4,4})?"
+											    	{% if fill %}value="{{ user.zipcode }}" {% if user.zipcode is not empty %}readonly{% endif %}{% endif %} required>
 											</div>
 										</div>
 										<div class="col-xs-6">
@@ -97,3 +99,5 @@
         {% endif %}
     </article>
 </div>
+
+{{ debug }}
