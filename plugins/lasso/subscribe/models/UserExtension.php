@@ -65,15 +65,15 @@ class UserExtension extends Model
         return $userextension;
     }
 
-    public static function getModel($user)
+    public static function getModel($user, $verificationDate = null, $affiliation = null)
     {
         if($user->extension)
             return $user->extension;
         $userextension = new static;
         $userextension->user = $user;
         //$userextension->user_id = $user->id;
-        $userextension->verificationDate = null;
-        //$userextension->affiliation = "other";
+        $userextension->verificationDate = $verificationDate;
+        $userextension->affiliation = ($affiliation ? $affiliation : 3);
         $userextension->save();
         $user->extension = $userextension;
         //$user->push();
