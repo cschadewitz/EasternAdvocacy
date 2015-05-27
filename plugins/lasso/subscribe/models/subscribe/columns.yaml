@@ -15,5 +15,10 @@ columns:
     zip:
           label: Zipcode
           type: number
-    type: type
-    verificationDate: vDate
+    type:
+          label: Affiliation
+          type: text
+    verificationDate:
+          label: Subscribed
+          type: partial
+          path: $/lasso/subscribe/controllers/subscribe/_subscribed.htm
