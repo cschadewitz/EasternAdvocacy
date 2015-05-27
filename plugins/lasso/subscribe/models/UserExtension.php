@@ -55,12 +55,12 @@ class UserExtension extends Model
             return $user->extension;
         $userextension = new static;
         $userextension->user = $user;
-        //$userextension->user_id = $user->id;
+        $userextension->user_id = $user->id;
         $userextension->verificationDate = null;
-        $userextension->affiliation = "other";
+        //$userextension->affiliation = "other";
         $userextension->save();
         $user->extension = $userextension;
-        $user->push();
+        //$user->push();
         return $userextension;
     }
 }
