@@ -60,7 +60,7 @@
         public function boot(){
             $this->extendUserModel();
             $this->extendUserController();
-            //$this->extendUserMenu();
+            $this->extendUserMenu();
         }
 
         protected function extendUserModel()
@@ -80,8 +80,8 @@
                 $list->addColumns([
                     'extension[verificationDate]'  => [
                         'label' => 'Subscribed?',
-                        'type' => 'switch',
-                        //'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
+                        'type' => 'partial',
+                        'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
                     ],
                     'extension[affiliation]' => [
                         'label' => 'Affiliation',
