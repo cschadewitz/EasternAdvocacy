@@ -163,7 +163,7 @@ class UserSubscribe extends ComponentBase
 
     public function onUpdateExtension()
     {
-        if (!$user = $this->user())
+        if (!$user = $this->getUser())
             return;
         $data = post();
         $userData = array_slice($data, 0, 5);
