@@ -16,19 +16,23 @@
             {
             ?>
                 <thead>
+                		<tr>
                     <th>#</th>
                     <th>Category</th>
                     <th>Question</th>
                     <th>Options</th>
+                  </tr>
                 </thead>
                 <tbody>
                     <?php
                     foreach($questions as $question)
                     {
+                    	    echo '<tr>';
                         echo '<th scope="row">'.$question->id.'</th>';
                         echo '<td>'.$question->faq->title.'</td>';
                         echo '<td>'.$question->question.'</td>';
                         echo '<td><a href="'.Backend::url('lasso/faq/questions/update/').'/'.$question->id.'">Answer this</a></td>';
+                        echo '</tr>';
                     }
                     ?>
                 </tbody>

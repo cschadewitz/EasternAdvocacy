@@ -24,6 +24,21 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerSettings()
+    {
+        return [
+            'notifications' => [
+                'label'       => 'FAQ Settings',
+                'description' => 'Manage FAQ settings.',
+                'category'    => 'FAQ',
+                'icon'        => 'icon-cog',
+                'class'       => 'Lasso\Faq\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'faq'
+            ]
+        ];
+    }
+
     public function registerNavigation()
     {
         return [
