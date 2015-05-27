@@ -125,7 +125,7 @@
                         'label'         => 'Subscribers',
                         'url'           => Backend::url('lasso/subscribe/subscribe'),
                         'icon'          => 'icon-user',
-                        'owner'         => 'RainLab.Subscribe',
+                        'owner'         => 'Lasso.Subscribe',
                         'permissions'   => ['lasso.subscribers.*'],
                     ],
                     'users'         => [
