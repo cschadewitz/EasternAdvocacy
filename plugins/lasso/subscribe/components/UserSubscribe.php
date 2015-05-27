@@ -131,8 +131,7 @@ class UserSubscribe extends ComponentBase
         $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
         $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
         $user = Auth::register($userData, $automaticActivation);
-        $userextension = UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
-        return;
+
         /*
          * Activation is by the user, send the email
          */
@@ -148,6 +147,8 @@ class UserSubscribe extends ComponentBase
         if ($automaticActivation || !$requireActivation) {
             Auth::login($user);
         }
+
+        $userextension = UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
 
         /*
          * Redirect to the intended page after successful sign in
