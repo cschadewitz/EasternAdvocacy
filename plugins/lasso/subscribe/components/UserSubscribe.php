@@ -54,14 +54,6 @@ class UserSubscribe extends ComponentBase
         return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
-    public function user()
-    {
-        if (!Auth::check())
-            return null;
-
-        return Auth::getUser();
-    }
-
     /**
      * Returns the login model attribute.
      */
@@ -140,7 +132,7 @@ class UserSubscribe extends ComponentBase
         }
         $email = $data['email'];
         $userextension->affiliation = Subscriber::type2Int($data["affiliation"]);
-        //$userextension->user = UserModel::where('email', '=', $email);
+        $userextension->user = UserModel::where('email', '=', $email);
         $userextension->save();
         /*
          * Activation is by the user, send the email
