@@ -42,9 +42,9 @@ class Email extends Model {
 		return $query->paginate($postsPerPage, $page);
 	}
 
-	public function getAuthor()
+	public function getAuthor($id)
 	{
-		return Backend::getUserById($this->author_id);
+		return Backend::getUserById($id);
 	}
 
 	public function setUrl($pageName, $controller) {
