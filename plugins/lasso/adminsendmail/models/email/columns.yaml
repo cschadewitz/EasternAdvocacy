@@ -13,7 +13,7 @@ columns:
     type: html
   created_at: Created On
   updated_at: Modified On
-  author:
+  author_id:
     label: Author
     type: partial
     path: $/lasso/adminsendmail/controllers/emails/_author.htm
