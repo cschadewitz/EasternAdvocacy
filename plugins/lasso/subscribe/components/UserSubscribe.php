@@ -110,7 +110,7 @@ class UserSubscribe extends ComponentBase
         $rules = [
             'email'    => 'required|email|between:2,64',
             'password' => 'required|min:6',
-            'zip' => 'required|numeric|between:5,10'
+            'zip' => 'required|between:5,10'
         ];
 
         if ($this->loginAttribute() == UserSettings::LOGIN_USERNAME) {
