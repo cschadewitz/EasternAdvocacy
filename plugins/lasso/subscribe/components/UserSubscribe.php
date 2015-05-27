@@ -109,7 +109,7 @@ class UserSubscribe extends ComponentBase
 
         $rules = [
             'email'    => 'required|email|between:2,64',
-            'password' => 'required|min:2',
+            'password' => 'required|min:6',
             'zip' => 'required|numeric|between:5,9'
         ];
 
@@ -168,7 +168,7 @@ class UserSubscribe extends ComponentBase
         }
     }
 
-    public function onUpdate()
+    public function onUpdateExtension()
     {
         if (!$user = $this->user())
             return;
