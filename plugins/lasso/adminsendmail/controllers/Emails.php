@@ -76,7 +76,7 @@ class Emails extends Controller {
 
 		//send email
 		$subs = Subscribe::verified()->get();
-		//$users = UserExtension::subscribers()->get();
+		$users = UserExtension::subscribers()->get();
 		$params = ['msg' => $email->content, 'subject' => $email->subject];
 		foreach ($subs as $subscriber) {
 			$params['unsubscribeUrl'] = '/unsubscribe/' . $subscriber->email . '/' . $subscriber->uuid;
@@ -87,7 +87,7 @@ class Emails extends Controller {
 				}
 			});
 		}
-		/*foreach ($users as $user) {
+		foreach ($users as $user) {
 			$params['loginUrl'] = '/user/account/';
 			Mail::send('lasso.adminsendmail::mail.user', $params, function ($message) use ($user, $email) {
 				$message->to($user->user->email, $user->user->name);
@@ -95,7 +95,7 @@ class Emails extends Controller {
 					$message->attach(App::basePath() . $attachment->getPath());
 				}
 			});
-		}*/
+		}
 
 		$email->sent = true;
 		$email->author = BackendAuth::getUser()->id;
