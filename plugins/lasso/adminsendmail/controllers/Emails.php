@@ -3,6 +3,7 @@
 use App;
 use Backend;
 use BackendMenu;
+use Backend\Facades\BackendAuth;
 use Backend\Classes\Controller;
 use Lasso\Adminsendmail\Models\Email;
 use Lasso\Subscribe\Models\Subscribe;
