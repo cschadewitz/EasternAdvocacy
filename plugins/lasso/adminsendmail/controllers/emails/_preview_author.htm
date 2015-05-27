@@ -1,1 +1,2 @@
-<div class="author-preview"><?=$model->getAuthor($value)->first_name?></div>
+<div class="author-preview"><?php if($value): ?> <?= $model->getAuthor($value)->first_name ?><?php else: ?>None <?php endif;?></div>
+<div class="author-preview"><?php if($value): ?> <?= $model->getAuthor($value)->first_name ?><?php else: ?>None <?php endif;?></div>
