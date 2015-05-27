@@ -12,7 +12,7 @@ class UpdateEmailsAddAuthor extends Migration {
      */
     public function up() {
         Schema::table('lasso_adminsendmail_emails', function ($table) {
-            $table->integer('admin_id')->unsigned()->index();
+            $table->integer('author_id')->unsigned()->index();
         });
     }
 
@@ -23,7 +23,7 @@ class UpdateEmailsAddAuthor extends Migration {
      */
     public function down() {
         Schema::table('lasso_adminsendmail_emails', function ($table) {
-            $table->dropColumn("admin_id");
+            $table->dropColumn("author_id");
         });
     }
 
