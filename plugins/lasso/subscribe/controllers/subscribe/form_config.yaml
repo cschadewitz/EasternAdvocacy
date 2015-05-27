@@ -2,7 +2,7 @@
 # Subscription Form Behavior Config
 #=====================================
 
-name: Signature
+name: Subscriber
 form: ~/plugins/lasso/subscribe/models/subscribe/fields.yaml
 modelClass: Lasso\Subscribe\Models\Subscribe
 
