@@ -39,7 +39,7 @@ class Subscriptions extends ReportWidgetBase {
 
     public function render()
     {
-
+        $this->assignVars();
         return $this->makePartial('reportWidget');
     }
 
