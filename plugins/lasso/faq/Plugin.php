@@ -41,6 +41,12 @@ class Plugin extends PluginBase
                         'url' => Backend::url('lasso/faq/faqs/create'),
                         'permissions' => ['lasso.faq.add_categories'],
                     ],
+                    'list_categories' => [
+                        'label' => 'FAQ categories',
+                        'icon' => 'icon-th-list',
+                        'url' => Backend::url('lasso/faq/faqs/'),
+                        'permissions' => ['lasso.faq.add_categories'],
+                    ],
                     'questions' => [
                         'label' => 'New Question',
                         'icon' => 'icon-question',
@@ -52,6 +58,12 @@ class Plugin extends PluginBase
                         'icon' => 'icon-magic',
                         'url' => Backend::url('lasso/faq/questions/unanswered'),
                         'permissions' => ['lasso.faq.answer_questions'],
+                    ],
+                    'list_questions' => [
+                        'label' => 'List of questions',
+                        'icon' => 'icon-list',
+                        'url' => Backend::url('lasso/faq/questions/'),
+                        'permissions' => ['lasso.faq.list_questions'],
                     ],
                 ],
             ],

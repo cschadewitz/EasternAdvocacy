@@ -1,2 +1,5 @@
 
-<?= $this->listRender() ?>
+<?php
+ \BackendMenu::setContext('Lasso.FAQ', 'faq', 'list_questions');
+
+ echo $this->listRender(); ?>

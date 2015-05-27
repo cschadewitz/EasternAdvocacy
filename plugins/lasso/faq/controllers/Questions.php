@@ -26,7 +26,6 @@ class Questions extends Controller
 
     public function unanswered()
     {
-
         BackendMenu::setContext('Lasso.FAQ', 'faq', 'answers');
         $this->pageTitle = "Answer questions";
         $this->addCss('/plugins/lasso/faq/assets/bootstrap/css/bootstrap.min.css');
