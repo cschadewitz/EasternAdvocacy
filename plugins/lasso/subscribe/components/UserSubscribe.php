@@ -139,8 +139,14 @@ class UserSubscribe extends ComponentBase
             $this->sendActivationEmail($user);
 
             Flash::success('An activation email has been sent to you at ' + $data["email"]);
+            UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
+            $redirectUrl = $this->pageUrl($this->property('redirect'));
+
+            if ($redirectUrl = post('redirect', $redirectUrl)) {
+                return Redirect::intended($redirectUrl);
+            }
         }
-        Flash::success('An activation email has been sent to you at ' + $data["email"]);
+
         /*
          * Automatically activated or not required, log the user in
          */
