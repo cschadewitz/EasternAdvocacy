@@ -1,7 +1,9 @@
 <?php namespace Lasso\Subscribe\Models;
 
+use Lasso\Subscribe\Controllers\Subscribe as Subscribers;
 use Model;
 use RainLab\User\Models\User;
+use Lasso\Subscribe\Models\Subscribe as Subscribe;
 
 /**
  * UserExtension Model
@@ -47,6 +49,19 @@ class UserExtension extends Model
             return $temp->where('verificationDate', '!=', 'NULL');
         else
             return $temp->where('verificationDate', '=', 'NULL');
+    }
+    public static function newModel($verificationDate = null, $affiliation = null )
+    {
+        $userextension = new static;
+        if($verificationDate)
+        {
+            $userextension->verificationDate = $verificationDate;
+        }
+        if($affiliation)
+        {
+            $userextension->affiliation = Subscribe::type2Int($affiliation);
+        }
+        return $userextension;
     }
 
     public static function getModel($user)
