@@ -54,6 +54,14 @@ class UserSubscribe extends ComponentBase
         return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function getUser()
+    {
+        if (!Auth::check())
+            return null;
+
+        return Auth::getUser();
+    }
+
     /**
      * Returns the login model attribute.
      */
@@ -81,7 +89,7 @@ class UserSubscribe extends ComponentBase
             $this->onActivate(false, $activationCode);
         }
 
-        $this->page['user'] = $this->user();
+        $this->page['user'] = $this->getUser();
         $this->page['loginAttribute'] = $this->loginAttribute();
         $this->page['loginAttributeLabel'] = $this->loginAttributeLabel();
     }
