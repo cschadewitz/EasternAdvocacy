@@ -1,0 +1,19 @@
+fields:
+    menu:
+        type: partial
+        path: $/lasso/subscribe/controllers/subscribe/_preview_menu.htm
+    name:
+        label: name
+        description: Your name
+        type: text
+    e-mail:
+        label: e-mail
+        description: your e-mail address
+        type: text
+    zip:
+        label: zip
+        description: your zip code
+        type: text
+    type:
+        label: type
+        description: Affiliation with university

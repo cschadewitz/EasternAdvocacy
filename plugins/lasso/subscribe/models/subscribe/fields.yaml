@@ -16,12 +16,12 @@ fields:
         description: your zip code
         type: text
     type:
-        label: type
-        type: dropdown
-        span: left
-        options:
-          Student: Student
-          Alumni: Alumni
-          Friend: Friend
-          Other: Other
-        description: Affiliation with university
+            label: type
+            type: dropdown
+            span: left
+            options:
+              Student: Student
+              Alumni: Alumni
+              Friend: Friend
+              Other: Other
+            description: Affiliation with university

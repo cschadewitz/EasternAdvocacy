@@ -11,6 +11,7 @@ class CreatePetitionsTable extends Migration
         Schema::create('lasso_subscribe_subscribers', function($table)
         {
             $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->char('uuid', 13);
             $table->string('email', 255);
             $table->string('name', 255);

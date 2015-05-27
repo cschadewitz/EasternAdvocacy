@@ -2,6 +2,7 @@
 namespace Lasso\AdminSendMail\Models;
 
 use Model;
+use Backend\Facades\BackendAuth;
 
 class Email extends Model {
 	protected $table = 'lasso_adminsendmail_emails';
@@ -12,7 +13,7 @@ class Email extends Model {
 
 	public $hasOne = [];
 	public $hasMany = [];
-	public $belongsTo = [];
+	public $belongsTo = ['author' => 'October\Rain\Auth\Models\User', 'key' => 'author_id'];
 	public $belongsToMany = [];
 	public $morphTo = [];
 	public $morphOne = [];
@@ -37,6 +38,11 @@ class Email extends Model {
 		], $options));
 
 		return $query->paginate($postsPerPage, $page);
+	}
+
+	public function getAuthor($id)
+	{
+		return BackendAuth::findUserById($id);
 	}
 
 	public function setUrl($pageName, $controller) {

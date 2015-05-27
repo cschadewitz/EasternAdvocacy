@@ -1,0 +1,44 @@
+<form data-request="onRegisterExtension">
+    <div class="form-group">
+        <label for="registerName">Name</label>
+        <input name="name" type="text" class="form-control" id="registerName" placeholder="Enter your name" pattern="[A-Za-z]{2,64}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input name="email" type="email" class="form-control" id="registerEmail" placeholder="Enter your email" pattern="[A-Za-z0-9_-]+[@][A-Za-z0-9_-]+[.][A-Za-z]{3,5}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input name="password" type="password" class="form-control" id="registerPassword" placeholder="Choose a password" pattern="[A-Za-z]{6,64}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="registerConfirmPassword">Confirm Password</label>
+        <input name="password_confirmation" type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirm password" pattern="[A-Za-z]{6,64}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="registerZip">Zip</label>
+        <input name="zip" type="text" class="form-control" id="registerZip" placeholder="Zip Code" pattern="\d{5,5}(-\d{4,4})?" required>
+    </div>
+
+    <div class="form-group">
+        <label for="registerAffiliation">Affiliation:</label>
+        <select id="registerAffiliation" class="form-control" name="affiliation" size="1">
+            <option value="none">-</option>
+            <option value="student">Student</option>
+            <option value="alumni">Alumni</option>
+            <option value="friend">Friend</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="registerSubscribe">Subscribe?</label>
+        <input name="subscribe" type="checkbox" class="form-control" id="registerSubscribe">
+    </div>
+
+    <button type="submit" class="btn btn-default">Register</button>
+</form>

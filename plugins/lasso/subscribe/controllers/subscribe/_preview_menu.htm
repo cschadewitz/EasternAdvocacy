@@ -1,0 +1,7 @@
+<div class="preview-menu">
+	<?php if($this->user->hasPermission('lasso.subscribe.edit_Subscribers')): ?>
+		<a href="<?=Backend::url('lasso/subscribe/subscribe/preview/' . $model->id)?>">
+			<span class="oc-icon-edit"></span>Edit
+		</a>
+	<?php endif; ?>
+</div>

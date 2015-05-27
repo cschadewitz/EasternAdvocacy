@@ -1,0 +1,25 @@
+<div class="report-widget">
+    <h3>Subscription Stats</h3>
+    <?php if (!isset($error)): ?>
+    <div
+            class="control-chart centered wrap-legend"
+            data-control="chart-pie"
+            data-size="200"
+            data-center-text="100">
+        <?php if($includeUnsub == 1): ?>
+        <ul>
+            <li>Un-Registered Subscribers <span><?= $subs ?></span></li>
+            <li>Subscribed Users <span><?= $userSubs ?></span></li>
+            <li>Un-Subscribed Users <span><?= $users ?></span></li>
+        </ul>
+        <?php else: ?>
+        <ul>
+            <li>Un-Registered Subscribers <span><?= $subs ?></span></li>
+            <li>Registered Subscribers <span><?= $userSubs ?></span></li>
+        </ul>
+        <?php endif; ?>
+    </div>
+    <?php else: ?>
+    <p class="flash-message static warning"><?= e($error) ?></p>
+    <?php endif; ?>
+</div>

@@ -5,7 +5,7 @@ use Backend;
 use BackendMenu;
 use Backend\Classes\Controller;
 use Lasso\Adminsendmail\Models\Email;
-use Lasso\Adminsendmail\Models\Subscriber;
+use Lasso\Subscribe\Models\Subscribe;
 use Lasso\Adminsendmail\ReportWidgets\TopViewed;
 use Mail;
 use Redirect;
@@ -73,12 +73,22 @@ class Emails extends Controller {
 		}
 
 		//send email
-		$subs = Subscriber::all();
+		$subs = Subscriber::verified()->get();
+		$users = UserExtension::subscribers()->get();
 		$params = ['msg' => $email->content, 'subject' => $email->subject];
 		foreach ($subs as $subscriber) {
 			$params['unsubscribeUrl'] = '/unsubscribe/' . $subscriber->email . '/' . $subscriber->uuid;
 			Mail::send('lasso.adminsendmail::mail.default', $params, function ($message) use ($subscriber, $email) {
 				$message->to($subscriber->email, $subscriber->name);
+				foreach ($email->attachments as $attachment) {
+					$message->attach(App::basePath() . $attachment->getPath());
+				}
+			});
+		}
+		foreach ($users as $user) {
+			$params['loginUrl'] = '/user/account/';
+			Mail::send('lasso.adminsendmail::mail.user', $params, function ($message) use ($user, $email) {
+				$message->to($user->user->email, $user->user->name);
 				foreach ($email->attachments as $attachment) {
 					$message->attach(App::basePath() . $attachment->getPath());
 				}

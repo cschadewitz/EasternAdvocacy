@@ -55,12 +55,17 @@
             return $query->where('verificationDate', 'IS', 'NULL');
         }
 
+        public function scopeVerified($query)
+        {
+            return $query->where('verificationDate', 'IS NOT', 'NULL');
+        }
+
         public function generateUUID()
         {
             return uniqid();
         }
 
-        public function type2int($type)
+        public static function type2int($type)
         {
             if(!empty($type)){
                 if(strcmp($type, "student")==0){
