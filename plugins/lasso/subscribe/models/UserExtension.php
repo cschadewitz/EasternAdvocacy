@@ -19,12 +19,12 @@ class UserExtension extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['id', 'user_id'];
+    protected $guarded = ['id'];
 
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['verificationDate', 'type'];
+    protected $fillable = ['user_id', 'verificationDate', 'type'];
 
     /**
      * @var array Relations
