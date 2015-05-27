@@ -78,11 +78,11 @@
 
 
                 $list->addColumns([
-                    //'extension[verificationDate]'  => [
-                      //  'label' => 'Subscribed?',
-                        //'type' => 'partial',
-                        //'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
-                    //],
+                    'extension[verificationDate]'  => [
+                        'label' => 'Subscribed?',
+                        'type' => 'partial',
+                        'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
+                    ],
                     'extension[affiliation]' => [
                         'label' => 'University Affiliation',
                         'type' => 'text'
