@@ -2,8 +2,10 @@
 
 <div class="form-container">
     <h1 class="mailing-list">Mailing List</h1>
-    <!--<form class="subscriber_form" onsubmit="processForm();return false;" method="post" name="subscriber_form"> -->
-    <form class="subscriber_form" onsubmit="onSubscribe();" method="post" name="subscriber_form">
+    {% flash %}
+    <div class="alert alert-{{type}}">{{ message }}</div>
+    {% endflash %}
+    <form class="subscriber_form" onsubmit="processForm();return false;" method="post" name="subscriber_form">
         <ul>
             <li>
                 <h2>Subscribe: </h2>

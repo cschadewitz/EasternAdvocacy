@@ -7,7 +7,7 @@ fields:
         label: name
         description: Your name
         type: text
-    e-mail:
+    email:
         label: e-mail
         description: your e-mail address
         type: text
@@ -16,5 +16,12 @@ fields:
         description: your zip code
         type: text
     type:
-        label: type
-        description: Affiliation with university
+            label: type
+            type: dropdown
+            span: left
+            options:
+              Student: Student
+              Alumni: Alumni
+              Friend: Friend
+              Other: Other
+            description: Affiliation with university
