@@ -148,16 +148,12 @@ class UserSubscribe extends ComponentBase
             Auth::login($user);
         }
 
-        $userextension = UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
+        UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
 
         /*
          * Redirect to the intended page after successful sign in
          */
-        $redirectUrl = $this->pageUrl($this->property('redirect'));
-
-        if ($redirectUrl = post('redirect', $redirectUrl)) {
-            return Redirect::intended($redirectUrl);
-        }
+        
     }
 
     public function onUpdateExtension()
