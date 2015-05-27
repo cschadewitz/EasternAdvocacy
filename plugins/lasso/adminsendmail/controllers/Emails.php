@@ -5,7 +5,7 @@ use Backend;
 use BackendMenu;
 use Backend\Classes\Controller;
 use Lasso\Adminsendmail\Models\Email;
-use Lasso\Adminsendmail\Models\Subscriber;
+use Lasso\Subscribe\Models\Subscribe;
 use Lasso\Adminsendmail\ReportWidgets\TopViewed;
 use Mail;
 use Redirect;
@@ -73,7 +73,7 @@ class Emails extends Controller {
 		}
 
 		//send email
-		$subs = Subscriber::all();
+		$subs = Subscriber::verified()->get();
 		$params = ['msg' => $email->content, 'subject' => $email->subject];
 		foreach ($subs as $subscriber) {
 			$params['unsubscribeUrl'] = '/unsubscribe/' . $subscriber->email . '/' . $subscriber->uuid;

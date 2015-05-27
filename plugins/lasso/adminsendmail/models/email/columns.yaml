@@ -1,15 +1,25 @@
 columns:
   id: Id
-  subject: Subject
-  abstract: Abstract
+  subject:
+    label: Subject
+    type: text
+    width: 20
+  abstract:
+    label: Abstract
+    type: text
+    width: 40
   content: 
     label: Content
     type: html
+  author_id:
+    label: Author
+    type: partial
+    path: $/lasso/adminsendmail/controllers/emails/_author.htm
   created_at: Created On
   updated_at: Modified On
   views: Views
   attachments:
-    label: attachments
+    label: Attachments
     type: partial
     sortable: no
   sent:

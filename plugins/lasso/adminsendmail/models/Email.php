@@ -12,7 +12,7 @@ class Email extends Model {
 
 	public $hasOne = [];
 	public $hasMany = [];
-	public $belongsTo = [];
+	public $belongsTo = ['author' => 'October\Rain\Auth\Models\User', 'key' => 'author_id'];
 	public $belongsToMany = [];
 	public $morphTo = [];
 	public $morphOne = [];
