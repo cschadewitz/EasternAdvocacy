@@ -171,7 +171,8 @@ class UserSubscribe extends ComponentBase
         $user->save($userData);
         //var_dump(UserExtension::getModel($user));
         $subbed = (array_key_exists('subscribe', $data) ? date('Y-m-d H:i:s') : null);
-        UserExtension::getModel($user, $subbed, $data['affiliation']);
+        UserExtension::setModel($user, $subbed, $data['affiliation']);
+
 
         /*
          * Password has changed, reauthenticate the user

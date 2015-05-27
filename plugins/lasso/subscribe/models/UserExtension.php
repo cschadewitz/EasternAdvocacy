@@ -50,17 +50,14 @@ class UserExtension extends Model
         else
             return $temp->where('verificationDate', '=', 'NULL');
     }
-    public static function newModel($verificationDate = null, $affiliation = null )
+
+    public static function setModel($user, $verificationDate, $affiliation)
     {
-        $userextension = new static;
-        if($verificationDate)
-        {
-            $userextension->verificationDate = $verificationDate;
-        }
-        if($affiliation)
-        {
-            $userextension->affiliation = Subscribe::type2Int($affiliation);
-        }
+        if(!$user->extension)
+            return null;
+        $userextension = $user->extension;
+        $userextension->verificationDate = $verificationDate;
+        $userextension->affiliation = ($affiliation ? $affiliation : "Friend");
         $userextension->save();
         return $userextension;
     }
@@ -73,7 +70,7 @@ class UserExtension extends Model
         $userextension->user = $user;
         $userextension->user_id = $user->id;
         $userextension->verificationDate = $verificationDate;
-        $userextension->affiliation = ($affiliation ? $affiliation : "friend");
+        $userextension->affiliation = ($affiliation ? $affiliation : "Friend");
         $userextension->save();
         $user->extension = $userextension;
         //$user->push();
