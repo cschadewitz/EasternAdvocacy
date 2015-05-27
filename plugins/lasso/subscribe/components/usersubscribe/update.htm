@@ -35,12 +35,12 @@
         <div role="tabpanel" class="tab-pane" id="information">
             <div class="form-group">
                 <label for="accountZip">Full Zip</label>
-                <input name="zip" type="number" class="form-control" id="accountZip" value="{{ form_value('zip') }}">
+                <input name="zip" type="text" class="form-control" id="accountZip" value="{{ form_value('zip') }}">
             </div>
 
             <div class="form-group">
                 <label for="accountAffiliation">Affiliation</label>
-                <select name="extension[affiliation]" class="form-control" id="accountAffiliation" value="{{ form_value('extension[affiliation]') }}">
+                <select name="extension[affiliation]" class="form-control" id="accountAffiliation" value="{{ form_value('extension.affiliation') }}">
                     <option value="none">-</option>
                     <option value="student">Student</option>
                     <option value="alumni">Alumni</option>
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label for="accountSubscribe">Subscribe?</label>
-                <input name="extension[verificationDate]" type="checkbox" class="form-control" id="accountSubscribe" value="{{ form_value('extension[verificationDate]') }}">
+                <input name="extension[verificationDate]" type="checkbox" class="form-control" id="accountSubscribe" value="{{ form_value('extension.verificationDate') }}">
             </div>
 
             <button type="submit" class="btn btn-default">Save</button>
