@@ -22,7 +22,8 @@ fields:
     author:
         label: Author
         description: The author of this email
-        type: text
+        type: partial
+        path: $/lasso/adminsendmail/controllers/emails/_preview_author.htm
         disabled: true
     attachments:
         label: Attachment

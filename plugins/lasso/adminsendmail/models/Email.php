@@ -1,9 +1,9 @@
 <?php
 namespace Lasso\AdminSendMail\Models;
 
+use Backend\Helpers\Backend;
 use Model;
-use Auth;
-use October\Rain\Auth\Models\User as Admin;
+use Backend\Facades\BackendAuth;
 
 class Email extends Model {
 	protected $table = 'lasso_adminsendmail_emails';
@@ -12,10 +12,10 @@ class Email extends Model {
 
 	protected $visible = ['id', 'subject', 'abstract', 'content', 'created_at', 'updated_at', 'views'];
 
-	protected $guarded = ['admin_id'];
+	protected $guarded = ['author_id'];
 	public $hasOne = [];
 	public $hasMany = [];
-	public $belongsTo = ['author' => 'October\Rain\Auth\Models\User', 'key' => 'admin_id'];
+	public $belongsTo = ['author' => 'October\Rain\Auth\Models\User', 'key' => 'author_id'];
 	public $belongsToMany = [];
 	public $morphTo = [];
 	public $morphOne = [];
@@ -44,7 +44,7 @@ class Email extends Model {
 
 	public function getAuthor()
 	{
-		return Admin::getLogin(getUserById($this->admin_id));
+		return Backend::getUserById($this->author_id);
 	}
 
 	public function setUrl($pageName, $controller) {
