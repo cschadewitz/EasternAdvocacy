@@ -41,12 +41,20 @@
 
                 <div class="form-group">
                     <label for="accountAffiliation">Affiliation</label>
-                    <select name="affiliation" class="form-control" id="accountAffiliation" selected="{{ user.extension.affiliation }}">
-                        <option value="None">-</option>
+                    <select name="affiliation" class="form-control" id="accountAffiliation">
+                        <option value="{{ user.extension.affiliation }}">{{ user.extension.affiliation }}</option>
+                        {% if !user.extension.verificationDate == "Student"%}
                         <option value="Student">Student</option>
+                        {% endif %}
+                        {% if !user.extension.verificationDate == "Alumni"%}
                         <option value="Alumni">Alumni</option>
-                        <option value="Friend">Friend</option>
+                        {% endif %}
+                        {% if !user.extension.verificationDate == "Friend"%}
+                        <option value="Friend">-</option>
+                        {% endif %}
+                        {% if !user.extension.verificationDate == "Other"%}
                         <option value="Other">Other</option>
+                        {% endif %}
                     </select>
                 </div>
 
