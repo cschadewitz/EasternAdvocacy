@@ -140,7 +140,7 @@ class UserSubscribe extends ComponentBase
 
             Flash::success('An activation email has been sent to you at ' + $data["email"]);
         }
-
+        Flash::success('An activation email has been sent to you at ' + $data["email"]);
         /*
          * Automatically activated or not required, log the user in
          */
@@ -153,7 +153,7 @@ class UserSubscribe extends ComponentBase
         /*
          * Redirect to the intended page after successful sign in
          */
-        
+
     }
 
     public function onUpdateExtension()
