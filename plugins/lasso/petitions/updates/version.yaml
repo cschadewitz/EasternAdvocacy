@@ -29,9 +29,20 @@
 1.4.5:
     - Added component viewPost
 1.4.6:
-    -added active, goal flags to migrations
+    - Added active, goal flags to migrations
 1.5.0:
-    -added petition immutability
-    -updated backend views
-    -added form confirmations
-    -updated frontEnd view html/css
+    - Added petition immutability
+    - updated backend views
+    - added form confirmations
+    - updated frontEnd view html/css
+1.5.1:
+    - added model validation to backend forms
+1.5.2:
+    - Added backend list toolbar add and delete
+1.5.3:
+    - Added db seeding using faker
+    - SeedPetitionsTable.php
+1.5.4:
+    - Added Pagination to frontend component
+    - Refactored components, removed post component, renamed frontend to petition list view
+    

@@ -8,6 +8,15 @@
 
     class Petitions extends Model
     {
+        use \October\Rain\Database\Traits\Validation;
+
+        public $rules = [
+            'title' => 'required|between:4,200',
+            'summary' => 'required',
+            'body' => 'required',
+            'goal' => 'required',
+        ];
+
         protected $table = 'lasso_petitions_petitions';
 
         protected $primaryKey = 'pid';
@@ -37,6 +46,24 @@
             //Delete effected signatures
             \Lasso\Petitions\Models\Signatures::DeleteUsers($this->pid);
             $this->signatures = 0;
+            $this->save();
+        }
+
+        public function scopeListPosts($query, $options) {
+            extract(array_merge([
+                'page' => 1,
+                'petitionsPerPage' => 10,
+            ], $options), EXTR_OVERWRITE);
+
+            return $query->paginate($petitionsPerPage, $page);
+        }
+
+        public function setUrl($pageName, $controller) {
+            $params = [
+                'pid' => $this->id,
+                'slug' => $this->slug,
+            ];
+            return $this->url = $controller->pageUrl($pageName, $params);
         }
 
         public function scopeTitle($query, $title)

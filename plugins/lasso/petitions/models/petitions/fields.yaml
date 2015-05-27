@@ -7,7 +7,11 @@ fields:
         label: Petition Summary
         description: Summarize your petition
         type: textarea
+        size: small
         required: true
+        preset:
+            field: body
+            type: camel
     body:
         label: Body
         description: Describe your petition
@@ -26,5 +30,5 @@ fields:
     goal:
         label: Petition Goal
         description: Number of signatures needed
-        type: Number
+        type: number
         span: left

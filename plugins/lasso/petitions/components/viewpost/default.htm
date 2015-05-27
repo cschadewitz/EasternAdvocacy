@@ -1,3 +1,6 @@
+{% flash %}
+<div class="alert alert-{{type}}">{{ message }}</div>
+{% endflash %}
 <div class="petition">
     {% if petitionInfo is empty %}
         <h1>Invalid Petition</h1>
@@ -36,8 +39,5 @@
         <h2>Cause</h2>
         {{ petitionInfo.attributes.body|raw}}
     </div>
-    {% flash %}
-    <div class="alert alert-error">{{ message }}</div>
-    {% endflash %}
     {% endif %}
 </div>

@@ -16,5 +16,22 @@
             <li class="divider"></li>
         {% endfor %}
         </ul>
+        {% if petitions.lastPage > 1 %}
+        <ul class="pagination">
+            {% if petitions.currentPage > 1 %}
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (petitions.currentPage-1) }) }}">&larr; Prev</a></li>
+            {% endif %}
+
+            {% for page in 1..petitions.lastPage %}
+            <li class="{{ petitions.currentPage == page ? 'active' : null }}">
+                <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+
+            {% if petitions.lastPage > petitions.currentPage %}
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (petitions.currentPage+1) }) }}">Next &rarr;</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
     </article>
 </div>
