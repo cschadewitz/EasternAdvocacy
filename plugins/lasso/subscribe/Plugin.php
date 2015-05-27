@@ -78,7 +78,7 @@
 
 
                 $list->addColumns([
-                    'extension[verificationDate]'  => [
+                    'verificationDate'  => [
                         'label' => 'Subscribed?',
                         'type' => 'partial',
                         'path' => '$/lasso/subscribe/controllers/subscribe/_subscribed.htm',
