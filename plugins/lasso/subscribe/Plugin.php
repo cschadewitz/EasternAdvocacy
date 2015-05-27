@@ -59,7 +59,7 @@
 
         public function boot(){
             $this->extendUserModel();
-            //$this->extendUserController();
+            $this->extendUserController();
             //$this->extendUserMenu();
         }
 
@@ -76,10 +76,7 @@
                 if(!$model instanceof UserModel)
                     return;
 
-                if(!$model->exists)
-                    return;
 
-                UserExtension::getModel($model);
                 $list->addColumns([
                     'extension[verificationDate]'  => [
                         'label' => 'Subscribed?',
@@ -102,7 +99,7 @@
                     return;
                 //dump($model);
 
-
+                UserExtension::getModel($model);
                 $form->addTabFields([
                     'extension[verificationDate]'  => [
                         'label' => 'Subscribed Since',
