@@ -131,17 +131,17 @@ class UserSubscribe extends ComponentBase
         $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
         $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
         $user = Auth::register($userData, $automaticActivation);
-        $userextension = UserExtension::getModel($user);
+        $userextension = UserExtension::getModel($user, date('Y-m-d H:i:s'), Subscriber::type2Int($data["affiliation"]));
         //$userextension = UserExtension::newModel($data['affiliation'], $data['verificationDate']);
         //$userextension = $user->extension;
-        if($data['subscribe'])
-        {
-            $userextension->verificationDate = date('Y-m-d H:i:s');
-        }
-        $email = $data['email'];
-        $userextension->affiliation = Subscriber::type2Int($data["affiliation"]);
+        //if($data['subscribe'])
+        //{
+        //    $userextension->verificationDate = date('Y-m-d H:i:s');
+        //}
+        //$email = $data['email'];
+        //$userextension->affiliation = Subscriber::type2Int($data["affiliation"]);
         //$userextension->user = UserModel::findByEmail($email);
-        $userextension->save();
+        //$userextension->save();
         /*
          * Activation is by the user, send the email
          */
