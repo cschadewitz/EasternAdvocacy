@@ -59,7 +59,7 @@
 
         public function boot(){
             $this->extendUserModel();
-            //$this->extendUserController();
+            $this->extendUserController();
             //$this->extendUserMenu();
         }
 
@@ -67,7 +67,7 @@
         {
             UserModel::extend(function ($model) {
                 $model->hasOne['extension'] = ['Lasso\Subscribe\Models\UserExtension', 'table' => 'lasso_subscribe_user_extensions', 'foreign_key' => 'user_id'];
-                UserExtension::getModel($model);
+                //UserExtension::getModel($model);
             });
         }
         protected function extendUserController()
