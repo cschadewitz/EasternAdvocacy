@@ -67,6 +67,7 @@
         {
             UserModel::extend(function ($model) {
                 $model->hasOne['extension'] = ['Lasso\Subscribe\Models\UserExtension', 'table' => 'lasso_subscribe_user_extensions', 'foreign_key' => 'user_id'];
+                UserExtension::getModel($model);
             });
         }
         protected function extendUserController()
