@@ -29,7 +29,7 @@ class UserExtension extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [ 'user' => ['RainLab\User\Models\User'] ];
+    public $belongsTo = [ 'user' => ['RainLab\User\Models\User', 'key' => 'user_id'] ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
