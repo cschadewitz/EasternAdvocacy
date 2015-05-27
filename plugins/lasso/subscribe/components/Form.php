@@ -38,6 +38,7 @@ class Form extends ComponentBase
             ];
         }
         else{
+            \Flash::success('Subscription Successful!');
             $subscription = new \lasso\subscribe\models\Subscribe;
             $subscription->uuid = $uuid = $subscription->generateUUID();
             $subscription->name = $name;

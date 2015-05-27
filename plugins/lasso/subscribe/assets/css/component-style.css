@@ -107,9 +107,6 @@ button.submit:active {
     -o-box-shadow: 0 0 10px 5px #356b0b inset;
 
 }
-.subscriber_form{
-    display: none;
-}
 .email-error-dup{
     background: red;
     border-radius: 3px;

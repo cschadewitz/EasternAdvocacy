@@ -6,3 +6,8 @@ title: Subscribers
 list: ~/plugins/lasso/subscribe/models/subscribe/columns.yaml
 modelClass: Lasso\Subscribe\Models\Subscribe
 recordUrl: lasso/subscribe/subscribe/update/:uuid
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: Delete Subscriber(s)
