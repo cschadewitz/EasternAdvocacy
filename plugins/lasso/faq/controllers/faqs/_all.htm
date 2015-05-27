@@ -1,0 +1,37 @@
+
+<div class="container">
+    <br />
+    <br />
+    <br />
+
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        This section contains a wealth of information, related to the use of <strong>EWUAdvocates</strong>'s backend interface. If you cannot find an answer to your question,
+        make sure to contact us.
+    </div>
+
+    <br />
+
+    <div class="panel-group" id="accordion">
+        <?php
+        foreach($faqs as $faq)
+        {
+            echo '<div class="faqHeader">'.$faq->title.'</div>';
+            foreach($faq->questions as $question)
+            {
+                echo '<div class="panel panel-default">';
+                echo '<div class="panel-heading">';
+                echo '<h4 class="panel-title">';
+                echo '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$question->id.'">';
+                echo $question->question.'</a></h4></div><div id="collapse'.$question->id.'" class="panel-collapse collapse">';
+                echo '<div class="panel-body">';
+                if(empty($question->answer))
+                    echo '<em>This question has not been answered yet.</em>';
+                else
+                    echo $question->answer;
+                echo '</div></div></div>';
+            }
+        }
+        ?>
+    </div>
+</div>

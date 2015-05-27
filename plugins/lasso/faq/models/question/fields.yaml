@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    faq:
+        label: FAQ category
+        type: relation
+        nameFrom: title
+    question:
+        label: Question
+        type: text

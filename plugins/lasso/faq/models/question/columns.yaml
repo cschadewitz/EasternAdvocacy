@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    question:
+        label: Question
+        type: text
+    answered:
+        label: Answered?
+        type: switch
