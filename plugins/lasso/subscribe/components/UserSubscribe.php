@@ -139,12 +139,6 @@ class UserSubscribe extends ComponentBase
             $this->sendActivationEmail($user);
 
             Flash::success('An activation email has been sent to you at ' + $data["email"]);
-            UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
-            $redirectUrl = $this->pageUrl($this->property('redirect'));
-
-            if ($redirectUrl = post('redirect', $redirectUrl)) {
-                return Redirect::intended($redirectUrl);
-            }
         }
 
         /*
@@ -153,13 +147,18 @@ class UserSubscribe extends ComponentBase
         if ($automaticActivation || !$requireActivation) {
             Auth::login($user);
         }
+        $subbed = ($data['subscribe'] ? date('Y-m-d H:i:s') : null);
 
-        UserExtension::getModel($user, date('Y-m-d H:i:s'), $data['affiliation']);
+        UserExtension::getModel($user, $subbed, $data['affiliation']);
 
         /*
          * Redirect to the intended page after successful sign in
          */
+        $redirectUrl = $this->pageUrl($this->property('redirect'));
 
+        if ($redirectUrl = post('redirect', $redirectUrl)) {
+            return Redirect::intended($redirectUrl);
+        }
     }
 
     public function onUpdateExtension()
@@ -171,15 +170,14 @@ class UserSubscribe extends ComponentBase
 
         $user->save($userData);
         //var_dump(UserExtension::getModel($user));
-        if($data['subscribe'] == 'Yes')
+        if($data['subscribe'])
         {
-            $user->extension->verificationDate = DateTime::getTimestamp();
+            $user->extension->verificationDate = date('Y-m-d H:i:s');
         }
         else
         {
             $user->extension->verificationDate = null;
         }
-        $user->push();
 
         /*
          * Password has changed, reauthenticate the user
