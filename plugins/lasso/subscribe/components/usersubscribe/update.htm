@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="accountAffiliation">Affiliation</label>
-                <select name="affiliation" class="form-control" id="accountAffiliation" value="{{ form_value('affiliation') }}">
+                <select name="affiliation" class="form-control" id="accountAffiliation" value="{{ form_value('extension[affiliation]') }}">
                     <option value="none">-</option>
                     <option value="student">Student</option>
                     <option value="alumni">Alumni</option>
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label for="accountSubscribe">Subscribe?</label>
-                <input name="verificationDate" type="checkbox" class="form-control" id="accountSubscribe" value="{{ form_value('verificationDate') }}">
+                <input name="verificationDate" type="checkbox" class="form-control" id="accountSubscribe" value="{{ form_value('extension[verificationDate]') }}">
             </div>
 
             <button type="submit" class="btn btn-default">Save</button>
