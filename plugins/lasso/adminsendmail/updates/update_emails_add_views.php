@@ -1,6 +1,6 @@
-<?php
+<?php namespace Lasso\Adminsendmail\Updates;
 
-//use Schema;
+use Schema;
 use October\Rain\Database\Updates\Migration;
 
 class UpdateEmailsAddViews extends Migration {
