@@ -5,74 +5,91 @@ tabs:
     fields:
         email:
             span: left
-            label: Email address for site
+            label: Email
+            comment: Email address for site
             type: text
             tab: Social Contact
         email_include:
             span: right
-            label: Include on SocialButtons component?
+            label: Include Email
+            comment: Include on SocialButtons component?
             type: switch
-            tab: Social Contact
-        fb_app_id:
-            span: left
-            label: Facebook App ID
-            type: text
             tab: Social Contact
         fb_url:
             span: left
-            label:  Facebook Page URL
+            label: URL
+            comment: Facebook Page URL
             type: text
             tab: Social Contact
         fb_include:
             span: right
-            label: Include on SocialButtons component?
+            label: Include Facebook
+            comment: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
-        twitter_url:
+        fb_app_id:
             span: left
-            label: Twitter Page URL
+            label: App ID
+            comment: Facebook App ID
             type: text
             tab: Social Contact
-        twitter_id:
+        twitter_url:
             span: left
-            label: Twitter page name
+            label: URL
+            comment: Twitter Page URL
             type: text
             tab: Social Contact
         twitter_include:
             span: right
-            label: Include on SocialButtons component?
+            label: Include Twitter
+            comment: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
+        twitter_id:
+            span: left
+            label:
+            comment: Twitter page name
+            type: text
+            tab: Social Contact
         gp_url:
             span: left
-            label: Google+ Page URL
+            label:
+            comment: Google+ Page URL
             type:   text
             tab: Social Contact
         gp_include:
             span: right
-            label: Include on SocialButtons component?
+            label:
+            comment: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
         default_title:
             span: auto
-            label: Default title for social share dialogs
-            type: text
-            tab: Share Dialog
-        default_description:
-            span: auto
-            label: Default description for social share dialogs
+            label: Default Title
+            comment: Default title for social share dialogs
             type: text
             tab: Share Dialog
         default_url:
             span: auto
-            label: Default url for social share dialogs
+            label: Default URL
+            comment: Default url for social share dialogs
             type: text
             tab: Share Dialog
         default_image:
             span: auto
-            label: Default image for social share dialogs
-            type: text
+            label: Default Image
+            comment: Default image for social share dialogs
+            type: fileupload
+            mode: image
+            imageHeight: 200
+            imageWidth: 200
+            tab: Share Dialog
+        default_description:
+            span: full
+            label: Default Description
+            comment: Default description for social share dialogs
+            type: textarea
             tab: Share Dialog
