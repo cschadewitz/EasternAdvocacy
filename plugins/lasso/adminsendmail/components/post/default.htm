@@ -8,7 +8,7 @@
             <p class="post-content">There are no emails currently in the archive.</p>
         {% else %}
             <header><h2>{{ post.subject }}</h2></header>
-            {% if image %}
+            {% if post.image %}
                 <div class="post-image">
                     <img class="img-thumbnail img-responsive" src="{{post.image.getPath()}}" >
                 </div>
