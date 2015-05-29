@@ -12,7 +12,9 @@
 }
 .post-image{
     display: inline-block;
-    max-width: 100px;
+    max-width: 200px;
+    margin: 10px;
+    float: right;
 }
 
 .post-abstract {
