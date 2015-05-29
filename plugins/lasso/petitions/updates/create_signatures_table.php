@@ -25,6 +25,6 @@
 
         public function down()
         {
-            Schema::dropIfExists('lasso_petitions_petitions');
+            Schema::dropIfExists('lasso_petitions_signatures');
         }
     }

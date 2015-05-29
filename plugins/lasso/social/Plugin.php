@@ -42,8 +42,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Lasso\Social\Components\FacebookIntegration' => 'integration',
-            'Lasso\Social\Components\FacebookShareDialog' => 'share_dialog',
+            'Lasso\Social\Components\Integration' => 'integration',
+            'Lasso\Social\Components\ShareDialog' => 'share_dialog',
             'Lasso\Social\Components\SocialButtons'       => 'social_buttons'
         ];
     }
