@@ -1,7 +1,7 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
-tab:
+tabs:
     fields:
         email:
             span: auto
