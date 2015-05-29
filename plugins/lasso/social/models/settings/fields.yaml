@@ -75,17 +75,11 @@ tabs:
             placeholder: Site Name
             type: text
             tab: Share Dialog
-        default_url:
-            span: auto
-            label: Default URL
-            comment: Default url for social share dialogs
-            placeholder: Site URL
-            type: text
-            tab: Share Dialog
         default_image:
             span: full
             label: Default Image
             comment: Default image for social share dialogs
+            placeholder: Photo URL
             type: text
             tab: Share Dialog
         default_description:
