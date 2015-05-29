@@ -11,14 +11,11 @@ class SeedPetitionsTable extends Seeder{
         $faker = Faker\Factory::Create();
 
         for($i = 0; $i < 100; $i++){
-            $petition = Petitions::create(
-                array(
-                    'title' => $faker->sentence(5),
-                    'summary' => $faker->text(50),
-                    'body' => $faker->text(250),
-                    'goal' => $faker->randomNumber(3),
-                )
-            );
+            $petition = new Petitions;
+            $petition->title = $faker->sentence(5);
+            $petition->summary = $faker->text(50);
+            $petition->body = $faker->text(250);
+            $petition->goal = $faker->randomNumber(3);
             $petition->save();
         }
     }
