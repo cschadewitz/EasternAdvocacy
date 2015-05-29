@@ -104,7 +104,7 @@
         {
             return Db::select('SELECT lasso_petitions_petitions.*, signatures AS sig_count
                                 FROM lasso_petitions_petitions
-                                ORDER BY signatures
+                                ORDER BY sig_count
 	                            LIMIT ?', [$numberOfPetitions]);
         }
     }
