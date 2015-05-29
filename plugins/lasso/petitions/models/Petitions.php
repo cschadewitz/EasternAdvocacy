@@ -102,7 +102,7 @@
 
         public static function sortBySigCount($numberOfPetitions)
         {
-            return Db::select('SELECT lasso_petitions_petitions.*, signatures AS sig_count
+            return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures AS sig_count
                                 FROM lasso_petitions_petitions
                                 ORDER BY sig_count
 	                            LIMIT ?', [$numberOfPetitions]);
