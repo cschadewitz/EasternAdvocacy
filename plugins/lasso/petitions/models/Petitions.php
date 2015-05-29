@@ -4,6 +4,7 @@
     use Model;
     use Str;
     use Mail;
+    use Illuminate\Support\Facades\DB as Db;
     use October\Rain\Database\Traits\Sluggable;
 
     class Petitions extends Model
