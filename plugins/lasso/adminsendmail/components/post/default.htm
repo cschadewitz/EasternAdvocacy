@@ -1,6 +1,6 @@
 {% set post = __SELF__.post %}
 {% set attached = __SELF__.attached %}
-{% component "sharedialog" title = {{post.subject}} description = {{post.content | raw}} pageID = {{post.id}} %}
+{% component "sharedialog" title = post.subject description = post.content pageID = post.id %}
 <div class="row">
     <article id="lasso-archive" class="advocacy-article">
         {% if post is empty %}
