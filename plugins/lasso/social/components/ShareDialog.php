@@ -26,22 +26,27 @@ class ShareDialog extends ComponentBase
     public function defineProperties()
     {
         return [
-            'title' => [
+            'title'           => [
                 'title'       => 'Title',
                 'description' => 'Title for the share dialog',
                 'type'        => 'string',
                 'default'     => Settings::get('default_title')
             ],
-            'description'   => [
+            'description'     => [
                 'title'       => 'Description',
                 'description' => 'Description for the share dialog',
                 'type'        => 'string',
                 'default'     => Settings::get('default_description')
             ],
-            'image' => [
+            'image'           => [
                 'title'       => 'Image',
                 'description' => 'Featured image for the share dialog',
-                'type'        => 'string'
+                'type'        => 'string',
+            ],
+            'invisible'         =>  [
+                'title'       => 'Invisible',
+                'description' => 'If set the share buttons will be invisible',
+                'type'        => 'checkbox'
             ]
         ];
     }
