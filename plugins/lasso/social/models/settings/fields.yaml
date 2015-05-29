@@ -71,13 +71,15 @@ tabs:
         default_title:
             span: auto
             label: Default Title
-            comment: Default title for social share dialogs. Ex. Site Name
+            comment: Default title for social share dialogs.
+            placeholder: Site Name
             type: text
             tab: Share Dialog
         default_url:
             span: auto
             label: Default URL
-            comment: Default url for social share dialogs. Ex. Site URL
+            comment: Default url for social share dialogs.
+            placeholder: Site URL
             type: text
             tab: Share Dialog
         default_image:

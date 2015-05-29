@@ -17,7 +17,7 @@
                 {% endfor %}
             </ul>
             <div class="post-footer">
-                {% partial "share_dialog::default" title = post.subject description = post.content pageID = post.id %}
+                {% partial "share_dialog::default" title = post.subject description = post.content %}
                 <div class="post-views text-right">Views: {{ post.views }}</div>
                 <div class="post-date text-right">Sent:{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</div>
             </div>
