@@ -8,13 +8,13 @@
             data-full-width="1">
         <ul>
             <?php if (count($petitions)): ?>
-                <?php foreach ($petitions as $petition): ?>
-                <?php if($percentage): ?>
-                    <li><?= e($petition['title']) ?><span><?php echo $petition['signatures']->count(); ?></span></li>
-                <?php else: ?>
-                    <li><?= e($petition['title']) ?><span><?php echo $petition['signatures']->count() / $petition->goal(); ?></span></li>
-                <?php endif; ?>
-                <?php endforeach ?>
+            <?php foreach ($petitions as $petition): ?>
+            <?php if($percentage): ?>
+            <li><?= e($petition['title']) ?><span><?php echo $petition['signatures']->count(); ?></span></li>
+            <?php else: ?>
+            <li><?= e($petition['title']) ?><span><?php echo $petition['signatures']->count() / $petition->goal(); ?></span></li>
+            <?php endif; ?>
+            <?php endforeach ?>
             <?php endif; ?>
         </ul>
     </div>
