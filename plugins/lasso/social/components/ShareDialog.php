@@ -31,24 +31,22 @@ class ShareDialog extends ComponentBase
                 'title'       => 'Title',
                 'description' => 'Title for the share dialog',
                 'required'    => 'true',
-                'type'        => 'string'
+                'type'        => 'string',
+                'default'     => Settings::get('default_title')
             ],
             'description'   => [
                 'title'       => 'Description',
                 'description' => 'Action page basename',
                 'required'    => 'true',
-                'type'        => 'string'
+                'type'        => 'string',
+                'default'     => Settings::get('default_description')
             ],
             'image' => [
                 'title'       => 'Image',
                 'description' => 'Petition page basename',
                 'required'    => 'true',
-                'type'        => 'string'
-            ],
-            'pageID' => [
-                'title'       => 'PageID',
-                'description' => 'Identifying portion of url ie {{postId}}',
-                'type'        => 'string'
+                'type'        => 'string',
+                'default'     => Settings::get('default_image')
             ]
         ];
     }

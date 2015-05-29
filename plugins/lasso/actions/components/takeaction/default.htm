@@ -95,7 +95,7 @@
 					</div>
 				</div>
 			</div>
-			{% partial "share_dialog::default" title = action.title description = action.description pageID = action.id %}
+			{% partial "share_dialog::default" title = action.title description = action.description image=action.photo.getPath() %}
 			{% endif %}
         {% endif %}
     </article>

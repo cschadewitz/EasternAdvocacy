@@ -6,33 +6,59 @@ fields:
     email:
         label: Email address for site
         type: text
+        tab: Social Contact
     email_include:
         label: Include on SocialButtons component?
         type: switch
+        tab: Social Contact
     fb_app_id:
         label: Facebook App ID
         type: text
+        tab: Social Contact
     fb_url:
         label:  Facebook Page URL
         type: text
+        tab: Social Contact
     fb_include:
         label: Include on SocialButtons component?
         type: switch
         default: 1
+        tab: Social Contact
     twitter_url:
         label: Twitter Page URL
         type: text
+        tab: Social Contact
     twitter_id:
         label: Twitter page name
         type: text
+        tab: Social Contact
     twitter_include:
         label: Include on SocialButtons component?
         type: switch
         default: 1
+        tab: Social Contact
     gp_url:
         label: Google+ Page URL
         type:   text
+        tab: Social Contact
     gp_include:
         label: Include on SocialButtons component?
         type: switch
         default: 1
+        tab: Social Contact
+    default_title:
+        label: Default title for social share dialogs
+        type: text
+        tab: Share Dialog
+    default_description:
+        label: Default description for social share dialogs
+        type: text
+        tab: Share Dialog
+    default_url:
+        label: Default url for social share dialogs
+        type: text
+        tab: Share Dialog
+    default_image:
+        label: Default image for social share dialogs
+        type: text
+        tab: Share Dialog
