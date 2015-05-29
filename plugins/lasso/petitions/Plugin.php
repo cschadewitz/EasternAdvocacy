@@ -34,7 +34,7 @@
 
         public function registerReportWidgets() {
             return [
-                '\Lasso\AdminSendMail\ReportWidgets\TopPetitions' => [
+                '\Lasso\Petitions\ReportWidgets\TopPetitions' => [
                     'label' => 'Top Petitions',
                     'context' => 'dashboard',
                 ],
