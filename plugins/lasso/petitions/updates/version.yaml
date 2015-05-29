@@ -41,7 +41,7 @@
     - Added backend list toolbar add and delete
 1.5.3:
     - Added db seeding using faker
-    - SeedPetitionsTable.php
+    - seed_petitions_table.php
 1.5.4:
     - Added Pagination to frontend component
     - Refactored components, removed post component, renamed frontend to petition list view
