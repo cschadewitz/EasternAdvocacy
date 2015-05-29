@@ -1,7 +1,7 @@
 
 {% set appID = __SELF__.fbAppId %}
 {% set postPage = __SELF__.postPage %}
-<!--{% put sharedialog %}-->
+{% put sharedialog %}
 <title>Eastern Advocates - {{ title }}</title>
 <meta property="og:title"              content="{{title}}" />
 <meta property="og:url"                content="{{this.page.baseFileName|page}}{{pageID}}" />
@@ -9,4 +9,4 @@
 <meta property="og:type"               content="article" />
 <meta property="og:description"        content="{{description}}" />
 <meta property="og:site_name"          content="Eastern Advocates" />
-<!--{% endput %}-->
+{% endput %}
