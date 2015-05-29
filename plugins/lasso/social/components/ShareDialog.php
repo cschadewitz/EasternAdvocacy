@@ -56,7 +56,6 @@ class ShareDialog extends ComponentBase
         $this->assignVars();
     }
 
-    public function getImageResize
     public function assignVars()
     {
         $this->fbAppId = Settings::get('fb_app_id');
