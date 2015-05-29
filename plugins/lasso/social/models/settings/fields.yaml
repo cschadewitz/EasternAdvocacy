@@ -9,76 +9,76 @@ tabs:
             comment: Email address for site
             placeholder: example@example.co
             type: text
-            tab: Social Contact
+            tab: Social Buttons
         email_include:
             span: right
             label: Include Email
             comment: Include on SocialButtons component?
             type: switch
-            tab: Social Contact
+            tab: Social Buttons
         fb_url:
             span: left
             label: Facebook URL
             comment: Facebook Page URL
             placeholder: www.facebook.com/examplecompany
             type: text
-            tab: Social Contact
+            tab: Social Buttons
         fb_include:
             span: right
             label: Include Facebook
             comment: Include on SocialButtons component?
             type: switch
-            tab: Social Contact
+            tab: Social Buttons
         fb_app_id:
             span: left
             label: Facebook App ID
             comment: Facebook App ID
             type: text
-            tab: Social Contact
+            tab: Social Buttons
         twitter_url:
             span: left
             label: Twitter URL
             comment: Twitter Page URL
             placeholder: www.twitter.com/examplecompany
             type: text
-            tab: Social Contact
+            tab: Social Buttons
         twitter_include:
             span: right
             label: Include Twitter
             comment: Include on SocialButtons component?
             type: switch
-            tab: Social Contact
+            tab: Social Buttons
         twitter_id:
             span: left
             label: Twitter Name
             comment: Twitter page name
             placeholder: examplecompany
             type: text
-            tab: Social Contact
+            tab: Social Buttons
         gp_url:
             span: left
             label: Google+ URL
             comment: Google+ Page URL
             placeholder: www.google.com/+examplecompany
             type:   text
-            tab: Social Contact
+            tab: Social Buttons
         gp_include:
             span: right
             label: Include Google+
             comment: Include on SocialButtons component?
             type: switch
-            tab: Social Contact
+            tab: Social Buttons
         default_title:
             span: auto
             label: Default Title
-            comment: Default title for social share dialogs.
+            comment: Default title for social share dialogs
             placeholder: Site Name
             type: text
             tab: Share Dialog
         default_url:
             span: auto
             label: Default URL
-            comment: Default url for social share dialogs.
+            comment: Default url for social share dialogs
             placeholder: Site URL
             type: text
             tab: Share Dialog
@@ -86,10 +86,7 @@ tabs:
             span: full
             label: Default Image
             comment: Default image for social share dialogs
-            type: fileupload
-            mode: image
-            imageheight: 200
-            imagewidth: 200
+            type: text
             tab: Share Dialog
         default_description:
             span: full
