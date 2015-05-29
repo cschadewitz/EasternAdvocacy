@@ -9,8 +9,8 @@
         <ul>
             <?php if (count($petitions)): ?>
                 <?php foreach ($petitions as $petition): ?>
-                    <li><?= e($petition.title) ?><span><?php echo $petition.sig_count ?></span></li>
-                <?php endforeach ?>
+                    <li><?= e($petition['title']) ?><span><?= $petition['sig_count'] ?></span></li>
+                <?php endforeach; ?>
             <?php endif; ?>
         </ul>
     </div>
