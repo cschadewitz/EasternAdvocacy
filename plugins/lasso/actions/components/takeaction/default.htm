@@ -96,7 +96,7 @@
 					</div>
 				</div>
 			</div>
-			{% partial "share_dialog::default" title = action.title description = action.description image = {{ basePath | app }} ~ action.photo.getPath() %}
+			{% partial "share_dialog::default" title = action.title description = action.description image = basePath | app  ~ action.photo.getPath() %}
 			{% endif %}
         {% endif %}
     </article>
