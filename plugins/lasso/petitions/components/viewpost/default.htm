@@ -39,5 +39,6 @@
         <h2>Cause</h2>
         {{ petitionInfo.attributes.body|raw}}
     </div>
+    {% partial "share_dialog::default" title = petitionInfo.title description = petitionInfo.summary %}
     {% endif %}
 </div>
