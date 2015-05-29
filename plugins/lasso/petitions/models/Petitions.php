@@ -90,6 +90,22 @@
         {
             return $query->where('published', '=', 1);
         }
+
+        public function scopeSortByProgress($query)
+        {
+            return $query->sortBy(function($query)
+            {
+               return $query->signatures->count() / $query->goal;
+            });
+        }
+
+        public function scopeSortBySigCount($query)
+        {
+            return $query->sortBy(function($query)
+            {
+                return $query->signatures->count();
+            });
+        }
     }
 
     class Utility

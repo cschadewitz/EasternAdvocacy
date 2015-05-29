@@ -1,0 +1,24 @@
+<div class="report-widget">
+    <h3>Top Petition</h3>
+    <?php if (!isset($error)): ?>
+    <div
+            class="control-chart wrap-legend"
+            data-control="chart-bar"
+            data-height="100"
+            data-full-width="1">
+        <ul>
+            <?php if (count($petitions)): ?>
+                <?php foreach ($petitions as $petition): ?>
+                <?php if($percentage): ?>
+                    <li><?= e($petition['title']) ?><span><?php echo $petition['signatures']->count(); ?></span></li>
+                <?php else: ?>
+                    <li><?= e($petition['title']) ?><span><?php echo $petition['signatures']->count() / $petition->goal(); ?></span></li>
+                <?php endif; ?>
+                <?php endforeach ?>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <?php else: ?>
+    <p class="flash-message static warning"><?= e($error) ?></p>
+    <?php endif ?>
+</div>
