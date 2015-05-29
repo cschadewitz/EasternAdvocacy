@@ -15,6 +15,11 @@ fields:
         description: The abstract for this email
         type: textarea
         size: small
+    image:
+        label: Featured Image
+        description: The featured image for this email
+        type: fileupload
+        mode: image
     content:
         label: Content
         description: The content of this email

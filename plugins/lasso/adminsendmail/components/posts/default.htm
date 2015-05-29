@@ -9,9 +9,13 @@
             <li class="media">
                 <div class="media-body">
                     <h4 class="media-heading post-subject">{{ post.subject }}</h4>
-                    <p class="post-abstract">{{ post.abstract }} <a href="{{ [__SELF__.postPage|page, '/', post.id]|join  }}">Read More...</a></p>
-                    <p class="post-date text-right">{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</p>
-
+                    <div class="post-image">
+                        <img class="img-thumbnail img-responsive" src="{{post.image.getPath()}}" >
+                    </div>
+                    <div class="post-body">
+                        <p class="post-abstract">{{ post.abstract }} <a href="{{ [__SELF__.postPage|page, '/', post.id]|join  }}">Read More...</a></p>
+                        <p class="post-date text-right">{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</p>
+                    </div>
                 </div>
             </li>
             <li class="divider"></li>
