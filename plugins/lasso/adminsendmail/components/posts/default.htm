@@ -9,12 +9,14 @@
             <li class="media">
                 <div class="media-body">
                     <h4 class="media-heading post-subject">{{ post.subject }}</h4>
-                    {% if post.image %}
-                    <div class="post-image-thumb">
-                        <img class="img-thumbnail img-responsive" src="{{post.image.getPath()}}" >
+                    <div class="post-body">
+                        {% if post.image %}
+                            <div class="post-image-thumb">
+                                <img class="img-thumbnail img-responsive" src="{{post.image.getPath()}}" >
+                            </div>
+                        {% endif %}
+                        <p class="post-abstract">{{ post.abstract }} <a href="{{ [__SELF__.postPage|page, '/', post.id]|join  }}">Read More...</a></p>
                     </div>
-                    {% endif %}
-                    <p class="post-abstract">{{ post.abstract }} <a href="{{ [__SELF__.postPage|page, '/', post.id]|join  }}">Read More...</a></p>
                     <div class="post-footer">
                         <p class="post-date text-right">{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</p>
                     </div>
