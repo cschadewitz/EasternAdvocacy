@@ -41,8 +41,7 @@ class ShareDialog extends ComponentBase
             'image' => [
                 'title'       => 'Image',
                 'description' => 'Featured image for the share dialog',
-                'type'        => 'string',
-                'default'     => Settings::get('default_image')
+                'type'        => 'string'
             ]
         ];
     }
