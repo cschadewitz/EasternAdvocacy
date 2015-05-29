@@ -58,6 +58,7 @@ class ShareDialog extends ComponentBase
 
     public function assignVars()
     {
+        $this->addCss('/plugins/lasso/social/assets/css/social.css');
         $this->fbAppId = Settings::get('fb_app_id');
         $this->fbUrl = Settings::get('fb_url');
     }
