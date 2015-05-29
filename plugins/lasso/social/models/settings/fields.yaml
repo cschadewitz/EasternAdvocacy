@@ -7,6 +7,7 @@ tabs:
             span: left
             label: Email
             comment: Email address for site
+            placeholder: example@example.co
             type: text
             tab: Social Contact
         email_include:
@@ -17,8 +18,9 @@ tabs:
             tab: Social Contact
         fb_url:
             span: left
-            label: URL
+            label: Facebook URL
             comment: Facebook Page URL
+            placeholder: www.facebook.com/examplecompany
             type: text
             tab: Social Contact
         fb_include:
@@ -26,18 +28,18 @@ tabs:
             label: Include Facebook
             comment: Include on SocialButtons component?
             type: switch
-            default: 1
             tab: Social Contact
         fb_app_id:
             span: left
-            label: App ID
+            label: Facebook App ID
             comment: Facebook App ID
             type: text
             tab: Social Contact
         twitter_url:
             span: left
-            label: URL
+            label: Twitter URL
             comment: Twitter Page URL
+            placeholder: www.twitter.com/examplecompany
             type: text
             tab: Social Contact
         twitter_include:
@@ -45,37 +47,39 @@ tabs:
             label: Include Twitter
             comment: Include on SocialButtons component?
             type: switch
-            default: 1
             tab: Social Contact
         twitter_id:
             span: left
-            label:
+            label: Twitter Name
             comment: Twitter page name
+            placeholder: examplecompany
             type: text
             tab: Social Contact
         gp_url:
             span: left
-            label:
+            label: Google+ URL
             comment: Google+ Page URL
+            placeholder: www.google.com/+examplecompany
             type:   text
             tab: Social Contact
         gp_include:
             span: right
-            label:
+            label: Include Google+
             comment: Include on SocialButtons component?
             type: switch
-            default: 1
             tab: Social Contact
         default_title:
             span: auto
             label: Default Title
-            comment: Default title for social share dialogs
+            comment: Default title for social share dialogs. Ex. Site Name
+            default: {{this.page.title}}
             type: text
             tab: Share Dialog
         default_url:
             span: auto
             label: Default URL
-            comment: Default url for social share dialogs
+            comment: Default url for social share dialogs. Ex. Site URL
+            default: {{this.page.url}}
             type: text
             tab: Share Dialog
         default_image:
