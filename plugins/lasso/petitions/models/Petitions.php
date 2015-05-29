@@ -91,17 +91,24 @@
             return $query->where('published', '=', 1);
         }
 
-        public function scopeSortByProgress($query)
+        public static function sortByProgress($numberOfPetitions)
         {
-            return $query->sortBy(function($query)
-            {
-               return $query->signatures->count() / $query->goal;
-            });
+            return Db::select('SELECT lasso_petitions_petitions.*, COUNT(sid)/lasso_petitions_petitions.goal AS sig_count
+                                FROM lasso_petitions_petitions LEFT JOIN lasso_petitions_signatures
+                                ON lasso_petitions_petitions.pid = lasso_petitions_signatures.pid
+                                GROUP BY lasso_petitions_petitions.pid
+                                ORDER BY sig_count
+	                            LIMIT ?', [$numberOfPetitions]);
         }
 
-        public function scopeSortBySigCount($query)
+        public static function sortBySigCount($numberOfPetitions)
         {
-            return $query->orderBy($query->signatures->count());
+            return Db::select('SELECT lasso_petitions_petitions.*, COUNT(sid) AS sig_count
+                                FROM lasso_petitions_petitions LEFT JOIN lasso_petitions_signatures
+                                ON lasso_petitions_petitions.pid = lasso_petitions_signatures.pid
+                                GROUP BY lasso_petitions_petitions.pid
+                                ORDER BY sig_count
+	                            LIMIT ?', [$numberOfPetitions]);
         }
     }
 
