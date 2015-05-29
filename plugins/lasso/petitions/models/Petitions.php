@@ -101,10 +101,7 @@
 
         public function scopeSortBySigCount($query)
         {
-            return $query->sortBy(function($query)
-            {
-                return $query->signatures->count();
-            });
+            return $query->orderBy($query->signatures->count());
         }
     }
 
