@@ -14,7 +14,7 @@ class Settings extends Model
 
     public $settingsFields = 'fields.yaml';
 
-    public function getDefault_imageThumb($size = 25, $default = null)
+    public function getDefault_ImageThumb($size = 25, $default = null)
     {
         if (!$default) {
             $default = 'mm'; // Mystery man
