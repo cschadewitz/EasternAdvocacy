@@ -19,7 +19,7 @@ class Email extends Model {
 	public $morphOne = [];
 	public $morphMany = [];
 	public $attachOne = [
-		'email' => ['System\Models\File'],
+		'image' => ['System\Models\File'],
 	];
 	public $attachMany = [
 		'attachments' => ['System\Models\File'],
