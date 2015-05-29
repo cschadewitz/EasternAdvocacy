@@ -54,6 +54,12 @@ class Plugin extends PluginBase {
 						'url' => Backend::url('lasso/adminsendmail/emails'),
 						'permissions' => ['lasso.adminsendmail.access_emails'],
 					],
+					'new' => [
+						'label' => 'New Email',
+						'icon' => 'icon-plus',
+						'url' => Backend::url('lasso/adminsendmail/emails/create/'),
+						'permissions' => ['lasso.adminsendmail.access_emails'],
+					],
 				],
 
 			],
