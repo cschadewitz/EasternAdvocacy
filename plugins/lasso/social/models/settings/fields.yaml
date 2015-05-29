@@ -72,14 +72,12 @@ tabs:
             span: auto
             label: Default Title
             comment: Default title for social share dialogs. Ex. Site Name
-            default: {{this.page.title}}
             type: text
             tab: Share Dialog
         default_url:
             span: auto
             label: Default URL
             comment: Default url for social share dialogs. Ex. Site URL
-            default: {{this.page.url}}
             type: text
             tab: Share Dialog
         default_image:
