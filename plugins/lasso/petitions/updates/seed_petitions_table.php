@@ -19,6 +19,7 @@ class SeedPetitionsTable extends Seeder{
                     'goal' => $faker->randomNumber(3),
                 )
             );
+            $petition->save();
         }
     }
 }
