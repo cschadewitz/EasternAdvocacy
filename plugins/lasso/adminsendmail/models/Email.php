@@ -18,7 +18,9 @@ class Email extends Model {
 	public $morphTo = [];
 	public $morphOne = [];
 	public $morphMany = [];
-	public $attachOne = [];
+	public $attachOne = [
+		'email' => ['System\Models\File'],
+	];
 	public $attachMany = [
 		'attachments' => ['System\Models\File'],
 	];

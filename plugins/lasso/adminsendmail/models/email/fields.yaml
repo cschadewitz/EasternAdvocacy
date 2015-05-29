@@ -10,6 +10,11 @@ fields:
         label: Subject
         description: The subject for this email
         type: text
+    image:
+        label: Featured Image
+        description: The featured image for this email
+        type: fileupload
+        mode: image
     abstract:
         label: Abstract
         description: The abstract for this email
