@@ -13,7 +13,7 @@ use Backend\Classes\ReportWidgetBase;
 use Lasso\Petitions\Models\Petitions;
 use Lasso\Petitions\Models\Signatures;
 
-class Subscriptions extends ReportWidgetBase {
+class TopPetitions extends ReportWidgetBase {
 
 
     public $defaultAlias = 'topPetitions';
