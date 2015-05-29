@@ -14,5 +14,7 @@ class Settings extends Model
 
     public $settingsFields = 'fields.yaml';
 
+    public $attachOne = [
+        'default_image' => ['System\Models\File']];
 
 }

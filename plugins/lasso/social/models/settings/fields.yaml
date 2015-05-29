@@ -86,7 +86,10 @@ tabs:
             span: full
             label: Default Image
             comment: Default image for social share dialogs
-            type: text
+            type: fileupload
+            mode: image
+            imageheight: 200
+            imagewidth: 200
             tab: Share Dialog
         default_description:
             span: full
