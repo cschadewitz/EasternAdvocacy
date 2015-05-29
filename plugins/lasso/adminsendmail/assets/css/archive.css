@@ -12,9 +12,15 @@
 }
 .post-image{
     display: inline-block;
+    max-width: 300px;
+    margin: 10px;
+    float: left;
+}
+.post-image-thumb{
+    display: inline-block;
     max-width: 200px;
     margin: 10px;
-    float: right;
+    float: left;
 }
 
 .post-abstract {

@@ -8,7 +8,9 @@
             <p class="post-content">There are no emails currently in the archive.</p>
         {% else %}
             <header><h2>{{ post.subject }}</h2></header>
-
+            <div class="post-image">
+                <img class="img-thumbnail img-responsive" src="{{post.image.getPath()}}" >
+            </div>
             <p class="post-content">{{ post.content | raw }}</p>
 
             <ul class="post-attached-list">
