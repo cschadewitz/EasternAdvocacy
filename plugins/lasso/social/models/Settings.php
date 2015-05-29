@@ -14,4 +14,17 @@ class Settings extends Model
 
     public $settingsFields = 'fields.yaml';
 
+    public function getDefault_ImageThumb($size = 25, $default = null)
+    {
+        if (!$default) {
+            $default = 'mm'; // Mystery man
+        }
+
+        if ($this->default_image) {
+            return $this->default_image->getThumb($size, $size);
+        }
+        else {
+            return 'https://en.gravatar.com/avatar/93b1dacdd24fa8e1f21e446f3f244d18';
+        }
+    }
 }
