@@ -1,0 +1,10 @@
+.share-button{
+    display: inline-block;
+    vertical-align: bottom;
+}
+.share-button-alignment{
+    display: inline-block;
+    vertical-align: bottom;
+    height: 22px;
+    width: 80px;
+}
