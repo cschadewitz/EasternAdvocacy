@@ -43,10 +43,16 @@ class Plugin extends PluginBase
                 'order'       => 500,
 
                 'sideMenu' => [
-                    'actionmanager' => [
+                    'action' => [
                         'label'       => 'New Action',
                         'icon'        => 'icon-plus',
                         'url'         => Backend::url('lasso/actions/action/create'),
+                        'permissions' => ['lasso.actions.*'],
+                    ],
+                    'taken' => [
+                        'label'       => 'Actions records',
+                        'icon'        => 'icon-book',
+                        'url'         => Backend::url('lasso/actions/action/taken'),
                         'permissions' => ['lasso.actions.*'],
                     ]
                 ]

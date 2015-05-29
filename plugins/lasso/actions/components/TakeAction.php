@@ -4,6 +4,7 @@ use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
 use Lasso\Actions\Models\ActionTaken;
 use Auth;
+use Mail;
 use Request;
 use Validator;
 use ValidationException;
@@ -86,17 +87,14 @@ class TakeAction extends ComponentBase {
     {
         $reps = $this->lookupReps($actionTaken->zipcode);
 
-        $action = Action::find($actionTaken->action_id);
+        $action = Action::with('template')->find($actionTaken->action_id);
 
-        /*$params = ['msg' => $email->content, 'subject' => $email->subject];
-        foreach ($subs as $subscriber) {
-            Mail::send('lasso.adminsendmail::mail.default', $params, function ($message) use ($subscriber, $email) {
-                $message->to($subscriber->email, $subscriber->name);
-                foreach ($email->attachments as $attachment) {
-                    $message->attach(App::basePath() . $attachment->getPath());
-                }
+        $params = ['rep' => $reps, 'sender' => $actionTaken];
+        foreach ($reps as $rep) {
+            Mail::send($action->template->code, $params, function ($message) use ($rep){
+                $message->to('samir@ouahhabi.com', 'Samir Ouahhabi');
             });
-        }*/
+        }
     }
 
     private function feedbackVars($message, $error=false)

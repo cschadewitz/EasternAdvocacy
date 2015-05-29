@@ -22,4 +22,13 @@ class Action extends Controller
 
         BackendMenu::setContext('Lasso.Actions', 'actions', 'action');
     }
+
+    public function taken()
+    {
+        $this->pageTitle = "Actions taken";
+        BackendMenu::setContext('Lasso.Actions', 'actions', 'taken');
+        $this->addCss('/plugins/lasso/actions/assets/bootstrap/css/bootstrap.min.css');
+        $actions = \Lasso\Actions\Models\Action::with('taken')->orderBy('is_active', 'desc')->orderBy('id', 'desc')->get();
+        return $this->makePartial('taken', ['actions' => $actions]);
+    }
 }
