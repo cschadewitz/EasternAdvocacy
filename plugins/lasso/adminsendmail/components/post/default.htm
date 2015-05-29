@@ -8,16 +8,21 @@
             <p class="post-content">There are no emails currently in the archive.</p>
         {% else %}
             <header><h2>{{ post.subject }}</h2></header>
-
-            <p class="post-content">{{ post.content | raw }}</p>
-
+            <div class="post-body">
+                {% if post.image %}
+                    <div class="post-image">
+                        <img class="img-thumbnail img-responsive" src="{{post.image.getPath()}}" >
+                    </div>
+                {% endif %}
+                <p class="post-content">{{ post.content | raw }}</p>
+            </div>
             <ul class="post-attached-list">
                 {% for att in attached %}
                     <li class="post-attached-item"><a href="{{att.getPath}}" download="{{att.file_name}}">{{att.file_name}}</a></li>
                 {% endfor %}
             </ul>
             <div class="post-footer">
-                {% partial "share_dialog::default" title = post.subject description = post.content %}
+                {% partial "share_dialog::default" title = post.subject description = post.content image = post.image.getPath()%}
                 <div class="post-views text-right">Views: {{ post.views }}</div>
                 <div class="post-date text-right">Sent:{{ post.created_at|date("m/d/Y") }} - {{ post.created_at|date("h:i") }}</div>
             </div>

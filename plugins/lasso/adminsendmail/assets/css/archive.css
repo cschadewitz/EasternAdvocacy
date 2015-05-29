@@ -1,10 +1,22 @@
-.lasso-archive {
-
-}
-
 .post-subject {
     color:#A10022;
     font-size: 30px;
+}
+
+.post-body{
+    display: inline-block;
+}
+.post-image{
+    display: inline-block;
+    max-width: 300px;
+    margin: 10px;
+    float: left;
+}
+.post-image-thumb{
+    display: inline-block;
+    max-width: 200px;
+    margin: 10px;
+    float: left;
 }
 
 .post-abstract {
