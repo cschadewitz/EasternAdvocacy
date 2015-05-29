@@ -3,10 +3,10 @@
 {% set postPage = __SELF__.postPage %}
 {% put sharedialog %}
 <title>Eastern Advocates - {{ title }}</title>
-<meta property="og:title"              content="{{title}}" />
 <meta property="og:url"                content="{{this.page.baseFileName|page}}" />
-<meta property="fb:app_id"             content="{{appID}}" />
 <meta property="og:type"               content="article" />
+<meta property="og:title"              content="{{title}}" />
+<meta property="fb:app_id"             content="{{appID}}" />
 {% if image %}<meta property="og:image"              content="{{image}}" />{% endif %}
 <meta property="og:description"        content="{{description|raw}}" />
 <meta property="og:site_name"          content="Eastern Advocates" />
