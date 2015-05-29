@@ -4,54 +4,54 @@
 tabs:
     fields:
         email:
-            span: auto
+            span: left
             label: Email address for site
             type: text
             tab: Social Contact
         email_include:
-            span: auto
+            span: right
             label: Include on SocialButtons component?
             type: switch
             tab: Social Contact
         fb_app_id:
-            span: auto
+            span: left
             label: Facebook App ID
             type: text
             tab: Social Contact
         fb_url:
-            span: auto
+            span: left
             label:  Facebook Page URL
             type: text
             tab: Social Contact
         fb_include:
-            span: auto
+            span: right
             label: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
         twitter_url:
-            span: auto
+            span: left
             label: Twitter Page URL
             type: text
             tab: Social Contact
         twitter_id:
-            span: auto
+            span: left
             label: Twitter page name
             type: text
             tab: Social Contact
         twitter_include:
-            span: auto
+            span: right
             label: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
         gp_url:
-            span: auto
+            span: left
             label: Google+ Page URL
             type:   text
             tab: Social Contact
         gp_include:
-            span: auto
+            span: right
             label: Include on SocialButtons component?
             type: switch
             default: 1
