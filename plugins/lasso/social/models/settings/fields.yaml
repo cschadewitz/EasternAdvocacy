@@ -4,61 +4,75 @@
 tab:
     fields:
         email:
+            span: auto
             label: Email address for site
             type: text
             tab: Social Contact
         email_include:
+            span: auto
             label: Include on SocialButtons component?
             type: switch
             tab: Social Contact
         fb_app_id:
+            span: auto
             label: Facebook App ID
             type: text
             tab: Social Contact
         fb_url:
+            span: auto
             label:  Facebook Page URL
             type: text
             tab: Social Contact
         fb_include:
+            span: auto
             label: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
         twitter_url:
+            span: auto
             label: Twitter Page URL
             type: text
             tab: Social Contact
         twitter_id:
+            span: auto
             label: Twitter page name
             type: text
             tab: Social Contact
         twitter_include:
+            span: auto
             label: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
         gp_url:
+            span: auto
             label: Google+ Page URL
             type:   text
             tab: Social Contact
         gp_include:
+            span: auto
             label: Include on SocialButtons component?
             type: switch
             default: 1
             tab: Social Contact
         default_title:
+            span: auto
             label: Default title for social share dialogs
             type: text
             tab: Share Dialog
         default_description:
+            span: auto
             label: Default description for social share dialogs
             type: text
             tab: Share Dialog
         default_url:
+            span: auto
             label: Default url for social share dialogs
             type: text
             tab: Share Dialog
         default_image:
+            span: auto
             label: Default image for social share dialogs
             type: text
             tab: Share Dialog

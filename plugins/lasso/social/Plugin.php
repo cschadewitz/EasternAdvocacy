@@ -34,7 +34,8 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-rss-square',
                 'class'       => 'Lasso\Social\Models\Settings',
                 'order'       => 500,
-                'keywords'    => 'facebook'
+                'keywords'    => 'facebook',
+                'permissions' => ['lasso.social.*']
             ]
         ];
     }
