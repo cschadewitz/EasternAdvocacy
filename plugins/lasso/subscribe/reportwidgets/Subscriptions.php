@@ -32,7 +32,7 @@ class Subscriptions extends ReportWidgetBase {
             'includeUnsub' => [
                 'title'    => 'Include un-subscribed users',
                 'type'     => 'checkbox',
-                'default'  => 'true'
+                'default'  => 'false'
             ]
         ];
     }
@@ -45,9 +45,11 @@ class Subscriptions extends ReportWidgetBase {
 
     public function assignVars()
     {
-        $this->vars['subs'] = Subscribe::verified()->count();
-        $this->vars['users'] = UserExtension::subscribers(true)->count();
-        $this->vars['userSubs'] = UserExtension::subscribers()->count();
+        $this->vars['subs'] = $subs = Subscribe::verified()->count();
+        $this->vars['userUnsubs'] = $userUnsubs = UserExtension::subscribers(true)->count();
+        $this->vars['userSubs'] = $userSubs = UserExtension::subscribers()->count();
+        $this->vars['subsTotal'] = $subs + $userSubs;
+        $this->vars['usersTotal'] = $userUnsubs + $userSubs;
         $this->vars['includeUnsub'] = $this->page['includeUnsub'] = $this->property('includeUnsub');
     }
 }

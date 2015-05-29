@@ -5,17 +5,19 @@
             class="control-chart centered wrap-legend"
             data-control="chart-pie"
             data-size="200"
-            data-center-text="100">
-        <?php if($includeUnsub == 1): ?>
-        <ul>
-            <li>Un-Registered Subscribers <span><?= $subs ?></span></li>
-            <li>Subscribed Users <span><?= $userSubs ?></span></li>
-            <li>Un-Subscribed Users <span><?= $users ?></span></li>
-        </ul>
-        <?php else: ?>
+            data-center-text=<?= $subsTotal ?> >
         <ul>
             <li>Un-Registered Subscribers <span><?= $subs ?></span></li>
             <li>Registered Subscribers <span><?= $userSubs ?></span></li>
+        </ul>
+    </div>
+    <div
+            class="control-chart centered wrap-legend"
+            data-control="chart-pie"
+            data-size="200"
+            data-center-text=<?= $userSubs ?>/ <?= $userTotal ?> >
+            <li>Users Subscribed <span><?= $userSubs ?></span></li>
+            <li>Users Not Subscribed <span><?= $userUnsubs ?></span></li>
         </ul>
         <?php endif; ?>
     </div>
