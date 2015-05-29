@@ -1,38 +1,96 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
-
-fields:
-    email:
-        label: Email address for site
-        type: text
-    email_include:
-        label: Include on SocialButtons component?
-        type: switch
-    fb_app_id:
-        label: Facebook App ID
-        type: text
-    fb_url:
-        label:  Facebook Page URL
-        type: text
-    fb_include:
-        label: Include on SocialButtons component?
-        type: switch
-        default: 1
-    twitter_url:
-        label: Twitter Page URL
-        type: text
-    twitter_id:
-        label: Twitter page name
-        type: text
-    twitter_include:
-        label: Include on SocialButtons component?
-        type: switch
-        default: 1
-    gp_url:
-        label: Google+ Page URL
-        type:   text
-    gp_include:
-        label: Include on SocialButtons component?
-        type: switch
-        default: 1
+tabs:
+    fields:
+        email:
+            span: left
+            label: Email
+            comment: Email address for site
+            placeholder: example@example.co
+            type: text
+            tab: Social Buttons
+        email_include:
+            span: right
+            label: Include Email
+            comment: Include on SocialButtons component?
+            type: switch
+            tab: Social Buttons
+        fb_url:
+            span: left
+            label: Facebook URL
+            comment: Facebook Page URL
+            placeholder: www.facebook.com/examplecompany
+            type: text
+            tab: Social Buttons
+        fb_include:
+            span: right
+            label: Include Facebook
+            comment: Include on SocialButtons component?
+            type: switch
+            tab: Social Buttons
+        fb_app_id:
+            span: left
+            label: Facebook App ID
+            comment: Facebook App ID
+            type: text
+            tab: Social Buttons
+        twitter_url:
+            span: left
+            label: Twitter URL
+            comment: Twitter Page URL
+            placeholder: www.twitter.com/examplecompany
+            type: text
+            tab: Social Buttons
+        twitter_include:
+            span: right
+            label: Include Twitter
+            comment: Include on SocialButtons component?
+            type: switch
+            tab: Social Buttons
+        twitter_id:
+            span: left
+            label: Twitter Name
+            comment: Twitter page name
+            placeholder: examplecompany
+            type: text
+            tab: Social Buttons
+        gp_url:
+            span: left
+            label: Google+ URL
+            comment: Google+ Page URL
+            placeholder: www.google.com/+examplecompany
+            type:   text
+            tab: Social Buttons
+        gp_include:
+            span: right
+            label: Include Google+
+            comment: Include on SocialButtons component?
+            type: switch
+            tab: Social Buttons
+        default_title:
+            span: auto
+            label: Default Title
+            comment: Default title for social share dialogs
+            placeholder: Site Name
+            type: text
+            tab: Share Dialog
+        default_url:
+            span: auto
+            label: Default URL
+            comment: Default url for social share dialogs
+            placeholder: Site URL
+            type: text
+            tab: Share Dialog
+        default_image:
+            span: full
+            label: Default Image
+            comment: Default image for social share dialogs
+            type: text
+            tab: Share Dialog
+        default_description:
+            span: full
+            label: Default Description
+            comment: Default description for social share dialogs
+            type: textarea
+            tab: Share Dialog

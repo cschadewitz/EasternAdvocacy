@@ -12,6 +12,7 @@
 
 	    {% component 'account' %}
 	    <p></p>
+		{% partial "share_dialog::default" title = action.title description = action.description image = action.photo.getPath() invisible = true %}
     </article>
 {% else %} 
 <div class="row">
@@ -95,6 +96,7 @@
 					</div>
 				</div>
 			</div>
+			{% partial "share_dialog::default" title = action.title description = action.description image = action.photo.getPath() %}
 			{% endif %}
         {% endif %}
     </article>

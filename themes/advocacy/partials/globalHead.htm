@@ -1,12 +1,9 @@
 description = "Global Stylesheet Includes"
-
-[share_dialog]
-postId = "{{ :postId }}"
-archivePage = "archive"
-postPage = "article"
 ==
 <meta charset="utf-8">
-{% component 'share_dialog'%}
+{% placeholder sharedialog default %}
+<title>Eastern Advocates - {{ this.page.title }}</title>
+{% endplaceholder %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="thNCs_zpevIAZssd4tgOPmxLcCHksCZFRKa1FqTrhwY" />
 <!-- <link rel="icon" type="image/png" href="{{ 'assets/images/october.png'|theme }}" /> -->

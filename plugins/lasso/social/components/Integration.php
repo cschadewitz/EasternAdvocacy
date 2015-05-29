@@ -3,7 +3,7 @@
 use Cms\Classes\ComponentBase;
 use Lasso\Social\Models\Settings as Settings;
 
-class FacebookIntegration extends ComponentBase
+class Integration extends ComponentBase
 {
 
     public function componentDetails()
