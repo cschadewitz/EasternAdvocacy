@@ -46,7 +46,7 @@ class ShareDialog extends ComponentBase
                 'description' => 'Petition page basename',
                 'required'    => 'true',
                 'type'        => 'string',
-                'default'     => Settings::get('default_image').getPublicPath()
+                'default'     => Settings::get('default_image')
             ]
         ];
     }
