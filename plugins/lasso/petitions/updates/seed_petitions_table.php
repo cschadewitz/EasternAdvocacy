@@ -1,7 +1,7 @@
 <?php
-
 namespace Lasso\Petitions\Updates;
 
+require_once getcwd().'/vendor/fzaninotto/faker/src/autoload.php';
 use Seeder;
 use Lasso\Petitions\Models\Petitions;
 use Faker;
