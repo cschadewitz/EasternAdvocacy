@@ -19,8 +19,7 @@ class ShareDialog extends ComponentBase
     {
         return [
             'name'        => 'Facebook Share Dialog',
-            'description' => 'This component should be added within the head of the layout used for individual post
-                               pages. This will add content Facebook share dialog.'
+            'description' => 'This component should be added to the layout. The partial can be added anywhere and contains '
         ];
     }
 
@@ -30,21 +29,18 @@ class ShareDialog extends ComponentBase
             'title' => [
                 'title'       => 'Title',
                 'description' => 'Title for the share dialog',
-                'required'    => 'true',
                 'type'        => 'string',
                 'default'     => Settings::get('default_title')
             ],
             'description'   => [
                 'title'       => 'Description',
-                'description' => 'Action page basename',
-                'required'    => 'true',
+                'description' => 'Description for the share dialog',
                 'type'        => 'string',
                 'default'     => Settings::get('default_description')
             ],
             'image' => [
                 'title'       => 'Image',
-                'description' => 'Petition page basename',
-                'required'    => 'true',
+                'description' => 'Featured image for the share dialog',
                 'type'        => 'string',
                 'default'     => Settings::get('default_image')
             ]

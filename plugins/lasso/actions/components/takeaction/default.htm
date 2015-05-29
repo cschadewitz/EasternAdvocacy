@@ -24,7 +24,7 @@
     <article id="takeaction" class="col-md-8 col-md-offset-2">
         {% if access_status == 'ok' %}{% set fill = true %}{% else %}{% set fill = false %}{% endif %}
             <header><h2>{{ action.title }}</h2></header>
-					<img src="{{ action.photo.getPath() }}" class="img-responsive img-thumbnail" >
+					<img src="{{ action.photo.getPublicPath() }}" class="img-responsive img-thumbnail" >
             <div class="takeaction-header">
 				<h1>{{ action.subtitle }}</h1>
 				<p>{{ action.description }}</p>
@@ -95,7 +95,7 @@
 					</div>
 				</div>
 			</div>
-			{% partial "share_dialog::default" title = action.title description = action.description image=action.photo.getPath() %}
+			{% partial "share_dialog::default" title = action.title description = action.description image=action.photo.getPublicPath() %}
 			{% endif %}
         {% endif %}
     </article>
