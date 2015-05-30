@@ -9,8 +9,8 @@ class Recaptcha extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'recaptcha Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'ReCaptcha',
+            'description' => 'A Captcha component using Google\'s ReCaptcha software'
         ];
     }
 

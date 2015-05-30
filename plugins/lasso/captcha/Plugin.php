@@ -110,7 +110,7 @@ class Plugin extends PluginBase
             $captchaResponse = json_decode($captchaResponse);
 
             if (json_last_error() != JSON_ERROR_NONE) {
-                $result['error'] = json_last_error_msg();
+                $result['error'] = "JSON Error: " . json_last_error_msg();
                 return $result;
             }
 
