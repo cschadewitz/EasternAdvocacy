@@ -2,6 +2,8 @@
 namespace Lasso\Subscribe\Components;
 
 use Cms\Classes\ComponentBase;
+use Lasso\Subscribe\Controllers\Subscribe;
+use Lasso\Subscribe\Models\Subscribe as SubModel;
 use Mail;
 
 class Form extends ComponentBase
@@ -29,23 +31,23 @@ class Form extends ComponentBase
             throw new \Exception(sprintf('Please enter your zip code.'));
         if ( empty($type) )
             throw new \Exception(sprintf('Please select your affiliation.'));
-        if((new \lasso\subscribe\models\Subscribe)->validEmail($email) == 0){
+        if((new SubModel)->validEmail($email) == 0){
             throw new \Exception(sprintf('Email is not valid.'));
         }
-        if((new\lasso\subscribe\models\Subscribe)->uniqueEmail($email) == 0){
+        if((new SubModel)->uniqueEmail($email) == 0){
             return [
                 'error' => 'nonUniqueEmail',
             ];
         }
         else{
             \Flash::success('Subscription Successful!');
-            $subscription = new \lasso\subscribe\models\Subscribe;
-            $subscription->uuid = $uuid = $subscription->generateUUID();
+            $subscription = new SubModel;
             $subscription->name = $name;
             $subscription->email = $email;
             $subscription->zip = $zip;
             $subscription->type = $subscription->type2int($type);
             $subscription->save();
+            $uuid = SubModel::Email($email)->first();
             $params = ['name' => $name, 'email' => $email, 'uuid' => $uuid];
 
 
