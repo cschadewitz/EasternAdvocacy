@@ -56,10 +56,10 @@ class TopPetitions extends ReportWidgetBase {
         $this->vars['numberOfPetitions'] = $this->numberOfPetitions = $this->property('numberOfPetitions');
         $this->vars['percentage'] = $this->percentage = $this->property('percentage');
         if(!$this->percentage) {
-            $this->vars['petitions'] = Petitions::sortByProgress($this->numberOfPetitions);
+            $this->vars['petitions'] = json_decode(json_encode(Petitions::sortByProgress($this->numberOfPetitions)), true);
         }
         else {
-            $this->vars['petitions'] = Petitions::sortBySigCount($this->numberOfPetitions);
+            $this->vars['petitions'] = json_decode(json_encode(Petitions::sortBySigCount($this->numberOfPetitions)), true);
         }
 
     }
