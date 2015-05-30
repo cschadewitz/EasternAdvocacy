@@ -138,7 +138,7 @@ class UserSubscribe extends ComponentBase
         if ($userActivation) {
             $this->sendActivationEmail($user);
 
-            \Flash::success('An activation email has been sent to you at ' + $data["email"]);
+            \Flash::success('An activation email has been sent to you');
         }
 
         /*
