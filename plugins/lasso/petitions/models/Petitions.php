@@ -96,7 +96,7 @@
         {
             return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures/lasso_petitions_petitions.goal AS sig_count
                                 FROM lasso_petitions_petitions
-                                ORDER BY sig_count
+                                ORDER BY sig_count DESC
 	                            LIMIT ?', [$numberOfPetitions]);
         }
 
@@ -104,7 +104,7 @@
         {
             return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures AS sig_count
                                 FROM lasso_petitions_petitions
-                                ORDER BY sig_count
+                                ORDER BY sig_count DESC
 	                            LIMIT ?', [$numberOfPetitions]);
         }
     }
