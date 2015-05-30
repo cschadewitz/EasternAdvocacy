@@ -1,3 +1,6 @@
+{% flash %}
+<div class="alert alert-{{type}}">{{ message }}</div>
+{% endflash %}
 {% if not user %}
 
     <div class="row">

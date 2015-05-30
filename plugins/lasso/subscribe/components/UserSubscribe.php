@@ -138,7 +138,7 @@ class UserSubscribe extends ComponentBase
         if ($userActivation) {
             $this->sendActivationEmail($user);
 
-            Flash::success('An activation email has been sent to you at ' + $data["email"]);
+            \Flash::success('An activation email has been sent to you');
         }
 
         /*
@@ -181,7 +181,7 @@ class UserSubscribe extends ComponentBase
             Auth::login($user->reload(), true);
         }
 
-        Flash::success(post('flash', 'Your account has been successfully updated.'));
+        \Flash::success(post('flash', 'Your account has been successfully updated.'));
 
         /*
          * Redirect to the intended page after successful update
@@ -218,12 +218,12 @@ class UserSubscribe extends ComponentBase
                 UserExtension::getModel($user);
                 $user->extension->verificationDate = $sub->verificationDate;
                 $this->removeOldSubscription($user);
-                Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription
+                \Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription
                                             to a registered account!');
             }
             else
             {
-                Flash::success('Your account has been successfully activated. Thanks for Registering!');
+                \Flash::success('Your account has been successfully activated. Thanks for Registering!');
             }
 
             /*
@@ -256,7 +256,7 @@ class UserSubscribe extends ComponentBase
                 throw new ApplicationException('Your account has already been activated');
             }
 
-            Flash::success('An activation email has been sent to you at ' + $user->email);
+            \Flash::success('An activation email has been sent to you at ' + $user->email);
 
             $this->sendActivationEmail($user);
 
