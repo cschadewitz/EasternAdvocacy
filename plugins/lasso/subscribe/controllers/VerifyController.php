@@ -5,9 +5,8 @@
     {
         public function commit($uuid)
         {
-            $subscription = new \lasso\subscribe\models\Subscribe;
-            if($subscription->UUID($uuid)->count() == 1){
-                $verifier = \lasso\subscribe\models\Subscribe::find($uuid);
+            if(\Lasso\Subscribe\Models\Subscribe::UUID($uuid)->count() == 1){
+                $verifier = \Lasso\Subscribe\Models\Subscribe::find($uuid);
                 $verifier->verificationDate = date('Y-m-d H:i:s');
                 $verifier->save();
                 return redirect('/archive/1');

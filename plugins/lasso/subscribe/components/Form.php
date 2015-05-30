@@ -39,14 +39,14 @@ class Form extends ComponentBase
         }
         else{
             \Flash::success('Subscription Successful!');
-            $subscription = new \lasso\subscribe\models\Subscribe;
-            $subscription->uuid = $uuid = $subscription->generateUUID();
+            $subscription = new \Lasso\Subscribe\Models\Subscribe;
             $subscription->name = $name;
             $subscription->email = $email;
             $subscription->zip = $zip;
             $subscription->type = $subscription->type2int($type);
             $subscription->save();
-            $params = ['name' => $name, 'email' => $email, 'uuid' => $uuid];
+            $uuid = \Lasso\Subscribe\Models\Subscribe::Email($email)->first();
+            $params = ['name' => $name, 'email' => $email, 'uuid' => $uuid->uuid];
 
 
             Mail::sendTo([$email => $name], 'lasso.subscribe::mail.verify', $params);

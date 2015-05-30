@@ -11,4 +11,5 @@
       - Added backend context menu
       - fixed sql query bug in registerSchedule function
       - Added new subscriber and delete subscribers toolbar to backened menu
-
+1.0.4:
+      - Fixed bug in subscription verification controller
