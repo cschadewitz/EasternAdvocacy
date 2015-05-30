@@ -41,19 +41,23 @@ class Address extends Model
      * @param $street_address - Array of address components
      * @return Address - new address object with lat/long coordinates looked up
      */
-    public static function parseNewAddress($street_address) {
-        if(Address::checkRecord($street_address)) {
+    public static function parseNewAddress($street_address)
+    {
+        if (Address::checkRecord($street_address)) {
             return Address::parseAddress($street_address);
         }
         $street = "";
-        $street = $street . (isset($street_address['address'])?$street_address['address']:"");
-        $street = $street . (isset($street_address['city'])?$street_address['city']:"");
-        $street = $street . (isset($street_address['state'])?$street_address['state']:"");
-        $street = $street . (isset($street_address['zip'])?$street_address['zip']:"");
+        $street = $street . (isset($street_address['address']) ? $street_address['address'] : "");
+        $street = $street . (isset($street_address['city']) ? $street_address['city'] : "");
+        $street = $street . (isset($street_address['state']) ? $street_address['state'] : "");
+        $street = $street . (isset($street_address['zip']) ? $street_address['zip'] : "");
 
         $results = Address::getCoordsFromAPI($street);
-        $lat=round($results[0], 2);//normalized here, too many digits and the sunlight api fails
-        $long=round($results[1], 2);
+        if (is_null($results)) {
+            return null;
+        }
+        $lat = round($results[0], 2);//normalized here, too many digits and the sunlight api fails
+        $long = round($results[1], 2);
 
         $newAddress = Address::create([
             'address' => $street_address['address'],
@@ -96,6 +100,7 @@ class Address extends Model
             ));
             $json = json_decode($json);
             if ($json->{'status'} != 'OK') {
+                //return array();
                 throw new Exception($json->{'status'});
             }
             $json = $json->{'results'};
@@ -107,8 +112,7 @@ class Address extends Model
             $results = array($lat, $long);
             return $results;
         } catch (Exception $e) {
-            echo 'Exception: ', $e->getMessage(), "\n";
-            return $e->getMessage();
+            return null;
         }
     }
 

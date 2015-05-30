@@ -77,9 +77,8 @@ class Legislator extends Model
                 Settings::get('sunlight_id')
             )));
             return json_decode($json);
-        } catch (Exception $e) {
-            echo 'Exception: ', $e->getMessage(), "\n";
-            return $e->getMessage();
+        } catch (\Exception $e) {
+            return null;
         }
     }
 
@@ -98,10 +97,8 @@ class Legislator extends Model
                 Settings::get('sunlight_id')
             )));
             return $json;
-        }
-        catch (Exception $e) {
-            echo 'Exception: ', $e->getMessage(), "\n";
-            return $e->getMessage();
+        } catch (\Exception $e) {
+            return null;
         }
     }
 
