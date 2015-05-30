@@ -59,14 +59,8 @@ class TopViewed extends ReportWidgetBase {
     {
         $this->assignVars();
 
-        $this->posts = Email::orderBy('views', 'desc')->take($this->numberOfPosts)->get();
 
-        /*$this->posts->each(function($post) {
-            $post->setUrl($this->postPage, $this->controller);
-        });
-        */
-        $this->vars['rows'] = $this->posts;
-        $this->vars['postPage'] = $this->postPage;
+
         return $this->makePartial('reportWidget');
     }
 
@@ -74,5 +68,7 @@ class TopViewed extends ReportWidgetBase {
     {
         $this->postPage = $this->page['postPage'] = $this->property('postPage');
         $this->numberOfPosts = $this->page['numberOfPosts'] = $this->property('numberOfPosts');
+        $this->vars['rows'] = $this->posts = Email::orderBy('views', 'desc')->take($this->numberOfPosts)->get();
+        $this->vars['postPage'] = $this->postPage;
     }
 }

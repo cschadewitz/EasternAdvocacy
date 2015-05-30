@@ -32,7 +32,7 @@ class Plugin extends PluginBase {
 	public function registerReportWidgets() {
 		return [
 			'\Lasso\AdminSendMail\ReportWidgets\TopViewed' => [
-				'label' => 'TopViewed',
+				'label' => 'Top Viewed',
 				'context' => 'dashboard',
 			],
 		];

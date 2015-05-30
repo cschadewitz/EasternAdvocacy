@@ -32,6 +32,15 @@
             ];
         }
 
+        public function registerReportWidgets() {
+            return [
+                '\Lasso\Petitions\ReportWidgets\TopPetitions' => [
+                    'label' => 'Top Petitions',
+                    'context' => 'dashboard',
+                ],
+            ];
+        }
+
         public function registerNavigation()
         {
             return [

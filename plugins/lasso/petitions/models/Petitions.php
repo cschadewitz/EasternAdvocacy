@@ -4,6 +4,7 @@
     use Model;
     use Str;
     use Mail;
+    use Illuminate\Support\Facades\DB as Db;
     use October\Rain\Database\Traits\Sluggable;
 
     class Petitions extends Model
@@ -89,6 +90,22 @@
         public function scopeActive($query)
         {
             return $query->where('published', '=', 1);
+        }
+
+        public static function sortByProgress($numberOfPetitions)
+        {
+            return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures/lasso_petitions_petitions.goal AS sig_count
+                                FROM lasso_petitions_petitions
+                                ORDER BY sig_count DESC
+	                            LIMIT ?', [$numberOfPetitions]);
+        }
+
+        public static function sortBySigCount($numberOfPetitions)
+        {
+            return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures AS sig_count
+                                FROM lasso_petitions_petitions
+                                ORDER BY sig_count DESC
+	                            LIMIT ?', [$numberOfPetitions]);
         }
     }
 
