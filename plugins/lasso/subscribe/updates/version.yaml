@@ -12,4 +12,7 @@
       - fixed sql query bug in registerSchedule function
       - Added new subscriber and delete subscribers toolbar to backened menu
 1.0.4:
+      - Added report widget
+      - Small changes
+1.0.5:
       - Fixed bug in subscription verification controller
