@@ -28,3 +28,7 @@ fields:
         label: Google API URL Address
         comment: Google Geocache API base URL
         type: text
+    cache_time:
+        label: Cache Timeout
+        comment: How long (in days) to hold cached entries
+        type: number
