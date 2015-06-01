@@ -5,7 +5,6 @@ use Lasso\LegislativeLookup\Models\Address;
 use Lasso\LegislativeLookup\Models\Legislator;
 use Validator;
 use ValidationException;
-use Flash;
 
 class Lookup extends ComponentBase
 {
@@ -155,6 +154,8 @@ class Lookup extends ComponentBase
         if(is_null($coords)) {
             $isnew = true;
             $coords = Address::parseNewAddress(array('address' => $address, 'city' => '', 'state' => '', 'zip' => ''));
+            if(is_null($coords))//if still empty
+                return array();//return empty array
         }
         $leg = Legislator::getLegislatorsFromAddress($coords);
         if($isnew) {

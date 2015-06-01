@@ -51,7 +51,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Stolen shamelessly from dschutz's subscriber plugin
+     * Stolen shamelessly from dschultz's subscriber plugin
      */
     public function registerSchedule($schedule)
     {
