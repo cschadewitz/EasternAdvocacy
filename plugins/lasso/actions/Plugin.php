@@ -32,6 +32,21 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerSettings()
+    {
+        return [
+            'notifications' => [
+                'label'       => 'Actions Settings',
+                'description' => 'Manage Actions settings.',
+                'category'    => 'Actions',
+                'icon'        => 'icon-send',
+                'class'       => 'Lasso\Actions\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'faq'
+            ]
+        ];
+    }
+
     public function registerNavigation()
     {
         return [

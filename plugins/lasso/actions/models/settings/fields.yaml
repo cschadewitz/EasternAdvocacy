@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    openstatesapikey:
+        label: OpenStates API key
+        type: text
+    googlegeocodeapikey:
+        label: Google GeoCode API key
+        type: text
+    numrecentrecords:
+        label: The number of recent actions records to display in the backend
+        type: text
+        default: 10

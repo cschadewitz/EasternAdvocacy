@@ -1,5 +1,33 @@
 <div class="container">
     <div class="row">
+        <div class="jumbotron">
+            <h1>Action records</h1>
+            <p>This page displays the records of
+                <?php
+                if(count($actions)==count($select))
+                    echo ' all the ';
+                else
+                    echo ' the most recent ';
+                ?>
+                actions taken by our users.</p>
+            <p>You can view the records for a specific action by choosing one from the following list:
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    Action title
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <?php
+                    foreach($select as $action)
+                    {
+                        echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="'.Backend::url('lasso/actions/action/taken/').'/'.$action->id.'">'.$action->title.'</a></li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+            </p>
+        </div>
+        <br/>
         <?php
         foreach($actions as $action)
         {
@@ -17,7 +45,7 @@
             else
             {
                 echo '<table class="table table-bordered table-hover">';
-                echo '<thead><tr><th>#</th><th>Name</th><th>Email</th><th>IP Address</th><th>Zip code</th></tr></thead>';
+                echo '<thead><tr><th>#</th><th>Name</th><th>Email</th><th>IP Address</th><th>Zip code</th><th>Time</th></tr></thead>';
                 echo '<tbody>';
                 foreach($action->taken as $taken)
                 {
@@ -27,6 +55,7 @@
                     echo '<td>'.$taken->email.'</td>';
                     echo '<td>'.$taken->ip_address.'</td>';
                     echo '<td>'.$taken->zipcode.'</td>';
+                    echo '<td>'.$taken->created_at.'</td>';
                     echo '</tr>';
                 }
                 echo '</tbody>';
@@ -34,6 +63,10 @@
             echo '</table>';
             echo '</div></div>';
         }
+        if(count($actions)!=count($select))
+            echo '<h1 style="text-align: center;"><a href="'.Backend::url('lasso/actions/action/taken/all').'">
+                <span class="caret"></span> Show all Actions
+                <span class="caret"></span></a></h1>';
         ?>
     </div>
 </div>

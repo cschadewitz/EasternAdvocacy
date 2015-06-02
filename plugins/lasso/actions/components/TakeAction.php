@@ -3,6 +3,7 @@
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
 use Lasso\Actions\Models\ActionTaken;
+use Lasso\Actions\Models\Settings;
 use Auth;
 use Mail;
 use Request;
@@ -189,7 +190,7 @@ class TakeAction extends ComponentBase {
     }
 
 	public function getGeoCode($address) {
-		$geokey = 'AIzaSyB-uT5MX5748RHDpXJ5YgTWD3gWoSC_KbA';
+		$geokey = Settings::get('googlegeocodeapikey');
 
 		$json = file_get_contents(sprintf(
 			"https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s",
@@ -201,7 +202,7 @@ class TakeAction extends ComponentBase {
 	}
 
 	public function getGeoReps($geo) {
-		$openhousekey = 'f78ae693f1c343aab4d0e5898eca594d';
+		$openhousekey = Settings::get('openstatesapikey');
 
 		$lat = $geo['results'][0]['geometry']['location']['lat']; // 46.486931;
 		$long = $geo['results'][0]['geometry']['location']['lng']; // -107.575956;
