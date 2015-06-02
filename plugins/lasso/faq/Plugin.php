@@ -34,8 +34,21 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-cog',
                 'class'       => 'Lasso\Faq\Models\Settings',
                 'order'       => 500,
-                'keywords'    => 'faq'
+                'keywords'    => 'faq',
+                'permissions' => ['lasso.faq.settings'],
             ]
+        ];
+    }
+
+    public function registerPermissions()
+    {
+        return [
+            'lasso.faq.read_faqs'       => ['tab' => 'FAQ', 'label' => 'Read the FAQs'],
+            'lasso.faq.manage_categories'  => ['tab' => 'FAQ', 'label' => 'Manage FAQ categories'],
+            'lasso.faq.ask_questions'  => ['tab' => 'FAQ', 'label' => 'Create new questions'],
+            'lasso.faq.answer_questions'  => ['tab' => 'FAQ', 'label' => 'Answer questions'],
+            'lasso.faq.manage_questions'  => ['tab' => 'FAQ', 'label' => 'Manage all the questions'],
+            'lasso.faq.settings'  => ['tab' => 'FAQ', 'label' => 'FAQ Settings']
         ];
     }
 
@@ -46,7 +59,7 @@ class Plugin extends PluginBase
                 'label'       => 'FAQs',
                 'url'         => Backend::url('lasso/faq/faqs/all'),
                 'icon'        => 'icon-question',
-                'permissions' => ['lasso.faq.*'],
+                'permissions' => ['lasso.faq.read_faqs'],
                 'order'       => 500,
 
                 'sideMenu' => [
@@ -54,13 +67,13 @@ class Plugin extends PluginBase
                         'label' => 'New FAQ category',
                         'icon' => 'icon-plus',
                         'url' => Backend::url('lasso/faq/faqs/create'),
-                        'permissions' => ['lasso.faq.add_categories'],
+                        'permissions' => ['lasso.faq.manage_categories'],
                     ],
                     'list_categories' => [
                         'label' => 'FAQ categories',
                         'icon' => 'icon-th-list',
                         'url' => Backend::url('lasso/faq/faqs/'),
-                        'permissions' => ['lasso.faq.add_categories'],
+                        'permissions' => ['lasso.faq.manage_categories'],
                     ],
                     'questions' => [
                         'label' => 'New Question',
@@ -78,7 +91,7 @@ class Plugin extends PluginBase
                         'label' => 'List of questions',
                         'icon' => 'icon-list',
                         'url' => Backend::url('lasso/faq/questions/'),
-                        'permissions' => ['lasso.faq.list_questions'],
+                        'permissions' => ['lasso.faq.manage_questions'],
                     ],
                 ],
             ],

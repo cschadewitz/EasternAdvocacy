@@ -114,7 +114,7 @@ class Emails extends Controller {
 
         foreach ($users as $user) {
             $params['unsubscribeUrl'] = '/user/account/';
-            Mail::send('lasso.adminsendmail::mail.user', $params, function ($message) use ($user, $email) {
+            Mail::send('lasso.adminsendmail::mail.default', $params, function ($message) use ($user, $email) {
                 $message->to($user->user->email, $user->user->name);
                 foreach ($email->attachments as $attachment) {
                     $message->attach(App::basePath() . $attachment->getPath());
