@@ -52,12 +52,12 @@
 
         public function scopeNotVerified($query)
         {
-            return $query->where('verificationDate', 'IS', 'NULL');
+            return $query->whereNull('verificationDate');
         }
 
         public function scopeVerified($query)
         {
-            return $query->where('verificationDate', 'IS NOT', 'NULL');
+            return $query->whereNotNull('verificationDate');
         }
 
         public function generateUUID()
