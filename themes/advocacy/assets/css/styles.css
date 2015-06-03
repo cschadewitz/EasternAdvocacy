@@ -91,12 +91,12 @@ article > header > h2 {
 @media (min-width: 992px) {
   .advocacy-article {
     float: left;
-    width: 66.66666667%;
+    width: 83.33333333%;
   }
 }
 @media (min-width: 992px) {
   .advocacy-article {
-    margin-left: 16.66666667%;
+    margin-left: 8.33333333%;
   }
 }
 .footer-left {
@@ -124,6 +124,10 @@ div.footer-links > a:focus {
 }
 div.footer-links > a.footer-brand {
   font-size: 16px;
+}
+.copyright {
+  color: #999;
+  font-size: .8em;
 }
 footer {
   position: fixed;
