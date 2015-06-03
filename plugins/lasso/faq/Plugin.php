@@ -40,6 +40,13 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerMailTemplates()
+    {
+        return [
+            'lasso.faq::mail.default' => 'Default template used by the FAQ plugin to send out notifications to devs.'
+        ];
+    }
+
     public function registerPermissions()
     {
         return [

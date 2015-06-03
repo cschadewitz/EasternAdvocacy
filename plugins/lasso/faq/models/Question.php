@@ -1,5 +1,8 @@
 <?php namespace Lasso\FAQ\Models;
 
+use Backend;
+use BackendAuth;
+use Backend\Models\User as BackendUser;
 use Mail;
 use Model;
 
@@ -44,11 +47,16 @@ class Question extends Model
         if(!$this->answered) {
             $contacts = $this->getContacts();
             if (Settings::get('send_emails') && !is_null($contacts)) {
-                $message = 'New unanswered question: ' . $this->question.'<br/>
-                    Whenever possible, could you please provide an answer to our content admins.<br/>Thank you!';
-                $params = ['msg' => $message, 'subject' => 'New FAQ'];
+                $admin = BackendAuth::getUser()->first_name.' '.BackendAuth::getUser()->last_name;
+                $question = $this->question;
+                $category = $this->faq->title;
+                $link = Backend::url('lasso/faq/questions/unanswered');
+                $params = ['admin' => $admin,
+                    'question' => $question,
+                    'category' => $category,
+                    'link' => $link];
                 foreach ($contacts as $contact) {
-                    Mail::send('lasso.faq::mail.default', $params, function ($message) use ($contact) {
+                    Mail::send(Settings::get('notification_template'), $params, function ($message) use ($contact) {
                         $message->to($contact, 'Lasso');
                     });
                 }

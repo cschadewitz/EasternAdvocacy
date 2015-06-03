@@ -18,6 +18,11 @@ fields:
     contact5:
         label: Contact 5
         type: text
+    notification_template:
+        label: Notification Template
+        type: dropdown
+        comment: You can customize mail templates by selecting Mail > Mail Templates from the settings menu.
+        default: lasso.faq::mail.default
     send_emails:
         label: Send notifications to these contacts?
         type: switch
