@@ -66,6 +66,8 @@ class Legislator extends Model
      */
     public static function getLegislatorsFromDistrict($district, $state)
     {
+        //Verified results against http://app.leg.wa.gov/DistrictFinder/
+        //discrepancy with dishonered Rep. Susan Fagan, dismissed but still returned via API
         try {
             $json = file_get_contents(htmlspecialchars_decode(sprintf(
             //"https://openstates.org/api/v1/legislators/?district=%s&state=%s&apikey=%s", //saving original here just in case
@@ -75,9 +77,8 @@ class Legislator extends Model
                 Settings::get('sunlight_id')
             )));
             return json_decode($json);
-        } catch (Exception $e) {
-            echo 'Exception: ', $e->getMessage(), "\n";
-            return $e->getMessage();
+        } catch (\Exception $e) {
+            return null;
         }
     }
 
@@ -96,21 +97,39 @@ class Legislator extends Model
                 Settings::get('sunlight_id')
             )));
             return $json;
+        } catch (\Exception $e) {
+            return null;
         }
-        catch (Exception $e) {
-            echo 'Exception: ', $e->getMessage(), "\n";
-            return $e->getMessage();
+    }
+
+    /**
+     * @param $addr - Address object
+     * @return Legislator|null - Legislator object based on address
+     */
+    public static function getLegislatorsFromAddress($addr) {
+        $legislatorRecord = null;
+        if(is_null($addr['district'])) {
+            $legislators = Legislator::getJSONLegislatorsFromCoords($addr['lat'], $addr['long']);//pull from API
+            foreach (json_decode($legislators) as $legislator) {
+                $legislatorRecord = Legislator::UUID($legislator->{'id'})->first();//check the id of our json against the cache
+                if (is_null($legislatorRecord)) {
+                    $legislatorRecord = Legislator::getLegislatorFromJSON($legislator);//add it
+                }
+            }//endforeach
+            $addr['district'] = json_decode($legislatorRecord['district']);
         }
+        $legislatorRecord = Legislator::getLegislatorByDistrict($addr['district']);
+        return $legislatorRecord;
     }
 
     /*
      * get and scope methods for use, instance and statics
      */
     public static function getLegislatorByUUID($UUID){
-        return Legislator::where('uuid', '=', $uuid)->first();
+        return Legislator::where('uuid', '=', $uuid)->get();
     }
     public static function getLegislatorByDistrict($district){
-        return Legislator::where('district', '=', $district)->first();
+        return Legislator::where('district', '=', $district)->get();
     }
     public function getUUID(){
         return $this->uuid;

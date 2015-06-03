@@ -50,24 +50,41 @@ class Lookup extends ComponentBase
      * @return array|mixed
      */
     public function onParseAddress() {
-        $address = post('address');
-        $city = post('city');
-        $state = post('state');
-        $zip = post('zip');
-        $location = array($address, $city, $state, $zip);
+        $location = [
+            'address' => post('address'),
+            'city' => post('city'),
+            'state' => post('state'),
+            'zip' => post('zip')
+        ];
+        $rules = [//turns out alpha_dash doesn't allow for spaces, kinda need those for addresses (and some cities)
+            'address' => 'regex:/^\w+(\s*\w*)*$/',
+            'city' => 'regex:/^\w+(\s*\w*)*$/',
+            'state' => 'alpha|size:2',
+            'zip' => 'regex:/^\d{5}(-\d{4}){0,1}$/'
+        ];
+        $messages = [
+            'address' => 'Address must not contain special characters, alpha-numeric and spaces only',
+            'city' => 'City must not contain special characters, alpha-numeric and spaces only',
+            'state' => 'State must be 2 letters',
+            'zip' => 'Zipcode must be standard 5 or 9 digit zip code'
+        ];
 
-        $rules = [];
-        $rules['address'] = 'alpha_dash';
-        $rules['city'] = 'alpha_dash';
-        $rules['state'] = 'size:2';
-        $rules['zip'] = 'numerical:5';
-
-        $validation = Validator::make($location, $rules);
+        $validation = Validator::make($location, $rules, $messages);
         if ($validation->fails()) {
-            throw new ValidationException($validation);
+            $this->page['message'] = $validation->errors()->toArray();
+            return false;
         }
 
         $coordinates = Address::parseNewAddress($location);
+        $addrObject = ['AddressObject' => $coordinates ];
+        $addrRules = ['AddressObject' => 'required' ];
+        $addrMsgs = ['required' => 'We are sorry, the address you entered could not be found' ];
+
+        $validateResults = Validator::make($addrObject, $addrRules, $addrMsgs);
+        if($validateResults->fails()) {
+          $this->page['message'] = $validateResults->errors()->toArray();
+            return false;
+        }
         $legislatorRecord = null;//instanciate here for scope purposes
         $legislators = null;//and this
         if ($coordinates->districtNotExists()) {//if we don't have a district associated with our address, then we have no legislators yet
@@ -75,14 +92,23 @@ class Lookup extends ComponentBase
                 $coordinates->getLat(),
                 $coordinates->getLong()
             );//pull from API
-            foreach (json_decode($legislators) as $legislator) {
-                $legislatorRecord = Legislator::UUID($legislator->{'id'})->first();//check the id of our json against the cache
-                if (is_null($legislatorRecord)) {
-                    $legislatorRecord = Legislator::getLegislatorFromJSON($legislator);//add it
-                }
-            }//endforeach
-            $coordinates->district = $legislatorRecord->district;
-            $coordinates->save();
+        foreach (json_decode($legislators) as $legislator) {
+            $legislatorRecord = Legislator::UUID($legislator->{'id'})->first();//check the id of our json against the cache
+            if (is_null($legislatorRecord)) {
+                $legislatorRecord = Legislator::getLegislatorFromJSON($legislator);//add it
+            }
+        }
+        $legValidate = ['LegislatorObject' => $legislatorRecord ];
+        $legRules = ['LegislatorObject' => 'required' ];
+        $legMsgs = ['required' => 'We are sorry, no legislators were found for the given address' ];
+        $validateLegislator = Validator::make($legValidate, $legRules, $legMsgs);
+        if($validateLegislator->fails()) {
+            $this->page['message'] = $validateLegislator->errors()->toArray();
+            return false;
+        }
+        $coordinates->district = $legislatorRecord->district;
+        $coordinates->state = $legislatorRecord->state;
+        $coordinates->save();
         } else {//else we already have the records and just have to grab them from the cache
             $legislatorRecord = Legislator::getLegislatorByDistrict(
                 $coordinates->getDistrict(),
@@ -104,24 +130,40 @@ class Lookup extends ComponentBase
     public function infoFromObject($address) {
         if($address->districtExists())
             return(Legislator::getLegislatorByDistrict($address->district));
-        $street_address = array($address->address, $address->city, $address->state, $address->zip);
+        $street_address = array('address' => $address->address,
+            'city' => $address->city,
+            'state' => $address->state,
+            'zip' => $address->zip);
         return infoFromArray($street_address);
     }
     /**
      * @param $address array with street address
      * @return JSON legislator records
      */
-    public function infoFromArray($address) {
-        $street_address = $address[0] . $address[1] . $address[2] . $address[3];
-        return infoFromString($street_address);
+    public static function infoFromArray($address) {
+        $street_address = $address['address'] . $address['city'] . $address['state'] . $address['zip'];
+        return Lookup::infoFromString($street_address);
     }
     /**
      * @param $address string containing address
      * @return JSON with legislator information, checking cache first
      */
-    public function infoFromString($address) {
-        $coords = Address::scopeAddress($address)->get();
-        return Legislator::getJSONLegislatorsFromCoords($coords[0], $coords[1])->get()->toJson();
+    public static function infoFromString($address) {
+        $coords = Address::address($address)->first();
+        $isnew = false;
+        if(is_null($coords)) {
+            $isnew = true;
+            $coords = Address::parseNewAddress(array('address' => $address, 'city' => '', 'state' => '', 'zip' => ''));
+            if(is_null($coords))//if still empty
+                return array();//return empty array
+        }
+        $leg = Legislator::getLegislatorsFromAddress($coords);
+        if($isnew) {
+            $coords['state'] = $leg->first()['state'];
+            $coords['district'] = $leg->first()['district'];
+            $coords->save();
+        }
+        return $leg;
     }
 
     /**
@@ -129,7 +171,7 @@ class Lookup extends ComponentBase
      * @param $address - string containing address
      * @return JSON with legislator information
      */
-    public function info($address) {
-        return infoFromString($address);
+    public static function info($address) {
+        return Lookup::infoFromString($address);
     }
 }
