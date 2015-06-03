@@ -1,0 +1,13 @@
+{%set reps = __SELF__.representatives%}
+
+{% for rep in reps %}
+    <li>
+        <p>{{rep.title}} {{rep.firstName}} {{rep.lastName}} ({{rep.politicalParty}})
+            <br /><a href="mailto:{{rep.emailAddress}}">{{rep.emailAddress}}</a>
+            <br />{{rep.physicalAddress}}
+            <br />{{rep.phoneNumber}}
+        </p>
+    </li>
+{% else %}
+    <li>No results found</li>
+{% endfor %}

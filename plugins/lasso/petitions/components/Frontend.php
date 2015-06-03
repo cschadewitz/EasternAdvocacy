@@ -29,6 +29,12 @@ class Frontend extends \Cms\Classes\ComponentBase
     public function defineProperties()
     {
         return [
+            'showPublished' =>[
+                'title' => 'Show Published',
+                'description' => 'Show only published petitions',
+                'type' => 'checkbox',
+                'default' => 'true',
+            ],
             'pageNumber' => [
                 'title'       => 'Page Number',
                 'description' => 'Determines the page that the user is on',
@@ -40,7 +46,7 @@ class Frontend extends \Cms\Classes\ComponentBase
                 'description'       => 'Number of petitions to display per page.',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Invalid format of the posts per page value',
+                'validationMessage' => 'Invalid format of the petitions per page value',
                 'default'           => '10',
             ],
             'noPetitionsMessage' => [
@@ -59,31 +65,18 @@ class Frontend extends \Cms\Classes\ComponentBase
         ];
     }
 
-/*    function petitions()
-    {
-        $petitions = \Lasso\Petitions\Models\Petitions::Active()->get();
-        $result = [];
-        foreach($petitions as $petition){
-            $store = [];
-            foreach($petition as $code => $data){
-                $store[$code] = $data;
-            }
-            $result[$petition['title']] = $store;
-        }
-        return $result;
-    }*/
-
     public function getPetitionPageOptions()
     {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
     public function onRun()
     {
+        $this->addJs('/plugins/lasso/petitions/assets/ajax.js');
         $this->prepareVars();
 
-        $this->petitions = $this->page['petitions'] = \Lasso\Petitions\Models\Petitions::orderBy('created_at', 'desc')->listPosts([
+        $this->petitions = $this->page['petitions'] = \Lasso\Petitions\Models\Petitions::Published()->orderBy('created_at', 'desc')->listPosts([
             'page'          => $this->property('pageNumber'),
-            'petitionsPerPage'  => $this->property('petitionsPerPage')
+            'petitionsPerPage'  => $this->property('petitionsPerPage'),
         ]);
 
         $this->petitions->each(function($petition) {
@@ -105,10 +98,5 @@ class Frontend extends \Cms\Classes\ComponentBase
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noPostsMessage = $this->page['noPetitionsMessage'] = $this->property('noPetitionsMessage');
         $this->postPage = $this->page['petitionPage'] = $this->property('petitionPage');
-        $pn = $this->property('pageNumber');
-        /*$this->noPetitionsMessage = $this->page['noPetitionsMessage'] = $this->property('noPetitionsMessage');
-        $this->petitionPage = $this->page['petitionPage'] = $this->property('petitionPage');
-        $this->pageNumber = $this->page['pageNumber']  = $this->paramName('pageNumber', $pn);
-        $this->petitionsPerPage = $this->page['petitionsPerPage'] = $this->property('petitionsPerPage');*/
     }
 }

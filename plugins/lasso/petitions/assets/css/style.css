@@ -1,3 +1,8 @@
+.alert-error {
+    background-color: #cc3300;
+    border-color: #d6e9c6;
+    color: #000012;
+}
 .form{
     float: left;
     margin: 4px;

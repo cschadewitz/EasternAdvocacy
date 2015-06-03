@@ -29,15 +29,7 @@
             return [
 			'Lasso\Petitions\Components\Viewpost' => 'viewPost',
                 'Lasso\Petitions\Components\Frontend' => 'frontEnd',
-            ];
-        }
-
-        public function registerReportWidgets() {
-            return [
-                '\Lasso\Petitions\ReportWidgets\TopPetitions' => [
-                    'label' => 'Top Petitions',
-                    'context' => 'dashboard',
-                ],
+                'Lasso\Petitions\Components\HomePage' => 'homePage',
             ];
         }
 

@@ -19,12 +19,12 @@ fields:
         required: true
     published:
         label: Published?
-        description: Publish petition right away?
+        description: Publish petition so that it can be viewed on the frontend.
         type: checkbox
         default: true
     active:
-        label: Petition is currently active?
-        description: Petition is active if goal has not been met
+        label: Active?
+        description: Petition is active and able to be signed.
         type: checkbox
         default: true
     goal:

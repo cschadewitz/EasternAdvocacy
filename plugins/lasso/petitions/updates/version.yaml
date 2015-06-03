@@ -41,8 +41,17 @@
     - Added backend list toolbar add and delete
 1.5.3:
     - Added db seeding using faker
-    - seed_petitions_table.php
+    - SeedPetitionsTable.php
 1.5.4:
     - Added Pagination to frontend component
     - Refactored components, removed post component, renamed frontend to petition list view
+1.5.5:
+    - Fixed bug causing trivial changes, such as published or active, to trigger the immutability functions
+    - Added published functionality to petitions front end only published petitions will be viewable
+    - Added active functionality to petitions front end unactive petitions are still viewable but cannot be signed
+    - Added homePage component to home page in theme
+    - Added frontend component to Sign Petition page in theme
+    - Changed components class tags to match the theme and have the correct width.
+    - Fixed bug that was causing petitions signature count not to be reset when the immutability functions where triggered.
+    - Fixed css bug where alerts with type error had no styling, there was no css rule for .alert-error in the theme style.css, I added a rule to htis components css.
     

@@ -1,6 +1,14 @@
 title = "Sign Petition"
-url = "/petition"
+url = "/petition/:pageNumber"
 layout = "default"
 hidden = "0"
+
+[frontEnd]
+showPublished = "true"
+pageNumber = "{{ :pageNumber }}"
+petitionsPerPage = "10"
+noPetitionsMessage = "No petitions found"
+petitionPage = "petition"
 ==
 {% content 'petition.htm' %}
+{% component 'frontEnd' %}

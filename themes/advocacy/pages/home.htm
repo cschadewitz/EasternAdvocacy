@@ -6,9 +6,14 @@ hidden = "0"
 [homeView]
 numberOfPosts = "4"
 postPage = "article"
+
+[homePage]
+petitionsOnHomePage = "5"
+noPetitionsMessage = "No petitions found"
 ==
 {% put styles %}
 <link rel="stylesheet" type="text/css" href="{{ 'assets/css/home.css'|theme }}">
 {% endput %}
 {% content 'whoweare.htm' %}
 {% component 'homeView' %}
+{% component 'homePage' %}

@@ -4,7 +4,6 @@
     use Model;
     use Str;
     use Mail;
-    use Illuminate\Support\Facades\DB as Db;
     use October\Rain\Database\Traits\Sluggable;
 
     class Petitions extends Model
@@ -41,13 +40,53 @@
         }
 
         public function afterUpdate(){
-            $util = new Utility();
-            //Email effected petitioners
-            $util->emailSignatures($this->pid);
-            //Delete effected signatures
-            \Lasso\Petitions\Models\Signatures::DeleteUsers($this->pid);
-            $this->signatures = 0;
-            $this->save();
+            if($this->ignoreChanges())
+                return;
+            $changes = $this->getChanges();
+            if((count($changes) == 1 && in_array("published", $changes)) || (count($changes) == 1 && in_array("active", $changes)))
+            {
+                return;
+            }
+            elseif(count($changes) == 2 && in_array("published", $changes) && in_array("active", $changes))
+            {
+                return;
+            }
+            else
+            {
+                    //Email effected petitioners
+                    \Lasso\Petitions\Models\Signatures::EmailSignatures($this->pid);
+                    //Delete effected signatures
+                    \Lasso\Petitions\Models\Signatures::DeleteUsers($this->pid);
+                    Petitions::ResetSignatureCount($this->pid);
+                    return;
+            }
+        }
+
+        public function ignoreChanges(){
+            return $this->isDirty('signatures');
+        }
+
+        public function getChanges(){
+            $changes = [];
+            if($this->isDirty('title')){
+                $changes[] = "title";
+            }
+            if($this->isDirty('summary')){
+                $changes[] = "summary";
+            }
+            if($this->isDirty('body')){
+                $changes[] = "body";
+            }
+            if($this->isDirty('active')){
+                $changes[] = "active";
+            }
+            if($this->isDirty('goal')){
+                $changes[] = "goal";
+            }
+            if($this->isDirty('published')){
+                $changes[] = "published";
+            }
+            return $changes;
         }
 
         public function scopeListPosts($query, $options) {
@@ -57,6 +96,10 @@
             ], $options), EXTR_OVERWRITE);
 
             return $query->paginate($petitionsPerPage, $page);
+        }
+
+        public function scopeResetSignatureCount($query, $pid){
+            $query->where('pid', '=', $pid)->update(array('signatures' => 0));
         }
 
         public function setUrl($pageName, $controller) {
@@ -87,40 +130,13 @@
             return $query->where('slug', '=', $slug);
         }
 
+        public function scopePublished($query)
+        {
+            return $query->where('published', '=', '1');
+        }
+
         public function scopeActive($query)
         {
-            return $query->where('published', '=', 1);
+            return $query->where('active', '=', 1);
         }
-
-        public static function sortByProgress($numberOfPetitions)
-        {
-            return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures/lasso_petitions_petitions.goal AS sig_count
-                                FROM lasso_petitions_petitions
-                                ORDER BY sig_count DESC
-	                            LIMIT ?', [$numberOfPetitions]);
-        }
-
-        public static function sortBySigCount($numberOfPetitions)
-        {
-            return Db::select('SELECT lasso_petitions_petitions.*, lasso_petitions_petitions.signatures AS sig_count
-                                FROM lasso_petitions_petitions
-                                ORDER BY sig_count DESC
-	                            LIMIT ?', [$numberOfPetitions]);
-        }
-    }
-
-    class Utility
-    {
-
-        public function emailSignatures($pid)
-        {
-            $results = \Lasso\Petitions\Models\Signatures::Pid($pid)->get();
-            $petition = \Lasso\Petitions\Models\Petitions::Pid($pid)->first();
-
-            foreach ($results as $r) {
-                $params = ['name' => $r->name, 'email' => $r->email, 'petitionName' => $petition->title, 'slug' => $petition->slug];
-                Mail::sendTo([$r->email => $r->name], 'lasso.petitions::mail.petition_changed', $params);
-            }
-        }
-
     }

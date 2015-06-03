@@ -1,0 +1,19 @@
+<form
+        data-request="{{__SELF__}}::onSearchZip"
+        data-request-success="$('#zipCode').val('')"
+        data-request-update="'{{__SELF__}}::results': '#go'"
+        >
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="input-group">
+                <input name="zipCode" type="text" id="zipCode" class="form-control" value=""/>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+            <ul class="list-group" id="go">
+                {% partial '@results' %}
+            </ul>
+        </div>
+    </div>
+</form>
