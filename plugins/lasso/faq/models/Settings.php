@@ -1,6 +1,7 @@
 <?php namespace Lasso\Faq\Models;
 
 use Model;
+use System\Models\MailTemplate;
 
 /**
  * Settings Model
@@ -15,4 +16,9 @@ class Settings extends Model
     // Reference to field configuration
     public $settingsFields = 'fields.yaml';
 
+
+    public function getNotificationTemplateOptions()
+    {
+        return [''=>'- Do not send a notification -'] + MailTemplate::orderBy('code')->lists('code', 'code');
+    }
 }
