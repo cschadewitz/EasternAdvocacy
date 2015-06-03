@@ -3,7 +3,9 @@
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
 use Lasso\Actions\Models\ActionTaken;
+use Lasso\Actions\Models\Settings;
 use Auth;
+use Mail;
 use Request;
 use Validator;
 use ValidationException;
@@ -86,17 +88,14 @@ class TakeAction extends ComponentBase {
     {
         $reps = $this->lookupReps($actionTaken->zipcode);
 
-        $action = Action::find($actionTaken->action_id);
+        $action = Action::with('template')->find($actionTaken->action_id);
 
-        /*$params = ['msg' => $email->content, 'subject' => $email->subject];
-        foreach ($subs as $subscriber) {
-            Mail::send('lasso.adminsendmail::mail.default', $params, function ($message) use ($subscriber, $email) {
-                $message->to($subscriber->email, $subscriber->name);
-                foreach ($email->attachments as $attachment) {
-                    $message->attach(App::basePath() . $attachment->getPath());
-                }
+        $params = ['rep' => $reps, 'sender' => $actionTaken];
+        foreach ($reps as $rep) {
+            Mail::send($action->template->code, $params, function ($message) use ($rep){
+                $message->to('samir@ouahhabi.com', 'Samir Ouahhabi');
             });
-        }*/
+        }
     }
 
     private function feedbackVars($message, $error=false)
@@ -191,7 +190,7 @@ class TakeAction extends ComponentBase {
     }
 
 	public function getGeoCode($address) {
-		$geokey = 'AIzaSyB-uT5MX5748RHDpXJ5YgTWD3gWoSC_KbA';
+		$geokey = Settings::get('googlegeocodeapikey');
 
 		$json = file_get_contents(sprintf(
 			"https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s",
@@ -203,7 +202,7 @@ class TakeAction extends ComponentBase {
 	}
 
 	public function getGeoReps($geo) {
-		$openhousekey = 'f78ae693f1c343aab4d0e5898eca594d';
+		$openhousekey = Settings::get('openstatesapikey');
 
 		$lat = $geo['results'][0]['geometry']['location']['lat']; // 46.486931;
 		$long = $geo['results'][0]['geometry']['location']['lng']; // -107.575956;

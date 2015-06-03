@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Action records</h1>
+            <p>This page displays the records of an Action taken by our users.</p>
+            <p>You can view the records for a specific action by choosing one from the following list:
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    Action title..
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <?php
+                    foreach($select as $action)
+                    {
+                        echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="'.Backend::url('lasso/actions/action/taken/').'/'.$action->id.'">'.$action->title.'</a></li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+            </p>
+        </div>
+        <br/>
+        <?php
+        $action = $actions;
+        $panel_mode = $action->is_active? 'success' : 'warning';
+        echo '<div class="panel panel-'.$panel_mode.'"><div class="panel-heading">';
+        if(!$action->is_active)
+        echo '<span class="oc-icon-warning" data-toggle="tooltip" data-placement="top" title="This action is not active"></span>';
+        echo '<a href="'.Backend::url('lasso/actions/action/update/').'/'.$action->id.'">'.$action->title.'</a>';
+        echo '</div>';
+        echo '<div class="panel-body">';
+            if(count($action->taken) == 0)
+            {
+            echo '<em>There are no records for this action.</em>';
+            }
+            else
+            {
+            echo '<table class="table table-bordered table-hover">';
+                echo '<thead><tr><th>#</th><th>Name</th><th>Email</th><th>IP Address</th><th>Zip code</th><th>Time</th></tr></thead>';
+                echo '<tbody>';
+                foreach($action->taken as $taken)
+                {
+                echo '<tr>';
+                    echo '<th scope="row">'.$taken->id.'</th>';
+                    echo '<td>'.$taken->name.'</td>';
+                    echo '<td>'.$taken->email.'</td>';
+                    echo '<td>'.$taken->ip_address.'</td>';
+                    echo '<td>'.$taken->zipcode.'</td>';
+                    echo '<td>'.$taken->created_at.'</td>';
+                    echo '</tr>';
+                }
+                echo '</tbody>';
+                }
+                echo '</table>';
+            echo '</div></div>';
+            echo '<h1 style="text-align: center;"><a href="'.Backend::url('lasso/actions/action/taken/all').'">
+            <span class="caret"></span> Show all Actions
+            <span class="caret"></span></a></h1>';
+        ?>
+    </div>
+</div>
