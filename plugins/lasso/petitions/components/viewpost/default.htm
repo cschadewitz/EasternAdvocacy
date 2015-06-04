@@ -4,34 +4,65 @@
 <div class="petition">
     {% if petitionInfo is empty %}
         <h1>Invalid Petition</h1>
+    {% elseif petitionInfo.published == false %}
+        <h1>Access Restricted. Petition is not currently published</h1>
     {% else %}
     <div class="form">
-        {{ form_open({ request: 'signPetition' }) }}
-        <ul class="form-items">
-            <li>
-                <h2>Count Me In: </h2>
-            </li>
-            <li>
-                <input id="name" type="text" value="" name="name" placeholder="Name" required/>
-            </li>
-            <li>
-                <input id="email" type="email" value="" name="email" placeholder="name@example.com" required pattern="^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$"/>
-            </li>
-            <li>
-                <input name="mailingaddress" type="text" id="mailingaddress" placeholder="Address" required/>
-            </li>
-            <li>
-                <input type="text" name="city" id="city" placeholder="City" required/>
-            </li>
-            <li>
-                <input id="zip" type="text" value="" name="zip" placeholder="Enter zip code" required pattern="^\d{5}(\-?\d{4})?$"/>
-            </li>
-            <li>
-                <button type="submit" class="submit">Sign</button>
-            </li>
-            <input type="hidden" name="pid" value="{{ petitionInfo.pid }}"/>
-        </ul>
-        {{ form_close() }}
+        {% if petitionInfo.active == true %}
+            {{ form_open({ request: 'signPetition' }) }}
+            <ul class="form-items">
+                <li>
+                    <h2>Count Me In: </h2>
+                </li>
+                <li>
+                    <input id="name" type="text" value="" name="name" placeholder="Name" required/>
+                </li>
+                <li>
+                    <input id="email" type="email" value="" name="email" placeholder="name@example.com" required pattern="^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$"/>
+                </li>
+                <li>
+                    <input name="mailingaddress" type="text" id="mailingaddress" placeholder="Address" required/>
+                </li>
+                <li>
+                    <input type="text" name="city" id="city" placeholder="City" required/>
+                </li>
+                <li>
+                    <input id="zip" type="text" value="" name="zip" placeholder="Enter zip code" required pattern="^\d{5}(\-?\d{4})?$"/>
+                </li>
+                <li>
+                    <button type="submit" class="submit">Sign</button>
+                </li>
+                <input type="hidden" name="pid" value="{{ petitionInfo.pid }}"/>
+            </ul>
+            {{ form_close() }}
+        {% elseif petitionInfo.active == false %}
+            {{ form_open({ request: 'signPetition' }) }}
+            <ul class="form-items">
+                <li>
+                    <h2>Count Me In: </h2>
+                </li>
+                <li>
+                    <input id="name" type="text" value="" name="name" placeholder="Name" required disabled/>
+                </li>
+                <li>
+                    <input disabled id="email" type="email" value="" name="email" placeholder="name@example.com" required pattern="^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$"/>
+                </li>
+                <li>
+                    <input disabled name="mailingaddress" type="text" id="mailingaddress" placeholder="Address" required/>
+                </li>
+                <li>
+                    <input disabled type="text" name="city" id="city" placeholder="City" required/>
+                </li>
+                <li>
+                    <input disabled id="zip" type="text" value="" name="zip" placeholder="Enter zip code" required pattern="^\d{5}(\-?\d{4})?$"/>
+                </li>
+                <li>
+                    <button disabled type="submit" class="submit">Sign</button>
+                </li>
+                <input type="hidden" name="pid" value="{{ petitionInfo.pid }}"/>
+            </ul>
+            {{ form_close() }}
+        {% endif %}
     </div>
     <div class="info">
         {{ petitionInfo.attributes.title }}
@@ -39,6 +70,5 @@
         <h2>Cause</h2>
         {{ petitionInfo.attributes.body|raw}}
     </div>
-    {% partial "share_dialog::default" title = petitionInfo.attributes.title description = petitionInfo.attributes.summary %}
     {% endif %}
 </div>

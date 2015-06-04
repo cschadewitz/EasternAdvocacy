@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+        zip:
+         label: Zip
+         type: text
+         searchable: true
+
+        representative_id:
+         label: RepresentativeID
+         type: text
+         searchable: true

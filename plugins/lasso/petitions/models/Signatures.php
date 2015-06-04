@@ -9,6 +9,7 @@
 namespace Lasso\Petitions\Models;
 
 use Model;
+use Mail;
 
 class Signatures extends Model
 {
@@ -50,5 +51,16 @@ class Signatures extends Model
             return 0;
         }
         return 1;
+    }
+
+    public function scopeEmailSignatures($query, $pid)
+    {
+        $results = \Lasso\Petitions\Models\Signatures::Pid($pid)->get();
+        $petition = \Lasso\Petitions\Models\Petitions::Pid($pid)->first();
+
+        foreach ($results as $r) {
+            $params = ['name' => $r->name, 'email' => $r->email, 'petitionName' => $petition->title, 'slug' => $petition->slug];
+            Mail::sendTo([$r->email => $r->name], 'lasso.petitions::mail.petition_changed', $params);
+        }
     }
 }
