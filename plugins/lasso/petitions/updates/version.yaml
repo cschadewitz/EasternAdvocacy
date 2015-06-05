@@ -55,3 +55,4 @@
     - Fixed bug that was causing petitions signature count not to be reset when the immutability functions where triggered.
     - Fixed css bug where alerts with type error had no styling, there was no css rule for .alert-error in the theme style.css, I added a rule to htis components css.
     - Fixed typo in email url.
+    - Fixed CSS bug that was causing active page button to cut through the footer.

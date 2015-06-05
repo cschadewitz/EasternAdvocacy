@@ -18,12 +18,11 @@
         </ul>
         {% if petitions.lastPage > 1 %}
         <ul class="pagination">
-            <input id="currentPage" type="hidden" value="{{ petitions.currentPage }}"/>
             {% if petitions.currentPage > 1 %}
             <li><a class="prev" href="{{ this.page.baseFileName|page({ (pageParam): (petitions.currentPage-1) }) }}">&larr; Prev</a></li>
             {% endif %}
             {% for page in 1..petitions.lastPage %}
-            <li class="{{ petitions.currentPage == page ? 'active' : null }}">
+            <li class="{{ petitions.currentPage == page ? 'active-page' : null }}">
                 <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
             </li>
             {% endfor %}

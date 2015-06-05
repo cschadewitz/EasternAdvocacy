@@ -71,7 +71,7 @@ class Frontend extends \Cms\Classes\ComponentBase
     }
     public function onRun()
     {
-        $this->addJs('/plugins/lasso/petitions/assets/ajax.js');
+        $this->addCss('/plugins/lasso/petitions/assets/css/style.css');
         $this->prepareVars();
 
         $this->petitions = $this->page['petitions'] = \Lasso\Petitions\Models\Petitions::Published()->orderBy('created_at', 'desc')->listPosts([
