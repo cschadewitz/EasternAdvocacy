@@ -294,7 +294,7 @@ class UserSubscribe extends ComponentBase
                 throw new ApplicationException('Your account has already been activated');
             }
 
-            \Flash::success('An activation email has been sent to you at ' + $user->email);
+            \Flash::success('An activation email has been sent to you');
 
             $this->sendActivationEmail($user);
 

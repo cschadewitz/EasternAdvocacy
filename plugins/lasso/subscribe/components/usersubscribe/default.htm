@@ -19,7 +19,7 @@
 
 {% else %}
 
-{% partial 'account::activation_check' %}
+{% partial __SELF__ ~ '::activation_check' %}
 
 {% partial __SELF__ ~ '::update' %}
 
