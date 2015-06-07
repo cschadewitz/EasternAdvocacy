@@ -33,8 +33,8 @@
         public function registerPermissions()
         {
             return [
-                'lasso.subscribe.access_subscribers'  => ['tab' => 'Users', 'label' => 'View Subscribers'],
-                'lasso.subscribe.edit_subscribers' => ['tab' => 'Users', 'label' => 'Edit Subscribers']
+                'lasso.subscribe.access_subscribers'  => ['tab' => 'Subscribers', 'label' => 'View Subscribers'],
+                'lasso.subscribe.edit_subscribers' => ['tab' => 'Subscribers', 'label' => 'Edit Subscribers']
             ];
         }
 

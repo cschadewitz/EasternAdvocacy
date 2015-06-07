@@ -14,8 +14,8 @@
                         <a class="footer-brand" href="{{ 'home'|page }}">Eastern Advocates</a>
 
                         {% if user %}
-                        <a id="#account-link" class="disabled"  href="{{ 'user-account'|page }}"><i class="icon-user"></i> {{ user.name }}</a>
-                        <a href="{{ 'user'|page }}"><i class="icon-lock"></i> Logout</a>
+                        <a id="#account-link" class="disabled"  href="{{ 'user'|page }}"><i class="icon-user"></i> {{ user.name }}</a>
+                        <a href="{{ 'user-logout'|page }}"><i class="icon-lock"></i> Logout</a>
                         {% else %}
                         <a id="#account-link-no-user" class="disabled"  href="#account-link-no-user"><i class="icon-user"></i> No User</a>
                         <a href="{{ 'user-account'|page }}"><i class="icon-lock"></i> Login</a>

@@ -18,25 +18,22 @@ description = "Global Nav Bar"
                     <ul class="dropdown-menu navbar-inverse" role="menu">
                         <li class="{% if this.page.id == 'findreps' %}active{% endif %} nav-inverse-item"><a href="{{ 'findreps'|page }}">Find Reps</a></li>
                         <li class="{% if this.page.id == 'petition' %}active{% endif %} nav-inverse-item"><a href="{{ 'petition'|page }}">Sign Petition</a></li>
-                        <li class="{% if this.page.id == 'contribute' %}active{% endif %} nav-inverse-item"><a href="{{ 'contribute'|page }}">Contribute</a></li>
+                        <li class="{% if this.page.id == 'actions' %}active{% endif %} nav-inverse-item"><a href="{{ 'actions'|page }}">Take Action</a></li>
                     </ul>
                 </li>
                 <li class="{% if this.page.id == 'subscribe' or this.page.id == 'unsubscribe' or this.page.id == 'unsubscribe-form' or this.page.id == 'archive' or this.page.id == 'edit-mail' %}active{% endif %} dropdown">
                     <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mailing List <span class="caret"></span></a>
                     <ul class="dropdown-menu navbar-inverse" role="menu">
-                        <li class="{% if this.page.id == 'subscribe' %}active{% endif %} nav-inverse-item"><a href="{{ 'subscribe'|page }}">Subscribe</a></li>
+                        <li class="{% if this.page.id == 'subscribe' %}active{% endif %} nav-inverse-item"><a href="{% if user %}{{ 'user-account'|page }}{% else %}{{ 'subscribe'|page }}{% endif %}">Subscribe</a></li>
                         <li class="{% if this.page.id == 'archive' %}active{% endif %} nav-inverse-item"><a href="{{ 'archive'|page({ pageNumber: 1 }) }}">Archived News</a></li>
-                        {% if user %}
-                        <li class="{% if this.page.id == 'edit-mail' %}active{% endif %} nav-inverse-item"><a href="{{ 'edit-mail'|page }}">Admin Send Mail</a></li>
-                        {% endif %}
-                        <li class="{% if this.page.id == 'unsubscribe-form' %}active{% endif %} nav-inverse-item"><a href="{{ 'unsubscribe-form'|page }}">Unsubscribe</a></li>
+                        <li class="{% if this.page.id == 'unsubscribe-form' %}active{% endif %} nav-inverse-item"><a href="{% if user %}{{ 'user-account'|page }}{% else %}{{ 'unsubscribe-form'|page }}{% endif %}">Unsubscribe</a></li>
                     </ul>
                 </li>
                 <li class="{% if this.page.id == 'about-us' or this.page.id == 'friends' %}active{% endif %} dropdown">
                     <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <span class="caret"></span></a>
                     <ul class="dropdown-menu navbar-inverse" role="menu">
-                        <li class="{% if this.page.id == 'about-us' %}active{% endif %} nav-inverse-item"><a href="{{ 'about-us'|page }}">About Us</a></li>
-                        <li class="{% if this.page.id == 'friends' %}active{% endif %} nav-inverse-item"><a href="{{ 'friends'|page }}">Friends of EWU</a></li>
+                        <li class="{% if this.page.id == 'about' %}active{% endif %} nav-inverse-item"><a href="{{ 'about'|page }}">About Us</a></li>
+                        <li class="{% if this.page.id == 'friends' %}active{% endif %} nav-inverse-item"><a href="{{ 'friends'|page }}">Friends of EWUA</a></li>
                     </ul>
                 </li>
             </ul>

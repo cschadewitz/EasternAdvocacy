@@ -1,0 +1,20 @@
+title = "User Logout"
+url = "/user/logout"
+layout = "default"
+hidden = "0"
+
+[session]
+security = "user"
+redirect = "home"
+==
+<div class="row">
+    <article id="who-we-are" class="advocacy-article">
+        <header>
+            <h2>Logout</h2>
+        </header>
+        <p>Thank you for coming by {{ user.name }}!</p>
+        <p>Are you sure you would like to Logout?</p>
+        <button data-request="onLogout" data-request-data="redirect: '/user/account'">Logout</button>
+        
+    </article>
+</div>
