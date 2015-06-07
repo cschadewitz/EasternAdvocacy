@@ -252,11 +252,11 @@ class UserSubscribe extends ComponentBase
             if (!$user->attemptActivation($code)) {
                 throw new ValidationException(['code' => 'Invalid activation code supplied']);
             }
+            $email = $user->email;
 
-            if (($sub = Subscriber::Email($user->email).get()) != null) {
+            if (($sub = Subscriber::Email($email).get()) != null) {
                 removeOldSubscription($sub);
-                \Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription
-                                            to a registered account!');
+                \Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription to a registered account!');
             }
             else
             {
