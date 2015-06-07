@@ -13,7 +13,30 @@ redirect = "home"
             <h2>User Home Page</h2>
         </header>
         <p>Welcome Home, {{ user.name }}!</p>
-        <a data-request="onLogout" data-request-data="redirect: '/user/account'">Sign out!</a>
+        <a href="/user/account"role="button" class="btn btn-default">Update</a>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#logoutModal">Logout</button>
+        <noscript>
+            <a href="/user/logout">Sign out!</a>
+        </noscript>
         
     </article>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="logoutLabel">Logout</h4>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for coming by {{ user.name }}!</p>
+                <p>Are you sure you would like to Logout?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-request="onLogout" data-request-data="redirect: '/user/account'">Yes</button>
+                <button type="button" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
 </div>
