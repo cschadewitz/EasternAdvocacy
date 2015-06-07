@@ -262,7 +262,6 @@ class UserSubscribe extends ComponentBase
             else
             {
                 \Flash::success('Your account has been successfully activated. Thanks for Registering!');
-		\Flash::success(gettype($email));
             }
 
             /*
