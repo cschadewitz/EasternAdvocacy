@@ -48,7 +48,7 @@ class Form extends ComponentBase
             $subscription->type = $subscription->type2int($type);
             $subscription->save();
             $uuid = SubModel::Email($email)->first();
-            $params = ['name' => $name, 'email' => $email, 'uuid' => $uuid];
+            $params = ['name' => $name, 'email' => $email, 'uuid' => $uuid->uuid];
 
 
             Mail::sendTo([$email => $name], 'lasso.subscribe::mail.verify', $params);
