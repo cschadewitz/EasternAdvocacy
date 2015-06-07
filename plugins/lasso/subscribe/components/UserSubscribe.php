@@ -273,6 +273,13 @@ class UserSubscribe extends ComponentBase
             if ($isAjax) throw $ex;
             else Flash::error($ex->getMessage());
         }
+        /*
+         * Redirect
+         */
+        $redirectUrl = $this->pageUrl($this->property('redirect'));
+
+        if ($redirectUrl = post('redirect', $redirectUrl))
+            return Redirect::to($redirectUrl);
     }
 
     protected function removeOldSubscription($sub)
