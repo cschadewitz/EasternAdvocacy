@@ -253,14 +253,16 @@ class UserSubscribe extends ComponentBase
                 throw new ValidationException(['code' => 'Invalid activation code supplied']);
             }
             $email = $user->email;
-
-            if (($sub = Subscriber::Email($email).get()) != null) {
-                removeOldSubscription($sub);
+		
+            if (($sub = Subscriber::where('email', '=', $email)) != null) {
+                //$this->removeOldSubscription($sub);
+		$sub->delete();
                 \Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription to a registered account!');
             }
             else
             {
                 \Flash::success('Your account has been successfully activated. Thanks for Registering!');
+		\Flash::success(gettype($email));
             }
 
             /*
@@ -282,9 +284,9 @@ class UserSubscribe extends ComponentBase
             return Redirect::to($redirectUrl);
     }
 
-    protected function removeOldSubscription($sub)
+    protected function removeOldSubscription($old)
     {
-        if(($sub = Subscriber::UUID($sub->uuid).get())!= null) {
+        if(($sub = Subscriber::UUID($old->uuid).get())!= null) {
             $sub->delete();
         }
         //$sub->delete();
