@@ -2,8 +2,7 @@
     - First version of Actions
     - create_actions_table.php
 1.0.2:
-    - Actions seeder
-    - seed_actions_table.php
+    - Actions seeder (removed for production)
 1.0.3:
     - Add taken actions
     - create_action_takens_table.php

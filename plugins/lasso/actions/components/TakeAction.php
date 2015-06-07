@@ -7,6 +7,7 @@ use Lasso\Actions\Models\Settings;
 use Auth;
 use Mail;
 use Request;
+use Twig;
 use Validator;
 use ValidationException;
 
@@ -55,7 +56,7 @@ class TakeAction extends ComponentBase {
 
                 $this->emailReps($actionTaken);
 
-                $this->feedbackVars("You have succesfully contacted your representatives.");
+                $this->feedbackVars("You have successfully contacted your representatives.");
             }
         }
 
@@ -86,15 +87,22 @@ class TakeAction extends ComponentBase {
 
     private function emailReps($actionTaken)
     {
+        $test_mode = Settings::get('test_mode');
+
         $reps = $this->lookupReps($actionTaken->zipcode);
 
         $action = Action::with('template')->find($actionTaken->action_id);
 
-        $params = ['rep' => $reps, 'sender' => $actionTaken];
+        $sender = $actionTaken->email;
+
         foreach ($reps as $rep) {
-            Mail::send($action->template->code, $params, function ($message) use ($rep){
-                $message->to('samir@ouahhabi.com', 'Samir Ouahhabi');
-            });
+            if(isset($rep->email)) {
+                $params = ['rep' => $rep->full_name, 'advocate' => $actionTaken->name];
+                Mail::send($action->template->code, $params, function ($message) use ($rep, $sender, $test_mode) {
+                    $to_email = $test_mode ? Settings::get('test_email') : $rep->email;
+                    $message->to($to_email)->cc($sender);
+                });
+            }
         }
     }
 
@@ -116,11 +124,22 @@ class TakeAction extends ComponentBase {
 		$action = Action::with('template')->find($this->property('actionId'));
 		$this->page['access_status'] = $this->checkAccessStatus($action);
 		$this->page['action'] = $action;
+        $this->page['rendered_email'] = $this->renderEmailContent($action);
 		if(Auth::check() && !empty(Auth::check()->zipcode))
 			$this->page['reps'] = $this->lookupReps(Auth::check()->zipcode);
 		else
 			$this->page['reps'] = null;
 	}
+
+    private function renderEmailContent($action)
+    {
+        $loader = new \Twig_Loader_Array(array(
+            'index.html' => $action->template->content_html,
+        ));
+        $twig = new \Twig_Environment($loader);
+
+        return $twig->render('index.html', array('rep' => 'Legislator', 'advocate' => '-- your name'));
+    }
 
 	private function checkAccessStatus($action)
 	{

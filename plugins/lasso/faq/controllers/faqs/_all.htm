@@ -1,8 +1,6 @@
 
 <div class="container">
     <br />
-    <br />
-    <br />
 
     <div class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -22,8 +20,15 @@
                 echo '<div class="panel panel-default">';
                 echo '<div class="panel-heading">';
                 echo '<h4 class="panel-title">';
+                if ($this->user->hasAccess('lasso.faq.answer_questions'))
+                {
+                    echo '<a href="'.Backend::url('lasso/faq/questions/update/' . $faq->id).'">';
+                    echo '<span class="oc-icon-edit"></span>';
+                    echo '</a>';
+                }
                 echo '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$question->id.'">';
-                echo $question->question.'</a></h4></div><div id="collapse'.$question->id.'" class="panel-collapse collapse">';
+                echo $question->question.'</a></h4>';
+                echo '</div><div id="collapse'.$question->id.'" class="panel-collapse collapse">';
                 echo '<div class="panel-body">';
                 if(empty($question->answer))
                     echo '<em>This question has not been answered yet.</em>';

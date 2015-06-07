@@ -25,7 +25,11 @@
     <article id="takeaction" class="col-md-8 col-md-offset-2">
         {% if access_status == 'ok' %}{% set fill = true %}{% else %}{% set fill = false %}{% endif %}
             <header><h2>{{ action.title }}</h2></header>
-					<img src="{{ action.photo.getPath() }}" class="img-responsive img-thumbnail" >
+                {% if action.photo.getPath() is not null %}
+					<img src="{{ action.photo.getPath() }}" class="img-responsive img-thumbnail">
+                {% else %}
+                    <img src="{{ 'plugins/lasso/actions/assets/logo.png' | app }}" class="img-responsive img-thumbnail">
+                {% endif %}
             <div class="takeaction-header">
 				<h1>{{ action.subtitle }}</h1>
 				<p>{{ action.description }}</p>
@@ -83,7 +87,10 @@
 										</div>
 										<div class="col-xs-6">
 											<div class="form-group">
-											    <div id="message">{{ action.template.content_html | raw }}</div>
+											    <div id="message">
+                                                    <strong>Subject: </strong><u>{{ action.template.subject }}</u>
+                                                    <p>{{ rendered_email | raw }}</p>
+                                                </div>
 											</div>
 										</div>
 									</div>

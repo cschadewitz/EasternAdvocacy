@@ -13,3 +13,15 @@ fields:
         label: The number of recent actions records to display in the backend
         type: text
         default: 10
+    test_mode:
+        label: Test mode
+        type: checkbox
+        default: 0
+    test_email:
+        label: Email address to use for test mode
+        type: text
+        placeholder: dev@example.com
+        trigger:
+            action: show
+            field: test_mode
+            condition: checked

@@ -58,25 +58,18 @@ class Emails extends Controller {
 
 	public function send($id = null) {
 		$this->pageTitle = 'Send Email';
-        $subs = Subscribe::verified()->get();
-        $users = UserExtension::subscribers()->get();
 
 		$email = Email::with('attachments')->find($id);
 
         if($this->canSend($email)) {
             $this->sendEmail($email);
 
-            return $this->makePartial('send', [
-                'sent' => true,
-                'subs' => $subs,
-                'users' => $users]);
+            return $this->makePartial('send', ['sent' => true]);
         }
         else {
             return $this->makePartial('send', [
                 'sent' => false,
-                'error' => $this->getSendError($email),
-                'subs' => $subs,
-                'users' => $users
+                'error' => $this->getSendError($email)
             ]);
         }
 	}
