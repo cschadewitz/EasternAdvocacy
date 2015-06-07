@@ -12,9 +12,6 @@ redirect = "user-account"
         <header>
             <h2>User Home Page</h2>
         </header>
-        {% flash %}
-        <div class="alert alert-{{type}}">{{ message }}</div>
-        {% endflash %}
         <p>Welcome Home, {{ user.name }}!</p>
         <a href="{{ 'user-account'|page }}"role="button" class="btn btn-default">Update</a>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#logoutModal">Logout</button>
