@@ -94,6 +94,45 @@ class UserSubscribe extends ComponentBase
         $this->page['loginAttributeLabel'] = $this->loginAttributeLabel();
     }
 
+    public function onSignin()
+    {
+        /*
+         * Validate input
+         */
+        $data = post();
+        $rules = [];
+
+        $rules['login'] = $this->loginAttribute() == UserSettings::LOGIN_USERNAME
+            ? 'required|between:2,64'
+            : 'required|email|between:2,64';
+
+        $rules['password'] = 'required|min:2';
+
+        if (!array_key_exists('login', $data)) {
+            $data['login'] = post('username', post('email'));
+        }
+
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
+
+        /*
+         * Authenticate user
+         */
+        $user = Auth::authenticate([
+            'login' => array_get($data, 'login'),
+            'password' => array_get($data, 'password')
+        ], true);
+
+        /*
+         * Redirect to the intended page after successful sign in
+         */
+        $redirectUrl = $this->pageUrl($this->property('redirect'));
+
+        if ($redirectUrl = post('redirect', $redirectUrl))
+            return Redirect::intended($redirectUrl);
+    }
     /**
      * Register the user
      */
@@ -214,10 +253,8 @@ class UserSubscribe extends ComponentBase
                 throw new ValidationException(['code' => 'Invalid activation code supplied']);
             }
 
-            if (($sub = Subscriber::email($user->email).get()) != null) {
-                UserExtension::getModel($user);
-                $user->extension->verificationDate = $sub->verificationDate;
-                $this->removeOldSubscription($user);
+            if (($sub = Subscriber::Email($user->email).get()) != null) {
+                removeOldSubscription($sub);
                 \Flash::success('Your account has been successfully activated. Thanks for upgrading your subscription
                                             to a registered account!');
             }
@@ -238,11 +275,12 @@ class UserSubscribe extends ComponentBase
         }
     }
 
-    protected function removeOldSubscription($user)
+    protected function removeOldSubscription($sub)
     {
-        if (($sub = Subscriber::email($user->email).get()) != null)
-            return false;
-        $sub->delete();
+        if(($sub = Subscriber::UUID($sub->uuid).get())!= null) {
+            $sub->delete();
+        }
+        //$sub->delete();
     }
 
     public function onSendActivationEmail($isAjax = true)
