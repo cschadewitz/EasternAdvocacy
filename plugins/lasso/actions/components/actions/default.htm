@@ -20,8 +20,8 @@
     						<div class="fff">
 								<div class="thumbnail">
 									<a href="{{ basePath | app }}/take-action/{{ action.id }}">
-										<img src="{{ action.photo.getPath() != null? action.photo.getPath() : 'plugins/lasso/actions/assets/logo.png' }}" alt="{{ action.title }}">
-										</a>
+										<img src="{{ action.photo.getPath() != null? action.photo.getPath() : '/plugins/lasso/actions/assets/logo.png' | app }}" alt="{{ action.title }}">
+									</a>
 								</div>
 								<div class="caption">
 									<h4><a href="{{ basePath | app }}/take-action/{{ action.id }}">{{ action.title }}</a></h4>
@@ -50,7 +50,7 @@
         <nav>
 			<ul class="control-box pager">
 				<li><a data-slide="prev" href="#myCarousel" class=""><i class="icon-chevron-left"></i></a></li>
-				<li><a data-slide="next" href="#myCarousel" class=""><i class="icon-chevron-right"></i></li>
+				<li><a data-slide="next" href="#myCarousel" class=""><i class="icon-chevron-right"></i></a></li>
 			</ul>
 		</nav>
 	   <!-- /.control-box -->   
