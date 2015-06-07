@@ -13,10 +13,10 @@ redirect = "home"
             <h2>User Home Page</h2>
         </header>
         <p>Welcome Home, {{ user.name }}!</p>
-        <a href="/user/account"role="button" class="btn btn-default">Update</a>
+        <a href="{{ 'user-account'|page }}"role="button" class="btn btn-default">Update</a>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#logoutModal">Logout</button>
         <noscript>
-            <a href="/user/logout">Sign out!</a>
+            <a href="{{ 'user-logout'|page }}">Sign out!</a>
         </noscript>
         
     </article>
