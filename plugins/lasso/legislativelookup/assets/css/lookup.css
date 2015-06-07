@@ -14,3 +14,6 @@
 .lasso-lookup-area-fields {
     white-space: nowrap !important;
 }
+.lasso-btn-zfix {
+    z-index: -1;
+}

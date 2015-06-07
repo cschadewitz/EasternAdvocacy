@@ -74,6 +74,6 @@ class Plugin extends PluginBase
                     Db::delete('delete from lasso_legislativelookup_legislators where id = "'.$val->id.'"');
                 }
             }
-        })->weekly();
+        })->weekly()->sundays()->at('00:01');
     }
 }
