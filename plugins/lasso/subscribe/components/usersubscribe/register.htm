@@ -1,17 +1,17 @@
 <form data-request="onRegisterExtension">
     <div class="form-group">
         <label for="registerName">Name</label>
-        <input name="name" type="text" class="form-control" id="registerName" placeholder="Enter your name" pattern="[A-Za-z. -]{2,64}" required>
+        <input name="name" type="text" class="form-control" id="registerName" placeholder="Enter your name" pattern="[A-Za-z. -]{2,64}" data-toggle="tooltip" data-placement="top" title="First or Full Name" required>
     </div>
 
     <div class="form-group">
         <label for="registerEmail">Email</label>
-        <input name="email" type="email" class="form-control" id="registerEmail" placeholder="Enter your email" pattern="([\w_.-]+)[@]([\w_-]+){1}([.][\w_-]+)*([.][A-Za-z]{2,5}){1}" title="Example - admin@ewuadvocates.org" required>
+        <input name="email" type="email" class="form-control" id="registerEmail" placeholder="Enter your email" pattern="([\w_.-]+)[@]([\w_-]+){1}([.][\w_-]+)*([.][A-Za-z]{2,5}){1}" data-toggle="tooltip" data-placement="top" title="Example:admin@ewuadvocates.org" required>
     </div>
 
     <div class="form-group">
         <label for="registerPassword">Password</label>
-        <input name="password" type="password" class="form-control" id="registerPassword" placeholder="Choose a password" pattern="[\w!@#$%^&*()_+=<>?,./:;'-]{6,64}" required>
+        <input name="password" type="password" class="form-control" id="registerPassword" placeholder="Choose a password" pattern="[\w!@#$%^&*()_+=<>?,./:;'-]{6,64}" data-toggle="tooltip" data-placement="top" title="Allowed characters: alpha-numeric & !@#$%^&*()_+=<>?,./:;'-" required>
     </div>
 
     <div class="form-group">
@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <label for="registerZip">Zip</label>
-        <input name="zip" type="text" class="form-control" id="registerZip" placeholder="Zip Code" pattern="\d{5,5}(-\d{4,4})?" required>
+        <input name="zip" type="text" class="form-control" id="registerZip" placeholder="Zip Code" pattern="\d{5,5}(-\d{4,4})?" data-toggle="tooltip" data-placement="top" title="Example: 99004 or 99004-4532" required>
     </div>
 
     <div class="form-group">
