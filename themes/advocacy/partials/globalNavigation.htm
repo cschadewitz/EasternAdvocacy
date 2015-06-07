@@ -32,7 +32,7 @@ description = "Global Nav Bar"
                 <li class="{% if this.page.id == 'about-us' or this.page.id == 'friends' %}active{% endif %} dropdown">
                     <a href ="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <span class="caret"></span></a>
                     <ul class="dropdown-menu navbar-inverse" role="menu">
-                        <li class="{% if this.page.id == 'about-us' %}active{% endif %} nav-inverse-item"><a href="{{ 'about'|page }}">About Us</a></li>
+                        <li class="{% if this.page.id == 'about' %}active{% endif %} nav-inverse-item"><a href="{{ 'about'|page }}">About Us</a></li>
                         <li class="{% if this.page.id == 'friends' %}active{% endif %} nav-inverse-item"><a href="{{ 'friends'|page }}">Friends of EWUA</a></li>
                     </ul>
                 </li>
