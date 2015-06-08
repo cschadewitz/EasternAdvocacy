@@ -140,6 +140,14 @@ footer {
   text-align: center;
   font-size: .8em;
 }
+@media (max-height: 400px) {
+  body {
+    padding-bottom: 0;
+  }
+  footer {
+    position: static;
+  }
+}
 .advocacy-article {
   position: relative;
   min-height: 1px;
