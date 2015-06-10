@@ -9,7 +9,7 @@
                 <div class="media-body">
                     <h4 class="media-heading post-subject" ><a class="petition-title" href="{{ ['p'|app, '/', petition.attributes.slug]|join  }}">{{ petition.attributes.title }}</a></h4>
                     <p class="petition-summary">{{petition.attributes.summary}}</p>
-                    <a href="{{ ['p'|page, '/', petition.attributes.slug]|join }}">Read More...</a>
+                    <a href="{{ ['p'|app, '/', petition.attributes.slug]|join }}">Read More...</a>
                     <p class="petition-date text-right">{{ petition.attributes.created_at|date("m/d/Y") }} - {{ petition.attributes.created_at|date("h:i") }}</p>
                 </div>
             </li>
