@@ -1,5 +1,6 @@
 <?php namespace Lasso\Actions\Components;
 
+use Backend\Classes\AuthManager;
 use Cms\Classes\ComponentBase;
 use Lasso\Actions\Models\Action;
 use Lasso\Actions\Models\ActionTaken;
@@ -42,24 +43,48 @@ class TakeAction extends ComponentBase {
         if ($validation->fails()) {
             $this->feedbackVars((new ValidationException($validation))->getMessage(), true);
         }
-        else
-        {
-            $count = ActionTaken::where('action_id', '=', $this->property('actionId'))
+        else {
+            if($this->validateUser()) {
+                $count = ActionTaken::where('action_id', '=', $this->property('actionId'))
                     ->where('email', Request::input('email'))->count();
-            if($count > 0)
-            {
-                $this->feedbackVars("You have already taken this action.", true);
+                if ($count > 0) {
+                    $this->feedbackVars("You have already taken this action.", true);
+                } else {
+                    $actionTaken = $this->saveActionTaken();
+
+                    $this->emailReps($actionTaken);
+
+                    $this->feedbackVars("You have successfully contacted your representatives.");
+                }
             }
-            else
-            {
-                $actionTaken = $this->saveActionTaken();
-
-                $this->emailReps($actionTaken);
-
-                $this->feedbackVars("You have successfully contacted your representatives.");
+            else {
+                $this->feedbackVars("User information mismatch.", true);
             }
         }
 
+    }
+
+    private function validateUser()
+    {
+        $action = Action::with('template')->find($this->property('actionId'));
+        if(!$action->require_user) {
+            return true;
+        }
+        else {
+            if(Auth::check())
+            {
+                $user = Auth::getUser();
+                if($user->name==Request::input('name')
+                    && $user->email==Request::input('email'))
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     private function validateInput()
